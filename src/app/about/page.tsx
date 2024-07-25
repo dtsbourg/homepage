@@ -49,8 +49,7 @@ function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 
 export const metadata: Metadata = {
   title: 'About',
-  description:
-    'I’m Spencer Sharp. I live in New York City, where I design the future.',
+  description: 'I’m Dylan Bourgeois. I build robots and their brains.',
 }
 
 export default function About() {
@@ -69,58 +68,80 @@ export default function About() {
         </div>
         <div className="lg:order-first lg:row-span-2">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            I’m Spencer Sharp. I live in New York City, where I design the
-            future.
+            I’m Dylan Bourgeois. I build robots and their brains.
           </h1>
           <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
             <p>
-              I’ve loved making things for as long as I can remember, and wrote
-              my first program when I was 6 years old, just two weeks after my
-              mom brought home the brand new Macintosh LC 550 that I taught
-              myself to type on.
+              We live in a world full of promises around AI and robotics. Each
+              advancement promises to make us more dependent on autonomous
+              agents. In order to become true companions though, robots will
+              need to understand and interact with the world the way we do. They
+              will need to be predictable, reliable and safe in doing so.
+              Whether we achieve this in the near term will determine whether
+              robots will stay on the sidelines or truly change our lives for
+              the better.
             </p>
             <p>
-              The only thing I loved more than computers as a kid was space.
-              When I was 8, I climbed the 40-foot oak tree at the back of our
-              yard while wearing my older sister’s motorcycle helmet, counted
-              down from three, and jumped — hoping the tree was tall enough that
-              with just a bit of momentum I’d be able to get to orbit.
+              We need robots to understand and interact with the world the way
+              we do, and I made it my career to study and build their brains to
+              do so.
             </p>
             <p>
-              I spent the next few summers indoors working on a rocket design,
-              while I recovered from the multiple surgeries it took to fix my
-              badly broken legs. It took nine iterations, but when I was 15 I
-              sent my dad’s Blackberry into orbit and was able to transmit a
-              photo back down to our family computer from space.
+              In 2016/17, I pioneered novel unsupervised methods to measure bias
+              in news coverage, mapping the media landscape and quantifying the
+              impact of acquisitions on news narratives. Then at CERN, I
+              leveraged early generative AI techniques, including attention, to
+              efficiently filter through vast amounts of collision data in
+              search of new physics.
             </p>
             <p>
-              Today, I’m the founder of Planetaria, where we’re working on
-              civilian space suits and manned shuttle kits you can assemble at
-              home so that the next generation of kids really <em>can</em> make
-              it to orbit — from the comfort of their own backyards.
+              In 2018/19, I focused on developing novel methods for source code
+              understanding at Stanford. These were foundational for the latest
+              advancements in code generation with LLMs. Model interpretability
+              and explainability were at the core of this work, both from a
+              technical perspective (proposing novel methods for graph neural
+              networks at NeurIPS 2019) and from a societal perspective (working
+              with the legal community to draft standards and requirements,
+              resulting in published work at the Privacy Law Scholars Conference
+              in 2022 and currently serving in the pool of experts for the
+              European Data Protection Bureau).
+            </p>
+            <p>
+              Robotics stems as the natural extension of these abstractions,
+              requiring extremely vertical system-level thinking. I was employee
+              #3 at Robust.AI where I architected various critical systems, from
+              robot execution models to knowledge frameworks for common sense
+              reasoning. There, I realized that robotics could not scale to its
+              full potential, yet. This led me to co-found Claryo to push novel
+              and intelligent representations of the world.
             </p>
           </div>
         </div>
         <div className="lg:pl-20">
           <ul role="list">
-            <SocialLink href="#" icon={XIcon}>
-              Follow on X
-            </SocialLink>
-            <SocialLink href="#" icon={InstagramIcon} className="mt-4">
-              Follow on Instagram
-            </SocialLink>
-            <SocialLink href="#" icon={GitHubIcon} className="mt-4">
-              Follow on GitHub
-            </SocialLink>
-            <SocialLink href="#" icon={LinkedInIcon} className="mt-4">
-              Follow on LinkedIn
+            <SocialLink href="http://github.com/dtsbourg" icon={GitHubIcon}>
+              Find me on GitHub
             </SocialLink>
             <SocialLink
-              href="mailto:spencer@planetaria.tech"
+              href="https://www.linkedin.com/in/dylan-bourgeois-319ab294/"
+              icon={LinkedInIcon}
+              className="mt-4"
+            >
+              Find me on LinkedIn
+            </SocialLink>
+            <SocialLink
+              href="https://x.com/dtsbourg"
+              icon={XIcon}
+              className="mt-4"
+            >
+              Find me on X
+            </SocialLink>
+            <SocialLink
+              href="mailto:contact@dtsbourg.me"
               icon={MailIcon}
               className="mt-8 border-t border-zinc-100 pt-8 dark:border-zinc-700/40"
             >
-              spencer@planetaria.tech
+              contact [at] dtsbourg [dot] me
             </SocialLink>
           </ul>
         </div>

@@ -77,10 +77,6 @@ export default function Speaking() {
             event="MSc. Thesis"
             ctas={[
               { title: 'PDF', href: '#1' },
-              {
-                title: 'Data (Raw)',
-                href: 'https://purl.stanford.edu/zj784yy0646',
-              },
               { title: 'Code', href: 'https://github.com/dtsbourg/BiFocalE' },
               {
                 title: 'Slides',
