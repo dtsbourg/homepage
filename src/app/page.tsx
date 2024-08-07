@@ -11,9 +11,9 @@ import {
 import logoCern from '@/images/logos/cern.svg'
 import logoEPFL from '@/images/logos/epfl.svg'
 import logoClaryo from '@/images/logos/claryo.svg'
-import logoRobust from '@/images/logos/robust.webp'
+import logoRobust from '@/images/logos/robust.png'
 import logoStanford from '@/images/logos/stanford.svg'
-import illustrationImage from '@/images/bg.png'
+import illustrationImage from '@/images/bg-new.svg'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
 
@@ -152,7 +152,7 @@ function Role({ role }: { role: Role }) {
 
   return (
     <li className="flex gap-4">
-      <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+      <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-200/50 dark:bg-white dark:ring-0">
         <Image src={role.logo} alt="" className="h-7 w-7" unoptimized />
       </div>
       <dl className="flex flex-auto flex-wrap gap-x-2">
@@ -266,7 +266,7 @@ export default async function Home() {
             I build robots and their brains.
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I’m Dylan, a software designer and entrepreneur based in New York
+            I’m Dylan, an engineer and entrepreneur based in New York
             City. I’m the founder of Claryo, where we are building the new
             generation of embodied AI.
           </p>
