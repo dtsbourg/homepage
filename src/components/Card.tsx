@@ -98,7 +98,7 @@ Card.Cta = function CardTitle<T extends React.ElementType = 'p'>({
   return (
     <div
       aria-hidden="true"
-      className="text-darkTurquoise dark:text-turquoise relative z-10 mt-4 flex items-center text-sm font-medium"
+      className="text-darkLavender dark:text-lavender relative z-10 mt-4 flex items-center text-sm font-medium"
     >
       {href ? (
         <Card.Link href={href}>
