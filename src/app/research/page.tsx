@@ -65,14 +65,14 @@ export default function Speaking() {
         <ResearchSection title="Publications">
           <Publication
             title="Explanations and meaningful information: at the interface between technical capabilities and legal frameworks"
-            description="A technical deep-dive into HelioStream, the real-time streaming library I wrote for transmitting live video back to Earth."
+            description="For many individuals, decisions taken by a computer are preferable to ones made by humans because they are often considered to be more objective. At the same time, individuals feel uncomfortable with autonomous vehicles roaming the roads. This clash can be explained by the fact that decisions made by computers, and more specifically by AI-enabled systems, can be virtually impossible to understand from the outside."
             authors="D. Bourgeois, S. Vergnolle"
             event="PLSC 2022"
             ctas={[{ title: 'Preprint', href: '#' }]}
           />
           <Publication
             title="Learning Representations of Source Code from Structure and Context"
-            description="They say that if you’re not embarassed by your first version, you’re doing it wrong. Well when you’re selling DIY space shuttle kits it turns out it’s a bit more complicated."
+            description="Early transformer models would view source code as plain text. In this work, we show the value of heterogenous representations, in particular tree and graph-based forms such as ASTs. We also show how transformers can be considered equivalent to Graph Neural Networks (GNN) in some forms, and leverage this fact to propose novel code understanding models."
             authors="D. Bourgeois"
             event="MSc. Thesis"
             ctas={[
@@ -86,7 +86,7 @@ export default function Speaking() {
           />
           <Publication
             title="GNNExplainer: Generating explanations for Graph Neural Networks"
-            description="They say that if you’re not embarassed by your first version, you’re doing it wrong. Well when you’re selling DIY space shuttle kits it turns out it’s a bit more complicated."
+            description="Graph Neural Networks (GNNs) represent information very compactly, yet when machine learning models operate on them we lose the ability to understand predictions' rationale. In this work we propose a model-agnostic framework to extract meaningful explanations of any GNN's predictions."
             authors="R. Ying, D. Bourgeois, J. You, M. Zitnik, J. Leskovec"
             event="NeurIPS 2019"
             ctas={[
@@ -106,7 +106,7 @@ export default function Speaking() {
           />
           <Publication
             title="A Dynamic Embedding Model of the Media Landscape"
-            description="They say that if you’re not embarassed by your first version, you’re doing it wrong. Well when you’re selling DIY space shuttle kits it turns out it’s a bit more complicated."
+            description="Leverage the unsupervised news coverage similarity maps from prior work, we show that market dynamics greatly affect coverage patterns. In particular, acquisitions tend to concentrate and unify the set of covered events over time."
             authors="J. Rappaz*, D. Bourgeois*, K. Aberer "
             event="WWW 2019"
             ctas={[
@@ -122,7 +122,7 @@ export default function Speaking() {
           />
           <Publication
             title="Selection Bias in News Coverage: Learning It, Fighting It"
-            description="They say that if you’re not embarassed by your first version, you’re doing it wrong. Well when you’re selling DIY space shuttle kits it turns out it’s a bit more complicated."
+            description="Leveraging advanced recommendation systems, we analyze large amounts of news coverage from many sources. We extract similarity maps from the embedding, in order to understand similarities and biases in coverage, and propose a method for diversifying news consumption."
             authors="D. Bourgeois, J. Rappaz, K. Aberer"
             event="WWW 2018"
             ctas={[
@@ -142,7 +142,7 @@ export default function Speaking() {
           />
           <Publication
             title="Using holistic information in the Trigger"
-            description="They say that if you’re not embarassed by your first version, you’re doing it wrong. Well when you’re selling DIY space shuttle kits it turns out it’s a bit more complicated."
+            description="The trigger sifts through large amounts of particle collision data in near real-time. This must be done in software, at a whopping 30MHz rate. In doing so, it must remove large amounts of data while retaining the most important information (i.e. the rarest decays). For this purpose, we devise high recall, configurable machine learning methods to efficiently retain the most useful information for later processing."
             authors="D. Bourgeois, C. Fitzpatrick, S. Stahl"
             event="LHCb Public Note"
             ctas={[
@@ -162,7 +162,7 @@ export default function Speaking() {
           />
           <Publication
             title="New approaches for track reconstruction in LHCb's Vertex Locator"
-            description="They say that if you’re not embarassed by your first version, you’re doing it wrong. Well when you’re selling DIY space shuttle kits it turns out it’s a bit more complicated."
+            description="The VErtex LOcator (VELO) is the closest subdetector to the collision point. We reconstruct collision tracks and the residuals of each hit with respect to the initial estimated straight line. Using recurrent networks, we estimate the position and uncertainty of a VELO track's closest to beam state. The resolution of this prediction as well as its ability to estimate the uncertainty is shown to be superior to existing methods."
             authors="C. Hasse, J. Albrecht, B. Couturier, D. Bourgeois, V. Coco, N. Nolte, S. Ponce"
             event=" JHEP 2018"
             ctas={[
@@ -180,7 +180,7 @@ export default function Speaking() {
         <ResearchSection title="Patents">
           <Publication
             title="Cleaning robot"
-            description="How we used world-class visual design to attract a great team, win over customers, and get more press for Planetaria."
+            description="An autonomous UV disinfection robot for COVID-19 and other pathogens."
             authors="R. Brooks, D. Bourgeois, C. Chao, A. Trevor, M.R. Amer, A. Jules, G.F. Marcus"
             event="US20210346543A1"
             ctas={[
@@ -192,7 +192,7 @@ export default function Speaking() {
           />
           <Publication
             title="Ultraviolet cleaning trajectory modeling"
-            description="How we used world-class visual design to attract a great team, win over customers, and get more press for Planetaria."
+            description="A factor graph optimization based framework for provable UV disinfection thresholds."
             authors="A. Trevor, D. Bourgeois, M. Kollmitz, C. Chao"
             event="US20210347048A1"
             ctas={[
