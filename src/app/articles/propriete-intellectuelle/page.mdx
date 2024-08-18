@@ -1,0 +1,92 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import brasRobot from './robot-bras.webp'
+import monkeySelfie from './monkey.jpg'
+import catSpace from './catspace.jpg'
+
+export const article = {
+  author: 'Dylan Bourgeois',
+  date: '2019-01-15',
+  title: 'La propriété intellectuelle à l\'ère du machine learning',
+  description: '',
+  lang: 'Français'
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Au sens philosophique, la filiation créative d'une oeuvre générée par une intelligence artificielle est difficile à définir. Cette notion est aussi épineuse dans le cadre légal. Certaines spécificités des algorithmes de machine learning posent de nouvelles questions au sujet de la protection de la propriété intellectuelle qu'ils représentent et des productions que ces modèles génèrent.
+
+ 
+
+Présent jusque dans la Déclaration Universelle des Droits de l'Homme (art 27), le droit à la propriété intellectuelle sert de liant pour nos penchants innovateurs. Traditionnellement le repère d'avocats chevronnés au jargon complexe, il est pourtant garant d'une grande partie des inventions qui nous entourent. Derrière les subtilités légales et techniques se cache un cadre protecteur de l'inventeur, et, parfois, du consommateur. Souvent astreint à la jalouse protection de secrets industrielles, le droit de la propriété intellectuelle sert aussi à encadrer des pratiques plus collaboratives comme le logiciel libre ou le partage de créations vers le domaine public.
+
+ 
+
+> Toute personne a le droit de prendre part librement à la vie culturelle de la communauté, de jouir des arts et de participer au progrès scientifique et aux bienfaits qui en résultent. 
+> 
+> **Déclaration Universelle des Droits de l'Homme (article 27)**
+ 
+
+Pour faire valoir ses droits, un inventeur ou créateur dispose de trois grands mécanismes. Le trademark ™ sert à protéger l'image d'un produit reconnaissable, une marque. Le consommateur y trouve un gage de qualité. Le copyright ©, lui, permet d'expliciter les conditions d'utilisation d'une invention. Il peut limiter les usages à son inventeur seul, ou être plus permissif, comme pour certaines licenses open-source.
+
+ 
+
+Enfin, le brevet permet l'octroi temporaire d'un monopole d'exploitation sur une invention. Une fois le brevet octroyé, il est courant de le rendre public puisque la loi protègera contre l'utilisation indue de cette propriété intellectuelle. Pour obtenir ce fameux brevet, une demande est déposée. Un office de l'innovation jugera de la qualité et de la nouveauté que représente cette invention pour décider de son octroi.
+
+ 
+
+## La spécificité d'un modèle ne se trouve pas dans les blocs constituants
+
+
+<Image src={brasRobot} alt="Dessin Technique d'un bras de robot" />
+*Dessin Technique d'un bras de robot (Brevet US4806066A)*
+
+La demande de brevet nécessite une description particulièrement détaillée du fonctionnement de l'invention. Dessins techniques et diagrammes d'analyse systémique y sont monnaie courante. Dans le cas d'une machine ayant une extension physique, la description est souvent aisée. Pour un algorithme en revanche, les choses peuvent se compliquer. Quelles sont les cotations, quel est le processus de fabrication? Sous les législations actuelles, un algorithme ou une formule mathématique seuls ne peuvent faire l'objet d'un brevet. Pour rendre le tout brevetable il faut justifier l'utilisation dans un contexte particulier, une utilisation propre à l'entreprise industrielle.
+
+Cette définition prend du sens dans le cadre des modèles de machine learning. Ces modèles sont souvent explicités sous la forme d'une quantité que l'on cherche à optimiser sous certaines contraintes, par exemple une erreur de classification. Des leviers ou paramètres sont offerts à un algorithme d'optimisation, qui est alors chargé de trouver les réglages qui satisferont au mieux cette contrainte pour obtenir le modèle recherché. Tel un cuisinier automatique, l'algorithme va chercher la meilleure combinaison possible des ingrédients à disposition pour obtenir le plat désiré. Ce sont alors les proportions obtenues, la recette optimale, qui peuvent être brevetées, mais pas la formule qui permet de les obtenir.
+
+ 
+
+Il faut néanmoins noter que les paramètres obtenus dépendent intrinsèquement des “ingrédients” qui ont été fournis pour l'apprentissage. Pour reprendre l'image du Portrait d'Edmond Bellamy, la formule a été optimisée pour trouver une combinaison de tableau anciens, ce qui a donné le tableau final. Néanmoins, on pourrait donner à la même formule des images de chats, obtenant ainsi un modèle aux paramètres optimisés pour produire des images félines. Ces deux modèles sont très différents mais sont issus de la même formule générale. Ce sont les données qui ont fait la différence dans l'obtention du modèle final.
+
+<Image src={catSpace} alt="Photos de chats générées par un GAN" />
+*Photos de chats générées par un GAN (Alexia Jolicoeur-Martineau)*
+
+
+Là se trouve la clef de la propriété intellectuelle dans le domaine du machine learning. Des entreprises comme Google ou Facebook n'ont aucun mal à partager les équations qui régissent ces modèles, car en l'absence des massives collections de données, jalousement gardés, leur propriété intellectuelle est saine et sauve. Il est absolument critique pour ces entreprises d'obtenir des jeux de données massifs et détaillés, puisqu'ils sont les clefs de voûte de modèles efficaces. A noter que ces données ne peuvent faire l'objet d'un copyright que si elles sont structurées, manipulées ou traitées spécifiquement.
+
+ 
+
+Au vu de l'enjeu économique que représente le machine learning, beaucoup d'entreprises profitent de lois protectionnistes sur les secrets industriels. Au contraire du brevet, le secret industriel (ou “trade secret”) ne nécessite pas de rendre public le fonctionnement de l'invention. Cette pratique est souvent appliquée aux jeux de données collectés par ces entreprises, mais pose des questions de transparence, d'éthique, et d'adéquation avec la méthode scientifique, qui repose sur la communication ouverte du savoir.
+
+ 
+
+En effet il est extrêmement difficile de connaître l'étendue des pratiques de collections de données, que l'on sait pourtant intensives, ou de leur utilisation par des entreprises. Si les révélations autour des pratiques douteuses de groupes comme Facebook ont attiré l'attention des politiques sur la question, seule l'Union Européenne a adopté des régulations limitant le droit au secret industriel dans le cadre de la manipulation des données personnelles.
+
+ 
+
+Quand bien même la collection et l'utilisation des données serait plus transparente, il manque encore de nombreux outils pour évaluer l'impact macroscopique des ces modèles et de leurs décisions automatisées. A un niveau microscopique aussi, il reste à comprendre exactement comment rendre ces modèles plus robustes, et interpréter correctement la manière dont ils apprennent et produisent des prédictions. Ces deux échelles devront nécessairement coopérer, au niveau technique comme au niveau politique, pour obtenir un impact économique comme social positif.
+
+ 
+
+## Une fois l'algorithme entraîné, à qui appartient sa production?
+
+ 
+
+Dans un précédent article, nous avons discuté de la difficulté de définir la filiation artistique d'une oeuvre générée par un modèle de machine learning. Cette question se pose évidemment au-delà de la sphère artistique. Si le précédent débat gravitait majoritairement autour de l'aspect philosophique de la création, pour beaucoup d'entreprises cette question est vite dominée par la question financière et légale.
+
+ 
+
+En 2011, le photographe anglais David Slater se rend en Indonésie pour photographier une espèce de macaque en voie de disparition. Pour éviter de brusquer ces singes craintifs, le photographe installe son appareil en laissant les singes jouer avec le déclencheur. Il obtient ainsi des “selfies” pris par les animaux. A son retour, il tente vendre ces clichés, déclenchant une polémique sur leur attribution: le singe peut-il avoir des droits sur le cliché ou sont-ils l'oeuvre du photographe? Après un long débat, le bureau du Copyright américain a statué qu'un créateur non-humain n'étant pas une personne juridique, et ne pouvait donc pas obtenir les droits sur la création.
+
+<Image src={monkeySelfie} alt="Selfie de Macaque" />
+*Selfie de Macaque (Indonésie, 2011)*
+ 
+
+Cette décision remet clairement en cause le copyright pour des oeuvres générées par ordinateur, y compris par une intelligence artificielle. Le droit des logiciels, dont la question s'est posée dans les années 80-90, offre une réponse partielle. Les créateurs doivent produire des licenses explicitant le transfert des droits d'utilisation des modèles développés vers l'utilisateur. Cette condition est standardisée pour les logiciels. Alors les modèles, comme les programmes informatiques, sont considérés comme des outils pour l'utilisateur, qui est alors libre de demander les droits sur les créations qui en sont issues. Pour ce faire, il devra remplir les mêmes conditions d'unicité et d'innovation que pour tout autre oeuvre artistique ou technique.
+
+Ces conditions restent pourtant floues: comment juger de l'intention de l'artiste? Un créateur peut-il revendiquer toutes les créations qui sont possibles avec cet outil? Comment quantifier l'importance de l'intervention artistique dans le résultat final? Que faire des meta-algorithmes, qui créent d'autres algorithmes automatiquement à partir d'une contrainte? Autant de questions qui restent à discuter pour obtenir, enfin, un cadre légal clair autour de pratiques créatives qui deviendront de plus en plus courantes.
