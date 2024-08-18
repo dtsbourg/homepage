@@ -28,7 +28,8 @@ function Article({ article }: { article: ArticleWithSlug }) {
         className="mt-1 hidden md:block"
       >
         {formatDate(article.date)}
-        <p className='text-lavender/70'>{article.lang ?? 'English'}</p>
+        {article.lang && <p className='text-zinc-700'>{article.lang}</p>}
+        <p className='text-zinc-700'>{'English'}</p>
       </Card.Eyebrow>
     </article>
   )

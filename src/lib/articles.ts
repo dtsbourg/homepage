@@ -1,4 +1,6 @@
 import glob from 'fast-glob'
+import { join } from 'path';
+import { existsSync } from 'fs';
 
 interface Article {
   title: string
@@ -10,6 +12,7 @@ interface Article {
 
 export interface ArticleWithSlug extends Article {
   slug: string
+  hasTranslation: boolean
 }
 
 async function importArticle(
@@ -20,8 +23,15 @@ async function importArticle(
     article: Article
   }
 
+  // Check if there is a translated.mdx in the same folder
+  const folder = articleFilename.replace(/\/page\.mdx$/, '');
+  const translatedFile = join('./src/app/articles', folder, 'translated.mdx');
+
+  const hasTranslation = existsSync(translatedFile);
+
   return {
     slug: articleFilename.replace(/(\/page)?\.mdx$/, ''),
+    hasTranslation,
     ...article,
   }
 }

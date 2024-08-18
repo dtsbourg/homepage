@@ -7,7 +7,9 @@ export const article = {
   date: '2018-10-18',
   title: 'L\'intelligence artificielle, une balade dans la “vallée de l\'étrange”',
   description: '',
-  lang: 'Français'
+  lang: 'Français',
+  slug: 'vallee-etrange',
+  hasTranslation: true
 }
 
 export const metadata = {
@@ -17,7 +19,7 @@ export const metadata = {
 
 export default (props) => <ArticleLayout article={article} {...props} />
 
-La vidéo s’ouvre sur un fondu, un tube de l’été, déjà bien trop entendu, sonne le glas. Le dernier né des robots de Boston Dynamics entame une danse extraordinaire de dextérité, parfaitement synchronisé au rythme du tube aux 3.2 milliards de vues: Uptown Funk, par Mark Ronson et Bruno Mars.
+La vidéo s'ouvre sur un fondu, un tube de l'été, déjà bien trop entendu, sonne le glas. Le dernier né des robots de Boston Dynamics entame une danse extraordinaire de dextérité, parfaitement synchronisé au rythme du tube aux 3.2 milliards de vues: Uptown Funk, par Mark Ronson et Bruno Mars.
 
 <iframe
     className="aspect-video w-full"
@@ -26,62 +28,62 @@ La vidéo s’ouvre sur un fondu, un tube de l’été, déjà bien trop entendu
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 ></iframe>
 
-Entre fascination et stupeur, le contraste entre la musique légère et les relents dystopiens qu’ont laissé des films comme Terminator ou Blade Runner nous laisse inexplicablement … mal à l’aise.
+Entre fascination et stupeur, le contraste entre la musique légère et les relents dystopiens qu'ont laissé des films comme Terminator ou Blade Runner nous laisse inexplicablement … mal à l'aise.
 
 <Image src={blade} alt="" />
 *Extrait de Blade Runner de Ridley Scott (1982)*
 
-## La vallée de l’étrange
+## La vallée de l'étrange
  
 
-Ce sentiment a un nom : la vallée de l’étrange (uncanny valley). Expression inaugurée par le roboticien japonais Masahiro Mori en 1970, inspirée du terme freudien unheimlich, “l’inquiétante étrangeté”. Il exprime ce profond sentiment de malaise ressenti quand un objet tente d’imiter le vivant. Si aucun doute n’est permis sur la nature de l’entité nous faisant face, le cerveau ne perçoit aucune menace envers sa propre humanité. Si en revanche le soupçon s’installe, l’ambiguïté entre le naturel et l’artificiel angoisse. On retrouve par exemple cette préoccupation dans le cinéma d’animation ou dans les jeux vidéos, où les traits sont caricaturés ou adoucis pour éviter ce piège de l’hyperréalisme.
+Ce sentiment a un nom : la vallée de l'étrange (uncanny valley). Expression inaugurée par le roboticien japonais Masahiro Mori en 1970, inspirée du terme freudien unheimlich, “l'inquiétante étrangeté”. Il exprime ce profond sentiment de malaise ressenti quand un objet tente d'imiter le vivant. Si aucun doute n'est permis sur la nature de l'entité nous faisant face, le cerveau ne perçoit aucune menace envers sa propre humanité. Si en revanche le soupçon s'installe, l'ambiguïté entre le naturel et l'artificiel angoisse. On retrouve par exemple cette préoccupation dans le cinéma d'animation ou dans les jeux vidéos, où les traits sont caricaturés ou adoucis pour éviter ce piège de l'hyperréalisme.
 
-Spotmini, le robot danseur, se promène lui allègrement dans cette vallée avec des mouvements fluides d’un naturel déconcertant. Il n’est pourtant que le fruit d’une programmation spécifique, une marionnette mécanique aux fils trop nombreux pour être manipulés par même les mains les plus expertes. Son contrôle est donc automatisé, mais seulement pour cette chorégraphie bien précise, une suite de mouvements expertement programmée par les ingénieurs de la firme américaine.
+Spotmini, le robot danseur, se promène lui allègrement dans cette vallée avec des mouvements fluides d'un naturel déconcertant. Il n'est pourtant que le fruit d'une programmation spécifique, une marionnette mécanique aux fils trop nombreux pour être manipulés par même les mains les plus expertes. Son contrôle est donc automatisé, mais seulement pour cette chorégraphie bien précise, une suite de mouvements expertement programmée par les ingénieurs de la firme américaine.
 
-L’enveloppe mécanique n’est que le vecteur du contrôle algorithmique. Il est essentiel de séparer l’extension physique du robot de son “cerveau”, pour abuser du vocabulaire anthropomorphe.
+L'enveloppe mécanique n'est que le vecteur du contrôle algorithmique. Il est essentiel de séparer l'extension physique du robot de son “cerveau”, pour abuser du vocabulaire anthropomorphe.
 
-Pour sa part, le domaine dit de l’”Intelligence Artificielle” se penche plutôt sur ce second aspect. Comment élaborer une machine, pas seulement son extension physique ou mécanique, dotée de capacités cognitives habituellement réservées aux humains: perception et traitement de stimuli externes, raisonnement et abstraction, apprentissage continu, interaction avec un environnement,… Le tout, et c’est là la clef du problème, de façon autonome. Émuler l’une de ces actions en isolement, avec un degré d’approximation plus ou moins grand, est relativement aisé: ce sont des problèmes bien connus des ingénieurs depuis des décennies. “Fermer la boucle” de contrôle est en revanche bien plus complexe et un des enjeux majeurs  pour la recherche actuelle.
+Pour sa part, le domaine dit de l'”Intelligence Artificielle” se penche plutôt sur ce second aspect. Comment élaborer une machine, pas seulement son extension physique ou mécanique, dotée de capacités cognitives habituellement réservées aux humains: perception et traitement de stimuli externes, raisonnement et abstraction, apprentissage continu, interaction avec un environnement,… Le tout, et c'est là la clef du problème, de façon autonome. Émuler l'une de ces actions en isolement, avec un degré d'approximation plus ou moins grand, est relativement aisé: ce sont des problèmes bien connus des ingénieurs depuis des décennies. “Fermer la boucle” de contrôle est en revanche bien plus complexe et un des enjeux majeurs  pour la recherche actuelle.
 
  
 
-## L’apprentissage automatique
+## L'apprentissage automatique
  
 
-Pour tenter d’accéder à ce rêve, dont la tenants éthiques restent à discuter et dont la ligne d’arrivée est encore bien floue, la méthode la plus populaire à ce jour est le machine learning: l’apprentissage des machines. Le principe fondateur est simple: automatiser l’extraction d’informations statistiquement “intéressantes” en fonction de la tâche à réaliser. En d’autres termes, la fréquence des caractéristiques et leur co-occurrences sont autant, voir plus, informatives que les caractéristiques elles-mêmes.
+Pour tenter d'accéder à ce rêve, dont la tenants éthiques restent à discuter et dont la ligne d'arrivée est encore bien floue, la méthode la plus populaire à ce jour est le machine learning: l'apprentissage des machines. Le principe fondateur est simple: automatiser l'extraction d'informations statistiquement “intéressantes” en fonction de la tâche à réaliser. En d'autres termes, la fréquence des caractéristiques et leur co-occurrences sont autant, voir plus, informatives que les caractéristiques elles-mêmes.
  
 
-> Donner aux ordinateurs la capacité d’apprendre sans avoir été explicitement programmés – Arthur Samuel (1959)
+> Donner aux ordinateurs la capacité d'apprendre sans avoir été explicitement programmés – Arthur Samuel (1959)
  
 
-Serait-il possible d’enseigner à une machine comment reconnaître un chien dans une image? La première approche, traditionnelle, est celle de l’ingénieur: créer manuellement un ensemble de caractéristiques à remplir pour que l’animal photographié rentre dans la case “chien”. L’exercice est pourtant plus complexe qu’il n’y paraît. Nous reconnaissons assez intuitivement les animaux depuis notre tendre enfance, mais essayer de formaliser et énumérer un ensemble assez robuste pour incorporer l’ensemble des chiens “possibles” devient vite intractable.
+Serait-il possible d'enseigner à une machine comment reconnaître un chien dans une image? La première approche, traditionnelle, est celle de l'ingénieur: créer manuellement un ensemble de caractéristiques à remplir pour que l'animal photographié rentre dans la case “chien”. L'exercice est pourtant plus complexe qu'il n'y paraît. Nous reconnaissons assez intuitivement les animaux depuis notre tendre enfance, mais essayer de formaliser et énumérer un ensemble assez robuste pour incorporer l'ensemble des chiens “possibles” devient vite intractable.
 
-Le machine learning propose une méthodologie systématique pour automatiser l’énumération des caractéristiques qui différencient un chien des autres entités de la photo présentée. Les caractéristiques “découvertes” sont parfois similaires à celles qu’un humain aurait décrit intuitivement: un museau, des oreilles, un pelage, mais d’autres sont plus difficiles à définir, avec des assemblages complexes – voire psychédéliques – de traits canidés. En mélangeant la réponse à ces différentes caractéristiques dans l’image considérée, l’algorithme assigne alors d’un score sa confiance en la présence d’un chien ou non.
+Le machine learning propose une méthodologie systématique pour automatiser l'énumération des caractéristiques qui différencient un chien des autres entités de la photo présentée. Les caractéristiques “découvertes” sont parfois similaires à celles qu'un humain aurait décrit intuitivement: un museau, des oreilles, un pelage, mais d'autres sont plus difficiles à définir, avec des assemblages complexes – voire psychédéliques – de traits canidés. En mélangeant la réponse à ces différentes caractéristiques dans l'image considérée, l'algorithme assigne alors d'un score sa confiance en la présence d'un chien ou non.
 
-L’élégance de cette approche réside dans le fait qu’elle est générale et auto-suffisante. [^*] Lorsque nous sommes en possession d’informations (par exemple des photos de chiens) et que nous voulons en tirer une prédiction (comme la présence ou l’absence de chien) nous pouvons appliquer ces algorithmes pour “apprendre” comment passer de notre entrée à notre objectif. Ces algorithmes pourraient alors, s’ils sont correctement implémentés, prédire aussi la présence de chiens dans des photos jamais encore observées.
+L'élégance de cette approche réside dans le fait qu'elle est générale et auto-suffisante. [^*] Lorsque nous sommes en possession d'informations (par exemple des photos de chiens) et que nous voulons en tirer une prédiction (comme la présence ou l'absence de chien) nous pouvons appliquer ces algorithmes pour “apprendre” comment passer de notre entrée à notre objectif. Ces algorithmes pourraient alors, s'ils sont correctement implémentés, prédire aussi la présence de chiens dans des photos jamais encore observées.
 
 <Image src={dog} alt="" />
 *Un exemple de classification de chien par un algorithme de machine learning (source: distill.pub).*
 
-C’est exactement pour cette raison que ces méthodes sont si populaires à l’heure actuelle: le champ d’applications apparaît immense. En formulant le problème de la bonne manière, on croirait aisément qu’il ne suffit alors plus qu’à cueillir le fruit quand il est mûr. Les exemples vont bon train, alternant entre le crucial et le ludique: prédire la présence d’un cancer à partir d’IRM, traduire d’une langue à une autre, étudier ce que regardent vos amis pour prédire quelles séries vous aimerez regarder ou quelles pages vous allez “liker”, utiliser l’historique des achats pour vendre des publicités plus ciblées, dénicher le spam d’une boite mail… La liste d’exemples ne fait que s’allonger, mettant en lumière l’enjeu économique et social que peut représenter ce domaine.
+C'est exactement pour cette raison que ces méthodes sont si populaires à l'heure actuelle: le champ d'applications apparaît immense. En formulant le problème de la bonne manière, on croirait aisément qu'il ne suffit alors plus qu'à cueillir le fruit quand il est mûr. Les exemples vont bon train, alternant entre le crucial et le ludique: prédire la présence d'un cancer à partir d'IRM, traduire d'une langue à une autre, étudier ce que regardent vos amis pour prédire quelles séries vous aimerez regarder ou quelles pages vous allez “liker”, utiliser l'historique des achats pour vendre des publicités plus ciblées, dénicher le spam d'une boite mail… La liste d'exemples ne fait que s'allonger, mettant en lumière l'enjeu économique et social que peut représenter ce domaine.
 
  
 
 ## La machine comme outil
  
 
-Pourtant, le formalisme présenté ici laisse transparaître une autre faille dans la réalisation actuelle de l’intelligence artificielle. Les outils des machine learning ne s’occupent “que” de trouver des régularités statistiques, des quantités mathématiques, bien loin d’une quelconque compréhension de ce qu’est intrinsèquement un chien, d’y associer des souvenirs ou des émotions, un contexte, un futur ou un passé. En résumé, il n’y a pas d’intention, de dessein, et encore moins de libre-arbitre malgré ce que suggère l’utilisation de termes comme “intelligence” ou “apprentissage”, des actions profondément humaines.
+Pourtant, le formalisme présenté ici laisse transparaître une autre faille dans la réalisation actuelle de l'intelligence artificielle. Les outils des machine learning ne s'occupent “que” de trouver des régularités statistiques, des quantités mathématiques, bien loin d'une quelconque compréhension de ce qu'est intrinsèquement un chien, d'y associer des souvenirs ou des émotions, un contexte, un futur ou un passé. En résumé, il n'y a pas d'intention, de dessein, et encore moins de libre-arbitre malgré ce que suggère l'utilisation de termes comme “intelligence” ou “apprentissage”, des actions profondément humaines.
 
-Ces méthodes ont aussi un spectre limité par nature : elles ont été pensées et optimisées pour une tâche et une seule, un objectif explicite. Un algorithme auquel on aurait enseigné la reconnaissance d’images de chiens ne saurait étendre son savoir aux chats, ou deviner la parenté distante de notre ami Spot à ses cousins biologiques. Un des enjeux majeurs de la recherche actuelle est d’arriver à faire cohabiter plusieurs objectifs, par exemple en construisant les capacités de façon incrémentale.
+Ces méthodes ont aussi un spectre limité par nature : elles ont été pensées et optimisées pour une tâche et une seule, un objectif explicite. Un algorithme auquel on aurait enseigné la reconnaissance d'images de chiens ne saurait étendre son savoir aux chats, ou deviner la parenté distante de notre ami Spot à ses cousins biologiques. Un des enjeux majeurs de la recherche actuelle est d'arriver à faire cohabiter plusieurs objectifs, par exemple en construisant les capacités de façon incrémentale.
 
 Il paraît alors bien plus judicieux, du moins plus prudent, de penser aux algorithmes de machine learning comme des outils, puissants et flexibles, mais bel et bien mécaniques.
 
  
 
-—
+----
 
  
 
-Beaucoup reste à dire sur ce sujet, ses succès et ses limites, ses raisons et son histoire, les opportunités qui s’ouvrent et les dangers qui dressent, les questions éthiques, sociales, philosophiques ou géo-politiques qu’il soulève. Ce sont ces questions auxquelles j’essaierai de répondre dans cette nouvelle chronique, qui tentera de déchiffrer l’Intelligence Artificielle et ses artifices intelligents.
+Beaucoup reste à dire sur ce sujet, ses succès et ses limites, ses raisons et son histoire, les opportunités qui s'ouvrent et les dangers qui dressent, les questions éthiques, sociales, philosophiques ou géo-politiques qu'il soulève. Ce sont ces questions auxquelles j'essaierai de répondre dans cette nouvelle chronique, qui tentera de déchiffrer l'Intelligence Artificielle et ses artifices intelligents.
 
  
 
