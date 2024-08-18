@@ -1,5 +1,4 @@
 import { type Metadata } from 'next'
-
 import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
@@ -29,6 +28,7 @@ function Article({ article }: { article: ArticleWithSlug }) {
         className="mt-1 hidden md:block"
       >
         {formatDate(article.date)}
+        <p className='text-lavender/70'>{article.lang ?? 'English'}</p>
       </Card.Eyebrow>
     </article>
   )
@@ -40,13 +40,14 @@ export const metadata: Metadata = {
     'All of my long-form thoughts on AI, robotics and their interface with society, collected in chronological order.',
 }
 
+
 export default async function ArticlesIndex() {
   let articles = await getAllArticles()
 
   return (
     <SimpleLayout
-      title="Writing about AI, robotics and their interface with society."
-      intro="All of my long-form thoughts on AI, robotics and their interface with society, collected in chronological order."
+      title="My writing."
+      intro="All of my long-form thoughts on AI, robotics, and their interface with society, collected in chronological order."
     >
       <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
         <div className="flex max-w-3xl flex-col space-y-16">

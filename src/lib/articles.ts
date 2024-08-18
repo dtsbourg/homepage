@@ -5,6 +5,7 @@ interface Article {
   description: string
   author: string
   date: string
+  lang: string | undefined
 }
 
 export interface ArticleWithSlug extends Article {

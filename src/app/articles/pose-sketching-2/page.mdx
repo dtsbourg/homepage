@@ -46,7 +46,7 @@ We intend to apply here a version of visual servoing in which the
 control law is based on minimising the error between the observed pose
 and the desired pose by minimising the error in the image (i.e. working
 in the pixel space directly). This is called Image-Based Visual Servoing
-(IBVS) proposed by Weiss et al. \[\1\].
+(IBVS) proposed by Weiss et al.[^1]
 
 ## Mapping the task space to the pixel space
 
@@ -97,27 +97,27 @@ stacking arbitrarily thin chunks of rays.
 
 Thankfully, optics provides us with a simple way to get over these
 issues by defining a projective matrix for the optical system of the
-camera. All we need to know are some basic lens characteristics: $f_x$
-and $f_y$ are the respective focal lengths on axis x and y of the lens,
-$s$ is the axis skew (which causes distortion in the image), $x_0$ and
-$y_0$ are the displacements of the studied point (in our case, where the
+camera. All we need to know are some basic lens characteristics: $$f_x$$
+and $$f_y$$ are the respective focal lengths on axis x and y of the lens,
+$$s$$ is the axis skew (which causes distortion in the image), $$x_0$$ and
+$$y_0$$ are the displacements of the studied point (in our case, where the
 user clicked on the screen). Note that these parameters are expressed in
 pixel units, meaning the distances are not taken into account. To model
 this dependency we can use a scaled version, dividing the values by the
 factor of the sensor sizes in pixels and mm.
 
-{/* $$\mathbf{K} = \begin{bmatrix} f_x & s   & x_0 \\ 0   & f_y & y_0 \\ 0   & 0   & 1 \end{bmatrix}$$ */}
+$$\mathbf{K} = \begin{bmatrix} f_x & s   & x_0 \\ 0   & f_y & y_0 \\ 0   & 0   & 1 \end{bmatrix}$$
 
-However, this method is incomplete. We only get the matrix $K$ which
+However, this method is incomplete. We only get the matrix $$K$$ which
 models the lens, and not the camera. For this we simply incorporate an
-extrinsic matrix (as opposed to the intrinsic matrix $\mathbf{K}$),
+extrinsic matrix (as opposed to the intrinsic matrix $$\mathbf{K}$$),
 modelling the pose of the camera in the world space, in generalised
-coordinates, comprised of a rotation $\mathbf{R}$ and a translation $t$.
+coordinates, comprised of a rotation $$\mathbf{R}$$ and a translation $$t$$.
 
-{/* $$\mathbf{P} = \mathbf{K} \cdot \begin{bmatrix} \mathbf{R} | t \end{bmatrix} \,\,\,\,,$$ */}
+$$\mathbf{P} = \mathbf{K} \cdot \begin{bmatrix} \mathbf{R} | t \end{bmatrix} \,\,\,\,$$
 
 Some methods have been proposed to learn such a mapping, such as
-deriving it online as in \[\2\], or by calibrating the
+deriving it online as in, [^2] or by calibrating the
 system with a point known by both the robot and the camera (getting an
 intermediate referential). In practice, this is the simplest way to find
 it. In our experiments we calibrated with the robot's end effector as a
@@ -129,15 +129,14 @@ intermediate referentials for calibration.
 So once we have learnt these maps, we can finally use them to do
 something useful (well, at least fun): moving robots around ! Let's
 define a simple robot as in Fig. 4. The arm of the robot is defined by
-two joint angles ($\mathbf{q} = [q_1\, \,q_2]^T$), and the
+two joint angles ($$\mathbf{q} = [q_1\, \,q_2]^T$$), and the
 end-effector's position in the robot space is denoted $\mathbf{x_R}$.
 
 <Image src={pixelControl} alt="" />
-
 *Figure 4: Controlling in the pixel space*
 
-Following our previous argument, we learn a mapping $F_c$ which brings a
-point $\mathbf{x}$ in world space to a point $\mathbf{p}$ in the pixel
+Following our previous argument, we learn a mapping $$F_c$$ which brings a
+point $$\mathbf{x}$$ in world space to a point $$\mathbf{p}$$ in the pixel
 space (on the screen). We could use the simple method of ray-tracing but
 as detailed earlier this method has severe shortcomings.
 
@@ -158,21 +157,21 @@ the screen and a joint angle !
 $$\mathbf{p} = F_c(F(\mathbf{q}))$$
 
 We can now define a control law that will minimise the error in the
-pixel space between the desired position $\hat{p}$ and the
-current position $\mathbf{p}$ by controlling the joint angles
-$\mathbf{q}$. This can be obtained by applying the chain rule to the
+pixel space between the desired position $$\hat{p}$$ and the
+current position $$\mathbf{p}$$ by controlling the joint angles
+$$\mathbf{q}$$. This can be obtained by applying the chain rule to the
 previous mapping, to obtain:
 
-{/* $$\begin{align} \frac{\partial{\mathbf{p}}}{\partial{\mathbf{q}}} &= \frac{\partial ({F_c \circ F}) }{\partial{\mathbf{q}}} \\ & = \frac{\partial F}{\partial \mathbf{q}} \cdot \frac{\partial F_c}{\partial \mathbf{q}} \Bigg\rvert_{F(\mathbf{q})} \\ & = \mathbf{J} \cdot \mathbf{J}_c \big\rvert_{F(\mathbf{q})} \end{align}>$$ */}
+$$\begin{align} \frac{\partial{\mathbf{p}}}{\partial{\mathbf{q}}} &= \frac{\partial \left( F_c \circ F \right)}{\partial{\mathbf{q}}} \\ &= \frac{\partial F}{\partial \mathbf{q}} \cdot \frac{\partial F_c}{\partial \mathbf{x}} \Bigg\rvert_{\mathbf{x} = F(\mathbf{q})} \\ &= \mathbf{J} \cdot \mathbf{J}_c \big\rvert_{\mathbf{x} = F(\mathbf{q})} \end{align}$$
 
-where $\mathbf{J}$ is the Jacobian of $F$, mapping velocities from the
-joint-angles to the end-effector, and $\mathbf{J_c}$ is the Jacobian of
-$F_c$, mapping velocities from the end-effector to the pixel space. The
-final control law is obtained by computing the pseudo-inverse ($^+$) of
-this relation to finally get, for a simple PD controller (the gain $k_p$
+where $$\mathbf{J}$$ is the Jacobian of $$F$$, mapping velocities from the
+joint-angles to the end-effector, and $$\mathbf{J_c}$$ is the Jacobian of
+$$F_c$$, mapping velocities from the end-effector to the pixel space. The
+final control law is obtained by computing the pseudo-inverse ($$^+$$) of
+this relation to finally get, for a simple PD controller (the gain $$k_p$$
 controls how aggressively we want to reach the solution):
 
-{/* $$\dot{\mathbf{q}} = (\mathbf{J} \cdot \mathbf{J}_c \big\rvert_{F(\mathbf{q})} )^{+} \cdot k_p (\mathbf{p} - \hat{\mathbf{p}})$$ */}
+$$\dot{\mathbf{q}} = (\mathbf{J} \cdot \mathbf{J}_c \big\rvert_{F(\mathbf{q})} )^{+} \cdot k_p (\mathbf{p} - \hat{\mathbf{p}})$$
 
 ## Visual servoing with Baxter
 
@@ -247,15 +246,14 @@ all here for aren't we ? :)
 ------------------------------------------------------------------------
 
 
-- \[\1\](L. Weiss, A. Sanderson, and C. Neuman. "Dynamic sensor-based control
+[^1]: L. Weiss, A. Sanderson, and C. Neuman. "Dynamic sensor-based control
     of robots with visual feedback". In: IEEE Journal on Robotics and
     Automation 3.5 (1987), pp. 404--417. issn: 0882-4967. doi:
-    10.1109/JRA.1987.1087115.)
+    10.1109/JRA.1987.1087115.
 
-- \[\2\](
-    Andreas Ruf and Radu Horaud. "Visual Servoing of Robot Manipulators
+[^2]: Andreas Ruf and Radu Horaud. "Visual Servoing of Robot Manipulators
     Part I: Projective Kinematics". In: The International Journal of
     Robotics Research 18.11 (1999), pp. 1101--1118. doi:
     10.1177/02783649922067744. eprint:
     https://doi.org/10.1177/02783649922067744. url:
-    https://doi.org/10.1177/02783649922067744.s)
+    https://doi.org/10.1177/02783649922067744.s
