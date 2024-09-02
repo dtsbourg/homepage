@@ -198,7 +198,7 @@ function ThemeToggle() {
   )
 }
 
-export function LanguageSelector({ onLanguageChange }) {
+export function LanguageSelector({ onLanguageChange }: { onLanguageChange: (newLanguage: string) => void }) {
   const [language, setLanguage] = useState('en');
   const [mounted, setMounted] = useState(false);
 
