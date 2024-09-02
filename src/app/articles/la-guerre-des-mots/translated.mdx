@@ -1,0 +1,45 @@
+import zipfWiki from './zipfWiki.webp'
+import promptExample from './example-prompt.png'
+
+A few months ago, the American company OpenAI ignited a firestorm in the Machine Learning community. The announcement of the impressive results of an automatic text generator was accompanied by the decision not to publicly release the model, fearing its potential malicious use. This successful research directly stems from recent significant advances in the field of automatic text processing. Despite the decision to keep the model under embargo—a solution that could be described as, at best, palliative—it highlights an awareness of the potential misuse of increasingly powerful and efficient machine learning methods, and the growing role that researchers must play in controlling these risks.
+
+## Language: A Matter of Statistics or a Universal Grammar?
+
+> You shall know a word by the company it keeps. – J.R. Firth (1954)
+
+As a tool of human expression, language contains numerous subtleties and ambiguities, making its formal modeling extremely difficult. An immense body of research in linguistics has produced theories of grammar, its usage and emergence, and its relationship with human modes of thought. Yet, this meticulous and rigorous work struggles to model human expression in its common, everyday form, which is constantly evolving. It stumbles when trying to address the particular cases, idiosyncrasies, and linguistic subtleties.
+
+Despite the lexical richness and the nearly infinite combinations that grammar offers, everyday language reveals an impressive regularity. For example, Zipf's law, observed in the 1950s, shows that the frequency of a word is inversely proportional to its rank in terms of popularity. In other words, the second most used word is twice as infrequent as the most common one, the third is three times less frequent, and so on. The work of other influential linguists, such as J.R. Firth or Ludwig Wittgenstein, advocates for the study of linguistic regularities rather than the development of a universal grammar, as defended by Noam Chomsky, and continues to influence current language theories and models.
+
+<Image src={zipfWiki} alt="" />
+*Zipf's law (1950) applied to Wikipedia*
+
+## A Language Model
+
+The observation of this regularity motivated the probabilistic processing of text: by observing the statistical properties of an expression, it is possible to estimate its characteristics. An intuitive model of language involves determining the probability of a word given its context, often composed of the preceding words. This predictive model aligns with our ability to complete sentences, for example.
+
+This formulation is known as a "language model." Formally, it involves determining, among all possible words, which word is most likely given the context in which it is used. As usual, to estimate these probabilities, machine learning models learn from examples. With enough examples, a model can sequentially construct a correct sentence with enough confidence to be credible.
+
+## The GPT-2 Model and Its Implications
+
+In this same vein, the generative qualities of GPT-2, the name of the state-of-the-art model, are more a reflection of the quality of the data on which the algorithm was trained than of a novel architecture. It was trained on a corpus of 8 million web pages, sourced from various platforms, from Reddit to Wikipedia.
+
+<Image src={promptExample} alt="" />
+
+At first glance, the results are quite impressive, with the creation of fairly coherent texts overall, even over relatively long passages—a notoriously difficult task in the scientific community. So, is this the end of journalism? Can we now assign the task of generating article after article to an algorithm, flooding the internet with fake news and robotic press releases?
+
+As often, the reality is more nuanced. While there is indeed a risk in the free availability of technologies that could enable the large-scale creation of credible fake content, GPT-2 is not yet at that level. Upon closer inspection, the coherence is only superficial: there is no understanding of relationships more complex than contextual co-occurrence statistics. For example, it seems hard to believe in unicorns with ... four horns?
+
+> The scientist named the population, after their distinctive horn, Ovid's Unicorn. These four-horned, silver-white unicorns were previously unknown to science.
+
+Moreover, the reluctance to make the model itself available raises a broader question about scientific advances in fields with prohibitive costs. Traditionally, pre-trained models are made available to the scientific community, accompanied by a paper detailing the method. The community then validates the results, if possible, by replicating them.
+
+This mode of operation is becoming increasingly difficult economically (the optimization process of GPT-2 cost several million dollars), not to mention the complexities related to intellectual property (these models are becoming genuine competitive advantages). At a time when research is dominated by industry rather than academia, the opacity of the results is problematic. Evidence of this is that OpenAI chose to communicate this result through the press, with a coordinated announcement under journalistic embargo, rather than sharing it with the scientific community. The sensationalist headlines and the total surprise of the research community at this result sparked a firestorm.
+
+## With a Bit of Perspective
+
+A few months after its announcement, GPT-2 does not seem to have caused a major upheaval in the creation of fake content. However, it has clearly sparked a discussion about communication methods in science and the responsibility that creators of these technologies may bear. Despite everything, no unified response seems to have emerged, although there is a sense of awareness—only time will tell if the most concerned parties will respond to the call.
+
+A few artistic initiatives based on this technology have emerged, such as the subreddit "This story does not exist," which offers stories generated by GPT-2. Beyond that, the implications have been limited. It seems that, once again, the tool is only at the service of intention. Although some are now trying to find algorithmic solutions to detect fake texts, like modified images or artificially generated videos, a complete solution cannot be separated from considering the system as a whole.
+
+When we talk about technologies that could enable harmful actions, we must consider the system that incentivizes them. For example, fake news, the primary motivation behind GPT-2's model embargo, exists for two main reasons: an economic motivation, driven by the attention economy that controversy stimulates, and an ideological motivation, the eternal struggle for power, taken or to be taken. So, it seems futile to attack the tools without confronting the systems that nourish them.
