@@ -182,7 +182,7 @@ function Resume() {
   let resume: Array<Role> = [
     {
       company: 'Claryo',
-      title: 'Founder, Chief Architect & VP of Engineering',
+      title: 'Co-Founder, Chief Architect & VP of Engineering',
       logo: logoClaryo,
       start: '2022',
       end: {
@@ -267,7 +267,7 @@ export default async function Home() {
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
             I’m Dylan, an engineer and entrepreneur based in New York
-            City. I’m the founder of Claryo, where we are building the new
+            City. I’m the co-founder of Claryo, where we are building the new
             generation of embodied AI.
           </p>
           <div className="mt-6 flex gap-6">
