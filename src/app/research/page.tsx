@@ -202,6 +202,18 @@ export default function Speaking() {
               },
             ]}
           />
+                    <Publication
+            title="Systems and methods for a virtual facility supporting robotics fleet control and sensor data simulation"
+            description="A system for simulating robotic fleets in a virtual facility and generating large amounts of sensor data for training and validation of robotic systems."
+            authors="M. Amer, D. bourgeois, S. Nusser, P.-E. Evreux, K. Marshall, J. Staker, N. Vander Valk"
+            event="US12276989"
+            ctas={[
+              {
+                title: 'Filing',
+                href: 'https://www.freepatentsonline.com/12276989.html',
+              },
+            ]}
+          />
         </ResearchSection>
       </div>
     </SimpleLayout>
