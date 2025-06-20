@@ -28,8 +28,14 @@ function Article({ article }: { article: ArticleWithSlug }) {
         className="mt-1 hidden md:block"
       >
         {formatDate(article.date)}
-        {article.lang && <p className='text-zinc-700'>{article.lang}</p>}
-        <p className='text-zinc-700'>{'English'}</p>
+        <div className="flex flex-col space-y-1">
+          <p className='text-zinc-700'>{article.lang || 'English'}</p>
+          {article.hasTranslation && (
+            <p className='text-zinc-700'>
+              {(article.lang === 'Français') ? 'English' : 'Français'}
+            </p>
+          )}
+        </div>
       </Card.Eyebrow>
     </article>
   )

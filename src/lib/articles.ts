@@ -31,8 +31,8 @@ async function importArticle(
 
   return {
     slug: articleFilename.replace(/(\/page)?\.mdx$/, ''),
-    hasTranslation,
     ...article,
+    hasTranslation, // Override any manual hasTranslation with actual detection
   }
 }
 
