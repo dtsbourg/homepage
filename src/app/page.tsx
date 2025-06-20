@@ -239,7 +239,6 @@ function Resume() {
   )
 }
 
-
 function Illustration() {
   return (
     <div className="relative">
@@ -266,8 +265,8 @@ export default async function Home() {
             I build robots and their brains.
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I’m Dylan, an engineer and entrepreneur based in New York
-            City. I’m the co-founder of Claryo, where we are building the new
+            I&apos;m Dylan, an engineer and entrepreneur based in New York
+            City. I&apos;m the co-founder of Claryo, where we are building the new
             generation of embodied AI.
           </p>
           <div className="mt-6 flex gap-6">

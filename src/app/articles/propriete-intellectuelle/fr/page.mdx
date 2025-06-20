@@ -1,14 +1,15 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
-import brasRobot from './robot-bras.webp'
-import monkeySelfie from './monkey.jpg'
-import catSpace from './catspace.jpg'
+import Image from 'next/image'
+import brasRobot from '../robot-bras.webp'
+import monkeySelfie from '../monkey.jpg'
+import catSpace from '../catspace.jpg'
 
 export const article = {
   author: 'Dylan Bourgeois',
   date: '2019-01-15',
   title: 'La propriété intellectuelle à l\'ère du machine learning',
   description: 'Comment les algorithmes de machine learning redéfinissent-ils la propriété intellectuelle ? Entre brevets, secrets industriels et questions d\'attribution, une exploration des enjeux légaux et éthiques de l\'IA.',
-  lang: 'Français',
+  lang: 'fr',
   slug: 'propriete-intellectuelle',
   hasTranslation: true
 }
@@ -53,7 +54,7 @@ Cette définition prend du sens dans le cadre des modèles de machine learning. 
 
  
 
-Il faut néanmoins noter que les paramètres obtenus dépendent intrinsèquement des “ingrédients” qui ont été fournis pour l'apprentissage. Pour reprendre l'image du Portrait d'Edmond Bellamy, la formule a été optimisée pour trouver une combinaison de tableau anciens, ce qui a donné le tableau final. Néanmoins, on pourrait donner à la même formule des images de chats, obtenant ainsi un modèle aux paramètres optimisés pour produire des images félines. Ces deux modèles sont très différents mais sont issus de la même formule générale. Ce sont les données qui ont fait la différence dans l'obtention du modèle final.
+Il faut néanmoins noter que les paramètres obtenus dépendent intrinsèquement des "ingrédients" qui ont été fournis pour l'apprentissage. Pour reprendre l'image du Portrait d'Edmond Bellamy, la formule a été optimisée pour trouver une combinaison de tableau anciens, ce qui a donné le tableau final. Néanmoins, on pourrait donner à la même formule des images de chats, obtenant ainsi un modèle aux paramètres optimisés pour produire des images félines. Ces deux modèles sont très différents mais sont issus de la même formule générale. Ce sont les données qui ont fait la différence dans l'obtention du modèle final.
 
 <Image src={catSpace} alt="Photos de chats générées par un GAN" />
 *Photos de chats générées par un GAN (Alexia Jolicoeur-Martineau)*
@@ -63,7 +64,7 @@ Là se trouve la clef de la propriété intellectuelle dans le domaine du machin
 
  
 
-Au vu de l'enjeu économique que représente le machine learning, beaucoup d'entreprises profitent de lois protectionnistes sur les secrets industriels. Au contraire du brevet, le secret industriel (ou “trade secret”) ne nécessite pas de rendre public le fonctionnement de l'invention. Cette pratique est souvent appliquée aux jeux de données collectés par ces entreprises, mais pose des questions de transparence, d'éthique, et d'adéquation avec la méthode scientifique, qui repose sur la communication ouverte du savoir.
+Au vu de l'enjeu économique que représente le machine learning, beaucoup d'entreprises profitent de lois protectionnistes sur les secrets industriels. Au contraire du brevet, le secret industriel (ou "trade secret") ne nécessite pas de rendre public le fonctionnement de l'invention. Cette pratique est souvent appliquée aux jeux de données collectés par ces entreprises, mais pose des questions de transparence, d'éthique, et d'adéquation avec la méthode scientifique, qui repose sur la communication ouverte du savoir.
 
  
 
@@ -83,7 +84,7 @@ Dans un précédent article, nous avons discuté de la difficulté de définir l
 
  
 
-En 2011, le photographe anglais David Slater se rend en Indonésie pour photographier une espèce de macaque en voie de disparition. Pour éviter de brusquer ces singes craintifs, le photographe installe son appareil en laissant les singes jouer avec le déclencheur. Il obtient ainsi des “selfies” pris par les animaux. A son retour, il tente vendre ces clichés, déclenchant une polémique sur leur attribution: le singe peut-il avoir des droits sur le cliché ou sont-ils l'oeuvre du photographe? Après un long débat, le bureau du Copyright américain a statué qu'un créateur non-humain n'étant pas une personne juridique, et ne pouvait donc pas obtenir les droits sur la création.
+En 2011, le photographe anglais David Slater se rend en Indonésie pour photographier une espèce de macaque en voie de disparition. Pour éviter de brusquer ces singes craintifs, le photographe installe son appareil en laissant les singes jouer avec le déclencheur. Il obtient ainsi des "selfies" pris par les animaux. A son retour, il tente vendre ces clichés, déclenchant une polémique sur leur attribution: le singe peut-il avoir des droits sur le cliché ou sont-ils l'oeuvre du photographe? Après un long débat, le bureau du Copyright américain a statué qu'un créateur non-humain n'étant pas une personne juridique, et ne pouvait donc pas obtenir les droits sur la création.
 
 <Image src={monkeySelfie} alt="Selfie de Macaque" />
 *Selfie de Macaque (Indonésie, 2011)*
@@ -91,4 +92,4 @@ En 2011, le photographe anglais David Slater se rend en Indonésie pour photogra
 
 Cette décision remet clairement en cause le copyright pour des oeuvres générées par ordinateur, y compris par une intelligence artificielle. Le droit des logiciels, dont la question s'est posée dans les années 80-90, offre une réponse partielle. Les créateurs doivent produire des licenses explicitant le transfert des droits d'utilisation des modèles développés vers l'utilisateur. Cette condition est standardisée pour les logiciels. Alors les modèles, comme les programmes informatiques, sont considérés comme des outils pour l'utilisateur, qui est alors libre de demander les droits sur les créations qui en sont issues. Pour ce faire, il devra remplir les mêmes conditions d'unicité et d'innovation que pour tout autre oeuvre artistique ou technique.
 
-Ces conditions restent pourtant floues: comment juger de l'intention de l'artiste? Un créateur peut-il revendiquer toutes les créations qui sont possibles avec cet outil? Comment quantifier l'importance de l'intervention artistique dans le résultat final? Que faire des meta-algorithmes, qui créent d'autres algorithmes automatiquement à partir d'une contrainte? Autant de questions qui restent à discuter pour obtenir, enfin, un cadre légal clair autour de pratiques créatives qui deviendront de plus en plus courantes.
+Ces conditions restent pourtant floues: comment juger de l'intention de l'artiste? Un créateur peut-il revendiquer toutes les créations qui sont possibles avec cet outil? Comment quantifier l'importance de l'intervention artistique dans le résultat final? Que faire des meta-algorithmes, qui créent d'autres algorithmes automatiquement à partir d'une contrainte? Autant de questions qui restent à discuter pour obtenir, enfin, un cadre légal clair autour de pratiques créatives qui deviendront de plus en plus courantes. 

@@ -14,6 +14,7 @@ import {
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
+import { LanguageToggle } from '@/components/LanguageToggle'
 import avatarImage from '@/images/avatar.jpg'
 
 function CloseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -198,49 +199,7 @@ function ThemeToggle() {
   )
 }
 
-export function LanguageSelector({ onLanguageChange }: { onLanguageChange: (newLanguage: string) => void }) {
-  const [language, setLanguage] = useState('en');
-  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const handleLanguageChange = (newLanguage: string) => {
-    setLanguage(newLanguage);
-    if (onLanguageChange) {
-      onLanguageChange(newLanguage);
-    }
-  };
-
-  return (
-<>
-  <div className='mb-10 sm:mb-14 flex items-center flex-wrap'>
-    <p className="text-base text-zinc-600 dark:text-zinc-400">
-      All of my long-form thoughts on AI, robotics, and their interface with society, collected in chronological order. You can find articles in 
-      <button
-        type="button"
-        aria-label={mounted ? 'Switch to English' : 'French'}
-        className={`ml-1 text-lavender inline-flex items-center ${language === 'en' ? 'font-semibold' : ''}`}
-        onClick={() => handleLanguageChange('en')}
-      >
-        English
-      </button>
-      and in
-      <button
-        type="button"
-        aria-label={mounted ? 'Switch to French' : 'English'}
-        className={`ml-1 text-lavender inline-flex items-center ${language === 'fr' ? 'font-semibold' : ''}`}
-        onClick={() => handleLanguageChange('fr')}
-      >
-        French
-      </button>.
-    </p>
-  </div>
-</>
-
-  )
-}
 function clamp(number: number, a: number, b: number) {
   let min = Math.min(a, b)
   let max = Math.max(a, b)
@@ -449,7 +408,8 @@ export function Header() {
                 <DesktopNavigation className="pointer-events-auto hidden md:block" />
               </div>
               <div className="flex justify-end md:flex-1">
-                <div className="pointer-events-auto">
+                <div className="pointer-events-auto flex items-center gap-4">
+                  <LanguageToggle />
                   <ThemeToggle />
                 </div>
               </div>

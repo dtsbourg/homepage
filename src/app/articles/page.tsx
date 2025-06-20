@@ -1,68 +1,23 @@
-import { type Metadata } from 'next'
-import { Card } from '@/components/Card'
-import { SimpleLayout } from '@/components/SimpleLayout'
-import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
-import { formatDate } from '@/lib/formatDate'
+'use client'
 
-function Article({ article }: { article: ArticleWithSlug }) {
-  return (
-    <article className="md:grid md:grid-cols-4 md:items-baseline">
-      <Card className="md:col-span-3">
-        <Card.Title href={`/articles/${article.slug}`}>
-          {article.title}
-        </Card.Title>
-        <Card.Eyebrow
-          as="time"
-          dateTime={article.date}
-          className="md:hidden"
-          decorate
-        >
-          {formatDate(article.date)}
-        </Card.Eyebrow>
-        <Card.Description>{article.description}</Card.Description>
-        <Card.Cta>Read article</Card.Cta>
-      </Card>
-      <Card.Eyebrow
-        as="time"
-        dateTime={article.date}
-        className="mt-1 hidden md:block"
-      >
-        {formatDate(article.date)}
-        <div className="flex flex-col space-y-1">
-          <p className='text-zinc-700'>{article.lang || 'English'}</p>
-          {article.hasTranslation && (
-            <p className='text-zinc-700'>
-              {(article.lang === 'Français') ? 'English' : 'Français'}
-            </p>
-          )}
-        </div>
-      </Card.Eyebrow>
-    </article>
-  )
-}
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
-export const metadata: Metadata = {
-  title: 'Articles',
-  description:
-    'All of my long-form thoughts on AI, robotics and their interface with society, collected in chronological order.',
-}
+export default function ArticlesRedirect() {
+  const router = useRouter()
 
-
-export default async function ArticlesIndex() {
-  let articles = await getAllArticles()
+  useEffect(() => {
+    // Detect user's preferred language or default to English
+    const userLang = navigator.language.startsWith('fr') ? 'fr' : 'en'
+    router.replace(`/${userLang}/articles`)
+  }, [router])
 
   return (
-    <SimpleLayout
-      title="My writing."
-      intro="All of my long-form thoughts on AI, robotics, and their interface with society, collected in chronological order."
-    >
-      <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
-        <div className="flex max-w-3xl flex-col space-y-16">
-          {articles.map((article) => (
-            <Article key={article.slug} article={article} />
-          ))}
-        </div>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-lavender mx-auto"></div>
+        <p className="mt-4 text-zinc-600 dark:text-zinc-400">Redirecting...</p>
       </div>
-    </SimpleLayout>
+    </div>
   )
 }

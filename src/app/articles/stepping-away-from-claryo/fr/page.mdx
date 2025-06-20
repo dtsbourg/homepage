@@ -1,4 +1,22 @@
-import claryoBanner from './claryo-banner.png'
+import { ArticleLayout } from '@/components/ArticleLayout'
+import claryoBanner from '../claryo-banner.png'
+
+export const article = {
+  author: 'Dylan Bourgeois',
+  date: '2025-06-16',
+  title: 'Prendre du recul par rapport à Claryo',
+  description: 'Après près de trois ans à construire Claryo à partir de conversations dans les transports en commun jusqu\'à en faire un produit d\'IA vraiment formidable, j\'ai décidé que le moment était venu de prendre du recul et de commencer un nouveau chapitre.',
+  lang: 'fr',
+  slug: 'stepping-away-from-claryo',
+  hasTranslation: true,
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
 
 <Image src={claryoBanner} alt="Claryo Banner" />
 

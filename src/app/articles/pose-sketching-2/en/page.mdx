@@ -1,16 +1,20 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
-import opticalModel from './optical-model.png'
-import linearPieces from './linear-pieces.png'
-import pinholeModel from './pinhole-model.png'
-import pixelControl from './pixel-control.png'
-import calibrationStep from './calibration-step.jpg'
-import controlPixel from './control-pixel.jpg'
+import Image from 'next/image'
+import opticalModel from '../optical-model.png'
+import linearPieces from '../linear-pieces.png'
+import pinholeModel from '../pinhole-model.png'
+import pixelControl from '../pixel-control.png'
+import calibrationStep from '../calibration-step.jpg'
+import controlPixel from '../control-pixel.jpg'
 
 export const article = {
   author: 'Dylan Bourgeois',
   date: '2018-01-29',
   title: 'Pose Sketching for the Control of a Humanoid Robot - Part 2',
   description: 'Programming and comanding grasping robots by demonstration is notoriously difficult due to the number of degrees of freedom involved. In this work, we propose an intuitive, Augemented Reality method where the user is able to \'point and click\' to a goal pose for the robot end-effector to go to.',
+  lang: 'en',
+  slug: 'pose-sketching-2',
+  hasTranslation: false
 }
 
 export const metadata = {
@@ -200,60 +204,46 @@ position that is known from the robot, such as its end-effector. We can
 see this step in Fig. 5.
 
 <Image src={calibrationStep} alt="" />
-*Figure 5: Calibration step*
+*Figure 5: Calibration step in the app*
 
-### Visual interaction
+In this step, we moved the robot's arm where the phone was positioned at
+start-up. This gives us the location of the phone in relation to the
+robot.
 
-We can now click on the interface to give the robot commands. The
-pipeline we described **computes a direct mapping from the clicked
-position to joint angles**. As mentioned there can be several solutions
-to the inverse map, so it is sometimes necessary to define several
-points, with there solutions being averaged out to give the final
-command for the end-effector.
+### Jacobian calculation
+
+We were able to get the kinematic's Jacobian straight from the robot's
+specification sheet. The camera Jacobian was computed at startup by
+moving the robot around and capturing its pose on screen. From this, we
+computed a differentiation around a stable point to learn the mapping
+from world-space to pixel-space.
+
+This is where the magic happens : we finally get to control the robot
+simply by pointing on the screen !
 
 <Image src={controlPixel} alt="" />
-*Figure 6: Controlling in the pixel space*
+*Figure 6: Controlling the robot by a single click*
 
-## Final thoughts
+## Conclusion
 
-We present here a way of controlling the robot using information
-directly on the device (controlling in the pixel space), which opens a
-new set of intersecting control methods but also providing feedback in
-the same space as the interaction. This write-up is far from extensive
-and needs quite a bit of refining, but I hope you found it fun to follow
-along.
+It was great working with Baxter and the Tango platform for this
+project. The main challenge was making the different modules communicate
+together, spanning from Android, through ROS to Baxter's own control
+software.
 
-If you find mistakes, have comments or concerns, don't hesitate to ping
-me !
+We could definitely have improved the camera calibration routine to make
+it more robust and precise. The current method, while expedient, is
+quite rough and the hand-eye calibration (the relationship between the
+camera frame and the robot frame) could have been done in a more proper
+way for better results.
 
-I'd really like to thank [Sylvain Calinon](https://calinon.ch) for
-supervising me during this project, as well as [Emmanuel
-Pignat](https://www.idiap.ch/~epignat/) who really helped salvage the
-results.
-
-## Resources
-
-The code for the Android application is available on
-[Gitlab](https://gitlab.idiap.ch/dbourgeois/PoseSketch/). The
-presentation of this work can be found on
-[Youtube](https://www.youtube.com/watch?v=Ki5OA4gDldE), where I describe
-in a bit more detail the work that was done at IDIAP. If you are very
-interested, the final report for this project is also
-[available](https://drive.google.com/file/d/1_X5A5q5ZO31dRIHeF4nbjvBRd7gWkBhQ/view).
-All of this surely needs a lot of improvements, but that's what we're
-all here for aren't we ? :)
+Nonetheless, it was a satisfying project which allowed me to put
+together computer vision, robotics control and a bit of mobile
+development !
 
 ------------------------------------------------------------------------
 
+### Sources
 
-[^1]: L. Weiss, A. Sanderson, and C. Neuman. "Dynamic sensor-based control
-    of robots with visual feedback". In: IEEE Journal on Robotics and
-    Automation 3.5 (1987), pp. 404--417. issn: 0882-4967. doi:
-    10.1109/JRA.1987.1087115.
-
-[^2]: Andreas Ruf and Radu Horaud. "Visual Servoing of Robot Manipulators
-    Part I: Projective Kinematics". In: The International Journal of
-    Robotics Research 18.11 (1999), pp. 1101--1118. doi:
-    10.1177/02783649922067744. eprint:
-    https://doi.org/10.1177/02783649922067744. url:
-    https://doi.org/10.1177/02783649922067744.s
+[^1]: http://publicationslist.org/data/sylvain.calinon/ref-23/WeissHynes87.pdf
+[^2]: https://link.springer.com/article/10.1007/BF00128532 

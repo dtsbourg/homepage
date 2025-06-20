@@ -1,0 +1,76 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Image from 'next/image'
+import blade from '../blade.jpeg'
+import dog from '../dog-1024x762.webp'
+
+export const article = {
+  author: 'Dylan Bourgeois',
+  date: '2018-10-18',
+  title: 'Artificial Intelligence, a Walk Through the "Uncanny Valley"',
+  description: 'From Boston Dynamics\' dancing robot to fundamental questions about artificial intelligence: an exploration of the "uncanny valley" and the current limits of machine learning.',
+  lang: 'en',
+  slug: 'vallee-etrange',
+  hasTranslation: true
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+The video opens with a fade-in, a summer hit, already played far too many times, tolls the bell. The latest robot from Boston Dynamics begins an extraordinary dance of dexterity, perfectly synchronized to the rhythm of the track with 3.2 billion views: Uptown Funk, by Mark Ronson and Bruno Mars.
+
+<iframe
+    className="aspect-video w-full"
+    src={"https://www.youtube.com/embed/kHBcVlqpvZ8"}
+    title="YouTube Video Player"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+></iframe>
+
+Caught between fascination and astonishment, the contrast between the light-hearted music and the dystopian echoes left by films like Terminator or Blade Runner inexplicably leaves us … uneasy.
+
+<Image src={blade} alt="" />
+*Excerpt from Blade Runner by Ridley Scott (1982)*
+
+## The Uncanny Valley
+
+This feeling has a name: the uncanny valley. The expression was coined by Japanese roboticist Masahiro Mori in 1970, inspired by the Freudian term *unheimlich*, "the uncanny." It describes the deep sense of unease felt when an object tries to mimic life. If there is no doubt about the nature of the entity before us, the brain perceives no threat to its own humanity. However, if suspicion arises, the ambiguity between the natural and the artificial causes anxiety. This concern is often found in animation or video games, where features are caricatured or softened to avoid the trap of hyperrealism.
+
+Spotmini, the dancing robot, moves effortlessly through this valley with fluid movements that are unnervingly natural. Yet, it is only the result of specific programming, a mechanical puppet with too many strings to be controlled by even the most skilled hands. Its control is automated, but only for this precise choreography, a sequence of expertly programmed movements by the engineers at the American firm.
+
+The mechanical shell is merely the vehicle for algorithmic control. It is essential to separate the robot's physical extension from its "brain," to use anthropomorphic terminology.
+
+The field known as "Artificial Intelligence" focuses more on this second aspect: How to develop a machine, not just its physical or mechanical extension, endowed with cognitive abilities usually reserved for humans: perception and processing of external stimuli, reasoning and abstraction, continuous learning, interaction with the environment… All of this, and here lies the crux of the problem, autonomously. Emulating one of these actions in isolation, with a greater or lesser degree of approximation, is relatively easy: these are well-known problems for engineers for decades. However, "closing the loop" of control is much more complex and one of the major challenges for current research.
+
+## Machine Learning
+
+To attempt to reach this dream, whose ethical implications are still up for discussion and whose finish line remains unclear, the most popular method to date is machine learning. The foundational principle is simple: automate the extraction of statistically "interesting" information based on the task at hand. In other words, the frequency of characteristics and their co-occurrences are as informative, if not more so, than the characteristics themselves.
+
+> Giving computers the ability to learn without being explicitly programmed – Arthur Samuel (1959)
+
+Would it be possible to teach a machine how to recognize a dog in an image? The first, traditional approach is that of the engineer: manually create a set of characteristics that the photographed animal must meet to fit into the "dog" category. Yet, the exercise is more complex than it seems. We intuitively recognize animals from a young age, but trying to formalize and enumerate a robust enough set to encompass all "possible" dogs quickly becomes intractable.
+
+Machine learning offers a systematic methodology to automate the enumeration of characteristics that differentiate a dog from other entities in the presented photo. The "discovered" characteristics are sometimes similar to those a human would describe intuitively: a snout, ears, fur, but others are more difficult to define, with complex—if not psychedelic—assemblies of canine traits. By mixing the response to these different characteristics in the considered image, the algorithm then assigns a confidence score to the presence of a dog or not.
+
+The elegance of this approach lies in its generality and self-sufficiency. [^*] When we have information (for example, photos of dogs) and want to make a prediction (such as the presence or absence of a dog), we can apply these algorithms to "learn" how to move from our input to our goal. These algorithms could then, if correctly implemented, predict the presence of dogs in photos never before seen.
+
+<Image src={dog} alt="" />
+*An example of dog classification by a machine learning algorithm (source: distill.pub).*
+
+This is exactly why these methods are so popular today: the field of applications appears immense. By formulating the problem the right way, one might easily believe that it is no longer just about picking the fruit when it is ripe. Examples abound, alternating between the crucial and the playful: predicting the presence of cancer from MRIs, translating from one language to another, studying what your friends are watching to predict which series you'll enjoy or which pages you'll "like," using purchase history to sell more targeted ads, detecting spam in an inbox… The list of examples keeps growing, highlighting the economic and social stakes of this field.
+
+## The Machine as a Tool
+
+However, the formalism presented here reveals another flaw in the current realization of artificial intelligence. Machine learning tools "only" deal with finding statistical regularities, mathematical quantities, far from any understanding of what a dog intrinsically is, associating memories or emotions, a context, a future, or a past. In summary, there is no intention, no design, and even less free will despite what terms like "intelligence" or "learning," profoundly human actions, might suggest.
+
+These methods also have a naturally limited scope: they were designed and optimized for one task and one task only, an explicit goal. An algorithm that has been taught to recognize images of dogs would not know how to extend its knowledge to cats or guess Spot's distant biological relation to his cousins. One of the major challenges of current research is to manage to coexist multiple objectives, for example, by building capacities incrementally.
+
+It then seems much wiser, at least more prudent, to think of machine learning algorithms as tools, powerful and flexible, but nonetheless mechanical.
+
+—
+
+Much remains to be said on this subject, its successes and limitations, its reasons and history, the opportunities it opens up and the dangers it poses, the ethical, social, philosophical, or geopolitical questions it raises. These are the questions I will try to answer in this new column, which will attempt to decipher Artificial Intelligence and its intelligent artifices.
+
+[^*]: Within certain limits, which will be discussed in upcoming articles. 

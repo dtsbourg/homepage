@@ -2,7 +2,6 @@
 
 import { useContext } from 'react'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
 import { AppContext } from '@/app/providers'
 import { Container } from '@/components/Container'
 import { Prose } from '@/components/Prose'
@@ -31,23 +30,6 @@ export function ArticleLayout({
 }) {
   let router = useRouter()
   let { previousPathname } = useContext(AppContext)
-  const [translatedContent, setTranslatedContent] =
-    useState<React.ReactNode>(null)
-  let [showTranslation, setShowTranslation] = useState(false)
-
-  useEffect(() => {
-    if (showTranslation) {
-      import(`../app/articles/${article.slug}/translated.mdx`)
-        .then((mod) => {
-          setTranslatedContent(<mod.default />)
-        })
-        .catch((err) => {
-          console.error('Failed to load translated article:', err)
-        })
-    } else {
-      setTranslatedContent(undefined)
-    }
-  }, [showTranslation, article.slug])
 
   return (
     <Container className="mt-16 lg:mt-32">
@@ -76,22 +58,8 @@ export function ArticleLayout({
                 <span className="ml-3">{formatDate(article.date)}</span>
               </time>
             </header>
-            {article.hasTranslation && (
-              <button
-                type="button"
-                onClick={() => setShowTranslation(!showTranslation)}
-                aria-label="Show translation"
-                className="group mb-8 mt-8 flex items-center justify-center rounded-full bg-white px-4 py-2 shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 transition dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0 dark:ring-white/10 dark:hover:border-zinc-700 dark:hover:ring-white/20"
-              >
-                {showTranslation ? (
-                  <span>{article.lang === 'Français' ? '🇫🇷\u00A0\u00A0Lire en Français' : '🇺🇸\u00A0\u00A0Read in English'}</span>
-                ) : (
-                  <span>{article.lang === 'Français' ? '🇺🇸\u00A0\u00A0Read in English' : '🇫🇷\u00A0\u00A0Lire en Français'}</span>
-                )}
-              </button>
-            )}
             <Prose className="mt-8" data-mdx-content>
-              {translatedContent ?? children}
+              {children}
             </Prose>
           </article>
         </div>

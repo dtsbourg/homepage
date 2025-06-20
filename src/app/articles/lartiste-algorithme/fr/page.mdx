@@ -1,11 +1,11 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
-import edmondBellamy from './bellamy.jpg'
-import ganProgress from './ganProgress.webp'
-import interpolationDog from './interp.jpg'
-import ganMath from './ganmath.webp'
-import tomwhite from './tomwhite.jpeg'
-import aiArtExamples from './ai-art-examples.jpg'
-import robbieBarrat from './robbie-barrat.webp'
+import edmondBellamy from '../bellamy.jpg'
+import ganProgress from '../ganProgress.webp'
+import interpolationDog from '../interp.jpg'
+import ganMath from '../ganmath.webp'
+import tomwhite from '../tomwhite.jpeg'
+import aiArtExamples from '../ai-art-examples.jpg'
+import robbieBarrat from '../robbie-barrat.webp'
 
 export const article = {
   author: 'Dylan Bourgeois',
@@ -26,14 +26,12 @@ export default (props) => <ArticleLayout article={article} {...props} />
 
 Début novembre, Christie's mettait aux enchères une pièce générée par un algorithme d'intelligence artificielle. Vendu pour plus de 480'000.- CHF, le Portrait d'Edmond Bellamy a alimenté les débats, du monde de l'art à celui de la recherche. Certains applaudissent l'audace des auteurs, clamant l'avènement d'une nouvelle ère sur le marché de l'art. D'autres y voient un coup marketing, gonflé à coup d'approximations techniques et de débats approximatifs sur la nature de l'art, de sa production et de sa valeur.
 
-
 <Image src={edmondBellamy} alt="" />
 *Le portrait d'Edmond Bellamy, 2018, créé par GAN*
 
 ## La formule artistique
- 
 
-Pour générer ce portrait, les auteurs, un collectif parisien nommé Obvious, se sont servis d'un algorithme appelé Generative Adversarial Network. Le nom emprunté du sujet fictif, Edmond Bellamy, n'est d'ailleurs rien d'autre qu'une traduction littérale du nom de l'inventeur de ce procédé de génération, Ian Goodfellow. Inspiré par la théorie du jeu, le modèle “met en scène” une compétition entre deux joueurs. Le premier, appelé “Générateur”, a pour objectif de fabriquer un faux, imaginons par exemple un faux billet de banque. Il est contraint par le fait qu'il ne peut jamais avoir sous les yeux d'exemples d'un vrai. N'ayant aucune idée d'à quoi ressemblerait ce billet, il tente une combinaison aléatoire de formes et de couleurs et le soumet à un juge, un second joueur, appelé “Discriminateur”. Celui-ci répond aux essais du falsificateur, soit en rejetant le faux, soit en l'acceptant, considérant qu'il est assez proche d'un vrai.
+Pour générer ce portrait, les auteurs, un collectif parisien nommé Obvious, se sont servis d'un algorithme appelé Generative Adversarial Network. Le nom emprunté du sujet fictif, Edmond Bellamy, n'est d'ailleurs rien d'autre qu'une traduction littérale du nom de l'inventeur de ce procédé de génération, Ian Goodfellow. Inspiré par la théorie du jeu, le modèle "met en scène" une compétition entre deux joueurs. Le premier, appelé "Générateur", a pour objectif de fabriquer un faux, imaginons par exemple un faux billet de banque. Il est contraint par le fait qu'il ne peut jamais avoir sous les yeux d'exemples d'un vrai. N'ayant aucune idée d'à quoi ressemblerait ce billet, il tente une combinaison aléatoire de formes et de couleurs et le soumet à un juge, un second joueur, appelé "Discriminateur". Celui-ci répond aux essais du falsificateur, soit en rejetant le faux, soit en l'acceptant, considérant qu'il est assez proche d'un vrai.
 
 <iframe
 className="aspect-video w-full"
@@ -50,16 +48,12 @@ Cette opération est répétée un grand nombre de fois, jusqu'à arriver à un 
 
 Malheureusement, le générateur atteint rarement une reconstruction parfaite. Une des plus grandes difficultés des modèles actuels réside dans la capacité à générer des exemples originant de classes différentes. Dans l'exemple de faux billets, il est assez aisé, en essayant assez de fois, de générer un type de billet donné (50.- CHF par exemple). En revanche, savoir générer n'importe quel billet demande beaucoup plus d'efforts d'abstraction. La plupart du temps, le modèle ne saura séparer parfaitement les caractéristiques spécifiques à un billet de 50 francs par rapport à celles d'un billet de 20 francs. Alors, il génèrera souvent un mélange des deux, une sorte d'interpolation entre deux exemples connus.
 
-
 <Image src={interpolationDog} alt="" />
 *Interpolation entre un chien et une méduse par BigGAN*
 
 Au lieu de répliquer des billets, les auteurs ont programmé le générateur pour produire des portraits, inspirés de 15'000 différentes peintures du XV au XVIIIe siècle. Incapable de séparer les milliers de subtilités entre ces exemples, le générateur finit par rendre un mélange de ses influences. Le résultat laisse aisément deviner cette empreinte, avec des couleurs typiques et des quasi-coups de pinceaux, dont l'origine digitale ne semble visible qu'à travers des zones de flous, artefacts numériques de l'algorithme.
 
- 
-
 ## Qui est l'artiste?
- 
 
 Comme beaucoup d'oeuvres avant elle, cette pièce vendue chez Christie's est signée. Pourtant, à y regarder de plus près, la signature est un petit peu particulière. Elle exprime en des termes mathématiques ce combat sans merci entre générateur et discriminateur.
 
@@ -68,26 +62,15 @@ Comme beaucoup d'oeuvres avant elle, cette pièce vendue chez Christie's est sig
 
 Alors, cette formule seule est elle l'auteur de ce tableau? Son créateur ne devrait-t'il pas recevoir tout le crédit? Ou cette formule n'est-elle que le pinceau avec laquelle les artistes se sont exprimés?
 
- 
-
 En termes techniques, la formulation mathématique n'est que le manuel d'instructions. Pour arriver au résultat présenté chez Christie's, ce sont les données elles-mêmes, les tableaux desquels s'est inspiré l'algorithme qui ont produit cette pièce, unique.
-
- 
 
 Cette unicité est pourtant particulière, car elle semble plus proche de l'aléatoire que du grain de génie. Comme nous l'avons décrit dans l'article précédent, l'algorithme est incapable de compréhension. Il ne voit pas de visages, de tableaux de maîtres, n'envisage pas le contexte ou la portée de son trait, ne connaît rien de l'histoire de l'art, est incapable d'exprimer ou transmettre une émotion.
 
- 
-
 Pour beaucoup, la distinction se fait justement sur le point de l'intention. L'artiste, est lui aussi fruit de ses influences, de son environnement, mais sa production est surtout le résultat de son dessein. Certains comme Paul Gauguin invoquent le divin, d'autres comme Victor Hugo y voient une expression fataliste de la condition humaine. André Malraux, lui, rappelle que l'art est un échange entre humains. Tous semblent pourtant s'accorder sur l'importance primaire de l'intention dans la démarche artistique.
-
- 
 
 De ce point de vue, le Portrait d'Edmond Bellamy est bel et bien humain. Ce sont des humains qui ont choisi les images sur lesquels l'algorithme s'est basé. Ce sont des humains qui ont inventé et implémenté l'algorithme. Ce sont des humains qui voient et interprètent l'oeuvre. Ce sont enfin des humains qui assignent une valeur, vendent ou achètent cette oeuvre.
 
- 
-
 ## Le pinceau du futur
- 
 
 L'ouverture des avancées technologiques au monde de l'art offre de perspectives extraordinaires aux créatifs de tous bords. La possibilité d'expérimenter avec de nouveaux outils a toujours ouvert le champ des possibles pour les artistes. La technologie vient, là encore, au service de l'Homme là où l'on craignait qu'elle le remplace.
 
@@ -96,8 +79,7 @@ L'ouverture des avancées technologiques au monde de l'art offre de perspectives
 
 Dès la fin des années 60 et l'avènement des ordinateurs, l'art génératif fait saliver une génération entière d'artistes. Comme de nombreuses autres disciplines, l'art assisté par ordinateur subit aujourd'hui une seconde révolution numérique, celle des données. Au lieu de générer la complexité à partir de règles simples, les artistes d'aujourd'hui tentent d'effectuer le chemin inverse: distiller la simplicité d'un langage visuel complexe.
 
-
-Mario Klingemann a été un des pionniers dans le domaine, utilisant des réseaux neuronaux pour augmenter ou transformer des oeuvres existantes. D'autres artistes utilisent ces méthodes pour styliser leurs propres croquis, comme Helena Sarin. Tom White tente d'extraire de l'art abstrait des représentations que les réseaux neuronaux font des objets qui leur sont présentés. La première incursion de ces algorithmes dans le royaume de l'art remonte au projet “Deep Dream” de Google, mené par Mike Tyka, produisant de représentations psychédéliques qui ont fasciné le grand public.
+Mario Klingemann a été un des pionniers dans le domaine, utilisant des réseaux neuronaux pour augmenter ou transformer des oeuvres existantes. D'autres artistes utilisent ces méthodes pour styliser leurs propres croquis, comme Helena Sarin. Tom White tente d'extraire de l'art abstrait des représentations que les réseaux neuronaux font des objets qui leur sont présentés. La première incursion de ces algorithmes dans le royaume de l'art remonte au projet "Deep Dream" de Google, mené par Mike Tyka, produisant de représentations psychédéliques qui ont fasciné le grand public.
 
 <Image src={aiArtExamples} alt="" />
 *A gauche: 'The Fall of the House of Usher' par Anna Ridler. A droite: 'The Butcher's Son' par Mario Klingemann.*
@@ -109,10 +91,6 @@ Il faut tout de même noter que la vente aux enchères à suscité une controver
 
 Les chercheurs en machine learning sont bien conscients de possibilités offertes par ces modèles ultra-puissants. Un travail de fond pour rendre ces modèles accessibles au plus grand nombre est en train de porter ses fruits. Un des pionniers de cet effort, David Ha, a capturé l'imagination avec son projet Sketch-RNN, qui propose de faire un petit dessin simpliste en voyant un réseau neuronal tenter de compléter le dessin en cours. Google permet aujourd'hui à tout un chacun de s'amuser avec la toute dernière itération de leur GANs, proposant de créer des mélanges d'images. Il s'agit, comme dans l'exemple des portraits, d'interpoler entre plusieurs exemples. N'importe qui peut essayer de transférer le style d'une peinture à une photo, ou transformer un cheval en zèbre.
 
- 
+---
 
---
-
-
-On retrouvera comme thème récurrent dans cette chronique la puissance de la coopération entre Homme et machine. Certains arguent que l'avènement de l'art algorithmique sonne le glas de la création artistique. D'autres y voient un outil d'une puissance quasi-divine. Comme souvent la réalité se trouve dans la nuance, entre outil stimulant de créativité et questionnement de la nature de l'art et de la création. Quoi qu'il en soit, ces questions et leurs réponses éventuelles ne trouveront de sens que dans leur contexte humain, par et pour l'humanité.
-
+On retrouvera comme thème récurrent dans cette chronique la puissance de la coopération entre Homme et machine. Certains arguent que l'avènement de l'art algorithmique sonne le glas de la création artistique. D'autres y voient un outil d'une puissance quasi-divine. Comme souvent la réalité se trouve dans la nuance, entre outil stimulant de créativité et questionnement de la nature de l'art et de la création. Quoi qu'il en soit, ces questions et leurs réponses éventuelles ne trouveront de sens que dans leur contexte humain, par et pour l'humanité. 

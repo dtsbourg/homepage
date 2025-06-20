@@ -1,11 +1,15 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
-import settings from './setting.png'
+import Image from 'next/image'
+import settings from '../setting.png'
 
 export const article = {
   author: 'Dylan Bourgeois',
   date: '2018-01-28',
   title: 'Pose Sketching for the Control of a Humanoid Robot - Part 1',
   description: 'Programming and comanding grasping robots by demonstration is notoriously difficult due to the number of degrees of freedom involved. In this work, we propose an intuitive, Augemented Reality method where the user is able to \'point and click\' to a goal pose for the robot end-effector to go to.',
+  lang: 'en',
+  slug: 'pose-sketching-1',
+  hasTranslation: false
 }
 
 export const metadata = {
@@ -101,4 +105,4 @@ virtually interact with the separate degrees of freedom of the robot.
 
 - \[\1\](https://developers.google.com/tango)
 - \[\2\](https://github.com/google-ar/arcore-android-sdk)
-- \[\3\](https://developer.apple.com/arkit/ )
+- \[\3\](https://developer.apple.com/arkit/ ) 
