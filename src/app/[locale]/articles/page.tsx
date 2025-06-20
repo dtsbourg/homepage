@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: locale === 'fr' ? 'Articles' : 'Articles',
     description: locale === 'fr' 
-      ? 'Toutes mes réflexions approfondies sur l\'IA, la robotique et leur interface avec la société, recueillies par ordre chronologique.'
+      ? 'Un ensemble de réflexions approfondies sur l\'IA, la robotique et leurs impacts sur la société, recueillies par ordre chronologique.'
       : 'All of my long-form thoughts on AI, robotics and their interface with society, collected in chronological order.',
   }
 }
@@ -66,9 +66,9 @@ export default async function ArticlesIndex({ params }: Props) {
 
   let articles = await getAllArticles(locale)
 
-  const title = locale === 'fr' ? 'Mes écrits.' : 'My writing.'
+  const title = locale === 'fr' ? 'Mes articles.' : 'My writing.'
   const intro = locale === 'fr' 
-    ? 'Toutes mes réflexions approfondies sur l\'IA, la robotique et leur interface avec la société, recueillies par ordre chronologique.'
+    ? 'Un ensemble de réflexions approfondies sur l\'IA, la robotique et leurs impacts sur la société, recueillies par ordre chronologique.'
     : 'All of my long-form thoughts on AI, robotics, and their interface with society, collected in chronological order.'
 
   return (
