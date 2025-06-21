@@ -31,8 +31,39 @@ export function ArticleLayout({
   let router = useRouter()
   let { previousPathname } = useContext(AppContext)
 
+  // Structured data for the article
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: article.title,
+    description: article.description,
+    image: [
+      `${process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'}/portrait.jpg`
+    ],
+    datePublished: article.date,
+    dateModified: article.date,
+    author: {
+      '@type': 'Person',
+      name: article.author,
+      url: process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me',
+    },
+    publisher: {
+      '@type': 'Person',
+      name: 'Dylan Bourgeois',
+      url: process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me',
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'}/en/articles/${article.slug}`,
+    },
+  }
+
   return (
     <Container className="mt-16 lg:mt-32">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <div className="xl:relative">
         <div className="mx-auto max-w-2xl">
           {previousPathname && (

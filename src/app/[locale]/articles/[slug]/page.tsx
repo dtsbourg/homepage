@@ -37,10 +37,51 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   try {
     const { article } = await getArticle(slug, locale)
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'
+    const url = `${baseUrl}/${locale}/articles/${slug}`
     
     return {
       title: article.title,
       description: article.description,
+      keywords: ['Dylan Bourgeois', 'AI', 'artificial intelligence', 'robotics', article.title.split(' ').slice(0, 3)].flat(),
+      authors: [{ name: article.author }],
+      publisher: 'Dylan Bourgeois',
+      openGraph: {
+        type: 'article',
+        title: article.title,
+        description: article.description,
+        url,
+        siteName: 'Dylan Bourgeois',
+        locale: locale === 'fr' ? 'fr_FR' : 'en_US',
+        images: [
+          {
+            url: '/portrait.jpg',
+            width: 1200,
+            height: 630,
+            alt: article.title,
+          },
+        ],
+        publishedTime: article.date,
+        authors: [article.author],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: article.title,
+        description: article.description,
+        images: ['/portrait.jpg'],
+        creator: '@dtsbourg',
+      },
+      alternates: {
+        canonical: url,
+        languages: article.hasTranslation ? {
+          'en-US': `${baseUrl}/en/articles/${slug}`,
+          'fr-FR': `${baseUrl}/fr/articles/${slug}`,
+        } : undefined,
+      },
+      robots: {
+        index: true,
+        follow: true,
+      },
     }
   } catch (error) {
     notFound()
