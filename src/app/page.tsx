@@ -79,7 +79,7 @@ function ArrowDownIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 function Article({ article }: { article: ArticleWithSlug }) {
   return (
     <Card as="article">
-      <Card.Title href={`/articles/${article.slug}`}>
+      <Card.Title href={`/en/articles/${article.slug}`}>
         {article.title}
       </Card.Title>
       <Card.Eyebrow as="time" dateTime={article.date} decorate>
@@ -185,10 +185,7 @@ function Resume() {
       title: 'Co-Founder, Chief Architect & VP of Engineering',
       logo: logoClaryo,
       start: '2022',
-      end: {
-        label: 'Present',
-        dateTime: new Date().getFullYear().toString(),
-      },
+      end: '2025'
     },
     {
       company: 'Robust.AI',
@@ -262,7 +259,7 @@ export default async function Home() {
       <Container className="mt-9">
         <div className="max-w-2xl">
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-            I build robots and their brains.
+            Crafting artificially intelligent minds.
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
             I&apos;m Dylan, an engineer and entrepreneur based in New York

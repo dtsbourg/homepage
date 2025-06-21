@@ -14,7 +14,7 @@ export const metadata: Metadata = {
       'Dylan Bourgeois | Homepage',
   },
   description:
-    'I\'m Dylan Bourgeois, co-founder of Claryo. I build robots and their brains.',
+    'I\'m Dylan Bourgeois, co-founder of Claryo. I craft artificially intelligent minds.',
   alternates: {
     types: {
       'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed.xml`,
