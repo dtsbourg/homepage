@@ -2,3 +2,22 @@
 @import 'tailwindcss/components';
 @import './prism.css';
 @import 'tailwindcss/utilities';
+
+/* Critical CSS optimizations */
+@layer base {
+  /* Optimize font loading and reduce CLS */
+  html {
+    font-display: swap;
+  }
+  
+  /* Reduce layout shift for images */
+  img {
+    height: auto;
+    max-width: 100%;
+  }
+  
+  /* Optimize iframe loading */
+  iframe {
+    loading: lazy;
+  }
+}
