@@ -31,7 +31,7 @@ export function ArticleLayout({
   let router = useRouter()
   let { previousPathname } = useContext(AppContext)
 
-  // Structured data for the article
+  // Enhanced structured data for AI comprehension
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -46,6 +46,8 @@ export function ArticleLayout({
       '@type': 'Person',
       name: article.author,
       url: process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me',
+      jobTitle: 'AI Researcher & Software Engineer, Founder',
+      sameAs: ['https://twitter.com/dtsbourg', 'https://github.com/dtsbourg']
     },
     publisher: {
       '@type': 'Person',
@@ -56,6 +58,13 @@ export function ArticleLayout({
       '@type': 'WebPage',
       '@id': `${process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'}/en/articles/${article.slug}`,
     },
+    keywords: article.slug.split('-').join(', '),
+    inLanguage: article.lang || 'en',
+    isAccessibleForFree: true,
+    copyrightHolder: {
+      '@type': 'Person',
+      name: 'Dylan Bourgeois'
+    }
   }
 
   return (
