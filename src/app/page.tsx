@@ -7,6 +7,7 @@ import {
   GitHubIcon,
   LinkedInIcon,
   XIcon,
+  BlueSkyIcon,
 } from '@/components/SocialIcons'
 import logoCern from '@/images/logos/cern.svg'
 import logoEPFL from '@/images/logos/epfl.svg'
@@ -267,16 +268,21 @@ export default async function Home() {
             generation of embodied AI.
           </p>
           <div className="mt-6 flex gap-6">
-            <SocialLink href="#" aria-label="Follow on X" icon={XIcon} />
+            <SocialLink href="https://x.com/dtsbourg" aria-label="Follow on X" icon={XIcon} />
             <SocialLink
-              href="#"
+              href="http://github.com/dtsbourg"
               aria-label="Follow on GitHub"
               icon={GitHubIcon}
             />
             <SocialLink
-              href="#"
+              href="https://www.linkedin.com/in/dylan-bourgeois-319ab294/"
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
+            />
+            <SocialLink
+              href="https://bsky.app/profile/dtsbourg.bsky.social"
+              aria-label="Follow on Bluesky"
+              icon={BlueSkyIcon}
             />
           </div>
         </div>
