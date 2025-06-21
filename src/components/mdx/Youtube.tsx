@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 
 interface YouTubeProps {
   id: string
@@ -30,11 +31,13 @@ export default function YouTube({ id, title = "YouTube Video Player" }: YouTubeP
               <path d="M8 5v14l11-7z"/>
             </svg>
           </div>
-          <img
+          <Image
             src={`https://img.youtube.com/vi/${id}/maxresdefault.jpg`}
             alt={title}
             className="absolute inset-0 h-full w-full object-cover -z-10"
-            loading="lazy"
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority={false}
           />
         </div>
       )}
