@@ -243,10 +243,12 @@ function Illustration() {
       <Image
         src={illustrationImage}
         alt="Dylan Bourgeois working at his desk."
-        layout="responsive"
         width={1200}
         height={800}
         className="rounded-2xl"
+        priority={true}
+        unoptimized={true}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
     </div>
   )
