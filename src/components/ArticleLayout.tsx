@@ -46,7 +46,7 @@ export function ArticleLayout({
       '@type': 'Person',
       name: article.author,
       url: process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me',
-      jobTitle: 'AI Researcher & Software Engineer, Founder',
+      jobTitle: 'AI Researcher & Engineer, Founder',
       sameAs: ['https://twitter.com/dtsbourg', 'https://github.com/dtsbourg']
     },
     publisher: {
