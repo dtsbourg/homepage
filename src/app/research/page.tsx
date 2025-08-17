@@ -180,7 +180,7 @@ export default function Speaking() {
         <ResearchSection title="Patents">
           <Publication
             title="Cleaning robot"
-            description="An autonomous UV disinfection robot for COVID-19 and other pathogens."
+            description="An autonomous mobile robot system designed for comprehensive UV-C disinfection of indoor environments. The robot features intelligent navigation, real-time pathogen detection capabilities, and adaptive UV exposure control to effectively eliminate COVID-19 and other harmful microorganisms while ensuring safe operation around humans."
             authors="R. Brooks, D. Bourgeois, C. Chao, A. Trevor, M.R. Amer, A. Jules, G.F. Marcus"
             event="US20210346543A1"
             ctas={[
@@ -192,31 +192,31 @@ export default function Speaking() {
           />
           <Publication
             title="Ultraviolet cleaning trajectory modeling"
-            description="A factor graph optimization based framework for provable UV disinfection thresholds."
+            description="An intelligent path planning system that uses factor graph optimization to ensure complete UV disinfection coverage. The framework provides mathematical guarantees for pathogen elimination by modeling UV exposure thresholds and optimizing robotic trajectories for maximum disinfection efficacy."
             authors="A. Trevor, D. Bourgeois, M. Kollmitz, C. Chao"
             event="US20210347048A1"
             ctas={[
               {
                 title: 'Filing',
-                href: 'https://patents.google.com/patent/US20210346543A1',
+                href: 'https://patents.google.com/patent/US20210347048A1/en?inventor=Dylan+Bourgeois',
               },
             ]}
           />
                     <Publication
             title="Systems and methods for a virtual facility supporting robotics fleet control and sensor data simulation"
-            description="A system for simulating robotic fleets in a virtual facility and generating large amounts of sensor data for training and validation of robotic systems."
-            authors="M. Amer, D. bourgeois, S. Nusser, P.-E. Evreux, K. Marshall, J. Staker, N. Vander Valk"
-            event="US12276989"
+            description="An advanced simulation framework that creates digital twins of physical facilities to enable comprehensive robotic fleet testing and validation. The system generates synthetic sensor data at scale, allowing for extensive training of autonomous systems in realistic virtual environments before real-world deployment."
+            authors="M. Amer, D. Bourgeois, S. Nusser, P.-E. Evreux, K. Marshall, J. Staker, N. Vander Valk"
+            event="WO2025096496A1"
             ctas={[
               {
                 title: 'Filing',
-                href: 'https://www.freepatentsonline.com/12276989.html',
+                href: 'https://patents.google.com/patent/WO2025096496A1/en?inventor=Dylan+Bourgeois',
               },
             ]}
           />
           <Publication
             title="Systems and Methods for a Virtual Facility Supporting Robotics Fleet Control and Sensor Data Simulation"
-            description="A virtual facility system may include a storage system, a data engine, an integration system, a virtual facility interface system, and a simulator engine. The storage system may store data including video of the real facility. The data engine may train a neural rendering model of the real facility based on the data providing a photorealistic three-dimensional representation of the real facility."
+            description="A comprehensive virtual simulation platform that creates photorealistic 3D digital twins of real facilities using neural rendering and computer vision. The system enables large-scale robotic fleet simulation, synthetic sensor data generation, and advanced training environments for autonomous systems, bridging the gap between virtual testing and real-world deployment."
             authors="M. Amer, D. Bourgeois, S. Nusser, P.-E. Evreux, K. Marshall, J. Staker, N. Vander Valk"
             event="US20250251740A1"
             ctas={[
