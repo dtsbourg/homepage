@@ -214,6 +214,18 @@ export default function Speaking() {
               },
             ]}
           />
+          <Publication
+            title="Systems and Methods for a Virtual Facility Supporting Robotics Fleet Control and Sensor Data Simulation"
+            description="A virtual facility system may include a storage system, a data engine, an integration system, a virtual facility interface system, and a simulator engine. The storage system may store data including video of the real facility. The data engine may train a neural rendering model of the real facility based on the data providing a photorealistic three-dimensional representation of the real facility."
+            authors="M. Amer, D. Bourgeois, S. Nusser, P.-E. Evreux, K. Marshall, J. Staker, N. Vander Valk"
+            event="US20250251740A1"
+            ctas={[
+              {
+                title: 'Filing',
+                href: 'https://patents.google.com/patent/US20250251740A1/en?inventor=Dylan+Bourgeois',
+              },
+            ]}
+          />
         </ResearchSection>
       </div>
     </SimpleLayout>
