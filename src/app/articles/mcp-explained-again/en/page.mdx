@@ -30,13 +30,13 @@ why MCP could be central to a new, AI-driven, agentic internet.
 
 ## The impact of MCP
 
-In a nutshell, MCP is an open standard for connecting AI applications to external 
-systems. Think of it as a common language or interface that lets AI models (like 
-ChatGPT or Claude) access databases, web services, or even IoT devices on your 
-behalf. Instead of coding each integration custom, a developer can expose an MCP 
-server, and any AI agent (an MCP client) can discover and use it. It's like 
-giving AI assistants a set of standardized "plug-and-play" tools, hence the 
-"USB-C for AI" analogy.
+In a nutshell, [MCP](https://modelcontextprotocol.io) is an open standard for 
+connecting AI applications to external systems. Think of it as a common language 
+or interface that lets AI models (like ChatGPT or Claude) access databases, web 
+services, or even IoT devices on your behalf. Instead of coding each integration 
+custom, a developer can expose an MCP server, and any [AI agent](https://www.anthropic.com/news/model-context-protocol) 
+(an MCP client) can discover and use it. It's like giving AI assistants a set of 
+standardized "plug-and-play" tools, hence the "USB-C for AI" analogy.
 
 ### Why does this matter?
 
@@ -47,8 +47,8 @@ sandbox by standardizing two-way communication with the outside world.
 
 For example, an MCP-enabled agent could pull the latest sales figures from a 
 database and email a summary to your team, all through a consistent protocol that 
-your existing tools would use. The model now becomes an orchestrator, rather than 
-an information pit you have to copy-paste information in and out of.
+your existing tools would use. The [model now becomes an orchestrator](https://www.anthropic.com/research/tool-use), 
+rather than an information pit you have to copy-paste information in and out of.
 
 In theory, this means:
 
@@ -111,17 +111,17 @@ double-edged sword.
 
 For example, the initial MCP spec didn't even include an authentication mechanism, 
 a choice that led to each server inventing its own (sometimes flimsy) auth, until 
-OAuth was later added in a hurry. However, this speed also shows how vibrant the 
-community around this protocol is. With active working and interest groups, the 
-standard is rapidly evolving.
+[OAuth](https://oauth.net/2/) was later added in a hurry. However, this speed 
+also shows how vibrant the community around this protocol is. With active working 
+and interest groups, the [standard is rapidly evolving](https://spec.modelcontextprotocol.io).
 
-Like Javascript in its day, there are many other, likely more mature solutions out 
-there. Over time however, we have largely converged to what is objectively a 
-flawed language. MCP's fate will depend less on its design elegance and more on 
-whether builders rally behind it. The bet is that MCP will learn and adapt, 
-blending its early simplicity with the robustness required for wider adoption. 
-Where there is friction there is value, as much as we might be irked by inelegant 
-solutions.
+Like [JavaScript](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) 
+in its day, there are many other, likely more mature solutions out there. Over 
+time however, we have largely converged to what is objectively a flawed language. 
+MCP's fate will depend less on its design elegance and more on whether builders 
+rally behind it. The bet is that MCP will learn and adapt, blending its early 
+simplicity with the robustness required for wider adoption. Where there is 
+friction there is value, as much as we might be irked by inelegant solutions.
 
 ### Security & Abuse Concerns
 
@@ -166,7 +166,7 @@ In fact, early adopters learned that blindly converting REST APIs to MCP can
 backfire. An API built for human developers (with dozens of granular endpoints) 
 will "drown" an LLM agent in options and context tokens, making it less effective, 
 and provide a machine-oriented interface to agents who work with actions and 
-intent. For example, Notion had to re-build their MCP interface from scratch. The 
+intent. For example, Notion had to [re-build their MCP interface from scratch](https://www.notion.com/blog/notions-hosted-mcp-server-an-inside-look). The 
 best MCP implementations often require editing or curating the interface, creating 
 new compound tools, simplifying endpoints, adding semantic names, mixing and 
 matching functionality, improving context and documentation, so the AI can focus.
@@ -177,7 +177,7 @@ feel it's too much new complexity, while others feel it doesn't handle complexit
 enough. This is a valid question—should this be encoded in a protocol or live in 
 the application layer?
 
-Ogment.ai is exploring tools and patterns that make MCP practical: turning existing APIs 
+[Ogment.ai](https://ogment.ai) is exploring tools and patterns that make MCP practical: turning existing APIs 
 into agent-ready MCP connectors with guardrails, schemas, and observability built 
 in.
 
@@ -194,22 +194,22 @@ pragmatically speaking:
 connect them to real systems. Bloomberg's internal use of MCP proved illuminating: 
 by decoupling agents from backend systems, they dramatically reduced integration 
 friction and let engineers reuse connectors across domains. MCP turned custom 
-hacks into modular building blocks that scale. (See their public case study)
+hacks into modular building blocks that scale. (See their [public case study](https://www.bloomberg.com/company/stories/closing-the-agentic-ai-productionization-gap-bloomberg-embraces-mcp/))
 
 **An Ecosystem of Reusable Tools**: The goal is to make it easier for teams to turn 
 their own APIs or datasets into MCP connectors. The future involves a 
 marketplace of domain-specific MCP tools. Already, the broader AI community is 
-publishing connectors for things like Notion, Slack, BigQuery, and more (via MCP 
-libraries). Ogment.ai both consume and contribute to this ecosystem, aiming to make 
-platforms more composable and agent-friendly over time.
+publishing connectors for things like [Notion, Slack, BigQuery, and more](https://github.com/modelcontextprotocol/servers) 
+(via MCP libraries). Ogment.ai both consume and contribute to this ecosystem, 
+aiming to make platforms more composable and agent-friendly over time.
 
 **Evolution, Not Revolution**: Despite early missteps, MCP is evolving. Remember 
 those complaints about missing features? Many are being worked on, either within 
 the MCP spec or as extensions. For example, better error-handling conventions and 
-tracing hooks are on the roadmap, often informed by lessons from gRPC and REST, as 
-well as advanced agentic features like long running tasks and more support for 
-user elicitation. The current state of MCP isn't the final word—it's a 1.0 (or 
-2.0) that's rapidly improving in response to real-world use.
+tracing hooks are on the roadmap, often informed by lessons from [gRPC](https://grpc.io) 
+and REST, as well as advanced agentic features like long running tasks and more 
+support for user elicitation. The current state of MCP isn't the final word—it's 
+a 1.0 (or 2.0) that's rapidly improving in response to real-world use.
 
 **Alignment with AI's Future**: The most exciting thing about MCP is not its 
 current utility, but what it hints at: agents that discover new tools at runtime, 
@@ -217,21 +217,22 @@ share context, and delegate tasks. As AI systems move from monolithic models to
 ecosystems of collaborating agents, a standard like MCP could serve as the 
 connective tissue. That vision aligns deeply with this mission: making AI-native 
 product experiences, where APIs and data are first-class tools for agents to 
-orchestrate. Extensions like MCP-UI even promise to bring even more expressivity 
+orchestrate. Extensions like [MCP-UI](https://mcpui.dev/) even promise to bring even more expressivity 
 to AI-native applications.
 
 ## Conclusion
 
 MCP is flawed, opinionated, and evolving—and that's exactly why builders should 
-care. The critiques are real and meaningful, and they should not be dismissed. At the same 
-time, tools are already being built, momentum is accelerating, and OpenAI's 
-support is a game changer.
+care. The critiques are real and meaningful, and they should not be dismissed. At 
+the same time, tools are already being built, momentum is accelerating, and 
+[major industry support](https://www.anthropic.com/news/model-context-protocol) 
+is a game changer.
 
 MCP isn't just theory: it's a strategic bet on how APIs and data will be 
 accessed by agent-based interfaces. MCP has the potential to become the 
-de facto substrate for AI interoperability. So while I don't expect it to be 
-perfect today, the community is actively exploring it, learning from its failures, and aiming 
-to contribute to its evolution.
+de facto substrate for [AI interoperability](https://www.anthropic.com/news/model-context-protocol). 
+So while I don't expect it to be perfect today, the community is actively 
+exploring it, learning from its failures, and aiming to contribute to its evolution.
 
 If you're a founder or product leader thinking about AI agents, MCP is a lever 
 worth exploring now—not because it's mature, but because it's shaping the future. 
