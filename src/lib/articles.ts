@@ -105,30 +105,27 @@ export async function getAllArticles(locale?: string) {
 
   // If no locale is specified, use the original behavior (English only)
   if (!locale) {
-    // Combine all unique article slugs
-    const allFiles = [...legacyFiles, ...localeFiles];
-    const uniqueSlugs = new Set<string>();
-    const filesToProcess: string[] = [];
+    // Build a map of slugs to their preferred file path
+    const slugToFile = new Map<string, string>();
     
-    for (const file of allFiles) {
-      let slug: string;
+    // First pass: collect all locale-specific files (prioritize these)
+    for (const file of localeFiles) {
       if (file.includes('/en/page.mdx')) {
-        slug = file.replace('/en/page.mdx', '');
-      } else {
-        slug = file.replace('/page.mdx', '');
-      }
-      
-      if (!uniqueSlugs.has(slug)) {
-        uniqueSlugs.add(slug);
-        // Prefer the EN locale version if it exists, otherwise use legacy
-        const enFile = `${slug}/en/page.mdx`;
-        if (localeFiles.includes(enFile)) {
-          filesToProcess.push(enFile);
-        } else {
-          filesToProcess.push(file);
-        }
+        const slug = file.replace('/en/page.mdx', '');
+        slugToFile.set(slug, file);
       }
     }
+    
+    // Second pass: add legacy files only if not already present
+    for (const file of legacyFiles) {
+      const slug = file.replace('/page.mdx', '');
+      if (!slugToFile.has(slug)) {
+        slugToFile.set(slug, file);
+      }
+    }
+    
+    // Convert map to array of files to process
+    const filesToProcess = Array.from(slugToFile.values());
     
     let articles = await Promise.all(
       filesToProcess.map(filename => importArticle(filename, 'en'))

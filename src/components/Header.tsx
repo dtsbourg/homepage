@@ -141,7 +141,12 @@ function NavItem({
   href: string
   children: React.ReactNode
 }) {
-  let isActive = usePathname() === href
+  let pathname = usePathname()
+  
+  // Check if current path matches this nav item
+  // For /articles, also match /en/articles and /fr/articles
+  let isActive = pathname === href || 
+    (href === '/articles' && (pathname === '/en/articles' || pathname === '/fr/articles' || pathname.startsWith('/en/articles/') || pathname.startsWith('/fr/articles/')))
 
   return (
     <li>
