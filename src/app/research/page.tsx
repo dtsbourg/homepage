@@ -202,8 +202,8 @@ export default function Speaking() {
               },
             ]}
           />
-                    <Publication
-            title="Systems and methods for a virtual facility supporting robotics fleet control and sensor data simulation"
+          <Publication
+            title="Systems and methods for a virtual facility and a virtual facility world model"
             description="An advanced simulation framework that creates digital twins of physical facilities to enable comprehensive robotic fleet testing and validation. The system generates synthetic sensor data at scale, allowing for extensive training of autonomous systems in realistic virtual environments before real-world deployment."
             authors="M. Amer, D. Bourgeois, S. Nusser, P.-E. Evreux, K. Marshall, J. Staker, N. Vander Valk"
             event="WO2025096496A1"
