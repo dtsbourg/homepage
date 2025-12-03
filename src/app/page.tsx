@@ -15,6 +15,7 @@ import logoClaryo from '@/images/logos/claryo.svg'
 import logoRobust from '@/images/logos/robust.png'
 import logoStanford from '@/images/logos/stanford.svg'
 import illustrationImage from '@/images/bg-new.svg'
+import logoOgment from '@/images/logos/ogment.png'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
 
@@ -187,6 +188,13 @@ function Role({ role }: { role: Role }) {
 function Resume() {
   let resume: Array<Role> = [
     {
+      company: 'Ogment.ai',
+      title: 'Interim CTO',
+      logo: logoOgment,
+      start: '2025',
+      end: '2025',
+    },
+    {
       company: 'Claryo',
       title: 'Co-Founder, Chief Architect & VP of Engineering',
       logo: logoClaryo,
@@ -234,7 +242,11 @@ function Resume() {
           <Role key={roleIndex} role={role} />
         ))}
       </ol>
-      <Button href="/cv.pdf" variant="secondary" className="group mt-6 w-full">
+      <Button
+        href="/cv-2025.pdf"
+        variant="secondary"
+        className="group mt-6 w-full"
+      >
         See my CV
         <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
       </Button>
