@@ -154,7 +154,12 @@ function Role({ role }: { role: Role }) {
   return (
     <li className="flex gap-4">
       <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-200/50 dark:bg-white dark:ring-0">
-        <Image src={role.logo} alt={`${role.company} logo`} className="h-7 w-7" unoptimized />
+        <Image
+          src={role.logo}
+          alt={`${role.company} logo`}
+          className="h-7 w-7"
+          unoptimized
+        />
       </div>
       <dl className="flex flex-auto flex-wrap gap-x-2">
         <dt className="sr-only">Company</dt>
@@ -186,7 +191,7 @@ function Resume() {
       title: 'Co-Founder, Chief Architect & VP of Engineering',
       logo: logoClaryo,
       start: '2022',
-      end: '2025'
+      end: '2025',
     },
     {
       company: 'Robust.AI',
@@ -229,8 +234,8 @@ function Resume() {
           <Role key={roleIndex} role={role} />
         ))}
       </ol>
-      <Button href="#" variant="secondary" className="group mt-6 w-full">
-        Download CV
+      <Button href="/cv.pdf" variant="secondary" className="group mt-6 w-full">
+        See my CV
         <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
       </Button>
     </div>
@@ -265,12 +270,16 @@ export default async function Home() {
             Crafting artificially intelligent minds.
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-            I&apos;m Dylan, an engineer and entrepreneur based in New York
-            City. I&apos;m the co-founder of Claryo, where we are building the new
+            I&apos;m Dylan, an engineer and entrepreneur based in New York City.
+            I&apos;m the co-founder of Claryo, where we are building the new
             generation of embodied AI.
           </p>
           <div className="mt-6 flex gap-6">
-            <SocialLink href="https://x.com/dtsbourg" aria-label="Follow on X" icon={XIcon} />
+            <SocialLink
+              href="https://x.com/dtsbourg"
+              aria-label="Follow on X"
+              icon={XIcon}
+            />
             <SocialLink
               href="http://github.com/dtsbourg"
               aria-label="Follow on GitHub"
