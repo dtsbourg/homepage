@@ -4,6 +4,7 @@ import Link from 'next/link'
 import clsx from 'clsx'
 
 import { Container } from '@/components/Container'
+import { Prose } from '@/components/Prose'
 import {
   GitHubIcon,
   InstagramIcon,
@@ -50,7 +51,8 @@ function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'I&apos;m Dylan Bourgeois. I craft artificially intelligent minds.',
+  description:
+    'I&apos;m Dylan Bourgeois. I craft artificially intelligent minds.',
 }
 
 export default function About() {
@@ -71,29 +73,27 @@ export default function About() {
           <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
             I&apos;m Dylan Bourgeois. I craft artificially intelligent minds.
           </h1>
-          <div className="mt-6 space-y-7 text-base text-zinc-600 dark:text-zinc-400">
+          <Prose className="mt-6">
             <p>
               We live in a world full of promises around AI and robotics. Each
-              advancement promises to make us more dependent on autonomous
-              agents. In order to become true companions though, robots will
-              need to understand and interact with the world the way we do. They
-              will need to be predictable, reliable and safe in doing so.
-              Whether we achieve this in the near term will determine whether
-              robots will stay on the sidelines or truly change our lives for
-              the better.
+              advancement promises to make us more dependent on intelligent
+              agents. For these systems to become true companions though, they
+              need to understand and interact with the world predictably,
+              reliably, and safely. Whether we achieve this in the near term
+              will determine whether AI stays on the sidelines or truly
+              transforms our lives for the better.
             </p>
             <p>
-              We need robots to understand and interact with the world the way
-              we do, and I made it my career to study and build their brains to
-              do so.
+              I made it my career to build the intelligence that enables this
+              understanding.
             </p>
             <p>
               In 2016/17, I pioneered novel unsupervised methods to measure bias
               in news coverage, mapping the media landscape and quantifying the
               impact of acquisitions on news narratives. Then at CERN, I
-              leveraged early generative AI techniques, including attention, to
-              efficiently filter through vast amounts of collision data in
-              search of new physics.
+              leveraged early generative AI techniques, including attention
+              models, to efficiently filter through vast amounts of collision
+              data in search of new physics.
             </p>
             <p>
               In 2018/19, I focused on developing novel methods for source code
@@ -113,10 +113,28 @@ export default function About() {
               #3 at Robust.AI where I architected various critical systems, from
               robot execution models to knowledge frameworks for common sense
               reasoning. There, I realized that robotics could not scale to its
-              full potential, yet. This led me to co-found Claryo to push novel
-              and intelligent representations of the world.
+              full potential, yet. This led me to co-found{' '}
+              <Link href="https://claryo.co" target="_blank">
+                Claryo
+              </Link>{' '}
+              to push novel and intelligent representations of the world.
             </p>
-          </div>
+            <p>
+              As interim CTO of{' '}
+              <Link href="https://ogment.ai" target="_blank">
+                Ogment.ai
+              </Link>
+              , I built infrastructure enabling businesses to prepare for the
+              emerging wave of AI agents interacting with their systems. This
+              work highlighted a critical gap: while agents are becoming more
+              capable, their ability to learn and adapt remains fundamentally
+              limited by current training paradigms. I&apos;m now focused on
+              post-training methods and curriculum learning, developing
+              approaches that allow intelligent systems to continuously improve
+              through structured experience, moving beyond static pre-training
+              toward truly adaptive intelligence.
+            </p>
+          </Prose>
         </div>
         <div className="lg:pl-20">
           <ul role="list">
