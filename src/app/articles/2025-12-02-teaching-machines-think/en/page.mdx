@@ -33,7 +33,7 @@ But the tides are shifting. The models that feel genuinely useful, the ones that
 
 <Image src={blocks} alt="Blocks" />
 
-## The Limits of Learning by Osmosis
+## The limits of pattern matching
 
 Think about how next-word prediction actually works. A model reads billions of sentences and learns patterns: after "The capital of France is," the word "Paris" appears frequently. Model designers literally craft a pavlovian reward for filling mad libs. 
 
@@ -43,19 +43,19 @@ A model trained only on prediction can generate code that looks right but doesn'
 
 The core issue: next-word prediction optimizes for plausibility, not correctness. It teaches correlation, not causation, which is why researchers now add extra stages to fix miscalibration and reduce confident wrong answers on reasoning-heavy tasks.
 
-## Enter the Curriculum
+## Enter the curriculum
 
 AI labs have started adopting a fundamentally different approach, one that looks less like industrial-scale data processing and more like a structured education system.
 
 Modern AI development now unfolds in distinct stages, each designed to build specific capabilities before moving to the next:
 
-- **Stage 1**: Pre-training remains the foundation. Those trillions of words that teach language structure and world knowledge. This is like a child absorbing their native language through immersion. It builds intuition.
+- **Stage 1**: Pre-training remains the foundation. Those trillions of words that teach language structure and world knowledge let the model develop fluency, like a child absorbing their native language through immersion. It builds intuition.
 - **Stage 2**: Mid-training intensifies exposure to harder material: mathematics, scientific papers, complex reasoning tasks. The model develops literacy in domains requiring precision and logic.
 - **Stage 3**: Post-training is where the transformation happens. This is where a general language model becomes a reliable assistant, a coding expert, or a reasoning engine. The model has now "graduated", and can now apply its theoretical skills in action, learning along the way.
 
 <Image src={coloredPath} alt="Colored Path" />
 
-## Three Lessons That Build on Each Other
+## Three lessons that build on each other
 
 Post-training typically follows a three-part sequence, and the order matters tremendously:
 
@@ -65,11 +65,11 @@ Second, _preference optimization_. Present the model with multiple responses to 
 
 Third, _reinforcement learning_. Here we let the model explore much more freely. It can now iteratively generate multiple attempts at solving a problem, evaluate the outcomes, and reinforce strategies that work; discourage those that fail. This is where genuine problem-solving emerges, the model discovers approaches that weren't in its training data.
 
-The progression mirrors human learning: You learn the rules before the exceptions. You practice fundamentals before improvising. You understand standard approaches before inventing novel ones.
+This progression mirrors human learning: you learn the rules before the exceptions. You practice fundamentals before improvising. You understand standard approaches before inventing novel ones.
 
 <Image src={pathways} alt="Pathways" />
 
-## Why You Can't Skip Class
+## Why you can't skip class
 
 A few months ago, a Chinese start-up called [DeepSeek](https://deepseek.com/) took the AI world by storm when it released a highly capable yet low-cost model. To achieve this remarkable outcome, they tried [an experiment](https://www.nature.com/articles/s41586-025-09422-z): skip straight to reinforcement learning and skip a lot of the costly fine-tuning techniques. Out came a model that had developed impressive reasoning abilities. It learned to check its own work, pause to reconsider, and develop complex problem-solving strategies. Since then, every major model release has incorporated similar methods.
 
@@ -77,7 +77,7 @@ But it also mixed languages randomly, generated illegible output, and exhibited 
 
 The lesson: you need foundations before you can build expertise. Try teaching calculus before algebra, and students struggle. Apply advanced optimization before establishing basic competence, and AI systems destabilize.
 
-## What This Means for AI's Future
+## What this means for AI's future
 
 This shift from training to teaching raises profound questions:
 
@@ -95,7 +95,7 @@ Math and coding have clear right answers you can check automatically. But judgme
 
 <Image src={grid} alt="Grid" />
 
-## The Deeper Shift
+## What this teaches us about intelligence
 
 The old paradigm assumed intelligence would emerge from scale alone. Make the model bigger, show it more data, and capabilities would appear like magic.
 
