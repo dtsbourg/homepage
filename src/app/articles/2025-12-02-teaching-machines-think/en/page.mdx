@@ -1,0 +1,111 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Callout from '@/components/mdx/Callout'
+import Figure from '@/components/mdx/Figure'
+import pathways from '../path.jpg'
+import light from '../light.jpg'
+import coloredPath from '../colored-path.jpg'
+import blocks from '../blocks.jpg'
+
+export const article = {
+  author: 'Dylan Bourgeois',
+  date: '2025-12-02',
+  title: 'We\'re Not Training AI Anymore. We\'re Teaching It.',
+  description: 'AI systems are suddenly capable of tasks they consistently failed at months ago. The secret isn\'t just about bigger models or more computing power. Behind the latest breakthroughs is a quiet revolution: companies have stopped training AI and started teaching it.',
+  lang: 'en',
+  slug: 'teaching-machines-think',
+  hasTranslation: false,
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+
+AI systems are suddenly capable of tasks they consistently failed at months ago. The secret isn't just about bigger models or more computing power. Behind the latest breakthroughs is a quiet revolution: companies have stopped training AI and started teaching it.
+
+For years, the recipe for AI seemed simple: build bigger neural networks, feed them vast oceans of text from the internet, and let them predict what word comes next, over and over, trillions of times. Surprisingly, this brute-force approach worked. Models learned to translate languages, answer questions, and demonstrate what seemed like understanding, all from this single, repetitive task. This was a manifestation of the [Bitter Lesson](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) at work, a term coined by famed AI pioneer Richard Sutton.
+
+But the tides are shifting. The models that feel genuinely useful, the ones that could write working code, solve math problems reliably, or navigate complex instructions, aren't just bigger. They are being taught differently.
+
+<Image src={blocks} alt="Blocks" />
+
+## The Limits of Learning by Osmosis
+
+Think about how next-word prediction actually works. A model reads billions of sentences and learns patterns: after "The capital of France is," the word "Paris" appears frequently. Model designers literally craft a pavlovian reward for filling mad libs. 
+
+This creates something remarkable: fluency. The model can generate text that sounds human, maintains consistent grammar, and demonstrates broad knowledge. It absorbs correlations, common phrasings, and statistical regularities in human writing. But fluency isn't competence.
+
+A model trained only on prediction can generate code that looks right but doesn't run. It produces confident explanations that are subtly wrong. It might helpfully answer a question about building a bomb with the same enthusiasm it brings to recipes for apple pie.
+
+The core issue: next-word prediction optimizes for plausibility, not correctness. It teaches correlation, not causation, which is why researchers now add extra stages to fix miscalibration and reduce confident wrong answers on reasoning-heavy tasks.
+
+## Enter the Curriculum
+
+AI labs have started adopting a fundamentally different approach, one that looks less like industrial-scale data processing and more like a structured education system.
+
+Modern AI development now unfolds in distinct stages, each designed to build specific capabilities before moving to the next:
+
+- **Stage 1**: Pre-training remains the foundation. Those trillions of words that teach language structure and world knowledge. This is like a child absorbing their native language through immersion. It builds intuition.
+- **Stage 2**: Mid-training intensifies exposure to harder material: mathematics, scientific papers, complex reasoning tasks. The model develops literacy in domains requiring precision and logic.
+- **Stage 3**: Post-training is where the transformation happens. This is where a general language model becomes a reliable assistant, a coding expert, or a reasoning engine. The model has now "graduated", and can now apply its theoretical skills in action, learning along the way.
+
+<Image src={coloredPath} alt="Colored Path" />
+
+## Three Lessons That Build on Each Other
+
+Post-training typically follows a three-part sequence, and the order matters tremendously:
+
+First, _supervised fine-tuning_. Show the model examples: "When you see this question, here's how to answer it." Provide step-by-step reasoning traces for complex problems. This establishes behavioral patterns, the equivalent of learning proper technique in sports or music.
+
+Second, _preference optimization_. Present the model with multiple responses to the same question and tell it which one people preferred. This isn't about memorizing answers; it's about developing judgment. Should this response be concise or detailed? Confident or cautious? Helpful or appropriately restrained? This is very helpful for AI labs to steer models in the direction they want it to go, to give it personality (or, sadly, a lack thereof by building a consensual sycophant). 
+
+Third, _reinforcement learning_. Here we let the model explore much more freely. It can now iteratively generate multiple attempts at solving a problem, evaluate the outcomes, and reinforce strategies that work; discourage those that fail. This is where genuine problem-solving emerges, the model discovers approaches that weren't in its training data.
+
+The progression mirrors human learning: You learn the rules before the exceptions. You practice fundamentals before improvising. You understand standard approaches before inventing novel ones.
+
+<Image src={pathways} alt="Pathways" />
+
+## Why You Can't Skip Class
+
+A few months ago, a Chinese start-up called [DeepSeek](https://deepseek.com/) took the AI world by storm when it released a highly capable yet low-cost model. To achieve this remarkable outcome, they tried [an experiment](https://www.nature.com/articles/s41586-025-09422-z): skip straight to reinforcement learning and skip a lot of the costly fine-tuning techniques. Out came a model that had developed impressive reasoning abilities. It learned to check its own work, pause to reconsider, and develop complex problem-solving strategies. Since then, every major model release has incorporated similar methods.
+
+But it also mixed languages randomly, generated illegible output, and exhibited unstable behavior. Pure reinforcement learning forced the model to discover everything from scratch, including basic conventions about readable communication.
+
+The lesson: you need foundations before you can build expertise. Try teaching calculus before algebra, and students struggle. Apply advanced optimization before establishing basic competence, and AI systems destabilize.
+
+## What This Means for AI's Future
+
+This shift from training to teaching raises profound questions:
+
+**Can AI systems teach themselves?** 
+
+The most promising path forward involves models generating their own training examples and evaluating their own work, learning through self-play and self-evaluation. But can a system produce data better than what it learned from? How do you prevent a model from developing strange quirks when trained primarily on its own output?
+
+**How do they keep learning?** 
+
+Current systems are trained once and deployed. But production AI needs continuous learning: dynamically adapting to new tools, responding to user feedback, incorporating new information. How do you teach a model new skills without it forgetting old ones? Researchers now talk about “catastrophic forgetting,” where teaching a deployed system new skills can unexpectedly erase older ones, making continual learning an open research frontier rather than a solved engineering problem.
+
+**What about open-ended tasks?** 
+
+Math and coding have clear right answers you can check automatically. But judgment, creativity, and nuanced communication don't. How far can this teaching approach extend beyond verifiable tasks?
+
+<Image src={light} alt="Light" />
+
+## The Deeper Shift
+
+The old paradigm assumed intelligence would emerge from scale alone. Make the model bigger, show it more data, and capabilities would appear like magic.
+
+The new approach is more subtle: intelligence is multi-faceted. Different skills require different learning signals. And the order in which you teach those skills fundamentally shapes what the system becomes.
+
+We're not just training larger models anymore. We're designing curricula, sequencing lessons, and thinking carefully about reward structures and pedagogical progression. The teams that excel at this, understanding what must be learned before what, which feedback to provide when, will define the next generation of AI capability.
+
+As you watch AI systems become more capable, ask yourself: How would you teach a machine to think? What would you show it first? How would you help it develop judgment, not just knowledge? How would you encourage it to explore without losing its foundations? What kind of feedback would you provide? What kind of topics would you feel confident teaching it about?
+
+These aren't just technical questions for AI researchers. In answering those questions you might have thought back to your own educational journey. Or maybe you thought about how you teach your kids, how you debate with your friends or how you deal with your colleagues. These questions are revealing something fundamental about intelligence itself, including our own. 
+
+This is a full circle moment. In the 1960s, Artificial Intelligence was founded not by computer scientists but by cognitive and behavioral scientists. We're once again experimenting with what it takes to build intelligence from the ground up. And in teaching machines to think, we're learning more what thinking actually requires, how it emerges.
+
+The paradigm has shifted. We're not training AI anymore. We're teaching it. And we're only beginning to understand what that means.
