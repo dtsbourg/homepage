@@ -169,14 +169,14 @@ function Resume() {
     },
     {
       company: 'Stanford',
-      title: 'Researcher',
+      title: 'Research Assistant',
       logo: logoStanford,
       start: '2018',
       end: '2019',
     },
     {
       company: 'CERN',
-      title: 'Researcher',
+      title: 'Research Assistant',
       logo: logoCern,
       start: '2017',
       end: '2018',
