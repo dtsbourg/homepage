@@ -150,8 +150,8 @@ function Resume() {
       company: 'Ogment.ai',
       title: 'Interim CTO',
       logo: logoOgment,
-      start: '2025',
-      end: '2025',
+      start: 'June',
+      end: 'Dec 2025',
     },
     {
       company: 'Claryo',
