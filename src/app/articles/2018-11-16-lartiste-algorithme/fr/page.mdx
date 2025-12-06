@@ -26,7 +26,7 @@ export default (props) => <ArticleLayout article={article} {...props} />
 
 Début novembre, Christie's mettait aux enchères une pièce générée par un algorithme d'intelligence artificielle. Vendu pour plus de 480'000.- CHF, le Portrait d'Edmond Bellamy a alimenté les débats, du monde de l'art à celui de la recherche. Certains applaudissent l'audace des auteurs, clamant l'avènement d'une nouvelle ère sur le marché de l'art. D'autres y voient un coup marketing, gonflé à coup d'approximations techniques et de débats approximatifs sur la nature de l'art, de sa production et de sa valeur.
 
-<Image src={edmondBellamy} alt="" />
+<Image src={edmondBellamy} alt="Le portrait d'Edmond Bellamy, œuvre d'art générée par IA créée par GAN et vendue chez Christie's" />
 *Le portrait d'Edmond Bellamy, 2018, créé par GAN*
 
 ## La formule artistique
@@ -43,12 +43,12 @@ allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; pic
 
 Cette opération est répétée un grand nombre de fois, jusqu'à arriver à un équilibre entre les deux joueurs. Dans le meilleur des cas, le générateur aura réussi à répliquer un vrai billet, et parvient à tromper le second. Le générateur peut alors créer une infinité de nouveaux exemples à partir de sa compréhension de ce à quoi s'attend le discriminateur. Si cette reconstruction est parfaite, elle trouvera sa place dans un grand nombre d'applications. Nous avons déjà abordé l'importance cruciale que tiennent les données dans le développement des algorithmes de machine learning. La capacité à générer, sur demande, une infinité d'exemples pour améliorer un algorithme est une perspective pour le moins alléchante.
 
-<Image src={ganProgress} alt="" />
+<Image src={ganProgress} alt="Chronologie montrant l'amélioration progressive des images générées par GAN de 2014 à aujourd'hui" />
 *Avancées des GANs depuis leur invention en 2014*
 
 Malheureusement, le générateur atteint rarement une reconstruction parfaite. Une des plus grandes difficultés des modèles actuels réside dans la capacité à générer des exemples originant de classes différentes. Dans l'exemple de faux billets, il est assez aisé, en essayant assez de fois, de générer un type de billet donné (50.- CHF par exemple). En revanche, savoir générer n'importe quel billet demande beaucoup plus d'efforts d'abstraction. La plupart du temps, le modèle ne saura séparer parfaitement les caractéristiques spécifiques à un billet de 50 francs par rapport à celles d'un billet de 20 francs. Alors, il génèrera souvent un mélange des deux, une sorte d'interpolation entre deux exemples connus.
 
-<Image src={interpolationDog} alt="" />
+<Image src={interpolationDog} alt="Visualisation d'interpolation BigGAN transformant progressivement un chien en méduse" />
 *Interpolation entre un chien et une méduse par BigGAN*
 
 Au lieu de répliquer des billets, les auteurs ont programmé le générateur pour produire des portraits, inspirés de 15'000 différentes peintures du XV au XVIIIe siècle. Incapable de séparer les milliers de subtilités entre ces exemples, le générateur finit par rendre un mélange de ses influences. Le résultat laisse aisément deviner cette empreinte, avec des couleurs typiques et des quasi-coups de pinceaux, dont l'origine digitale ne semble visible qu'à travers des zones de flous, artefacts numériques de l'algorithme.
@@ -57,7 +57,7 @@ Au lieu de répliquer des billets, les auteurs ont programmé le générateur po
 
 Comme beaucoup d'oeuvres avant elle, cette pièce vendue chez Christie's est signée. Pourtant, à y regarder de plus près, la signature est un petit peu particulière. Elle exprime en des termes mathématiques ce combat sans merci entre générateur et discriminateur.
 
-<Image src={ganMath} alt="" />
+<Image src={ganMath} alt="Formule mathématique représentant l'architecture GAN utilisée comme signature du portrait d'Edmond Bellamy" />
 *La formulation mathématique d'un GAN, signature du portrait*
 
 Alors, cette formule seule est elle l'auteur de ce tableau? Son créateur ne devrait-t'il pas recevoir tout le crédit? Ou cette formule n'est-elle que le pinceau avec laquelle les artistes se sont exprimés?
@@ -74,7 +74,7 @@ De ce point de vue, le Portrait d'Edmond Bellamy est bel et bien humain. Ce sont
 
 L'ouverture des avancées technologiques au monde de l'art offre de perspectives extraordinaires aux créatifs de tous bords. La possibilité d'expérimenter avec de nouveaux outils a toujours ouvert le champ des possibles pour les artistes. La technologie vient, là encore, au service de l'Homme là où l'on craignait qu'elle le remplace.
 
-<Image src={tomwhite} alt="" />
+<Image src={tomwhite} alt="Œuvre d'art générative abstraite de Tom White utilisant la perception des réseaux neuronaux" />
 *Travail d'abstraction de Tom White*
 
 Dès la fin des années 60 et l'avènement des ordinateurs, l'art génératif fait saliver une génération entière d'artistes. Comme de nombreuses autres disciplines, l'art assisté par ordinateur subit aujourd'hui une seconde révolution numérique, celle des données. Au lieu de générer la complexité à partir de règles simples, les artistes d'aujourd'hui tentent d'effectuer le chemin inverse: distiller la simplicité d'un langage visuel complexe.

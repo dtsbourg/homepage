@@ -61,7 +61,7 @@ these commands (e.g. moving the arm) are to be measured in the global
 referential (for example xyz coordinates of the robot's end-effector) if
 they are to have any relevance to the task at hand.
 
-<Image src={opticalModel} alt="" />
+<Image src={opticalModel} alt="Linearised optical model diagram showing camera projection" />
 *Figure 1: Linearised optical model*
 
 Since our objective is to have a map between any pixel on our interface
@@ -79,7 +79,7 @@ interface at different positions but from the same point on the
 interface. The intersection of these two lines defines a unique point in
 space for this pixel.
 
-<Image src={linearPieces} alt="" />
+<Image src={linearPieces} alt="Piece-wise linearised optical model showing multiple ray paths" />
 *Figure 2: Piece-wise linearised optical model*
 
 This ray-tracing method is the simplest way to get a mapping from point
@@ -96,7 +96,7 @@ some form of linearisation which approximates this simple camera model
 but provides an easer geometrical framework (piece-wise linear) by
 stacking arbitrarily thin chunks of rays.
 
-<Image src={pinholeModel} alt="" />
+<Image src={pinholeModel} alt="Pinhole camera model diagram with focal point and projection plane" />
 *Figure 3: Pinhole camera model*
 
 Thankfully, optics provides us with a simple way to get over these
@@ -136,7 +136,7 @@ define a simple robot as in Fig. 4. The arm of the robot is defined by
 two joint angles ($$\mathbf{q} = [q_1\, \,q_2]^T$$), and the
 end-effector's position in the robot space is denoted $\mathbf{x_R}$.
 
-<Image src={pixelControl} alt="" />
+<Image src={pixelControl} alt="Diagram showing robot arm control mapping from pixel space to joint angles" />
 *Figure 4: Controlling in the pixel space*
 
 Following our previous argument, we learn a mapping $$F_c$$ which brings a
@@ -203,7 +203,7 @@ relative to the start-up position, we simply start-up the app at a
 position that is known from the robot, such as its end-effector. We can
 see this step in Fig. 5.
 
-<Image src={calibrationStep} alt="" />
+<Image src={calibrationStep} alt="Calibration step screenshot showing Baxter robot arm positioning for camera alignment" />
 *Figure 5: Calibration step in the app*
 
 In this step, we moved the robot's arm where the phone was positioned at
@@ -221,7 +221,7 @@ from world-space to pixel-space.
 This is where the magic happens : we finally get to control the robot
 simply by pointing on the screen !
 
-<Image src={controlPixel} alt="" />
+<Image src={controlPixel} alt="Screenshot demonstrating robot control through single pixel click on mobile interface" />
 *Figure 6: Controlling the robot by a single click*
 
 ## Conclusion
