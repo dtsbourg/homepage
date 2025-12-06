@@ -1,6 +1,7 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import './prism.css';
+@import 'katex/dist/katex.min.css';
 @import 'tailwindcss/utilities';
 
 /* Critical CSS optimizations */
