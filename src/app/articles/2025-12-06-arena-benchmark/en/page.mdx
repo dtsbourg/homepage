@@ -11,6 +11,8 @@ import socialNetwork2 from '../social-network2.jpg'
 import goodidea from '../goodidea.png'
 import lmarenaLeaderboard from '../lmarena-leaderboard.png'
 import lmarenaCompare from '../lmarena-compare.png'
+import mmlu from '../mmlu-cf.png'
+import deepmind from '../deepmind.jpg'
 
 export const article = {
   author: 'Dylan Bourgeois',
@@ -188,6 +190,8 @@ It's happening right now across the benchmark ecosystem:
 
 - [**MMLU**](https://huggingface.co/datasets/cais/mmlu), the multiple-choice knowledge test, faces significant [contamination concerns](https://arxiv.org/abs/2412.15194), with researchers estimating some models have seen portions of the test set during training. When Microsoft Research created [MMLU-CF](https://huggingface.co/datasets/microsoft/MMLU-CF), a contamination-free version, GPT-4o scored 73.4%. This was significantly lower than its 88.0% on the original MMLU, suggesting the performance gap may partly reflect memorization rather than pure capability.
 
+<Figure src={mmlu} title="the MMLU dataset" caption="Example data from the [MMLU-CF dataset](https://huggingface.co/datasets/microsoft/MMLU-CF/viewer/default/val?row=0&views%5B%5D=val)" />
+
 Each time the community identifies a limitation and creates a new benchmark to address it, the cycle begins again: the benchmark gains importance, development teams add it to their evaluation criteria, the optimization distorts it, the benchmark expressive power.
 
 ---
@@ -234,7 +238,7 @@ But the benchmarks live in the lab. The leaderboards measure demonstrations. And
 
 The leaderboard may crown a champion. But a champion of what? And for whom? And what does it mean to win a race when the finish line measures the wrong distance, in the wrong direction, toward a destination no one actually needs to reach?
 
----
+<Image src={deepmind} />
 
 ## Reading Between the Rankings
 
