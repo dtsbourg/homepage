@@ -39,8 +39,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { article } = await getArticle(slug, locale)
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'
     const url = `${baseUrl}/${locale}/articles/${slug}`
-    const ogImage = article.image || '/portrait.jpg'
-    const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${baseUrl}${ogImage}`
     
     return {
       title: article.title,
@@ -57,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         locale: locale === 'fr' ? 'fr_FR' : 'en_US',
         images: [
           {
-            url: ogImageUrl,
+            url: '/portrait.jpg',
             width: 1200,
             height: 630,
             alt: article.title,
@@ -70,7 +68,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         card: 'summary_large_image',
         title: article.title,
         description: article.description,
-        images: [ogImage],
+        images: ['/portrait.jpg'],
         creator: '@dtsbourg',
       },
       alternates: {

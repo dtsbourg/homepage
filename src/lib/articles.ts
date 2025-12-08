@@ -1,6 +1,6 @@
 import glob from 'fast-glob'
-import { join } from 'path'
-import { existsSync } from 'fs'
+import { join } from 'path';
+import { existsSync } from 'fs';
 
 interface Article {
   title: string
@@ -9,7 +9,6 @@ interface Article {
   date: string
   lang?: string
   slug: string
-  image?: string // Optional Open Graph image path
 }
 
 export interface ArticleWithSlug extends Article {
@@ -19,127 +18,116 @@ export interface ArticleWithSlug extends Article {
 }
 
 // Cache for slug -> folder mapping
-let slugToFolderCache: Map<string, string> | null = null
+let slugToFolderCache: Map<string, string> | null = null;
 
 async function buildSlugToFolderMap(): Promise<Map<string, string>> {
   if (slugToFolderCache) {
-    return slugToFolderCache
+    return slugToFolderCache;
   }
 
-  const slugToFolder = new Map<string, string>()
-
+  const slugToFolder = new Map<string, string>();
+  
   // Get all article files
   const localeFiles = await glob('*/{en,fr}/page.mdx', {
     cwd: './src/app/articles',
-  })
-
+  });
+  
   const legacyFiles = await glob('*/page.mdx', {
     cwd: './src/app/articles',
-  })
+  });
 
   // Process locale-specific files first (prioritize these)
   for (const file of localeFiles) {
     if (file.includes('/en/page.mdx')) {
-      const folder = file.replace('/en/page.mdx', '')
-      const articleModule = await import(`../app/articles/${file}`)
-      const slug = articleModule.article?.slug || folder
+      const folder = file.replace('/en/page.mdx', '');
+      const articleModule = await import(`../app/articles/${file}`);
+      const slug = articleModule.article?.slug || folder;
       if (!slugToFolder.has(slug)) {
-        slugToFolder.set(slug, folder)
+        slugToFolder.set(slug, folder);
       }
     }
   }
-
+  
   // Process legacy files (only if slug not already mapped)
   for (const file of legacyFiles) {
-    const folder = file.replace('/page.mdx', '')
-    const articleModule = await import(`../app/articles/${file}`)
-    const slug = articleModule.article?.slug || folder
+    const folder = file.replace('/page.mdx', '');
+    const articleModule = await import(`../app/articles/${file}`);
+    const slug = articleModule.article?.slug || folder;
     if (!slugToFolder.has(slug)) {
-      slugToFolder.set(slug, folder)
+      slugToFolder.set(slug, folder);
     }
   }
-
-  slugToFolderCache = slugToFolder
-  return slugToFolder
+  
+  slugToFolderCache = slugToFolder;
+  return slugToFolder;
 }
 
 async function importArticle(
   articleFilename: string,
-  locale: string = 'en',
+  locale: string = 'en'
 ): Promise<ArticleWithSlug | null> {
-  let articleModule
-  let folder: string
-
+  let articleModule;
+  let folder: string;
+  
   // Check if this is already a locale-specific file (e.g., "folder/en/page.mdx")
   if (articleFilename.includes(`/${locale}/page.mdx`)) {
-    articleModule = await import(`../app/articles/${articleFilename}`)
-    folder = articleFilename.replace(`/${locale}/page.mdx`, '')
+    articleModule = await import(`../app/articles/${articleFilename}`);
+    folder = articleFilename.replace(`/${locale}/page.mdx`, '');
   } else if (articleFilename.endsWith('/page.mdx')) {
     // Legacy structure - try to load based on locale
-    const baseFolder = articleFilename.replace('/page.mdx', '')
-    folder = baseFolder
-
+    const baseFolder = articleFilename.replace('/page.mdx', '');
+    folder = baseFolder;
+    
     // Try to import the locale-specific version first
-    const localeSpecificPath = `${baseFolder}/${locale}/page.mdx`
+    const localeSpecificPath = `${baseFolder}/${locale}/page.mdx`;
     try {
-      articleModule = await import(`../app/articles/${localeSpecificPath}`)
+      articleModule = await import(`../app/articles/${localeSpecificPath}`);
     } catch {
       // If locale-specific doesn't exist, try the original structure
       if (locale === 'en') {
         // For English, try the main page.mdx
-        articleModule = await import(`../app/articles/${articleFilename}`)
+        articleModule = await import(`../app/articles/${articleFilename}`);
       } else {
         // For French, try translated.mdx
-        const translatedPath = articleFilename.replace(
-          '/page.mdx',
-          '/translated.mdx',
-        )
-        const mainModule = await import(`../app/articles/${articleFilename}`)
-        const translatedModule = await import(
-          `../app/articles/${translatedPath}`
-        )
-
+        const translatedPath = articleFilename.replace('/page.mdx', '/translated.mdx');
+        const mainModule = await import(`../app/articles/${articleFilename}`);
+        const translatedModule = await import(`../app/articles/${translatedPath}`);
+        
         // Combine metadata from main with content from translated
         articleModule = {
           article: {
             ...mainModule.article,
-            lang: 'fr',
+            lang: 'fr'
           },
-          default: translatedModule.default,
-        }
+          default: translatedModule.default
+        };
       }
     }
   } else {
-    return null
+    return null;
   }
 
   const { article } = articleModule as {
     default: React.ComponentType
     article: Article
-  }
+  };
 
   if (!article) {
-    return null
+    return null;
   }
 
   // Use slug from article metadata, fallback to folder name
-  const slug = article.slug || folder
+  const slug = article.slug || folder;
 
   // Check if there are other locale versions
-  const otherLocale = locale === 'en' ? 'fr' : 'en'
-  const otherLocalePath = join(
-    './src/app/articles',
-    folder,
-    otherLocale,
-    'page.mdx',
-  )
-  const translatedFile = join('./src/app/articles', folder, 'translated.mdx')
-
-  const hasTranslation =
-    existsSync(otherLocalePath) || existsSync(translatedFile)
+  const otherLocale = locale === 'en' ? 'fr' : 'en';
+  const otherLocalePath = join('./src/app/articles', folder, otherLocale, 'page.mdx');
+  const translatedFile = join('./src/app/articles', folder, 'translated.mdx');
+  
+  const hasTranslation = existsSync(otherLocalePath) || existsSync(translatedFile);
 
   // Destructure to exclude slug from article (we use our computed slug instead)
-  const { slug: _articleSlug, ...articleWithoutSlug } = article
+  const { slug: _articleSlug, ...articleWithoutSlug } = article;
 
   return {
     ...articleWithoutSlug,
@@ -153,129 +141,127 @@ export async function getAllArticles(locale?: string) {
   // Get both legacy structure and new locale structure files
   let legacyFiles = await glob('*/page.mdx', {
     cwd: './src/app/articles',
-  })
-
+  });
+  
   let localeFiles = await glob('*/{en,fr}/page.mdx', {
     cwd: './src/app/articles',
-  })
+  });
 
   // If no locale is specified, use the original behavior (English only)
   if (!locale) {
     // Build a map of folders to their preferred file path
-    const folderToFile = new Map<string, string>()
-
+    const folderToFile = new Map<string, string>();
+    
     // First pass: collect all locale-specific files (prioritize these)
     for (const file of localeFiles) {
       if (file.includes('/en/page.mdx')) {
-        const folder = file.replace('/en/page.mdx', '')
-        folderToFile.set(folder, file)
+        const folder = file.replace('/en/page.mdx', '');
+        folderToFile.set(folder, file);
       }
     }
-
+    
     // Second pass: add legacy files only if not already present
     for (const file of legacyFiles) {
-      const folder = file.replace('/page.mdx', '')
+      const folder = file.replace('/page.mdx', '');
       if (!folderToFile.has(folder)) {
-        folderToFile.set(folder, file)
+        folderToFile.set(folder, file);
       }
     }
-
+    
     // Convert map to array of files to process
-    const filesToProcess = Array.from(folderToFile.values())
-
+    const filesToProcess = Array.from(folderToFile.values());
+    
     let articles = await Promise.all(
-      filesToProcess.map((filename) => importArticle(filename, 'en')),
-    )
-
+      filesToProcess.map(filename => importArticle(filename, 'en'))
+    );
+    
     // Deduplicate by slug (in case multiple folders have same slug)
-    const seenSlugs = new Set<string>()
+    const seenSlugs = new Set<string>();
     return articles
       .filter((article): article is ArticleWithSlug => {
-        if (article === null) return false
-        if (seenSlugs.has(article.slug)) return false
-        seenSlugs.add(article.slug)
-        return true
+        if (article === null) return false;
+        if (seenSlugs.has(article.slug)) return false;
+        seenSlugs.add(article.slug);
+        return true;
       })
       .sort((a, z) => +new Date(z.date) - +new Date(a.date))
   }
 
   // For a specific locale, get unique folders and prefer locale-specific files
-  const allFiles = [...legacyFiles, ...localeFiles]
-  const uniqueFolders = new Set<string>()
-  const filesToProcess: string[] = []
-
+  const allFiles = [...legacyFiles, ...localeFiles];
+  const uniqueFolders = new Set<string>();
+  const filesToProcess: string[] = [];
+  
   for (const file of allFiles) {
-    let folder: string
+    let folder: string;
     if (file.includes(`/${locale}/page.mdx`)) {
-      folder = file.replace(`/${locale}/page.mdx`, '')
+      folder = file.replace(`/${locale}/page.mdx`, '');
     } else if (file.includes('/en/page.mdx') || file.includes('/fr/page.mdx')) {
       // Skip other locale files
-      continue
+      continue;
     } else {
-      folder = file.replace('/page.mdx', '')
+      folder = file.replace('/page.mdx', '');
     }
-
+    
     if (!uniqueFolders.has(folder)) {
-      uniqueFolders.add(folder)
+      uniqueFolders.add(folder);
       // Prefer the specific locale version if it exists
-      const localeFile = `${folder}/${locale}/page.mdx`
+      const localeFile = `${folder}/${locale}/page.mdx`;
       if (localeFiles.includes(localeFile)) {
-        filesToProcess.push(localeFile)
+        filesToProcess.push(localeFile);
       } else {
-        filesToProcess.push(`${folder}/page.mdx`) // Try legacy structure
+        filesToProcess.push(`${folder}/page.mdx`); // Try legacy structure
       }
     }
   }
 
   let articles = await Promise.all(
-    filesToProcess.map((filename) => importArticle(filename, locale)),
-  )
+    filesToProcess.map(filename => importArticle(filename, locale))
+  );
 
   // Deduplicate by slug and filter out nulls, then sort by date
-  const seenSlugs = new Set<string>()
+  const seenSlugs = new Set<string>();
   return articles
     .filter((article): article is ArticleWithSlug => {
-      if (article === null) return false
-      if (seenSlugs.has(article.slug)) return false
-      seenSlugs.add(article.slug)
-      return true
+      if (article === null) return false;
+      if (seenSlugs.has(article.slug)) return false;
+      seenSlugs.add(article.slug);
+      return true;
     })
     .sort((a, z) => +new Date(z.date) - +new Date(a.date))
 }
 
 export async function getArticle(slug: string, locale: string = 'en') {
   // Build slug -> folder mapping
-  const slugToFolder = await buildSlugToFolderMap()
-  const folder = slugToFolder.get(slug)
-
+  const slugToFolder = await buildSlugToFolderMap();
+  const folder = slugToFolder.get(slug);
+  
   if (!folder) {
-    throw new Error(`Article not found: ${slug} in ${locale}`)
+    throw new Error(`Article not found: ${slug} in ${locale}`);
   }
-
-  const localeSpecificPath = `${folder}/${locale}/page.mdx`
-  let articleModule
-
+  
+  const localeSpecificPath = `${folder}/${locale}/page.mdx`;
+  let articleModule;
+  
   try {
-    articleModule = await import(`../app/articles/${localeSpecificPath}`)
+    articleModule = await import(`../app/articles/${localeSpecificPath}`);
   } catch {
     // Fallback to old structure
     if (locale === 'en') {
-      articleModule = await import(`../app/articles/${folder}/page.mdx`)
+      articleModule = await import(`../app/articles/${folder}/page.mdx`);
     } else {
-      const mainModule = await import(`../app/articles/${folder}/page.mdx`)
-      const translatedModule = await import(
-        `../app/articles/${folder}/translated.mdx`
-      )
-
+      const mainModule = await import(`../app/articles/${folder}/page.mdx`);
+      const translatedModule = await import(`../app/articles/${folder}/translated.mdx`);
+      
       articleModule = {
         article: {
           ...mainModule.article,
-          lang: 'fr',
+          lang: 'fr'
         },
-        default: translatedModule.default,
-      }
+        default: translatedModule.default
+      };
     }
   }
 
-  return articleModule
+  return articleModule;
 }
