@@ -3,10 +3,12 @@
 import { useEffect, useState } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 
-function LanguageIcon(props: React.ComponentPropsWithoutRef<'span'> & { children: React.ReactNode }) {
+function LanguageIcon(
+  props: React.ComponentPropsWithoutRef<'span'> & { children: React.ReactNode },
+) {
   return (
     <span
-      className="text-sm font-medium text-zinc-800 dark:text-zinc-200"
+      className="text-sm font-medium text-zinc-800 transition group-hover:text-darkLavender dark:text-zinc-200 dark:group-hover:text-lavender"
       {...props}
     >
       {props.children}
@@ -47,12 +49,13 @@ export function LanguageToggle() {
   const [hasTranslation, setHasTranslation] = useState<boolean | null>(null)
 
   // Only show language toggle on article pages
-  const isArticlePage = pathname.startsWith('/en/articles') || pathname.startsWith('/fr/articles')
-  
+  const isArticlePage =
+    pathname.startsWith('/en/articles') || pathname.startsWith('/fr/articles')
+
   // Determine current locale from pathname
   const currentLocale = pathname.startsWith('/fr/articles') ? 'fr' : 'en'
   const otherLocale = currentLocale === 'en' ? 'fr' : 'en'
-  
+
   // Extract slug from pathname for individual articles
   const isIndividualArticle = pathname.match(/^\/(en|fr)\/articles\/([^/]+)$/)
   const slug = isIndividualArticle ? isIndividualArticle[2] : null
@@ -72,17 +75,17 @@ export function LanguageToggle() {
     // Check if the translation file exists
     const checkTranslation = async () => {
       const targetPath = `/${otherLocale}/articles/${slug}`
-      
+
       const response = await fetch(targetPath, {
         method: 'HEAD',
       })
-      
+
       setHasTranslation(response.ok)
     }
 
     checkTranslation()
   }, [slug, otherLocale])
-  
+
   if (!isArticlePage) {
     return null
   }
@@ -93,8 +96,11 @@ export function LanguageToggle() {
     setIsLoading(true)
 
     let newPathname: string
-    
-    if (pathname.startsWith('/en/articles') || pathname.startsWith('/fr/articles')) {
+
+    if (
+      pathname.startsWith('/en/articles') ||
+      pathname.startsWith('/fr/articles')
+    ) {
       // For both listing pages and individual articles, replace the locale
       newPathname = pathname.replace(/^\/(en|fr)/, `/${otherLocale}`)
     } else {
@@ -104,13 +110,11 @@ export function LanguageToggle() {
 
     // Navigate to the new path
     router.push(newPathname)
-    
+
     // Reset loading state after a short delay to show feedback
-    // The actual navigation will happen before this, but this ensures
-    // the loading state is visible
     setTimeout(() => {
       setIsLoading(false)
-    }, 1000)
+    }, 300)
   }
 
   const isDisabled = isLoading || hasTranslation === false
@@ -118,32 +122,79 @@ export function LanguageToggle() {
 
   const getAriaLabel = () => {
     if (!mounted) return 'Toggle language'
-    if (hasTranslation === false) return `Translation not available in ${otherLocale === 'fr' ? 'French' : 'English'}`
+    if (hasTranslation === false)
+      return `Translation not available in ${otherLocale === 'fr' ? 'French' : 'English'}`
     return `Switch to ${otherLocale === 'fr' ? 'French' : 'English'}`
   }
 
   const getTitle = () => {
-    if (hasTranslation === false) return `Translation not available in ${otherLocale === 'fr' ? 'French' : 'English'}`
+    if (hasTranslation === false)
+      return `Translation not available in ${otherLocale === 'fr' ? 'French' : 'English'}`
     if (isCheckingTranslation) return 'Checking translation availability...'
     return `Switch to ${otherLocale === 'fr' ? 'French' : 'English'}`
   }
 
+  const getTooltipMessage = () => {
+    if (hasTranslation === false) {
+      if (currentLocale === 'en') {
+        return (
+          <>
+            <div>Version française non disponible</div>
+            <div className="text-xs text-zinc-600 dark:text-zinc-400">
+              French version not available
+            </div>
+          </>
+        )
+      }
+      return (
+        <>
+          <div>English version not available</div>
+          <div className="text-xs text-zinc-600 dark:text-zinc-400">
+            Version anglaise non disponible
+          </div>
+        </>
+      )
+    }
+
+    if (currentLocale === 'en') {
+      return (
+        <>
+          <div>Cliquez pour la version française</div>
+          <div className="text-xs text-zinc-600 dark:text-zinc-400">
+            Click here for French version
+          </div>
+        </>
+      )
+    }
+    return (
+      <>
+        <div>Click here for English version</div>
+        <div className="text-xs text-zinc-600 dark:text-zinc-400">
+          Cliquez pour la version anglaise
+        </div>
+      </>
+    )
+  }
+
+  // Wrap in div with hover tooltip
   return (
-    <button
-      type="button"
-      aria-label={getAriaLabel()}
-      title={getTitle()}
-      className="group rounded-full bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:bg-zinc-800/90 dark:ring-white/10 hover:ring-lavender dark:hover:ring-white/20 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:ring-zinc-900/5 dark:disabled:hover:ring-white/10"
-      onClick={handleLocaleChange}
-      disabled={isDisabled}
-    >
-      {isLoading || isCheckingTranslation ? (
-        <LoadingSpinner />
-      ) : (
-        <LanguageIcon>
-          {currentLocale === 'en' ? 'EN' : 'FR'}
-        </LanguageIcon>
-      )}
-    </button>
+    <div className="group/tooltip relative">
+      <button
+        type="button"
+        aria-label={getAriaLabel()}
+        className="group rounded-full bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition hover:ring-lavender disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:ring-zinc-900/5 dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20 dark:disabled:hover:ring-white/10"
+        onClick={handleLocaleChange}
+        disabled={isDisabled}
+      >
+        {isLoading || isCheckingTranslation ? (
+          <LoadingSpinner />
+        ) : (
+          <LanguageIcon>{currentLocale === 'en' ? 'EN' : 'FR'}</LanguageIcon>
+        )}
+      </button>
+      <div className="pointer-events-none absolute left-1/2 top-full z-50 mt-2 w-max -translate-x-1/2 rounded-lg bg-white/95 px-3 py-2 text-sm font-medium text-zinc-800 opacity-0 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition-opacity duration-150 group-hover/tooltip:opacity-100 dark:bg-zinc-800/95 dark:text-zinc-200 dark:ring-white/10">
+        {getTooltipMessage()}
+      </div>
+    </div>
   )
-} 
+}
