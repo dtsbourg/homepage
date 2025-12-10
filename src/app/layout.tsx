@@ -8,13 +8,25 @@ import { Layout } from '@/components/Layout'
 import '@/styles/tailwind.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me',
+  ),
   title: {
     template: '%s | Dylan Bourgeois',
     default: 'Dylan Bourgeois | Crafting Articially Intelligent Minds',
   },
-  description: 'Dylan Bourgeois is an AI researcher and co-founder of Claryo. Explore his thoughts on artificial intelligence, robotics, and their impact on society.',
-  keywords: ['Dylan Bourgeois', 'AI', 'artificial intelligence', 'robotics', 'machine learning', 'Claryo', 'research', 'technology'],
+  description:
+    'Dylan Bourgeois is an AI researcher and co-founder of Claryo. Explore his thoughts on artificial intelligence, robotics, and their impact on society.',
+  keywords: [
+    'Dylan Bourgeois',
+    'AI',
+    'artificial intelligence',
+    'robotics',
+    'machine learning',
+    'Claryo',
+    'research',
+    'technology',
+  ],
   authors: [{ name: 'Dylan Bourgeois', url: 'https://dtsbourg.me' }],
   creator: 'Dylan Bourgeois',
   publisher: 'Dylan Bourgeois',
@@ -23,11 +35,12 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me',
     title: 'Dylan Bourgeois | Crafting Articially Intelligent Minds',
-    description: 'Dylan Bourgeois is an AI researcher, engineer and co-founder of Claryo. Explore his thoughts on artificial intelligence, robotics, and their impact on society.',
+    description:
+      'Dylan Bourgeois is an AI researcher, engineer and co-founder of Claryo. Explore his thoughts on artificial intelligence, robotics, and their impact on society.',
     siteName: 'Dylan Bourgeois',
     images: [
       {
-        url: '/portrait.jpg',
+        url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'}/portrait.jpg`,
         width: 1200,
         height: 630,
         alt: 'Dylan Bourgeois',
@@ -37,8 +50,11 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Dylan Bourgeois | Crafting Articially Intelligent Minds',
-    description: 'Dylan Bourgeois is an AI researcher, engineer and co-founder of Claryo. Explore his thoughts on artificial intelligence, robotics, and their impact on society.',
-    images: ['/portrait.jpg'],
+    description:
+      'Dylan Bourgeois is an AI researcher, engineer and co-founder of Claryo. Explore his thoughts on artificial intelligence, robotics, and their impact on society.',
+    images: [
+      `${process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'}/portrait.jpg`,
+    ],
     creator: '@dtsbourg',
   },
   robots: {
@@ -66,8 +82,9 @@ export const metadata: Metadata = {
     google: process.env.GOOGLE_SITE_VERIFICATION,
   },
   other: {
-    'dns-prefetch': '//fonts.googleapis.com //img.youtube.com //www.youtube-nocookie.com',
-    'preconnect': 'https://fonts.googleapis.com https://fonts.gstatic.com',
+    'dns-prefetch':
+      '//fonts.googleapis.com //img.youtube.com //www.youtube-nocookie.com',
+    preconnect: 'https://fonts.googleapis.com https://fonts.gstatic.com',
   },
 }
 

@@ -3,34 +3,34 @@ import { notFound } from 'next/navigation'
 import { getAllArticles, getArticle } from '@/lib/articles'
 
 type Props = {
-  params: { 
+  params: {
     locale: string
-    slug: string 
+    slug: string
   }
 }
 
 export async function generateStaticParams() {
   const enArticles = await getAllArticles('en')
   const frArticles = await getAllArticles('fr')
-  
+
   const params = []
-  
+
   // Add English articles
   for (const article of enArticles) {
     params.push({ locale: 'en', slug: article.slug })
   }
-  
+
   // Add French articles
   for (const article of frArticles) {
     params.push({ locale: 'fr', slug: article.slug })
   }
-  
+
   return params
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = params
-  
+
   if (locale !== 'en' && locale !== 'fr') {
     notFound()
   }
@@ -39,11 +39,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { article } = await getArticle(slug, locale)
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'
     const url = `${baseUrl}/${locale}/articles/${slug}`
-    
+
     return {
       title: article.title,
       description: article.description,
-      keywords: ['Dylan Bourgeois', 'AI', 'artificial intelligence', 'robotics', article.title.split(' ').slice(0, 3)].flat(),
+      keywords: [
+        'Dylan Bourgeois',
+        'AI',
+        'artificial intelligence',
+        'robotics',
+        article.title.split(' ').slice(0, 3),
+      ].flat(),
       authors: [{ name: article.author }],
       publisher: 'Dylan Bourgeois',
       openGraph: {
@@ -55,7 +61,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         locale: locale === 'fr' ? 'fr_FR' : 'en_US',
         images: [
           {
-            url: '/portrait.jpg',
+            url: `${baseUrl}/portrait.jpg`,
             width: 1200,
             height: 630,
             alt: article.title,
@@ -68,15 +74,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         card: 'summary_large_image',
         title: article.title,
         description: article.description,
-        images: ['/portrait.jpg'],
+        images: [`${baseUrl}/portrait.jpg`],
         creator: '@dtsbourg',
       },
       alternates: {
         canonical: url,
-        languages: article.hasTranslation ? {
-          'en-US': `${baseUrl}/en/articles/${slug}`,
-          'fr-FR': `${baseUrl}/fr/articles/${slug}`,
-        } : undefined,
+        languages: article.hasTranslation
+          ? {
+              'en-US': `${baseUrl}/en/articles/${slug}`,
+              'fr-FR': `${baseUrl}/fr/articles/${slug}`,
+            }
+          : undefined,
       },
       robots: {
         index: true,
@@ -90,16 +98,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Article({ params }: Props) {
   const { locale, slug } = params
-  
+
   if (locale !== 'en' && locale !== 'fr') {
     notFound()
   }
 
   try {
-    const { default: ArticleComponent, article } = await getArticle(slug, locale)
-    
+    const { default: ArticleComponent, article } = await getArticle(
+      slug,
+      locale,
+    )
+
     return <ArticleComponent />
   } catch (error) {
     notFound()
   }
-} 
+}
