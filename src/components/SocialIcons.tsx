@@ -55,3 +55,15 @@ export function DownloadIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     </svg>
   )
 }
+
+export function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M3 5.5h18A2.5 2.5 0 0 1 23.5 8v9A2.5 2.5 0 0 1 21 19.5H3A2.5 2.5 0 0 1 .5 17V8A2.5 2.5 0 0 1 3 5.5Zm.9 2.55L12 13.35l8.1-5.3-1.1-1.45L12 11.1 5 6.6 3.9 8.05Z"
+      />
+    </svg>
+  )
+}

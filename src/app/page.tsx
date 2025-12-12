@@ -9,6 +9,7 @@ import {
   XIcon,
   BlueSkyIcon,
   DownloadIcon,
+  MailIcon,
 } from '@/components/SocialIcons'
 import logoCern from '@/images/logos/cern.svg'
 import logoEPFL from '@/images/logos/epfl.svg'
@@ -17,31 +18,9 @@ import logoRobust from '@/images/logos/robust.png'
 import logoStanford from '@/images/logos/stanford.svg'
 import illustrationImage from '@/images/bg-new.svg'
 import logoOgment from '@/images/logos/ogment.png'
+import logoStealth from '@/images/logos/ghost.svg'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
-
-function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      {...props}
-    >
-      <path
-        d="M2.75 7.75a3 3 0 0 1 3-3h12.5a3 3 0 0 1 3 3v8.5a3 3 0 0 1-3 3H5.75a3 3 0 0 1-3-3v-8.5Z"
-        className="fill-zinc-100 stroke-zinc-400 dark:fill-zinc-100/10 dark:stroke-zinc-500"
-      />
-      <path
-        d="m4 6 6.024 5.479a2.915 2.915 0 0 0 3.952 0L20 6"
-        className="stroke-zinc-400 dark:stroke-zinc-500"
-      />
-    </svg>
-  )
-}
 
 function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -136,8 +115,12 @@ function Role({ role }: { role: Role }) {
           aria-label={`${startLabel} until ${endLabel}`}
         >
           <time dateTime={startDate}>{startLabel}</time>{' '}
-          <span aria-hidden="true">—</span>{' '}
-          <time dateTime={endDate}>{endLabel}</time>
+          {endLabel && (
+            <>
+              <span aria-hidden="true">—</span>{' '}
+              <time dateTime={endDate}>{endLabel}</time>
+            </>
+          )}
         </dd>
       </dl>
     </li>
@@ -146,6 +129,13 @@ function Role({ role }: { role: Role }) {
 
 function Resume() {
   let resume: Array<Role> = [
+    {
+      company: 'Stealth',
+      title: "Let's chat!",
+      logo: logoStealth,
+      start: 'Soon',
+      end: '',
+    },
     {
       company: 'Ogment.ai',
       title: 'Interim CTO',
@@ -242,7 +232,8 @@ export default async function Home() {
           </h1>
           <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
             I&apos;m Dylan, an engineer and entrepreneur based in New York City.{' '}
-            <br />I build systems that perceive and understand the world.
+            I build systems that perceive, understand, and act in the world.
+            Let&apos;s chat!
           </p>
           <div className="mt-6 flex gap-6">
             <SocialLink
@@ -264,6 +255,11 @@ export default async function Home() {
               href="https://bsky.app/profile/dtsbourg.bsky.social"
               aria-label="Follow on Bluesky"
               icon={BlueSkyIcon}
+            />
+            <SocialLink
+              href="mailto:contact@dtsbourg.me"
+              aria-label="Email me"
+              icon={MailIcon}
             />
           </div>
         </div>
