@@ -67,3 +67,12 @@ export function MailIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
     </svg>
   )
 }
+
+export function BookIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
+      <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3 9.707 9.707 0 0 0 .75 4.533v14.25a.75.75 0 0 0 .75.717 8.207 8.207 0 0 1 4.5-1.347 8.207 8.207 0 0 1 4.5 1.347.75.75 0 0 0 .75-.717V4.533Z" />
+      <path d="M12.75 4.533A9.707 9.707 0 0 1 18 3a9.707 9.707 0 0 1 5.25 1.533v14.25a.75.75 0 0 1-.75.717 8.207 8.207 0 0 0-4.5-1.347 8.207 8.207 0 0 0-4.5 1.347.75.75 0 0 1-.75-.717V4.533Z" />
+    </svg>
+  )
+}

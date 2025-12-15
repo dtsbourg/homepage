@@ -7,7 +7,7 @@ import { Container } from '@/components/Container'
 import { Prose } from '@/components/Prose'
 import {
   GitHubIcon,
-  InstagramIcon,
+  BookIcon,
   LinkedInIcon,
   XIcon,
   BlueSkyIcon,
@@ -161,6 +161,13 @@ export default function About() {
               className="mt-4"
             >
               Find me on Bluesky
+            </SocialLink>
+            <SocialLink
+              href="https://www.goodreads.com/user/show/37301423-dylan-bourgeois"
+              icon={BookIcon}
+              className="mt-4"
+            >
+              Find me on Goodreads
             </SocialLink>
             <SocialLink
               href="mailto:contact@dtsbourg.me"

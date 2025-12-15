@@ -10,6 +10,7 @@ import {
   BlueSkyIcon,
   DownloadIcon,
   MailIcon,
+  BookIcon,
 } from '@/components/SocialIcons'
 import logoCern from '@/images/logos/cern.svg'
 import logoEPFL from '@/images/logos/epfl.svg'
@@ -255,6 +256,11 @@ export default async function Home() {
               href="https://bsky.app/profile/dtsbourg.bsky.social"
               aria-label="Follow on Bluesky"
               icon={BlueSkyIcon}
+            />
+            <SocialLink
+              href="https://www.goodreads.com/user/show/37301423-dylan-bourgeois"
+              aria-label="Follow on Goodreads"
+              icon={BookIcon}
             />
             <SocialLink
               href="mailto:contact@dtsbourg.me"
