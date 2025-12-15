@@ -63,7 +63,7 @@ export default function About() {
           <div className="max-w-xs px-2.5 lg:max-w-none">
             <Image
               src={portraitImage}
-              alt="Dylan Bourgeois - Crafting Articially Intelligent Minds"
+              alt="Dylan Bourgeois - Crafting Artificially Intelligent Minds"
               sizes="(min-width: 1024px) 32rem, 20rem"
               className="aspect-square rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
             />
