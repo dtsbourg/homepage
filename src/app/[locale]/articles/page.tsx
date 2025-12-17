@@ -29,7 +29,14 @@ function Article({
   return (
     <article className="md:grid md:grid-cols-4 md:items-baseline">
       <Card className="md:col-span-3">
-        <Card.Title>{article.title}</Card.Title>
+        <Card.Title>
+          <Link
+            href={`/${locale}/articles/${article.slug}`}
+            className="relative z-10 cursor-pointer decoration-dotted underline-offset-4 hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-darkLavender/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-lavender/40 dark:focus-visible:ring-offset-zinc-900"
+          >
+            {article.title}
+          </Link>
+        </Card.Title>
         <Card.Eyebrow
           as="time"
           dateTime={article.date}
