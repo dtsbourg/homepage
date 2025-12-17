@@ -1,6 +1,7 @@
 import glob from 'fast-glob'
-import { join } from 'path';
+import { dirname, join, relative, resolve } from 'path';
 import { existsSync } from 'fs';
+import { readFile } from 'fs/promises';
 
 interface Article {
   title: string
@@ -264,4 +265,99 @@ export async function getArticle(slug: string, locale: string = 'en') {
   }
 
   return articleModule;
+}
+
+function toPosixPath(p: string) {
+  return p.replace(/\\/g, '/')
+}
+
+type ImageImport = {
+  name: string
+  from: string
+}
+
+function extractImageImports(mdx: string): ImageImport[] {
+  const imports: ImageImport[] = []
+  const importRe =
+    /^import\s+([A-Za-z0-9_$]+)\s+from\s+['"]([^'"]+\.(?:png|jpe?g|webp|gif|svg))['"];?\s*$/gm
+
+  let match: RegExpExecArray | null
+  while ((match = importRe.exec(mdx)) !== null) {
+    imports.push({ name: match[1], from: match[2] })
+  }
+
+  return imports
+}
+
+function extractFirstUsedImageName(mdx: string, importNames: Set<string>) {
+  const usageRe =
+    /<(Image|Figure)\b[^>]*\bsrc=\{([A-Za-z0-9_$]+)\}[^>]*>/g
+
+  let match: RegExpExecArray | null
+  while ((match = usageRe.exec(mdx)) !== null) {
+    const name = match[2]
+    if (importNames.has(name)) return name
+  }
+
+  return null
+}
+
+/**
+ * Returns a Next-emitted image `src` (e.g. `/_next/static/media/...`) for the first
+ * image used in an article MDX, or null if none can be resolved.
+ *
+ * Intended for server-side metadata (OG/Twitter cards).
+ */
+export async function getArticleOgImageSrc(
+  slug: string,
+  locale: string = 'en',
+): Promise<string | null> {
+  try {
+    const slugToFolder = await buildSlugToFolderMap()
+    const folder = slugToFolder.get(slug)
+    if (!folder) return null
+
+    const articlesRootAbs = join(process.cwd(), 'src', 'app', 'articles')
+
+    const mdxCandidates = [
+      join(articlesRootAbs, folder, locale, 'page.mdx'),
+      join(articlesRootAbs, folder, 'page.mdx'),
+    ]
+
+    const mdxAbsPath = mdxCandidates.find(p => existsSync(p))
+    if (!mdxAbsPath) return null
+
+    const mdx = await readFile(mdxAbsPath, 'utf8')
+    const imageImports = extractImageImports(mdx)
+    if (imageImports.length === 0) return null
+
+    const importMap = new Map(imageImports.map(i => [i.name, i.from]))
+    const firstUsedName = extractFirstUsedImageName(
+      mdx,
+      new Set(importMap.keys()),
+    )
+
+    const importFrom = firstUsedName
+      ? importMap.get(firstUsedName) ?? null
+      : imageImports[0].from
+
+    if (!importFrom) return null
+
+    const imageAbsPath = resolve(dirname(mdxAbsPath), importFrom)
+    if (!imageAbsPath.startsWith(articlesRootAbs)) return null
+
+    const relFromArticlesRoot = toPosixPath(relative(articlesRootAbs, imageAbsPath))
+
+    // Import from src/lib/articles.ts -> src/app/articles/<...>
+    const mod = (await import(
+      `../app/articles/${relFromArticlesRoot}`
+    )) as unknown as { default?: unknown }
+
+    const img: any = (mod as any).default ?? mod
+    if (typeof img === 'string') return img
+    if (img && typeof img.src === 'string') return img.src
+    return null
+  } catch {
+    return null
+  }
 }

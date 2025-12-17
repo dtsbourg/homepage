@@ -1,6 +1,6 @@
 import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getAllArticles, getArticle } from '@/lib/articles'
+import { getAllArticles, getArticle, getArticleOgImageSrc } from '@/lib/articles'
 
 type Props = {
   params: {
@@ -39,6 +39,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { article } = await getArticle(slug, locale)
     const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'
     const url = `${baseUrl}/${locale}/articles/${slug}`
+    const ogImageSrc = await getArticleOgImageSrc(slug, locale)
+    const ogImageUrl = ogImageSrc
+      ? ogImageSrc.startsWith('http')
+        ? ogImageSrc
+        : `${baseUrl}${ogImageSrc.startsWith('/') ? '' : '/'}${ogImageSrc}`
+      : `${baseUrl}/portrait.jpg`
 
     return {
       title: article.title,
@@ -61,7 +67,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         locale: locale === 'fr' ? 'fr_FR' : 'en_US',
         images: [
           {
-            url: `${baseUrl}/portrait.jpg`,
+            url: ogImageUrl,
             width: 1200,
             height: 630,
             alt: article.title,
@@ -74,7 +80,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         card: 'summary_large_image',
         title: article.title,
         description: article.description,
-        images: [`${baseUrl}/portrait.jpg`],
+        images: [ogImageUrl],
         creator: '@dtsbourg',
       },
       alternates: {
