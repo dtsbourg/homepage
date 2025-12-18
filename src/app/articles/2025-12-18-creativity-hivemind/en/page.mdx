@@ -1,0 +1,271 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Callout from '@/components/mdx/Callout'
+import CollapsibleCallout from '@/components/mdx/CollapsibleCallout'
+import Citation from '@/components/mdx/Citation'
+import Figure from '@/components/mdx/Figure'
+import riverTimeGpt from '../river-time-gpt.png'
+import similarityMetrix from '../similarity-matrix.png'
+import taxonomy from '../taxonomy.png'
+import timeMetaphorMap from '../time-metaphor-map.png'
+import baudrillard from '../baudrillard2019.jpg'
+import bourdieu from '../bourdieu.jpg'
+import creative2 from '../creative2.jpg'
+
+export const article = {
+  author: 'Dylan Bourgeois',
+  date: '2025-12-18',
+  title: 'The Artificial Hivemind: When AI Creativity Collapses Into Consensus',
+  description: [
+    'Why do different AI models keep giving the same creative answers?',
+    'A NeurIPS Best Paper study shows open-ended responses collapse into a few dominant modes across models and even across repeated samples.',
+    "Let's explore what that homogenization means for culture, and how to push for more diversity in practice.",
+  ].join(' '),
+  slug: 'creativity-hivemind',
+  lang: 'en',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Ask ChatGPT to write a metaphor about time. Then ask Claude. Then Gemini. You're consulting
+different oracles, built by rival companies with different philosophies, trained on different data.
+Surely you'd get meaningfully different answers?
+
+Here's what actually happens: time is a river. Time is a river. Time is a river, flowing endlessly.
+Time is a weaver, threading moments into tapestry. Time is a river. A relentless river. An invisible
+river carrying leaves.
+
+<Figure
+  src={riverTimeGpt}
+  alt="A screenshot of the GPT 5.2 response to the question 'Write a metaphor about time'"
+  caption="A screenshot of the GPT 5.2 response to the question 'Write a metaphor about time'"
+/>
+
+A study called:
+"[Artificial Hivemind: The Open-Ended Homogeneity of Language Models (and Beyond)](https://openreview.net/pdf?id=saDOrrnNTz)"
+just won
+[Best Paper at NeurIPS](https://blog.neurips.cc/2025/11/26/announcing-the-neurips-2025-best-paper-awards/)
+(a prestigious yearly AI conference). Researchers examined 1,250 responses to this simple prompt
+across 25 leading AI models. The responses collapsed into two clusters: time was either a river or
+weaver, with the river winning by a landslide. Welcome to the hivemind.
+
+Models don't just generate similar ideas, they are sometimes producing identical phrases. Multiple
+models independently generated the same sentence: "Elevate your iPhone with our sleek, slim-fitted
+case collection that combines minimalist design with bold, eye-catching patterns." For a social
+media motto prompt, two completely different models output the exact same text: "Empower Your
+Journey: Unlock Success, Build Wealth, Transform Yourself."
+
+This isn't a glitch. It's a pattern.
+
+## The Diversity Collapse Problem
+
+A dataset of 26,000 questions real people actually ask AI systems was collected for the paper. Not
+just sanitized test prompts, but the messy, genuine queries from actual conversations. Write me a
+pun. Help me brainstorm thesis ideas. Explain the paradox of free speech.
+
+These are open-ended questions, the kind where human creativity should flourish. The researchers
+developed a comprehensive taxonomy of such queries, categorizing everything from philosophical
+questions to hypothetical scenarios. What they discovered was a pattern of what AI researchers call
+"mode collapse", the tendency of models to gravitate toward a narrow set of outputs even when the
+space of possibilities is vast.
+
+<Figure
+  src={taxonomy}
+  alt="A taxonomy of open-ended questions"
+  caption="A taxonomy of open-ended questions"
+/>
+
+The results showed way more uniformity than we would expect. These systems aren't exploring the
+space of possibilities. They're circling the same few answers, rephrasing them slightly, convinced
+they've found something new.
+
+This highlighted two main issues:
+
+**Intra-model repetition**: When they asked individual models to respond to the same prompt 50 times
+with randomness cranked up, four out of five responses showed over 80% similarity. The responses are
+consistent, which would be good for factual retrieval, but also excessively repetitive.
+
+**Inter-model homogeneity**: Different models (GPT-4o from OpenAI, DeepSeek-V3 from the eponymous
+Chinese company, Claude from Anthropic, Qwen from Alibaba) produce responses with approx. 75%
+similarity to each other. Models that have (in theory) different training data, built by teams that
+are sometimes geopolitical rivals, are converging on the same linguistic patterns, the same
+metaphors, the same turns of phrase.
+
+<Figure
+  src={timeMetaphorMap}
+  alt="A map of the time metaphor space"
+  caption="A map of the time metaphor space"
+/>
+
+## What We Lose When Machines Agree
+
+What disappears in this convergence isn't just quirky alternatives. It's entire ways of knowing.
+Indigenous cultures often conceptualize time cyclically rather than linearly: time as seasons, as
+returns, as spirals. East Asian philosophical traditions sometimes treat time as relational rather
+than absolute, something that changes based on context and attention. These aren't just different
+metaphors; they're different epistemologies. When AI systems trained primarily on Western text
+converge on "time is a river," they're not just picking a common metaphor. They're reinforcing a
+particular cultural construction of reality as the default, the obvious, the "right" answer.
+
+Roland Barthes would recognize this pattern. In _Mythologies (1957)_, he described how culturally
+specific ideas become naturalized as common sense: what he called "myth" isn't a lie, but rather the
+transformation of history into nature. "Myth has the task of giving an historical intention a
+natural justification, and making contingency appear eternal".
+
+<Citation>
+  Barthes, R. (1972). <em>Mythologies</em>. Trans. Annette Lavers. New York: Hill and Wang. See
+  especially "Myth Today," pp. 109-159.
+</Citation>
+
+When AI systems consistently frame time as a river, they're performing exactly this operation:
+converting one cultural metaphor among many into what appears to be the natural, obvious way to
+think.
+
+The danger isn't that AI gives bad advice. It's that it gives increasingly similar advice, dressed
+up in enough linguistic variation that we don't notice we're all being guided down the same
+cognitive paths. The illusion of personalization, where the AI is responding to your specific query
+in your specific conversation, masks the reality that millions of conversations are converging on
+the same conceptual destinations.
+
+This isn't about quality. The river metaphor is fine, it's ancient, it's evocative, it works. The
+problem is the absence of alternatives. Where are the metaphors drawn from non-Western traditions?
+Where are the truly strange or unexpected framings? They exist in human creativity, but they've been
+smoothed away in the training process, sanded down in the pursuit of what the researchers call
+"pluralistic alignment", the attempt to make AI systems acceptable to everyone that paradoxically
+makes them distinctive to no one.
+
+We're building systems that are extraordinarily good at finding the center of the distribution. What
+happens to a culture that consistently chooses the average path?
+
+And here's the uncomfortable part: the influence is already flowing backward. Studies are beginning
+to document measurable shifts in how humans write and think after exposure to AI-generated content.
+The language patterns, the metaphors, the conceptual frameworks, they're seeping into human
+expression. When billions of people use similar AI systems for creative work, for writing, for
+thinking through problems, we're not just observing a diversity collapse in machines. We're
+engineering one in ourselves.
+
+<Figure src={baudrillard} alt="Jean Baudrillard" caption="Jean Baudrillard" />
+
+Jean Baudrillard anticipated this dynamic in _Simulacra and Simulation (1981)_, describing how
+copies without originals come to replace reality, what he called _hyperreality_. "It is no longer a
+question of imitation, nor duplication, nor even parody. It is a question of substituting the signs
+of the real for the real".
+
+<Citation>
+  Baudrillard, J. (1994). <em>Simulacra and Simulation</em>. Trans. Sheila Faria Glaser. Ann Arbor:
+  University of Michigan Press. See especially pp. 1-42.
+</Citation>
+
+When millions of people receive AI-generated metaphors about time, and those metaphors start to
+inform how they actually think about time, it then influences future AI training data. We're not
+dealing with authentic human creativity being assisted by AI. We're in a loop where the simulation
+(AI-generated ideas) becomes the reference point for generating more simulations, with decreasing
+connection to the diverse ways humans actually experience and conceptualize the world.
+
+## Why Machines Converge (And Why We Let Them)
+
+Models train on overlapping slices of the internet. They're refined using similar techniques,
+[as we discussed with post-training techniques](https://dtsbourg.me/en/articles/teaching-machines-think).
+These methods are designed to make systems "helpful and harmless." They increasingly train on
+synthetic data generated by other AI systems, creating an ouroboros of increasingly similar outputs.
+And crucially, they're all optimized against human ratings that, despite our diversity as
+individuals, show surprising consensus about what makes a "good" response.
+
+That last point is particularly revealing. When
+[we discussed evaluation](https://dtsbourg.me/en/articles/arena-benchmark), we saw that current AI
+grading systems work well when humans agree, but fail precisely where human preferences diverge.
+When different people legitimately prefer different responses for good reasons, AI judges, reward
+models, and automated evaluators all perform worse at predicting human satisfaction.
+
+The systems are calibrated to find consensus, not to appreciate multiplicity. This makes perfect
+sense for factual questions. But for open-ended creative tasks, it's systematically training models
+to converge on lowest-common-denominator responses that offend no one and delight few.
+
+Pierre Bourdieu's concept of cultural capital helps explain what's happening. In Distinction (1979),
+he showed how aesthetic preferences that appear natural or inevitable are actually socially learned
+and reinforce class boundaries.
+
+<Citation>
+  Bourdieu, P. (1984). <em>Distinction: A Social Critique of the Judgement of Taste</em>. Trans.
+  Richard Nice. Cambridge: Harvard University Press. See pp. 169-225 on "Cultural Capital and Social
+  Reproduction."
+</Citation>
+AI training on human preferences doesn't discover objective quality, it learns and reproduces the
+aesthetic preferences of whoever provides the ratings. When models converge on "sleek, slim-fitted"
+design language or "Empower Your Journey" motivational speak, they're not finding universal truths.
+They're encoding the cultural capital of a particular class and moment as the standard for "good"
+output.
+
+<Figure src={bourdieu} alt="Pierre Bourdieu" caption="Pierre Bourdieu" />
+
+## Beyond the Hivemind
+
+We need diversity-aware training objectives that explicitly reward exploring different valid
+approaches, not just identifying the single best one. We need to understand whether homogenization
+stems from pre-training (the initial learning from vast text corpora) or from alignment (the
+fine-tuning that makes models helpful). We need evaluation metrics that properly value multiplicity,
+that can recognize when five different responses are all equally good in different ways.
+
+More fundamentally, we need to ask what we want from these systems. Current AI development
+implicitly optimizes for a kind of algorithmic monoculture: systems that give consistent,
+predictable, "safe" responses. This makes sense for a product, for something you're deploying to
+billions of users. But it's potentially disastrous for creativity, for culture, for the long-term
+health of human expression.
+
+There's a tension here that the AI field hasn't resolved. We want models that are reliable enough to
+be useful but diverse enough to be interesting. We want them to reflect human values, but humans
+have genuinely different, sometimes incompatible values. We want them to be creative, but we've
+built systems that are fundamentally conservative, that gravitate toward the center of the
+distribution of human expression, not the edges where actual creativity lives.
+
+What kind of creative future do we want? One where AI acts as a genuine creative partner, surprising
+us with unexpected connections and perspectives we wouldn't have found alone? Or one where it
+efficiently guides everyone toward the same well-trodden solutions, optimizing away the messy,
+surprising diversity that makes human culture interesting?
+
+Right now, without quite meaning to, we're financing and building the second outcome. The artificial
+hivemind isn't a bug, it's the logical outcome of how we're using, training and deploying these
+systems. We're teaching them to find consensus, to identify the response that the most people will
+rate as good, to avoid the controversial or unexpected or strange.
+
+<Image src={creative2} />
+
+## Using these systems with intention
+
+So we're stuck with homogenized AI systems for now. What can individuals do while we wait for the
+field to solve this at the training level?
+
+First, **be skeptical of first drafts.** When you ask an AI for creative ideas, treat the initial
+response as the most obvious answer, because it probably is. Ask for alternatives explicitly. "Give
+me five very different metaphors for time" works better than accepting the first river that flows
+by. Push back. Say "that's too conventional" and see what emerges.
+
+Second, **use multiple models strategically.** Yes, the paper shows they're converging, but they
+haven't fully merged yet. GPT might give you the river, Claude might lean toward the weaver, and a
+smaller open-source model might surprise you with something stranger. The diversity isn't what we'd
+hope for, but it's not zero either. Collect responses from 3-4 different systems and look for the
+outliers.
+
+Third, **constrain creatively.** Paradoxically, specific constraints can force models away from
+their default patterns. Instead of "write a metaphor about time," try "write a metaphor about time
+using only images from marine biology" or "using concepts from textile manufacturing" or "avoiding
+any reference to water or movement." Constraints force the model to search different parts of its
+possibility space.
+
+Fourth, **iterate with awareness.** The paper tested min-p sampling, a technique that increases
+output diversity. It helped a little bit. Most AI interfaces don't expose these sampling parameters
+to users, but if you're using APIs or open-source models, experiment with temperature and sampling
+methods. Higher temperature makes outputs more random (and sometimes incoherent), but it can break
+repetition patterns. Find the sweet spot for your use case.
+
+Finally, **remember you're the creative one.** AI is a tool for exploration, not for answers. When
+you get output that feels too smooth, too conventional, too similar to what you've seen before,
+that's a sign. It's telling you where the consensus lies. Your job is to push beyond it. Use
+AI-generated content as a map of the obvious so you know which direction to go to find something
+genuinely novel.
+
+Time _is_ a river, after all. And right now, all our AIs are floating in the same direction.
