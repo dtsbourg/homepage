@@ -1,6 +1,6 @@
 export function GET(): Response {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'
-  
+
   const llmsTxt = `# LLMs.txt - AI Crawler Guidance
 # This file provides guidance for AI language models on how to use this site's content
 
@@ -50,4 +50,4 @@ For questions about content usage or citations: contact via site
       'Content-Type': 'text/plain',
     },
   })
-} 
+}

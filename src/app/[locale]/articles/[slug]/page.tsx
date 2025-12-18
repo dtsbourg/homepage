@@ -1,6 +1,10 @@
 import { type Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { getAllArticles, getArticle, getArticleOgImageSrc } from '@/lib/articles'
+import {
+  getAllArticles,
+  getArticle,
+  getArticleOgImageSrc,
+} from '@/lib/articles'
 
 type Props = {
   params: {

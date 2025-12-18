@@ -8,7 +8,10 @@ interface YouTubeProps {
   title?: string
 }
 
-export default function YouTube({ id, title = "YouTube Video Player" }: YouTubeProps) {
+export default function YouTube({
+  id,
+  title = 'YouTube Video Player',
+}: YouTubeProps) {
   const [isLoaded, setIsLoaded] = useState(false)
 
   const handleLoad = () => {
@@ -18,23 +21,23 @@ export default function YouTube({ id, title = "YouTube Video Player" }: YouTubeP
   return (
     <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-zinc-100 dark:bg-zinc-800">
       {!isLoaded && (
-        <div 
+        <div
           className="absolute inset-0 flex cursor-pointer items-center justify-center bg-black/20 transition-opacity hover:bg-black/30"
           onClick={handleLoad}
         >
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-red-600 transition-transform hover:scale-110">
-            <svg 
-              className="ml-1 h-6 w-6 fill-white" 
+            <svg
+              className="ml-1 h-6 w-6 fill-white"
               viewBox="0 0 24 24"
               aria-hidden="true"
             >
-              <path d="M8 5v14l11-7z"/>
+              <path d="M8 5v14l11-7z" />
             </svg>
           </div>
           <Image
             src={`https://img.youtube.com/vi/${id}/maxresdefault.jpg`}
             alt={title}
-            className="absolute inset-0 h-full w-full object-cover -z-10"
+            className="absolute inset-0 -z-10 h-full w-full object-cover"
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority={false}
@@ -55,4 +58,3 @@ export default function YouTube({ id, title = "YouTube Video Player" }: YouTubeP
     </div>
   )
 }
-  

@@ -10,8 +10,9 @@ import mistral from '../mensch.png'
 export const article = {
   author: 'Dylan Bourgeois',
   date: '2025-12-12',
-  title: 'Europe\'s AI Dilemma: Regulate, Imitate, or Innovate?',
-  description: 'Silicon Valley doesn\'t just shape the world, it rules it. The tech giants that call it home have amassed extraordinary influence over political and social structures, with decisions that ripple far beyond U.S. borders. Europe is caught in a bind: should it regulate, imitate, or innovate?',
+  title: "Europe's AI Dilemma: Regulate, Imitate, or Innovate?",
+  description:
+    "Silicon Valley doesn't just shape the world, it rules it. The tech giants that call it home have amassed extraordinary influence over political and social structures, with decisions that ripple far beyond U.S. borders. Europe is caught in a bind: should it regulate, imitate, or innovate?",
   slug: 'eu-ai-hyperscale',
   lang: 'en',
 }
@@ -23,265 +24,244 @@ export const metadata = {
 
 export default (props) => <ArticleLayout article={article} {...props} />
 
+Silicon Valley doesn't just shape the world, it rules it. The tech giants that call it home have
+amassed extraordinary influence over political and social structures, with decisions that ripple far
+beyond U.S. borders. This dominance turned domination is especially pronounced in AI, one of the
+critical domains of technological leadership of the 21st century.
 
-Silicon Valley doesn't just shape the world, it rules it. The tech giants that call
-it home have amassed extraordinary influence over political and social structures,
-with decisions that ripple far beyond U.S. borders. This dominance turned domination 
-is especially pronounced in AI, one of the critical domains of technological leadership
-of the 21st century.
+In a recent interview, Jensen Huang, CEO of Nvidia, argued that AI is a "five-layered cake": energy,
+infrastructure, hardware, model and application. Arguably, the US has a dominant position in all
+five layers, and Europe is struggling to keep up.
 
-In a recent interview, Jensen Huang, CEO of Nvidia, argued that AI is a 
-"five-layered cake": energy, infrastructure, hardware, model and application.
-Arguably, the US has a dominant position in all five layers, 
-and Europe is struggling to keep up.
+For those concerned about this concentration, Europe should be the natural counterweight. With its
+substantial economy, talented workforce, and history of engineering excellence, the European Union
+has the resources to compete. And yet, China is clearly gaining ground, even giving the US a run for
+its money. In contrast, Europe's response has been disappointingly passive, with many arguing it has
+focused more on regulating American companies than on fostering homegrown innovation.
 
+I see this tension up close. As a French founder working in the US, I often wonder if I should be
+building something in Europe instead, or whether I even could. There's a growing wave of bullish
+voices from across the Atlantic, some pointing to a golden opportunity for European startups to take
+the lead in safe and ethical AI, privacy-first technology, and deep tech. Others are more skeptical,
+arguing that despite its ambitions, Europe simply isn't structured to produce impactful technology
+companies. Every time I consider moving back, I hear conflicting accounts: funding is improving, but
+it's still fragmented; you can start, but you can't scale; there's enthusiasm, but bureaucracy is
+stifling; talent is abundant, but scaling across borders is painful; some pieces of the puzzle are
+falling into place, but it's virtually impossible to build across the stack.
 
-For those concerned about this concentration, Europe should be the natural counterweight.
-With its substantial economy, talented workforce, and history of engineering excellence, 
-the European Union has the resources to compete. And yet, China is clearly gaining ground, 
-even giving the US a run for its money. In contrast, Europe's response has been 
-disappointingly passive, with many arguing it has focused more on regulating 
-American companies than on fostering homegrown innovation.
-
-I see this tension up close. As a French founder working in the US, I often
-wonder if I should be building something in Europe instead, or whether I even
-could. There's a growing wave of bullish voices from across the Atlantic, some
-pointing to a golden opportunity for European startups to take the lead in safe and ethical
-AI, privacy-first technology, and deep tech. Others are more skeptical, arguing
-that despite its ambitions, Europe simply isn't structured to produce impactful
-technology companies. Every time I consider moving back, I hear conflicting
-accounts: funding is improving, but it's still fragmented; you can start, but you can't scale;
-there's enthusiasm, but bureaucracy is stifling; talent is abundant, but 
-scaling across borders is painful; some pieces of the puzzle are falling into place, 
-but it's virtually impossible to build across the stack.
-
-
-**Is Europe really ready to compete? Or is it stuck in a cycle of reactionary
-policies and delayed innovation?**
+**Is Europe really ready to compete? Or is it stuck in a cycle of reactionary policies and delayed
+innovation?**
 
 <Image src={eu} alt="Europe" />
 
-The European Union has leaned heavily on regulation as its main weapon against
-Silicon Valley. Laws like the [Digital Services Act (DSA)](https://digital-strategy.ec.europa.eu/en/policies/digital-services-act), 
-the [AI Act](https://artificialintelligenceact.eu/) and [General Data
-Protection Regulation (GDPR)](https://gdpr-info.eu/) have forced tech companies to 
-comply with stricter
-rules, shaping their behavior worldwide. These laws have yielded overall benefits
-for consumers, but they haven't necessarily created better technology for users.
-In fact, the most visible result of GDPR for most people is the never-ending
-barrage of cookie consent pop-ups.
+The European Union has leaned heavily on regulation as its main weapon against Silicon Valley. Laws
+like the
+[Digital Services Act (DSA)](https://digital-strategy.ec.europa.eu/en/policies/digital-services-act),
+the [AI Act](https://artificialintelligenceact.eu/) and
+[General Data Protection Regulation (GDPR)](https://gdpr-info.eu/) have forced tech companies to
+comply with stricter rules, shaping their behavior worldwide. These laws have yielded overall
+benefits for consumers, but they haven't necessarily created better technology for users. In fact,
+the most visible result of GDPR for most people is the never-ending barrage of cookie consent
+pop-ups.
 
-And when it comes to building alternatives, Europe has too often fallen into the
-trap of imitation rather than innovation. Consider [Qwant](https://www.qwant.com/), the French-built search
-engine meant to rival Google. Not only has it failed to capture significant market
-share, but its main provider of search results is [Bing](https://www.bing.com/) - a Microsoft product! The
-EU has spent years trying to create its own cloud platforms, social networks, and
-AI models, but most of these efforts arrive late, underfunded, and not competitive enough.
+And when it comes to building alternatives, Europe has too often fallen into the trap of imitation
+rather than innovation. Consider [Qwant](https://www.qwant.com/), the French-built search engine
+meant to rival Google. Not only has it failed to capture significant market share, but its main
+provider of search results is [Bing](https://www.bing.com/) - a Microsoft product! The EU has spent
+years trying to create its own cloud platforms, social networks, and AI models, but most of these
+efforts arrive late, underfunded, and not competitive enough.
 
-The solutions offered in an attempt to play catch up 
-often seem lackluster. A "Eurostack", meant to replicate 
-what American cloud providers have been doing for years, has been floated. A set 
-of patches to plaster over existing models, somehow meant to provide post-hoc 
-safety and privacy was proposed. Endless discussions predicting when "hyperscale" 
-approaches might
-hit the wall, when the bubble will pop, as if a win by default would 
-rationalize passivity.
-The vision is a digital ecosystem infused with European
-values - privacy, ethical AI, and human rights considerations - built from the
-ground up.
+The solutions offered in an attempt to play catch up often seem lackluster. A "Eurostack", meant to
+replicate what American cloud providers have been doing for years, has been floated. A set of
+patches to plaster over existing models, somehow meant to provide post-hoc safety and privacy was
+proposed. Endless discussions predicting when "hyperscale" approaches might hit the wall, when the
+bubble will pop, as if a win by default would rationalize passivity. The vision is a digital
+ecosystem infused with European values - privacy, ethical AI, and human rights considerations -
+built from the ground up.
 
-<Figure src={germanCar} alt="German Car" caption="This type of approach to technological 
+<Figure
+  src={germanCar}
+  alt="German Car"
+  caption="This type of approach to technological 
 advancement fundamentally misunderstands progress in AI. A German car manufacturer's 
 specialized AI doesn't start from scratch. It's built on foundation models trained at 
 a massive scale, then fine-tuned. The specialized system depends on the hyperscale 
 foundation. You can't skip to specialization. Screenshot from 
 [Europe must be ready when the AI bubble bursts](https://www.ft.com/content/0308f405-19ba-4aa8-9df1-40032e5ddc4e)
-by Marietje Schaake."/>
+by Marietje Schaake."
+/>
 
-The problem is that this fundamentally misunderstands how technology progresses,
-even more specifically how modern AI works.
+The problem is that this fundamentally misunderstands how technology progresses, even more
+specifically how modern AI works.
 
-Technology doesn't reward imitation; it rewards innovation. By the time a
-European-built alternative to a dominant American platform is ready, the U.S.
-version has already undergone multiple iterations, gained user traction, and set
-new industry standards. This is a classic case of [_The Innovator's Dilemma_](https://www.hbs.edu/faculty/Pages/item.aspx?num=46), 
-as described by Clayton Christensen in his book: companies (or in this case,
-governments) that focus too much on defending their position or copying
-incumbents end up permanently lagging behind. They are fundamentally unable to
-invest in alternatives that threaten to cannibalize an established product of
-their own, even if it means more long term success.
+Technology doesn't reward imitation; it rewards innovation. By the time a European-built alternative
+to a dominant American platform is ready, the U.S. version has already undergone multiple
+iterations, gained user traction, and set new industry standards. This is a classic case of
+[_The Innovator's Dilemma_](https://www.hbs.edu/faculty/Pages/item.aspx?num=46), as described by
+Clayton Christensen in his book: companies (or in this case, governments) that focus too much on
+defending their position or copying incumbents end up permanently lagging behind. They are
+fundamentally unable to invest in alternatives that threaten to cannibalize an established product
+of their own, even if it means more long term success.
 
-Beyond the pace of progress, reinforced by the exponential nature of hyperscaling,
-the idea that we can patch over existing models is ludicrous. You can't add privacy
-or safety as an afterthought to models you didn't build. These properties must be 
-architected into training data, model architecture, and deployment from the start.
+Beyond the pace of progress, reinforced by the exponential nature of hyperscaling, the idea that we
+can patch over existing models is ludicrous. You can't add privacy or safety as an afterthought to
+models you didn't build. These properties must be architected into training data, model
+architecture, and deployment from the start.
 
-Another school of thought suggests deregulation, removing restrictions to allow
-European startups to operate with the same aggressive, growth-at-all-costs
-mentality as Silicon Valley. French President Emmanuel Macron argued during
-February's AI Summit in Paris that Europe's strict data regulations should be
-relaxed to stimulate innovation. This approach naively ignores the lessons of
-the past decade. Unchecked growth has led to massive monopolies, widespread
-disinformation, and platforms optimized for engagement over societal well-being.
-Following that playbook would repeat the same mistakes, without necessarily
-making Europe more competitive.
+Another school of thought suggests deregulation, removing restrictions to allow European startups to
+operate with the same aggressive, growth-at-all-costs mentality as Silicon Valley. French President
+Emmanuel Macron argued during February's AI Summit in Paris that Europe's strict data regulations
+should be relaxed to stimulate innovation. This approach naively ignores the lessons of the past
+decade. Unchecked growth has led to massive monopolies, widespread disinformation, and platforms
+optimized for engagement over societal well-being. Following that playbook would repeat the same
+mistakes, without necessarily making Europe more competitive.
 
 So if imitation and deregulation are dead ends, what's the right path forward?
 
-Instead of copying U.S. platforms or trying to out-Silicon-Valley Silicon Valley,
-Europe should lean into its strengths and build an ecosystem that fosters
-original, globally competitive technology.
+Instead of copying U.S. platforms or trying to out-Silicon-Valley Silicon Valley, Europe should lean
+into its strengths and build an ecosystem that fosters original, globally competitive technology.
 
 1. **Invest in research as a competitive advantage**
 
-Many of the breakthroughs that drive today's biggest tech companies - machine
-learning, cryptography, networking - originated in university research labs.
-Europe has an advantage here: its universities and research institutions, often
-publicly funded, don't need to chase immediate commercial returns the way
-corporate labs in the U.S. do. By doubling down on these strengths, Europe can
-attract top researchers - including disillusioned American academics - who are
-looking for environments focused on exploration rather than short-term profits.
-This also fits perfectly with the next wave of innovations that could re-shape
-the technological and social landscapes: clean energy production at scale, novel 
-AI architectures that will power the next generation of models or
-advanced bio-technologies will require long innovation cycles without immediate
-commercial returns.
+Many of the breakthroughs that drive today's biggest tech companies - machine learning,
+cryptography, networking - originated in university research labs. Europe has an advantage here: its
+universities and research institutions, often publicly funded, don't need to chase immediate
+commercial returns the way corporate labs in the U.S. do. By doubling down on these strengths,
+Europe can attract top researchers - including disillusioned American academics - who are looking
+for environments focused on exploration rather than short-term profits. This also fits perfectly
+with the next wave of innovations that could re-shape the technological and social landscapes: clean
+energy production at scale, novel AI architectures that will power the next generation of models or
+advanced bio-technologies will require long innovation cycles without immediate commercial returns.
 
-The scale of investment matters here. The EU's recent AI innovation measures aim
-to mobilize around €4 billion in combined public and private funding for
-generative AI through 2027, while the broader InvestAI plan seeks to crowd in
-roughly €200 billion in AI-related investment overall, of which around [€50
-billion is expected to come from public sources](https://sciencebusiness.net/news/eu-budget/eu-invest-eu50b-supercharge-innovation-artificial-intelligence) and the rest from private
-capital. By contrast, [U.S. federal spending on AI](https://iq.govwin.com/neo/marketAnalysis/view/Federal-Artificial-Intelligence-Spending-Trends-FY-2022-2024/8401?researchTypeId=1&researchMarket=) 
-runs to a few billion dollars per year in unclassified R&D alone in the mid-2020s, on top of tens of billions
-annually from companies like Microsoft, Google, and Meta whose AI investments
-already dwarf public budgets. Europe is not just behind on frontier-scale
-spending; it is operating at a different order of magnitude. That said, research
-funding, especially long-term, open question work in universities and public
-institutes, remains an area where Europe can still punch above its weight,
-because breakthrough advances in architectures, algorithms, or training methods
-do not always require matching Silicon Valley's compute and capital budgets
-one-for-one.
+The scale of investment matters here. The EU's recent AI innovation measures aim to mobilize around
+€4 billion in combined public and private funding for generative AI through 2027, while the broader
+InvestAI plan seeks to crowd in roughly €200 billion in AI-related investment overall, of which
+around
+[€50 billion is expected to come from public sources](https://sciencebusiness.net/news/eu-budget/eu-invest-eu50b-supercharge-innovation-artificial-intelligence)
+and the rest from private capital. By contrast,
+[U.S. federal spending on AI](https://iq.govwin.com/neo/marketAnalysis/view/Federal-Artificial-Intelligence-Spending-Trends-FY-2022-2024/8401?researchTypeId=1&researchMarket=)
+runs to a few billion dollars per year in unclassified R&D alone in the mid-2020s, on top of tens of
+billions annually from companies like Microsoft, Google, and Meta whose AI investments already dwarf
+public budgets. Europe is not just behind on frontier-scale spending; it is operating at a different
+order of magnitude. That said, research funding, especially long-term, open question work in
+universities and public institutes, remains an area where Europe can still punch above its weight,
+because breakthrough advances in architectures, algorithms, or training methods do not always
+require matching Silicon Valley's compute and capital budgets one-for-one.
 
-<Figure src={neurips} alt="NeurIPS 2025" caption="Distribution of NeurIPS 2025 papers
+<Figure
+  src={neurips}
+  alt="NeurIPS 2025"
+  caption="Distribution of NeurIPS 2025 papers
 by country and affiliation. Clearly, European institutions have some catch-up to do. 
-Source: [AI World](https://aiworld.eu/story/from-beijing-to-san-francisco-what-neurips-2025-reveals-about-ai-leadership)" />
+Source: [AI World](https://aiworld.eu/story/from-beijing-to-san-francisco-what-neurips-2025-reveals-about-ai-leadership)"
+/>
 
 2. **Unify the markets**
 
-Research alone isn't enough. Europe needs better infrastructure for turning ideas
-into companies. Here, Schaake is on the right track: rather than 27 member states 
-pursuing their own goals, the EU needs specialized clusters and strategic ecosystem 
-development. One promising initiative is EU-Inc, a pan-European structure designed 
-to help founders scale across the continent. EU-Inc would allow startups to incorporate 
-once and operate across all 27 member states, similar to a Delaware C-corp in the US. 
-Instead of being forced to navigate 27 different regulatory systems, startups would 
-benefit from a unified framework, making it easier to raise capital, hire talent, 
-and reach a broad customer base. This would also help streamline competition, 
-reducing the number of duplicate efforts, where each country touts their 
-own sub-par GPT-clone.
+Research alone isn't enough. Europe needs better infrastructure for turning ideas into companies.
+Here, Schaake is on the right track: rather than 27 member states pursuing their own goals, the EU
+needs specialized clusters and strategic ecosystem development. One promising initiative is EU-Inc,
+a pan-European structure designed to help founders scale across the continent. EU-Inc would allow
+startups to incorporate once and operate across all 27 member states, similar to a Delaware C-corp
+in the US. Instead of being forced to navigate 27 different regulatory systems, startups would
+benefit from a unified framework, making it easier to raise capital, hire talent, and reach a broad
+customer base. This would also help streamline competition, reducing the number of duplicate
+efforts, where each country touts their own sub-par GPT-clone.
 
-Europe has long suffered from fragmented markets, slow-moving investors, and an
-aversion to risk. The proposed European Capital Markets Union should help unify
-investment opportunities, allowing deep-tech, AI, and biotech startups to access
-the kind of capital they need to compete globally.
+Europe has long suffered from fragmented markets, slow-moving investors, and an aversion to risk.
+The proposed European Capital Markets Union should help unify investment opportunities, allowing
+deep-tech, AI, and biotech startups to access the kind of capital they need to compete globally.
 
 3. **Build full-stack sovereignty**
 
-Europe must ensure that its technological leadership is aligned with
-public interest. Too often, tech is seen as either a tool for unchecked techno-capitalism,
-bordering on the dystopian. But it doesn't have to be.
+Europe must ensure that its technological leadership is aligned with public interest. Too often,
+tech is seen as either a tool for unchecked techno-capitalism, bordering on the dystopian. But it
+doesn't have to be.
 
-Instead of fighting losing battles over data privacy or content moderation 
-after the fact, Europe should invest in alternative models from the ground up. 
-This means full-stack domestic capabilities - not just regulations imposed on 
-American systems, but European-built infrastructure with safety and sovereignty 
-baked in from day one.
+Instead of fighting losing battles over data privacy or content moderation after the fact, Europe
+should invest in alternative models from the ground up. This means full-stack domestic
+capabilities - not just regulations imposed on American systems, but European-built infrastructure
+with safety and sovereignty baked in from day one.
 
-This doesn't mean abandoning privacy protections - it means building systems where 
-privacy is architected in from the start, not bolted on after the fact. 
-European-built infrastructure can embody European values without the compliance 
-theater of endless cookie pop-ups.
+This doesn't mean abandoning privacy protections - it means building systems where privacy is
+architected in from the start, not bolted on after the fact. European-built infrastructure can
+embody European values without the compliance theater of endless cookie pop-ups.
 
-[Mistral AI](https://mistral.ai/) offers a glimpse of what this could look like. The French AI company 
-has been working directly with European governments to deploy AI in public services, 
-demonstrating that you can build cutting-edge models while maintaining alignment 
-with European values and needs. This is fundamentally different from how American 
-AI companies work with governments. OpenAI and Anthropic offer API access;
-Mistral is building systems that run on European infrastructure, 
-with European data governance, designed for European administrative needs.
+[Mistral AI](https://mistral.ai/) offers a glimpse of what this could look like. The French AI
+company has been working directly with European governments to deploy AI in public services,
+demonstrating that you can build cutting-edge models while maintaining alignment with European
+values and needs. This is fundamentally different from how American AI companies work with
+governments. OpenAI and Anthropic offer API access; Mistral is building systems that run on European
+infrastructure, with European data governance, designed for European administrative needs.
 
-When [ASML](https://www.asml.com/), the Dutch semiconductor equipment 
-giant, invested in Mistral, it signaled the kind of vertical integration Europe 
-needs: key players working together, not in fragmented national silos.
+When [ASML](https://www.asml.com/), the Dutch semiconductor equipment giant, invested in Mistral, it
+signaled the kind of vertical integration Europe needs: key players working together, not in
+fragmented national silos.
 
-<Figure src={mistral} alt="Mistral" caption="Arthur Mensch, CEO of Mistral, in one 
-of such meetings with European governments." />
+<Figure
+  src={mistral}
+  alt="Mistral"
+  caption="Arthur Mensch, CEO of Mistral, in one 
+of such meetings with European governments."
+/>
 
-Real safety comes through sovereignty. You can't build safety into systems you 
-don't control, and you can't control systems you don't build.
-
+Real safety comes through sovereignty. You can't build safety into systems you don't control, and
+you can't control systems you don't build.
 
 4. **"Play to your strengths"**
 
-Europe is behind on consumer-oriented applications, and always has been. But it's
-world-class at (at least) two things that will unlock massive value in the next decade of AI.
+Europe is behind on consumer-oriented applications, and always has been. But it's world-class at (at
+least) two things that will unlock massive value in the next decade of AI.
 
-First, hardcore engineering, i.e. embedding AI within industrial settings, with deep tech at its heart. 
-German manufacturing, Dutch semiconductor expertise, French aerospace - these are domains
-where Europe already leads, and where AI can amplify existing advantages. This
-isn't about building chatbots; it's about building AI systems that improve
-precision manufacturing, optimize supply chains, and advance materials science.
+First, hardcore engineering, i.e. embedding AI within industrial settings, with deep tech at its
+heart. German manufacturing, Dutch semiconductor expertise, French aerospace - these are domains
+where Europe already leads, and where AI can amplify existing advantages. This isn't about building
+chatbots; it's about building AI systems that improve precision manufacturing, optimize supply
+chains, and advance materials science.
 
-Second, Europe has something Silicon Valley often lacks: taste. This is a
-continent rife with artistic tradition, design sensibility, and cultural depth.
-It has also built vast infrastructure for creative industries, to support 
-the production of creative content, the distribution of creative works while providing
-a stable and secure environment for artists and creators.
-As AI moves beyond purely functional applications into creative tools, for design,
-music, film, architecture, Europe's creative ecosystem could become a genuine
-competitive advantage. European artistic catalogs are similarly valuable, as demonstrated by Disney's 
-recent [$1B deal with OpenAI to bring characters to Sora](https://openai.com/index/disney-sora-agreement/).
-Its experience in supporting artists will be invaluable if it can sustain new forms of creation.
-The question is whether European companies can capture this opportunity, or 
-whether American platforms will simply extract European creativity and 
-monetize it elsewhere.
+Second, Europe has something Silicon Valley often lacks: taste. This is a continent rife with
+artistic tradition, design sensibility, and cultural depth. It has also built vast infrastructure
+for creative industries, to support the production of creative content, the distribution of creative
+works while providing a stable and secure environment for artists and creators. As AI moves beyond
+purely functional applications into creative tools, for design, music, film, architecture, Europe's
+creative ecosystem could become a genuine competitive advantage. European artistic catalogs are
+similarly valuable, as demonstrated by Disney's recent
+[$1B deal with OpenAI to bring characters to Sora](https://openai.com/index/disney-sora-agreement/).
+Its experience in supporting artists will be invaluable if it can sustain new forms of creation. The
+question is whether European companies can capture this opportunity, or whether American platforms
+will simply extract European creativity and monetize it elsewhere.
 
-Third, Europe is a union of many cultures and languages. This gives it a unique
-ability to build AI systems that are truly global. The accessibility of high-quality, 
-multilingual data is a major asset for building AI systems that scale to the rest 
-of the planet.
+Third, Europe is a union of many cultures and languages. This gives it a unique ability to build AI
+systems that are truly global. The accessibility of high-quality, multilingual data is a major asset
+for building AI systems that scale to the rest of the planet.
 
 <Callout type="info" title="Let's build!">
-    These are just some examples of how playing to your strengths can lead to a 
-    competitive advantage. Dear reader, you might have other ideas. 
-    Please share them! And if you'd like to build them together, well, even better, 
-    please [get in touch](mailto:contact@dtsbourg.me)!
+  These are just some examples of how playing to your strengths can lead to a competitive advantage.
+  Dear reader, you might have other ideas. Please share them! And if you'd like to build them
+  together, well, even better, please [get in touch](mailto:contact@dtsbourg.me)!
 </Callout>
 
 ---
 
-Europe doesn't need to become Silicon Valley. It needs to become something else.
-A place where the next generation of breakthroughs happen first, rather than
-second. A place where deep-tech and AI flourish under a framework that protects
-users and empowers entrepreneurs.
+Europe doesn't need to become Silicon Valley. It needs to become something else. A place where the
+next generation of breakthroughs happen first, rather than second. A place where deep-tech and AI
+flourish under a framework that protects users and empowers entrepreneurs.
 
-This isn't just a policy debate for me, it's personal. As a founder, I wrestle
-with these questions constantly. The U.S. is where things move fast, but at a
-cost. Europe offers a different set of values, but struggles with execution.
+This isn't just a policy debate for me, it's personal. As a founder, I wrestle with these questions
+constantly. The U.S. is where things move fast, but at a cost. Europe offers a different set of
+values, but struggles with execution.
 
-The question isn't whether Europe can compete. The resources are there. The talent is there. 
-The US is also very adept at shooting itself in the foot these days, as exemplified by the
-constant stream of anti-immigration policies.
-The question is whether European policymakers will accept that you can't regulate your 
-way to technological leadership and that you can't specialize your way around the need for foundational capability.
+The question isn't whether Europe can compete. The resources are there. The talent is there. The US
+is also very adept at shooting itself in the foot these days, as exemplified by the constant stream
+of anti-immigration policies. The question is whether European policymakers will accept that you
+can't regulate your way to technological leadership and that you can't specialize your way around
+the need for foundational capability.
 
-Waiting for the AI bubble to burst is not a strategy. 
-Building systems where safety and sovereignty are baked in 
-from day one, _that's a strategy_. But it requires actually building them, for the ground up.
-That's pretty damn hard.
+Waiting for the AI bubble to burst is not a strategy. Building systems where safety and sovereignty
+are baked in from day one, _that's a strategy_. But it requires actually building them, for the
+ground up. That's pretty damn hard.
 
-If Europe gets this right - if it invests in foundational research, unifies its 
-fragmented markets, and builds full-stack capabilities rather than just applications -
-it won't just reclaim sovereignty. It will define the next technological era on its
-own terms. But the window is closing fast.
+If Europe gets this right - if it invests in foundational research, unifies its fragmented markets,
+and builds full-stack capabilities rather than just applications - it won't just reclaim
+sovereignty. It will define the next technological era on its own terms. But the window is closing
+fast.

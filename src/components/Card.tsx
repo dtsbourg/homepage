@@ -98,11 +98,11 @@ Card.Cta = function CardTitle<T extends React.ElementType = 'p'>({
   return (
     <div
       aria-hidden="true"
-      className="text-darkLavender dark:text-lavender relative z-10 mt-4 flex items-center text-sm font-medium"
+      className="relative z-10 mt-4 flex items-center text-sm font-medium text-darkLavender dark:text-lavender"
     >
       {href ? (
         <Card.Link href={href}>
-          <div className='flex items-center justify-between'>
+          <div className="flex items-center justify-between">
             {children}
             <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current" />
           </div>

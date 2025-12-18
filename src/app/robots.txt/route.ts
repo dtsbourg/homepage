@@ -2,7 +2,7 @@ import { type MetadataRoute } from 'next'
 
 export function GET(): Response {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'
-  
+
   const robots: MetadataRoute.Robots = {
     rules: {
       userAgent: '*',
@@ -14,12 +14,14 @@ export function GET(): Response {
   }
 
   const rules = Array.isArray(robots.rules) ? robots.rules[0] : robots.rules
-  const disallowList = Array.isArray(rules.disallow) ? rules.disallow : [rules.disallow]
-  
+  const disallowList = Array.isArray(rules.disallow)
+    ? rules.disallow
+    : [rules.disallow]
+
   // AI-specific crawler directives
   const robotsTxt = `User-agent: ${rules.userAgent}
 Allow: ${rules.allow}
-${disallowList.map(path => `Disallow: ${path}`).join('\n')}
+${disallowList.map((path) => `Disallow: ${path}`).join('\n')}
 
 # AI Crawlers - Explicitly allow with specific directives
 User-agent: GPTBot
@@ -55,4 +57,4 @@ Host: ${robots.host}`
       'Content-Type': 'text/plain',
     },
   })
-} 
+}

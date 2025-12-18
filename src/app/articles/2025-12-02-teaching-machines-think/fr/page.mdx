@@ -10,8 +10,9 @@ import grid from '../grid.jpg'
 export const article = {
   author: 'Dylan Bourgeois',
   date: '2025-12-02',
-  title: 'L\'IA à l\'école : quand les machines deviennent élèves',
-  description: 'Les systèmes d\'IA franchissent soudain des étapes qu\'ils échouaient encore à maîtriser il y a quelques mois. Le secret ne tient plus seulement à la taille des modèles ou à la puissance de calcul. Derrière les dernières percées se cache une révolution silencieuse: les entreprises n\'"entraînent" plus l\'IA, elles lui enseignent.',
+  title: "L'IA à l'école : quand les machines deviennent élèves",
+  description:
+    "Les systèmes d'IA franchissent soudain des étapes qu'ils échouaient encore à maîtriser il y a quelques mois. Le secret ne tient plus seulement à la taille des modèles ou à la puissance de calcul. Derrière les dernières percées se cache une révolution silencieuse: les entreprises n'\"entraînent\" plus l'IA, elles lui enseignent.",
   lang: 'fr',
   slug: 'teaching-machines-think',
   hasTranslation: true,
@@ -24,34 +25,69 @@ export const metadata = {
 
 export default (props) => <ArticleLayout article={article} {...props} />
 
+Les systèmes d'IA franchissent soudain des étapes qu'ils échouaient encore à maîtriser il y a
+quelques mois. Le secret ne tient plus seulement à la taille des modèles ou à la puissance de
+calcul. Derrière les dernières percées se cache une révolution silencieuse : les entreprises n'«
+entraînent » plus l'IA, elles lui enseignent.
 
-Les systèmes d'IA franchissent soudain des étapes qu'ils échouaient encore à maîtriser il y a quelques mois. Le secret ne tient plus seulement à la taille des modèles ou à la puissance de calcul. Derrière les dernières percées se cache une révolution silencieuse : les entreprises n'« entraînent » plus l'IA, elles lui enseignent.
+Pendant des années, la recette semblait pourtant simple: construire des réseaux neuronaux toujours
+plus vastes, atteignant aujourd'hui des milliers de milliards de paramètres, les nourrir d'immenses
+volumes de textes collectés sur Internet, et les laisser prédire, mot après mot, ce qui vient
+ensuite. Contre toute attente, cette approche répétitive, dite de "force brute" fonctionnait. Les
+modèles apprenaient à traduire, à répondre à des questions, et semblaient parfois comprendre le
+monde, uniquement grâce à cet exercice répétitif. Il s'agissait là d'une illustration de la
+[« Bitter Lesson »](http://www.incompleteideas.net/IncIdeas/BitterLesson.html), formulée par Richard
+Sutton, un pionnier de l'apprentissage par renforcement: les gains d'échelle finissent toujours par
+l'emporter.
 
-Pendant des années, la recette semblait pourtant simple: construire des réseaux neuronaux toujours plus vastes, atteignant aujourd'hui des milliers de milliards de paramètres, les nourrir d'immenses volumes de textes collectés sur Internet, et les laisser prédire, mot après mot, ce qui vient ensuite. Contre toute attente, cette approche répétitive, dite de "force brute" fonctionnait. Les modèles apprenaient à traduire, à répondre à des questions, et semblaient parfois comprendre le monde, uniquement grâce à cet exercice répétitif. Il s'agissait là d'une illustration de la [« Bitter Lesson »](http://www.incompleteideas.net/IncIdeas/BitterLesson.html), formulée par Richard Sutton, un pionnier de l'apprentissage par renforcement: les gains d'échelle finissent toujours par l'emporter.
-
-Mais aujourd'hui, un changement profond s'opère. Les modèles réellement utiles, capables d'écrire du code fonctionnel, de résoudre de manière fiable des problèmes mathématiques ou de suivre des instructions complexes, ne se distinguent pas seulement par leur taille. Ils apprennent autrement.
+Mais aujourd'hui, un changement profond s'opère. Les modèles réellement utiles, capables d'écrire du
+code fonctionnel, de résoudre de manière fiable des problèmes mathématiques ou de suivre des
+instructions complexes, ne se distinguent pas seulement par leur taille. Ils apprennent autrement.
 
 <Image src={blocks} alt="Blocks" />
 
 ## Réciter n'est pas apprendre
 
-Pour comprendre, il faut revenir à ce qu'est la prédiction du « prochain mot ». Un modèle lit des milliards de phrases et mémorise des régularités: après « La capitale de la France est ...», le mot "Paris" revient fréquemment. Les concepteurs récompensent explicitement cette capacité à remplir des phrases à trous, de façon pavlovienne, un apprentissage mécanique par un modèle astreint à ses heures de colle.
+Pour comprendre, il faut revenir à ce qu'est la prédiction du « prochain mot ». Un modèle lit des
+milliards de phrases et mémorise des régularités: après « La capitale de la France est ...», le mot
+"Paris" revient fréquemment. Les concepteurs récompensent explicitement cette capacité à remplir des
+phrases à trous, de façon pavlovienne, un apprentissage mécanique par un modèle astreint à ses
+heures de colle.
 
-Cela produit pourtant un phénomène tout à fait remarquable: une maitrise de la langue. Le modèle génère un texte cohérent, grammaticalement correct, empreint de connaissance générale. Il absorbe les tournures courantes, les régularités qu'il observe dans le language humain, tel une éponge. Mais maîtrise ne veut pas dire compétence, il ne suffit pas de réciter pour comprendre.
+Cela produit pourtant un phénomène tout à fait remarquable: une maitrise de la langue. Le modèle
+génère un texte cohérent, grammaticalement correct, empreint de connaissance générale. Il absorbe
+les tournures courantes, les régularités qu'il observe dans le language humain, tel une éponge. Mais
+maîtrise ne veut pas dire compétence, il ne suffit pas de réciter pour comprendre.
 
-Lorsque le place dans une situation inattendue, un modèle entraîné uniquement à recracher ce qu'on lui demande peut écrire du code qui a l'air juste en première lecture, mais qui en réalité ne s'exécute pas. Il produit des explications convaincantes, mais subtilement fausses. Et répond parfois avec autant d'enthousiasme à une requête sur la fabrication d'explosifs qu'à une recette de tarte tatin.
+Lorsque le place dans une situation inattendue, un modèle entraîné uniquement à recracher ce qu'on
+lui demande peut écrire du code qui a l'air juste en première lecture, mais qui en réalité ne
+s'exécute pas. Il produit des explications convaincantes, mais subtilement fausses. Et répond
+parfois avec autant d'enthousiasme à une requête sur la fabrication d'explosifs qu'à une recette de
+tarte tatin.
 
-Le problème central est le suivant: l'objectif optimise la plausibilité, non la justesse. Il enseigne la corrélation, pas la causalité, ce qui explique pourquoi les chercheurs ajoutent désormais des étapes supplémentaires pour corriger les erreurs de raisonnement et réduire ces réponses fausses mais confiantes.
+Le problème central est le suivant: l'objectif optimise la plausibilité, non la justesse. Il
+enseigne la corrélation, pas la causalité, ce qui explique pourquoi les chercheurs ajoutent
+désormais des étapes supplémentaires pour corriger les erreurs de raisonnement et réduire ces
+réponses fausses mais confiantes.
 
-##  L'avènement du curriculum d'apprentissage
+## L'avènement du curriculum d'apprentissage
 
-Les laboratoires d'IA adoptent désormais une nouvelle approche, davantage inspirée d'un système éducatif structuré que d'un traitement industriel de données.
+Les laboratoires d'IA adoptent désormais une nouvelle approche, davantage inspirée d'un système
+éducatif structuré que d'un traitement industriel de données.
 
-Le développement moderne des modèles s'organise désormais en étapes, chacune conçue pour construire une compétence avant de passer à la suivante :
+Le développement moderne des modèles s'organise désormais en étapes, chacune conçue pour construire
+une compétence avant de passer à la suivante :
 
-- Phase 1: **le pré-entraînement**. Les milliers de milliards de mots ingérés permettent au modèle de développer sa fluidité, comme un enfant exposé en immersion à sa langue maternelle. Il forme ainsi des intuitions.
-- Phase 2: **l'entraînement intermédiaire**. Exposition renforcée à un corpus plus exigeant et spécialisé: mathématiques, articles scientifiques, tâches de raisonnement complexe. Le modèle acquiert des compétences logiques et de précision.
-- Phase 3: **le post-entraînement**. C'est là que s'opère la plupart des avancées récentes. Le modèle généraliste devient assistant plus fiable, expert en programmation ou en preuves mathématiques. Il apprend à mettre en œuvre ses capacités théoriques, propose des stratégies de reflexion autonomes et peut continuer à apprendre de ses propres erreurs.
+- Phase 1: **le pré-entraînement**. Les milliers de milliards de mots ingérés permettent au modèle
+  de développer sa fluidité, comme un enfant exposé en immersion à sa langue maternelle. Il forme
+  ainsi des intuitions.
+- Phase 2: **l'entraînement intermédiaire**. Exposition renforcée à un corpus plus exigeant et
+  spécialisé: mathématiques, articles scientifiques, tâches de raisonnement complexe. Le modèle
+  acquiert des compétences logiques et de précision.
+- Phase 3: **le post-entraînement**. C'est là que s'opère la plupart des avancées récentes. Le
+  modèle généraliste devient assistant plus fiable, expert en programmation ou en preuves
+  mathématiques. Il apprend à mettre en œuvre ses capacités théoriques, propose des stratégies de
+  reflexion autonomes et peut continuer à apprendre de ses propres erreurs.
 
 <Image src={coloredPath} alt="Colored Path" />
 
@@ -59,56 +95,107 @@ Le développement moderne des modèles s'organise désormais en étapes, chacune
 
 Le post-entraînement suit généralement trois étapes, dont l'ordre importe énormément :
 
-D'abord, l'apprentissage supervisé. On montre des exemples au modèle : « Face à cette question, voici la bonne réponse. » On fournit des exemples des étapes de raisonnement intermédiaire. Cela façonne les comportements, comme apprendre la structure mélodique en musique ou la stratégie de match en sport.
+D'abord, l'apprentissage supervisé. On montre des exemples au modèle : « Face à cette question,
+voici la bonne réponse. » On fournit des exemples des étapes de raisonnement intermédiaire. Cela
+façonne les comportements, comme apprendre la structure mélodique en musique ou la stratégie de
+match en sport.
 
-Ensuite, l'optimisation par préférences. On présente plusieurs réponses possibles à une même question, et on indique laquelle a été préférée par l'utilisateur. Ce n'est plus un apprentissage de contenu, mais de jugement : faut-il être concis ou détaillé? Confiant ou prudent? Serviable ou plus réservé? Une étape utile, mais qui peut aussi fabriquer un assistant consensuel, voire lisse à l'excès.
+Ensuite, l'optimisation par préférences. On présente plusieurs réponses possibles à une même
+question, et on indique laquelle a été préférée par l'utilisateur. Ce n'est plus un apprentissage de
+contenu, mais de jugement : faut-il être concis ou détaillé? Confiant ou prudent? Serviable ou plus
+réservé? Une étape utile, mais qui peut aussi fabriquer un assistant consensuel, voire lisse à
+l'excès.
 
-Enfin, l'apprentissage par renforcement. Le modèle explore alors beaucoup plus librement. Il génère plusieurs tentatives, évalue ses résultats et apprend à privilégier les stratégies efficaces. C'est ici qu'émergent les capacités de résolution de problèmes: le modèle découvre des approches qui ne lui ont jamais été explicitement décrites. Il a alors acquis une expertise de son domaine.
+Enfin, l'apprentissage par renforcement. Le modèle explore alors beaucoup plus librement. Il génère
+plusieurs tentatives, évalue ses résultats et apprend à privilégier les stratégies efficaces. C'est
+ici qu'émergent les capacités de résolution de problèmes: le modèle découvre des approches qui ne
+lui ont jamais été explicitement décrites. Il a alors acquis une expertise de son domaine.
 
-Cet enchaînement rappelle en beaucoup de points l'apprentissage humain: on apprend les règles avant les exceptions, les fondamentaux de pouvoir improviser.
+Cet enchaînement rappelle en beaucoup de points l'apprentissage humain: on apprend les règles avant
+les exceptions, les fondamentaux de pouvoir improviser.
 
 <Image src={pathways} alt="Pathways" />
 
 ## Pourquoi on ne peut pas brûler les étapes
 
-Il y a quelques mois, une start-up chinoise, [DeepSeek](https://deepseek.com/), a surpris le secteur en publiant un modèle très performant et peu coûteux. Pour y parvenir, ses chercheurs ont tenté [une expérimentation audacieuse](https://www.nature.com/articles/s41586-025-09422-z): sauter directement à l'apprentissage par renforcement, en négligeant une grande partie du coûteux fine-tuning.
+Il y a quelques mois, une start-up chinoise, [DeepSeek](https://deepseek.com/), a surpris le secteur
+en publiant un modèle très performant et peu coûteux. Pour y parvenir, ses chercheurs ont tenté
+[une expérimentation audacieuse](https://www.nature.com/articles/s41586-025-09422-z): sauter
+directement à l'apprentissage par renforcement, en négligeant une grande partie du coûteux
+fine-tuning.
 
-Le résultat: un modèle doté d'étonnantes capacités de raisonnement et de généralisation. Il vérifiait spontanément son propre travail, prenait le temps de reconsidérer une réponse, élaborait des stratégies complexes et novatrices.
+Le résultat: un modèle doté d'étonnantes capacités de raisonnement et de généralisation. Il
+vérifiait spontanément son propre travail, prenait le temps de reconsidérer une réponse, élaborait
+des stratégies complexes et novatrices.
 
-Mais il produisait aussi des textes illisibles, mélangeait aléatoirement les langues et se comportait parfois de manière instable. En l'absence de bases solides, le modèle devait réinventer des conventions fondamentales, comme celles nécessaires à une communication efficace.
+Mais il produisait aussi des textes illisibles, mélangeait aléatoirement les langues et se
+comportait parfois de manière instable. En l'absence de bases solides, le modèle devait réinventer
+des conventions fondamentales, comme celles nécessaires à une communication efficace.
 
-La leçon est claire: il faut établir des fondations avant d'atteindre l'expertise. Tenter d'enseigner le calcul intégral avant l'algèbre n'aurait aucun sens pour un étudiant. En IA aussi, enseigner les tâches les plus complexes sans s'être assuré de la compétence de base du modèle laisse l'utilisateur avec un outil "élève modèle" mais qui ne résiste pas à la pression de l'interro surprise.
+La leçon est claire: il faut établir des fondations avant d'atteindre l'expertise. Tenter
+d'enseigner le calcul intégral avant l'algèbre n'aurait aucun sens pour un étudiant. En IA aussi,
+enseigner les tâches les plus complexes sans s'être assuré de la compétence de base du modèle laisse
+l'utilisateur avec un outil "élève modèle" mais qui ne résiste pas à la pression de l'interro
+surprise.
 
 ## Quel programme scolaire pour l'élève IA?
 
 Cette transition, de l'entraînement vers l'enseignement, soulève des questions profondes.
 
-**L'IA peut-elle apprendre par elle même?** 
+**L'IA peut-elle apprendre par elle même?**
 
-La piste la plus prometteuse implique des modèles autodidactes, capables de générer leurs propres exemples, d'évaluer leur propre travail, d'apprendre en auto-jeu. Mais un système peut-il vraiment produire de meilleurs signaux que les données dont il est issu? Comment éviter l'apparition de dérives lorsqu'un modèle s'entraîne principalement sur ses propres productions, sans supervision ou expertise?
+La piste la plus prometteuse implique des modèles autodidactes, capables de générer leurs propres
+exemples, d'évaluer leur propre travail, d'apprendre en auto-jeu. Mais un système peut-il vraiment
+produire de meilleurs signaux que les données dont il est issu? Comment éviter l'apparition de
+dérives lorsqu'un modèle s'entraîne principalement sur ses propres productions, sans supervision ou
+expertise?
 
-**L'IA en apprentissage continu** 
+**L'IA en apprentissage continu**
 
-Les systèmes actuels sont entraînés une fois, puis déployés. Or une IA utile se doit d'apprendre en continu: s'adapter à de nouveaux outils à sa disposition, savoir intégrer les retours des utilisateurs, assimiler de nouvelles informations mais aussi de discerner par raisonnement le possible de l'improbable. Comment lui enseigner de nouvelles compétences sans qu'elle n'en oublie d'autres? Les chercheurs évoquent dans ce cas un phénomène « l'oubli catastrophique », où de nouvelles connaissances effacent partiellement les anciennes.
+Les systèmes actuels sont entraînés une fois, puis déployés. Or une IA utile se doit d'apprendre en
+continu: s'adapter à de nouveaux outils à sa disposition, savoir intégrer les retours des
+utilisateurs, assimiler de nouvelles informations mais aussi de discerner par raisonnement le
+possible de l'improbable. Comment lui enseigner de nouvelles compétences sans qu'elle n'en oublie
+d'autres? Les chercheurs évoquent dans ce cas un phénomène « l'oubli catastrophique », où de
+nouvelles connaissances effacent partiellement les anciennes.
 
-**L'IA face à la subtilité** 
+**L'IA face à la subtilité**
 
-Les mathématiques ou le code possèdent des réponses vérifiables. Pas le jugement, ni la créativité, ni la nuance. Jusqu'où ce paradigme de l'enseignement peut-il s'étendre au-delà des tâches fermées ?
+Les mathématiques ou le code possèdent des réponses vérifiables. Pas le jugement, ni la créativité,
+ni la nuance. Jusqu'où ce paradigme de l'enseignement peut-il s'étendre au-delà des tâches fermées ?
 
 <Image src={grid} alt="Grid" />
 
 ## Un miroir de notre intelligence
 
-Le précédent paradigme supposait que l'intelligence serait dérivée automatiquement par des gains l'échelle: plus le modèle serait gros, plus il aurait ingurgité de données, plus ses capacités émergeraient.
+Le précédent paradigme supposait que l'intelligence serait dérivée automatiquement par des gains
+l'échelle: plus le modèle serait gros, plus il aurait ingurgité de données, plus ses capacités
+émergeraient.
 
-La nouvelle approche est plus subtile: on accepte que l'intelligence présente de multiples facettes. Différentes compétences nécessitent différents signaux d'apprentissage. Chaque élève est différent, présentant des pré-dispositions différentes selon la matière enseignée. Et l'ordre dans lequel on les enseigne façonne profondément le système final.
+La nouvelle approche est plus subtile: on accepte que l'intelligence présente de multiples facettes.
+Différentes compétences nécessitent différents signaux d'apprentissage. Chaque élève est différent,
+présentant des pré-dispositions différentes selon la matière enseignée. Et l'ordre dans lequel on
+les enseigne façonne profondément le système final.
 
-La course n'est plus seulement à qui a le plus gros modèle. Il s'agit maintenant de concevoir des programmes scolaires pour les machines, en séquençant des leçons, en réfléchissant aux récompenses et à la progression pédagogique. C'est sur ce terrain que se joue le futur de l'intelligence artificielle.
+La course n'est plus seulement à qui a le plus gros modèle. Il s'agit maintenant de concevoir des
+programmes scolaires pour les machines, en séquençant des leçons, en réfléchissant aux récompenses
+et à la progression pédagogique. C'est sur ce terrain que se joue le futur de l'intelligence
+artificielle.
 
-À mesure que les IA deviennent plus capables, une question s'impose: comment enseignerait-on à une machine à penser? Que lui montrerait-on en premier? Comment lui transmettre du discernement plutôt que de la simple connaissance? Comment l'inciter à explorer sans lui faire perdre ses bases?
+À mesure que les IA deviennent plus capables, une question s'impose: comment enseignerait-on à une
+machine à penser? Que lui montrerait-on en premier? Comment lui transmettre du discernement plutôt
+que de la simple connaissance? Comment l'inciter à explorer sans lui faire perdre ses bases?
 
-Ces interrogations dépassent la seule technique. Elles renvoient à notre propre parcours éducatif, à la manière dont nous enseignons à nos propres enfants, débattons avec nos amis ou collaborons avec nos collègues. Demandez-vous alors, comment feriez vous pour partager ces connaissances? La réponse à cette question, individuelle, éclaire quelque chose de fondamental sur notre rapport à l'éducation, à l'intelligence.
+Ces interrogations dépassent la seule technique. Elles renvoient à notre propre parcours éducatif, à
+la manière dont nous enseignons à nos propres enfants, débattons avec nos amis ou collaborons avec
+nos collègues. Demandez-vous alors, comment feriez vous pour partager ces connaissances? La réponse
+à cette question, individuelle, éclaire quelque chose de fondamental sur notre rapport à
+l'éducation, à l'intelligence.
 
-Dans les années 1960, l'intelligence artificielle n'avait pas été fondée par des informaticiens mais par des chercheurs en sciences cognitives et comportementales. Aujourd'hui, en cherchant à enseigner aux machines, nous renouons avec cette ambition première: comprendre comment l'intelligence se construit.
+Dans les années 1960, l'intelligence artificielle n'avait pas été fondée par des informaticiens mais
+par des chercheurs en sciences cognitives et comportementales. Aujourd'hui, en cherchant à enseigner
+aux machines, nous renouons avec cette ambition première: comprendre comment l'intelligence se
+construit.
 
-Le paradigme a changé. Nous n'entraînons plus les IA. Nous leur enseignons. Et nous commençons à peine à mesurer tout ce que cela implique.
+Le paradigme a changé. Nous n'entraînons plus les IA. Nous leur enseignons. Et nous commençons à
+peine à mesurer tout ce que cela implique.

@@ -14,4 +14,4 @@ export default function LocaleLayout({
   }
 
   return children
-} 
+}

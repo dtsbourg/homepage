@@ -10,13 +10,13 @@
   html {
     font-display: swap;
   }
-  
+
   /* Reduce layout shift for images */
   img {
     height: auto;
     max-width: 100%;
   }
-  
+
   /* Optimize iframe loading */
   iframe {
     loading: lazy;

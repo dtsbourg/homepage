@@ -8,10 +8,11 @@ export const article = {
   author: 'Dylan Bourgeois',
   date: '2025-06-20',
   title: '"The Sensor Illusion" or Why Your AI Agent Might Be Flying Blind',
-  description: 'Why Your AI Agent Might Be Flying Blind - Would you trust a robot with no sensors? Then why are we building AI agents that way?',
+  description:
+    'Why Your AI Agent Might Be Flying Blind - Would you trust a robot with no sensors? Then why are we building AI agents that way?',
   lang: 'en',
   slug: 'sensor-illusion',
-  hasTranslation: false
+  hasTranslation: false,
 }
 
 export const metadata = {
@@ -23,30 +24,42 @@ export default (props) => <ArticleLayout article={article} {...props} />
 
 > Would you trust a robot with no sensors? Then why are we building AI agents that way?
 
-In robotics, we obsess over sensors. We use cameras for vision, lidar for depth, IMUs for motion, force sensors for manipulation. Each one is painstakingly selected, calibrated, and fused into a representation of the world — the robot's working reality.
+In robotics, we obsess over sensors. We use cameras for vision, lidar for depth, IMUs for motion,
+force sensors for manipulation. Each one is painstakingly selected, calibrated, and fused into a
+representation of the world — the robot's working reality.
 
 <Image src={mikaBaumeister} alt="Spot, the robot dog" />
 
-But for **AI agents**, we often treat the data pipeline as an after‑thought, as if the model will fill in the gaps. An agent's *sensor suite* is a tangle of APIs, webhooks, datasets, and user prompts — dynamic, noisy, and sometimes deceptive. Treating that plumbing as an after‑thought is like bolting an uncalibrated camera onto a self‑driving car and hoping the neural net spots the lane markings.
+But for **AI agents**, we often treat the data pipeline as an after‑thought, as if the model will
+fill in the gaps. An agent's _sensor suite_ is a tangle of APIs, webhooks, datasets, and user
+prompts — dynamic, noisy, and sometimes deceptive. Treating that plumbing as an after‑thought is
+like bolting an uncalibrated camera onto a self‑driving car and hoping the neural net spots the lane
+markings.
 
 Here's the hard‑earned robotics lesson:
 
 > **Sensor choice drives everything.**
 
-A robot doing warehouse navigation doesn't need the same perception stack as one doing surgical manipulation. The entire architecture — world models, decision logic, planning — is downstream of sensing.
+A robot doing warehouse navigation doesn't need the same perception stack as one doing surgical
+manipulation. The entire architecture — world models, decision logic, planning — is downstream of
+sensing.
 
 The same applies to AI agents.
 
-An agent doing financial forecasting needs very different inputs than one handling customer support. Yet most are built on generic pipelines and brittle API calls, relying on LLMs to *"figure it out."*
+An agent doing financial forecasting needs very different inputs than one handling customer support.
+Yet most are built on generic pipelines and brittle API calls, relying on LLMs to _"figure it out."_
 
 <Image src={mossyConnections} alt="Mossy Connections" />
 
 ## Robotics Lessons for AI Agent Design
 
-In this case, we could think like roboticists. That means treating inputs as **primary** and models as **downstream**. But unlike robots, AI agents have **two categories** of data sources:
+In this case, we could think like roboticists. That means treating inputs as **primary** and models
+as **downstream**. But unlike robots, AI agents have **two categories** of data sources:
 
-- **Passive sources** – what the model was trained on (pre‑training corpora, embeddings, past interactions). These are priors, not perceptions.
-- **Active sources** – real‑time APIs, databases, user prompts, and tools. These are your live sensors—and like any sensor, they can fail, drift, or lie.
+- **Passive sources** – what the model was trained on (pre‑training corpora, embeddings, past
+  interactions). These are priors, not perceptions.
+- **Active sources** – real‑time APIs, databases, user prompts, and tools. These are your live
+  sensors—and like any sensor, they can fail, drift, or lie.
 
 <Image src={passiveAction} alt="Passive and Active Sources" />
 
@@ -54,25 +67,38 @@ So what can we do to improve the situation?
 
 ### Part I — Before Deployment: Build for Perception
 
-1.  **Differentiate Priors from Sensors** -- Pre‑training gives your model intuition, not facts. Real‑time perception still matters.
+1.  **Differentiate Priors from Sensors** -- Pre‑training gives your model intuition, not facts.
+    Real‑time perception still matters.
 
-2. **Design for Context Windows, Not Just API Calls** -- Agents don't perceive continuously—they perceive through context windows. Long‑term memory requires explicit design.
+2.  **Design for Context Windows, Not Just API Calls** -- Agents don't perceive continuously—they
+    perceive through context windows. Long‑term memory requires explicit design.
 
-3. **Simulate Sensor Failure** -- Test how your agent behaves when data is missing, delayed, or contradictory. For example, [CheckList](https://arxiv.org/abs/2005.04118) and [Robustness Gym](https://arxiv.org/abs/2101.04840) let you stress‑test model behavior across degraded inputs.
+3.  **Simulate Sensor Failure** -- Test how your agent behaves when data is missing, delayed, or
+    contradictory. For example, [CheckList](https://arxiv.org/abs/2005.04118) and
+    [Robustness Gym](https://arxiv.org/abs/2101.04840) let you stress‑test model behavior across
+    degraded inputs.
 
 ### Part II — During Deployment: Operate Like a Roboticist
 
-4. **Monitor Input Integrity (Sensor Health)** -- Track the quality and freshness of inputs—not just the accuracy of outputs.
+4. **Monitor Input Integrity (Sensor Health)** -- Track the quality and freshness of inputs—not just
+   the accuracy of outputs.
 
-5. **Score and Weight Your Sources (Sensor Fusion)** -- LLMs blend inputs naturally, but you should make source confidence explicit. For example, [Toolformer](https://arxiv.org/abs/2302.04761) assigns utility to each tool, while the [ReAct](https://arxiv.org/abs/2210.03629) pattern conditions reasoning on weighted context.
+5. **Score and Weight Your Sources (Sensor Fusion)** -- LLMs blend inputs naturally, but you should
+   make source confidence explicit. For example, [Toolformer](https://arxiv.org/abs/2302.04761)
+   assigns utility to each tool, while the [ReAct](https://arxiv.org/abs/2210.03629) pattern
+   conditions reasoning on weighted context.
 
-6. **Build Redundancy & Degradation Paths** -- What happens when an API fails? Fall back to cached knowledge or ask the user. For example, [ReAct](https://arxiv.org/abs/2210.03629) and [Plan‑and‑Execute](https://arxiv.org/abs/2305.17000) agents include recovery steps; [LangGraph](https://docs.langchain.com/langgraph/) lets you design stateful agents with explicit fallback flows.
-
-
+6. **Build Redundancy & Degradation Paths** -- What happens when an API fails? Fall back to cached
+   knowledge or ask the user. For example, [ReAct](https://arxiv.org/abs/2210.03629) and
+   [Plan‑and‑Execute](https://arxiv.org/abs/2305.17000) agents include recovery steps;
+   [LangGraph](https://docs.langchain.com/langgraph/) lets you design stateful agents with explicit
+   fallback flows.
 
 ## Tune the whole system
 
-An AI agent is only as smart as the data it perceives. **Don't just tune the model — design the perception pipeline.** Separate pre‑training from real‑time inputs. Monitor them like sensors, fuse them with intent, and build fallback plans when they fail.
+An AI agent is only as smart as the data it perceives. **Don't just tune the model — design the
+perception pipeline.** Separate pre‑training from real‑time inputs. Monitor them like sensors, fuse
+them with intent, and build fallback plans when they fail.
 
 Robots taught us that perception drives intelligence. It's time agents learned that too.
 
@@ -80,11 +106,14 @@ Robots taught us that perception drives intelligence. It's time agents learned t
 
 > **How do we trust implicit fusion?**
 
+Foundation models transform brittle parsers into probabilistic _polymaths_ — they can interpolate
+across malformed or partial inputs the way a human infers missing words in a sentence. This
+**model‑free sensor fusion** is messy, probabilistic, and surprisingly robust, but it blurs the
+provenance of information and hides uncertainty.
 
-Foundation models transform brittle parsers into probabilistic *polymaths* — they can interpolate across malformed or partial inputs the way a human infers missing words in a sentence. This **model‑free sensor fusion** is messy, probabilistic, and surprisingly robust, but it blurs the provenance of information and hides uncertainty.
-
-
-Robotics offers structured calibration routines and explicit uncertainty modeling. LLMs offer confident prose. In a next post, we will investigate how modern AI can borrow from such formalisms to improve reliability.
+Robotics offers structured calibration routines and explicit uncertainty modeling. LLMs offer
+confident prose. In a next post, we will investigate how modern AI can borrow from such formalisms
+to improve reliability.
 
 ---
 
@@ -103,4 +132,4 @@ Robotics offers structured calibration routines and explicit uncertainty modelin
 - [LangGraph for Agent Workflows](https://docs.langchain.com/langgraph/)
 - [Great Expectations](https://greatexpectations.io/)
 - [WhyLabs](https://whylabs.ai/)
-- [Monte Carlo Data](https://www.montecarlodata.com/) 
+- [Monte Carlo Data](https://www.montecarlodata.com/)

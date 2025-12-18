@@ -3,11 +3,11 @@ import { getAllArticles } from '@/lib/articles'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'
-  
+
   // Get all articles for both languages
   const englishArticles = await getAllArticles('en')
   const frenchArticles = await getAllArticles('fr')
-  
+
   // Static pages
   const staticPages = [
     {
@@ -71,4 +71,4 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]
 
   return [...staticPages, ...articlePages]
-} 
+}

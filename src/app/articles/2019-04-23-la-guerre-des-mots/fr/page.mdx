@@ -6,10 +6,11 @@ export const article = {
   author: 'Dylan Bourgeois',
   date: '2019-04-23',
   title: 'La guerre des mots: comment les machines traitent le texte',
-  description: 'Quand OpenAI refusait de publier GPT-2 par peur de son usage malveillant : une analyse des enjeux du traitement automatique de texte, entre régularités linguistiques et responsabilité scientifique.',
+  description:
+    'Quand OpenAI refusait de publier GPT-2 par peur de son usage malveillant : une analyse des enjeux du traitement automatique de texte, entre régularités linguistiques et responsabilité scientifique.',
   lang: 'Français',
   slug: 'la-guerre-des-mots',
-  hasTranslation: true
+  hasTranslation: true,
 }
 
 export const metadata = {
@@ -19,47 +20,119 @@ export const metadata = {
 
 export default (props) => <ArticleLayout article={article} {...props} />
 
-> Publié sur le blog _Artifices Intelligents_ du journal Le Temps. Disponible [ici](https://blogs.letemps.ch/dylan-bourgeois/2019/04/23/la-guerre-des-mots-comment-les-machines-traitent-le-texte/).
+> Publié sur le blog _Artifices Intelligents_ du journal Le Temps. Disponible
+> [ici](https://blogs.letemps.ch/dylan-bourgeois/2019/04/23/la-guerre-des-mots-comment-les-machines-traitent-le-texte/).
 
-Il y quelques mois, l'entreprise américaine OpenAI a mis le feu aux poudres dans la communaute du Machine Learning. L'annonce des résultats impressionnants d'un generateur de texte automatique s'est accompagnée du refus de publier le modèle publiquement, de peur de son utilisation malicieuse. Cette recherche fructueuse découle directement de grandes avancées récentes dans le domaine du traitement automatique de texte. Malgre la décision de garder le modèle sous embargo, solution qu'on pourrait qualifier d'au mieux paliative, elle souligne une prise de conscience des potentielles dérives des methodes developpées par les chercheurs en machine learning, de plus en plus puissantes et efficaces, et du rôle accru que ces derniers doivent prendre dans le contrôle de ces dérives.
+Il y quelques mois, l'entreprise américaine OpenAI a mis le feu aux poudres dans la communaute du
+Machine Learning. L'annonce des résultats impressionnants d'un generateur de texte automatique s'est
+accompagnée du refus de publier le modèle publiquement, de peur de son utilisation malicieuse. Cette
+recherche fructueuse découle directement de grandes avancées récentes dans le domaine du traitement
+automatique de texte. Malgre la décision de garder le modèle sous embargo, solution qu'on pourrait
+qualifier d'au mieux paliative, elle souligne une prise de conscience des potentielles dérives des
+methodes developpées par les chercheurs en machine learning, de plus en plus puissantes et
+efficaces, et du rôle accru que ces derniers doivent prendre dans le contrôle de ces dérives.
 
 ## Le langage: une question de statistiques ou une grammaire universelle?
 
 > You shall know a word by the company it keeps. – J.R. Firth (1954)
 
-En tant qu'outil d'expression humain, le langage renferme de nombreuses subtilités et ambiguïtés, rendant sa modélisation formelle extrêmement difficile. Un immmense corpus de recherche en linguistique a produit des théories de la grammaire, de son utilisation et de son emergence, de sa relation avec les modes de pensée humains. Pourtant, ce travail minutieux et rigoureux peine à modeliser l'expression humaine dans sa forme courante, quotidienne, en évolution perpétuelle. Elle se prend les pieds dans le tapis à vouloir traiter les cas particuliers, idiosyncrasies et subtilités linguistiques.
+En tant qu'outil d'expression humain, le langage renferme de nombreuses subtilités et ambiguïtés,
+rendant sa modélisation formelle extrêmement difficile. Un immmense corpus de recherche en
+linguistique a produit des théories de la grammaire, de son utilisation et de son emergence, de sa
+relation avec les modes de pensée humains. Pourtant, ce travail minutieux et rigoureux peine à
+modeliser l'expression humaine dans sa forme courante, quotidienne, en évolution perpétuelle. Elle
+se prend les pieds dans le tapis à vouloir traiter les cas particuliers, idiosyncrasies et
+subtilités linguistiques.
 
-Malgré la richesse lexicale et les combinaisons quasi-infinies qu'offrent la grammaire, le langage quotidien revèle une regularité impressionante. Par exemple, la loi de Zipf, observée dans les années 50 montre que la fréquence d'un mot est inversement proportionelle à sa popularite. En d'autres termes, le deuxième mot le plus utilisé est deux fois moins fréquent que le plus commun, le troisième l'est trois fois moins, et caetera … Le travail d'autres linguistes influents, comme J.R. Firth ou Ludwig Wittgenstein, partisans de l'étude des régularités linguistiques plutôt que du développement d'une grammaire universelle, défendue par Noam Chomsky, continue toujours d'influencer les théories et modèles du langages actuels.
+Malgré la richesse lexicale et les combinaisons quasi-infinies qu'offrent la grammaire, le langage
+quotidien revèle une regularité impressionante. Par exemple, la loi de Zipf, observée dans les
+années 50 montre que la fréquence d'un mot est inversement proportionelle à sa popularite. En
+d'autres termes, le deuxième mot le plus utilisé est deux fois moins fréquent que le plus commun, le
+troisième l'est trois fois moins, et caetera … Le travail d'autres linguistes influents, comme J.R.
+Firth ou Ludwig Wittgenstein, partisans de l'étude des régularités linguistiques plutôt que du
+développement d'une grammaire universelle, défendue par Noam Chomsky, continue toujours d'influencer
+les théories et modèles du langages actuels.
 
-<Image src={zipfWiki} alt="Graphique démontrant la loi de Zipf montrant la relation inverse entre fréquence des mots et rang dans le texte de Wikipédia" />
+<Image
+  src={zipfWiki}
+  alt="Graphique démontrant la loi de Zipf montrant la relation inverse entre fréquence des mots et rang dans le texte de Wikipédia"
+/>
 *La loi de Zipf (1950) appliquée à Wikipedia*
 
 ## Un modèle du langage
 
-L'observation de cette régularité a motivé le traitement probabilistique du texte: en observant les propriétes statistiques d'une expression, il est possible d'en estimer les characteristiques. Un modèle intuitif du langage consiste a déterminer la probabilité d'un mot étant donne son contexte, souvent composé des mots qui le précède. Ce modele prédictif est en adequation avec notre capacité a finir des phrases par exemple.
+L'observation de cette régularité a motivé le traitement probabilistique du texte: en observant les
+propriétes statistiques d'une expression, il est possible d'en estimer les characteristiques. Un
+modèle intuitif du langage consiste a déterminer la probabilité d'un mot étant donne son contexte,
+souvent composé des mots qui le précède. Ce modele prédictif est en adequation avec notre capacité a
+finir des phrases par exemple.
 
-Cette formulation est qualifiée de "language model". Formellement, il s'agit de déterminer, parmi tous les mots possibles, quel mot est le plus probable étant donne le contexte dans lequel il est utilisé. Comme à leur habitude, pour estimer ces probabilités, les modèles de machine learning apprennent d'exemples. Avec assez d'exemples, un modèle est capable de construire sequentiellement une phrase correcte avec assez de confiance pour être crédible.
+Cette formulation est qualifiée de "language model". Formellement, il s'agit de déterminer, parmi
+tous les mots possibles, quel mot est le plus probable étant donne le contexte dans lequel il est
+utilisé. Comme à leur habitude, pour estimer ces probabilités, les modèles de machine learning
+apprennent d'exemples. Avec assez d'exemples, un modèle est capable de construire sequentiellement
+une phrase correcte avec assez de confiance pour être crédible.
 
 ## Le modèle GPT-2 et ses implications
 
-Dans cette même veine, les qualités génératives de GPT-2, le nom du modèle dernier cri, relèvent plus de la qualité des données sur lesquelles l'algorithme apprend que d'une architecture novatrice. Il a été entrainé sur un corpus de 8M de pages Web, issues de sources diverses, de Reddit à Wikipedia.
+Dans cette même veine, les qualités génératives de GPT-2, le nom du modèle dernier cri, relèvent
+plus de la qualité des données sur lesquelles l'algorithme apprend que d'une architecture novatrice.
+Il a été entrainé sur un corpus de 8M de pages Web, issues de sources diverses, de Reddit à
+Wikipedia.
 
-<Image src={promptExample} alt="Exemple de génération de texte par GPT-2 montrant l'entrée de prompt et le texte généré par l'IA" />
+<Image
+  src={promptExample}
+  alt="Exemple de génération de texte par GPT-2 montrant l'entrée de prompt et le texte généré par l'IA"
+/>
 
-A première vue les résultats sont plutôt impressionants, avec la création de textes assez cohérents dans l'ensemble, même sur des durées relativement longues, une tâche à la difficulté notoire dans la communauté scientifique. Alors est-ce la fin du journalisme? Peut-on donner un titre à l'algorithme qui s'occupera de générer article sur article, noyant l'internet sous les fake news et communiqués de presse robotiques?
+A première vue les résultats sont plutôt impressionants, avec la création de textes assez cohérents
+dans l'ensemble, même sur des durées relativement longues, une tâche à la difficulté notoire dans la
+communauté scientifique. Alors est-ce la fin du journalisme? Peut-on donner un titre à l'algorithme
+qui s'occupera de générer article sur article, noyant l'internet sous les fake news et communiqués
+de presse robotiques?
 
-Comme souvent la réalité est plus subtile. S'il existe bien un risque dans la mise en libre service de technologies qui permettraient la création à grande échelle de faux contenus crédibles, GPT-2 n'est pas encore dans cette veine. À y regarder de plus, près, la cohérence n'est que superficielle: aucune compréhension de relations plus complexes que des statistiques de co-occurences contextuelles. Par exemple, il semble difficile de croire en des licornes à .. quatre cornes?
+Comme souvent la réalité est plus subtile. S'il existe bien un risque dans la mise en libre service
+de technologies qui permettraient la création à grande échelle de faux contenus crédibles, GPT-2
+n'est pas encore dans cette veine. À y regarder de plus, près, la cohérence n'est que superficielle:
+aucune compréhension de relations plus complexes que des statistiques de co-occurences
+contextuelles. Par exemple, il semble difficile de croire en des licornes à .. quatre cornes?
 
-> The scientist named the population, after their distinctive horn, Ovid's Unicorn. These four-horned, silver-white unicorns were previously unknown to science.
+> The scientist named the population, after their distinctive horn, Ovid's Unicorn. These
+> four-horned, silver-white unicorns were previously unknown to science.
 
-De plus, la réticence à rendre disponible le modèle en lui-même ouvre une question plus globale sur les avancées scientifiques dans des domaines aux coûts calculs prohibitifs. Traditionnellement, les modèles pré-entraînés sont mis à disposition de la communauté scientifique, accompagnés d'un article détaillant la méthode. La communauté se charge alors de valider les résultats, si possible en répliquant les résultats.
+De plus, la réticence à rendre disponible le modèle en lui-même ouvre une question plus globale sur
+les avancées scientifiques dans des domaines aux coûts calculs prohibitifs. Traditionnellement, les
+modèles pré-entraînés sont mis à disposition de la communauté scientifique, accompagnés d'un article
+détaillant la méthode. La communauté se charge alors de valider les résultats, si possible en
+répliquant les résultats.
 
-Ce mode de travail devient de plus en plus difficile économiquement (le processus d'optimisation de GPT-2 a coûté plusieurs millions de dollars), sans compter les complexités liées à la propriété intellectuelle (ces modèles deviennent de veritables avantages compétitifs). Dans un moment où la recherche est dominée par les industriels plutôt que les académiques, l'opacité des résultats fait tâche. Preuve en est, OpenAI a préféré communiquer ce résultat par voie de presse, pour une annonce coordonnée et sous embargo journalistique, plutôt que de la partager avec la communauté scientifique. Les titres sensationalistes et la surprise totale de la communauté de recherche face à ce resultat a mis le feu aux poudres.
+Ce mode de travail devient de plus en plus difficile économiquement (le processus d'optimisation de
+GPT-2 a coûté plusieurs millions de dollars), sans compter les complexités liées à la propriété
+intellectuelle (ces modèles deviennent de veritables avantages compétitifs). Dans un moment où la
+recherche est dominée par les industriels plutôt que les académiques, l'opacité des résultats fait
+tâche. Preuve en est, OpenAI a préféré communiquer ce résultat par voie de presse, pour une annonce
+coordonnée et sous embargo journalistique, plutôt que de la partager avec la communauté
+scientifique. Les titres sensationalistes et la surprise totale de la communauté de recherche face à
+ce resultat a mis le feu aux poudres.
 
-## Avec un peu de recul 
+## Avec un peu de recul
 
-Quelques mois après son annonce, GPT-2 ne semble pas avoir causé de grand chamboulement dans la création de faux contenus. Pour autant il a clairement lancé la discussion sur les modes de communication dans la science et la responsabilité que peuvent porter les créateurs de ces technologies. Malgré tout, aucune réponse unifiée ne semble en être sortie, malgré le sentiment d'une prise de conscience, reste à voir si les acteurs les plus concernés répondront à l'appel.
+Quelques mois après son annonce, GPT-2 ne semble pas avoir causé de grand chamboulement dans la
+création de faux contenus. Pour autant il a clairement lancé la discussion sur les modes de
+communication dans la science et la responsabilité que peuvent porter les créateurs de ces
+technologies. Malgré tout, aucune réponse unifiée ne semble en être sortie, malgré le sentiment
+d'une prise de conscience, reste à voir si les acteurs les plus concernés répondront à l'appel.
 
-Quelques initiatives artistiques ont elles vu le jour basées sur cette technologie, par exemple le subreddit "This story does not exist" qui propose des histoires générées par GPT-2. Au-delà, les implications on été limitées. Il semblerait qu'encore une fois, l'outil ne soit qu'au service de l'intention. Bien que certains tentent désormais de trouver des solutions algorithmiques pour détecter les faux textes, comme les images modifiées ou les vidéos générées artificiellement, une solution complète ne saurait se soustraire à la considération du système dans son entièreté.
+Quelques initiatives artistiques ont elles vu le jour basées sur cette technologie, par exemple le
+subreddit "This story does not exist" qui propose des histoires générées par GPT-2. Au-delà, les
+implications on été limitées. Il semblerait qu'encore une fois, l'outil ne soit qu'au service de
+l'intention. Bien que certains tentent désormais de trouver des solutions algorithmiques pour
+détecter les faux textes, comme les images modifiées ou les vidéos générées artificiellement, une
+solution complète ne saurait se soustraire à la considération du système dans son entièreté.
 
-Lorsqu'on parle des techonologies qui permettraient des actions néfastes, nous devons considérer le système qui les incite. Par exemple, les fake news, dont la perspective était la première motivation à l'embargo du modèle GPT-2, existent pour deux raisons prinicpales: une motivation économique, produit de l'economie d'attention, que la controverse stimule, et une motivation ideologique, combat éternel du pouvoir pris ou à prendre. Alors, il semble futile s'attaquer aux outils sans confronter les systèmes qui les nourrissent. 
+Lorsqu'on parle des techonologies qui permettraient des actions néfastes, nous devons considérer le
+système qui les incite. Par exemple, les fake news, dont la perspective était la première motivation
+à l'embargo du modèle GPT-2, existent pour deux raisons prinicpales: une motivation économique,
+produit de l'economie d'attention, que la controverse stimule, et une motivation ideologique, combat
+éternel du pouvoir pris ou à prendre. Alors, il semble futile s'attaquer aux outils sans confronter
+les systèmes qui les nourrissent.

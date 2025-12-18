@@ -38,7 +38,7 @@ export function ArticleLayout({
     headline: article.title,
     description: article.description,
     image: [
-      `${process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'}/portrait.jpg`
+      `${process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'}/portrait.jpg`,
     ],
     datePublished: article.date,
     dateModified: article.date,
@@ -47,7 +47,7 @@ export function ArticleLayout({
       name: article.author,
       url: process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me',
       jobTitle: 'AI Researcher & Engineer, Founder',
-      sameAs: ['https://twitter.com/dtsbourg', 'https://github.com/dtsbourg']
+      sameAs: ['https://twitter.com/dtsbourg', 'https://github.com/dtsbourg'],
     },
     publisher: {
       '@type': 'Person',
@@ -63,8 +63,8 @@ export function ArticleLayout({
     isAccessibleForFree: true,
     copyrightHolder: {
       '@type': 'Person',
-      name: 'Dylan Bourgeois'
-    }
+      name: 'Dylan Bourgeois',
+    },
   }
 
   return (

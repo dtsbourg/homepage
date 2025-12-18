@@ -3,8 +3,9 @@ import { ArticleLayout } from '@/components/ArticleLayout'
 export const article = {
   author: 'Dylan Bourgeois',
   date: '2025-10-29',
-  title: 'MCP Explained… Again - Because This Time It\'s Getting Real',
-  description: 'MCP is fast becoming the "USB-C for AI," connecting models to the real world. This post breaks down what it is, why it matters, and where it\'s headed.',
+  title: "MCP Explained… Again - Because This Time It's Getting Real",
+  description:
+    'MCP is fast becoming the "USB-C for AI," connecting models to the real world. This post breaks down what it is, why it matters, and where it\'s headed.',
   lang: 'en',
   slug: 'mcp-explained-again',
   hasTranslation: false,
@@ -17,227 +18,203 @@ export const metadata = {
 
 export default (props) => <ArticleLayout article={article} {...props} />
 
-> This article was originally published on the [Ogment.ai blog](https://www.ogment.ai/blog/what-is-mcp).
+> This article was originally published on the
+> [Ogment.ai blog](https://www.ogment.ai/blog/what-is-mcp).
 
-Being in the trenches of AI-first infrastructure, I've been watching Model Context 
-Protocol (MCP) evolve from niche curiosity to a mainstream standard. For builders 
-like us, MCP isn't just a theory, it's a potential backbone that would let anyone 
-expose product APIs and data as plug-and-play tools inside agents like ChatGPT or 
-Claude. But MCP is controversial: some say it's over-engineered, others say it's 
-immature.
+Being in the trenches of AI-first infrastructure, I've been watching Model Context Protocol (MCP)
+evolve from niche curiosity to a mainstream standard. For builders like us, MCP isn't just a theory,
+it's a potential backbone that would let anyone expose product APIs and data as plug-and-play tools
+inside agents like ChatGPT or Claude. But MCP is controversial: some say it's over-engineered,
+others say it's immature.
 
-In this post, we'll cut through the hype, examine critiques, and share a bit about 
-why MCP could be central to a new, AI-driven, agentic internet.
-
+In this post, we'll cut through the hype, examine critiques, and share a bit about why MCP could be
+central to a new, AI-driven, agentic internet.
 
 ## The impact of MCP
 
-In a nutshell, [MCP](https://modelcontextprotocol.io) is an open standard for 
-connecting AI applications to external systems. Think of it as a common language 
-or interface that lets AI models (like ChatGPT or Claude) access databases, web 
-services, or even IoT devices on your behalf. Instead of coding each integration 
-custom, a developer can expose an MCP server, and any [AI agent](https://www.anthropic.com/news/model-context-protocol) 
-(an MCP client) can discover and use it. It's like giving AI assistants a set of 
-standardized "plug-and-play" tools, hence the "USB-C for AI" analogy.
+In a nutshell, [MCP](https://modelcontextprotocol.io) is an open standard for connecting AI
+applications to external systems. Think of it as a common language or interface that lets AI models
+(like ChatGPT or Claude) access databases, web services, or even IoT devices on your behalf. Instead
+of coding each integration custom, a developer can expose an MCP server, and any
+[AI agent](https://www.anthropic.com/news/model-context-protocol) (an MCP client) can discover and
+use it. It's like giving AI assistants a set of standardized "plug-and-play" tools, hence the "USB-C
+for AI" analogy.
 
 ### Why does this matter?
 
-Today's powerful language models are usually stuck in silos, limited to their 
-training data. They often act as glorified chatbots, only able to fetch 
-information for you. While already useful, MCP aims to break them out of their 
-sandbox by standardizing two-way communication with the outside world.
+Today's powerful language models are usually stuck in silos, limited to their training data. They
+often act as glorified chatbots, only able to fetch information for you. While already useful, MCP
+aims to break them out of their sandbox by standardizing two-way communication with the outside
+world.
 
-For example, an MCP-enabled agent could pull the latest sales figures from a 
-database and email a summary to your team, all through a consistent protocol that 
-your existing tools would use. The [model now becomes an orchestrator](https://www.anthropic.com/research/tool-use), 
-rather than an information pit you have to copy-paste information in and out of.
+For example, an MCP-enabled agent could pull the latest sales figures from a database and email a
+summary to your team, all through a consistent protocol that your existing tools would use. The
+[model now becomes an orchestrator](https://www.anthropic.com/research/tool-use), rather than an
+information pit you have to copy-paste information in and out of.
 
 In theory, this means:
 
-- **For AI products**: Access to a growing ecosystem of ready-made tools and data, 
-  making assistants more capable out-of-the-box.
-- **For end-users**: Smarter, more helpful AI that can actually take actions (like 
-  scheduling meetings or querying internal data) instead of just chitchat. No need 
-  to go back and forth between 20+ apps and dashboard to get work done.
-- **For builders**: An entirely new interface to your product, where users interact 
-  through an AI model, bypassing the traditional interaction surfaces you have with 
-  your customers.
+- **For AI products**: Access to a growing ecosystem of ready-made tools and data, making assistants
+  more capable out-of-the-box.
+- **For end-users**: Smarter, more helpful AI that can actually take actions (like scheduling
+  meetings or querying internal data) instead of just chitchat. No need to go back and forth between
+  20+ apps and dashboard to get work done.
+- **For builders**: An entirely new interface to your product, where users interact through an AI
+  model, bypassing the traditional interaction surfaces you have with your customers.
 
-No wonder MCP has generated so much excitement. It promises to let any company, 
-from established SaaS businesses to independent consultants, deliver AI features 
-that feel truly integrated and "alive" in the user's world, rather than confined 
-to canned knowledge. By mid-2025, MCP had rapidly grown into the de facto standard 
-for plugging tools into AI agents.
+No wonder MCP has generated so much excitement. It promises to let any company, from established
+SaaS businesses to independent consultants, deliver AI features that feel truly integrated and
+"alive" in the user's world, rather than confined to canned knowledge. By mid-2025, MCP had rapidly
+grown into the de facto standard for plugging tools into AI agents.
 
-This is exactly the role MCP should play: enabling teams to turn 
-product APIs and data into AI-native experiences. This way, users can invoke 
-features of platforms from inside their favorite AI models, without writing client 
-libraries or deploying custom integrations.
+This is exactly the role MCP should play: enabling teams to turn product APIs and data into
+AI-native experiences. This way, users can invoke features of platforms from inside their favorite
+AI models, without writing client libraries or deploying custom integrations.
 
 ## Dreams and Realities of MCP
 
-Whenever a technology rises this quickly, the backlash isn't far behind. MCP does 
-have its share of skeptics alongside the vocal, bullish community of early 
-adopters. Interestingly, the criticisms run in opposite directions. Depending on 
-who you ask, MCP is either over-engineered and unnecessary, or under-engineered 
-and dangerously incomplete. Let's unpack some of the main points of contention.
+Whenever a technology rises this quickly, the backlash isn't far behind. MCP does have its share of
+skeptics alongside the vocal, bullish community of early adopters. Interestingly, the criticisms run
+in opposite directions. Depending on who you ask, MCP is either over-engineered and unnecessary, or
+under-engineered and dangerously incomplete. Let's unpack some of the main points of contention.
 
 ### The Hype Train
 
-MCP has sensational appeal in tech circles, but limited real-world deployment. 
-Early on, most of the activity lived through countless demo servers and broken 
-GitHub projects but relatively few end-user deployments. This perceived gap 
-between developer buzz and actual adoption fuels skepticism.
+MCP has sensational appeal in tech circles, but limited real-world deployment. Early on, most of the
+activity lived through countless demo servers and broken GitHub projects but relatively few end-user
+deployments. This perceived gap between developer buzz and actual adoption fuels skepticism.
 
-In reality, the value of a protocol often emerges after ecosystem adoption, not at 
-day one. The disconnect isn't that MCP is useless; it's that few teams have yet 
-invested in making connectors durable. The flurry of activity to get things off 
-the ground with MCP is healthy, but now the real work starts. We need to turn 
-experiments into a reliable reality.
+In reality, the value of a protocol often emerges after ecosystem adoption, not at day one. The
+disconnect isn't that MCP is useless; it's that few teams have yet invested in making connectors
+durable. The flurry of activity to get things off the ground with MCP is healthy, but now the real
+work starts. We need to turn experiments into a reliable reality.
 
 ### An Immature Standard
 
-On the flip side, enterprise architects have slammed MCP for not doing enough. For 
-example, Julien Simon argued that MCP's design "overlooks four decades of hard-won 
-lessons from distributed systems". Unlike more mature frameworks, early versions of 
-MCP lack things like strict type checking, robust error handling, consistency 
-enforcement, and standardized security. Even client implementations were incomplete 
-and poorly documented, with features described in the specifications (for example, 
-elicitation) just being silently discarded. Essentially, it traded rigor for 
+On the flip side, enterprise architects have slammed MCP for not doing enough. For example, Julien
+Simon argued that MCP's design "overlooks four decades of hard-won lessons from distributed
+systems". Unlike more mature frameworks, early versions of MCP lack things like strict type
+checking, robust error handling, consistency enforcement, and standardized security. Even client
+implementations were incomplete and poorly documented, with features described in the specifications
+(for example, elicitation) just being silently discarded. Essentially, it traded rigor for
 ease-of-use.
 
-To critics, such omissions aren't academic details; they're the sort of 
-enterprise-grade features that prevent painful production failures when systems 
-scale up. They're not wrong: MCP trades friction for flexibility, and that's a 
-double-edged sword.
+To critics, such omissions aren't academic details; they're the sort of enterprise-grade features
+that prevent painful production failures when systems scale up. They're not wrong: MCP trades
+friction for flexibility, and that's a double-edged sword.
 
-For example, the initial MCP spec didn't even include an authentication mechanism, 
-a choice that led to each server inventing its own (sometimes flimsy) auth, until 
-[OAuth](https://oauth.net/2/) was later added in a hurry. However, this speed 
-also shows how vibrant the community around this protocol is. With active working 
-and interest groups, the [standard is rapidly evolving](https://spec.modelcontextprotocol.io).
+For example, the initial MCP spec didn't even include an authentication mechanism, a choice that led
+to each server inventing its own (sometimes flimsy) auth, until [OAuth](https://oauth.net/2/) was
+later added in a hurry. However, this speed also shows how vibrant the community around this
+protocol is. With active working and interest groups, the
+[standard is rapidly evolving](https://spec.modelcontextprotocol.io).
 
-Like [JavaScript](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/) 
-in its day, there are many other, likely more mature solutions out there. Over 
-time however, we have largely converged to what is objectively a flawed language. 
-MCP's fate will depend less on its design elegance and more on whether builders 
-rally behind it. The bet is that MCP will learn and adapt, blending its early 
-simplicity with the robustness required for wider adoption. Where there is 
+Like [JavaScript](https://www.ecma-international.org/publications-and-standards/standards/ecma-262/)
+in its day, there are many other, likely more mature solutions out there. Over time however, we have
+largely converged to what is objectively a flawed language. MCP's fate will depend less on its
+design elegance and more on whether builders rally behind it. The bet is that MCP will learn and
+adapt, blending its early simplicity with the robustness required for wider adoption. Where there is
 friction there is value, as much as we might be irked by inelegant solutions.
 
 ### Security & Abuse Concerns
 
-Another angle of criticism centers on security and control. MCP makes it trivially 
-easy to hook up third-party code as "tools" for your AI. That's a double-edged 
-sword. On one hand, a lone developer can spin up a local MCP server that, say, 
-reads your calendar or controls your smart lights, and voila! Your AI assistant 
-can do it. On the other hand, that means users might be encouraged to download and 
-run random MCP servers from the internet. Running unknown code on your machine is 
-risky, period. MCP's design (especially with local stdio servers) has created a 
-"low-friction path for less technical users to get exploited on their local 
-machines," as one security analyst noted.
+Another angle of criticism centers on security and control. MCP makes it trivially easy to hook up
+third-party code as "tools" for your AI. That's a double-edged sword. On one hand, a lone developer
+can spin up a local MCP server that, say, reads your calendar or controls your smart lights, and
+voila! Your AI assistant can do it. On the other hand, that means users might be encouraged to
+download and run random MCP servers from the internet. Running unknown code on your machine is
+risky, period. MCP's design (especially with local stdio servers) has created a "low-friction path
+for less technical users to get exploited on their local machines," as one security analyst noted.
 
-Moreover, many community-contributed MCP servers simply trust whatever input the 
-AI gives them. If an AI (or an adversary prompt) decided to misuse a powerful 
-tool, the protocol itself won't step in; it's on developers to implement safety 
-checks. Chaining is a major concern: you might have designed your API on its own, 
-without imagining its outputs could be implicitly connected to any other external 
-tool. An AI agent could, in theory, batch delete files or send emails if it has a 
-connected tool, and the user's only real safeguard is whether the agent asks 
-permission. Skeptics argue that a more mature system would enforce such trust 
-boundaries by design.
+Moreover, many community-contributed MCP servers simply trust whatever input the AI gives them. If
+an AI (or an adversary prompt) decided to misuse a powerful tool, the protocol itself won't step in;
+it's on developers to implement safety checks. Chaining is a major concern: you might have designed
+your API on its own, without imagining its outputs could be implicitly connected to any other
+external tool. An AI agent could, in theory, batch delete files or send emails if it has a connected
+tool, and the user's only real safeguard is whether the agent asks permission. Skeptics argue that a
+more mature system would enforce such trust boundaries by design.
 
-This is undeniably a concern, in particular as MCP enters the enterprise world, 
-and there remains a long way to go. Local servers have thankfully started to fade 
-out as remote connectors have gained momentum and maturity. Third party solutions 
-have gained momentum, as evidenced by Snyk acquiring Swiss company Invariant Labs, 
-as have best practices.
+This is undeniably a concern, in particular as MCP enters the enterprise world, and there remains a
+long way to go. Local servers have thankfully started to fade out as remote connectors have gained
+momentum and maturity. Third party solutions have gained momentum, as evidenced by Snyk acquiring
+Swiss company Invariant Labs, as have best practices.
 
 ### The Nuanced Truth
 
-Paradoxical as it sounds, both sides have a point. MCP is incredibly easy to get 
-started with—that's part of the design philosophy—but that simplicity brings 
-pitfalls. Practically anyone can write a basic MCP tool in an afternoon, yet 
-making that tool production-grade could require re-inventing wheels (security, 
-reliability, monitoring) that older frameworks already solved. Even then, if you 
-simply auto-wrap every REST endpoint in your company with MCP, you will overwhelm 
-your poor AI agent with too many choices. It is not designed to interact as a 
-machine: agents deal in actions and user intent, not data contracts.
+Paradoxical as it sounds, both sides have a point. MCP is incredibly easy to get started with—that's
+part of the design philosophy—but that simplicity brings pitfalls. Practically anyone can write a
+basic MCP tool in an afternoon, yet making that tool production-grade could require re-inventing
+wheels (security, reliability, monitoring) that older frameworks already solved. Even then, if you
+simply auto-wrap every REST endpoint in your company with MCP, you will overwhelm your poor AI agent
+with too many choices. It is not designed to interact as a machine: agents deal in actions and user
+intent, not data contracts.
 
-In fact, early adopters learned that blindly converting REST APIs to MCP can 
-backfire. An API built for human developers (with dozens of granular endpoints) 
-will "drown" an LLM agent in options and context tokens, making it less effective, 
-and provide a machine-oriented interface to agents who work with actions and 
-intent. For example, Notion had to [re-build their MCP interface from scratch](https://www.notion.com/blog/notions-hosted-mcp-server-an-inside-look). The 
-best MCP implementations often require editing or curating the interface, creating 
-new compound tools, simplifying endpoints, adding semantic names, mixing and 
-matching functionality, improving context and documentation, so the AI can focus.
+In fact, early adopters learned that blindly converting REST APIs to MCP can backfire. An API built
+for human developers (with dozens of granular endpoints) will "drown" an LLM agent in options and
+context tokens, making it less effective, and provide a machine-oriented interface to agents who
+work with actions and intent. For example, Notion had to
+[re-build their MCP interface from scratch](https://www.notion.com/blog/notions-hosted-mcp-server-an-inside-look).
+The best MCP implementations often require editing or curating the interface, creating new compound
+tools, simplifying endpoints, adding semantic names, mixing and matching functionality, improving
+context and documentation, so the AI can focus.
 
-This is a new kind of design work: creating machine-first interfaces rather than 
-human-centric ones. It's no surprise that MCP's critics come from all angles: some 
-feel it's too much new complexity, while others feel it doesn't handle complexity 
-enough. This is a valid question—should this be encoded in a protocol or live in 
-the application layer?
+This is a new kind of design work: creating machine-first interfaces rather than human-centric ones.
+It's no surprise that MCP's critics come from all angles: some feel it's too much new complexity,
+while others feel it doesn't handle complexity enough. This is a valid question—should this be
+encoded in a protocol or live in the application layer?
 
-[Ogment.ai](https://ogment.ai) is exploring tools and patterns that make MCP practical: turning existing APIs 
-into agent-ready MCP connectors with guardrails, schemas, and observability built 
-in.
+[Ogment.ai](https://ogment.ai) is exploring tools and patterns that make MCP practical: turning
+existing APIs into agent-ready MCP connectors with guardrails, schemas, and observability built in.
 
 ## Why be (Cautiously) Optimistic
 
-Given the noise, why are people investing time in MCP? Because it is seen as 
-infrastructure with compound value, not a silver bullet.
+Given the noise, why are people investing time in MCP? Because it is seen as infrastructure with
+compound value, not a silver bullet.
 
-Simply put, the long-term potential of a standardized AI integration 
-layer is immense, especially now that the dust is settling. Here's a bit of the upside I see, 
-pragmatically speaking:
+Simply put, the long-term potential of a standardized AI integration layer is immense, especially
+now that the dust is settling. Here's a bit of the upside I see, pragmatically speaking:
 
-**Bridging the Production Gap**: Enterprises often struggle to take AI pilots and 
-connect them to real systems. Bloomberg's internal use of MCP proved illuminating: 
-by decoupling agents from backend systems, they dramatically reduced integration 
-friction and let engineers reuse connectors across domains. MCP turned custom 
-hacks into modular building blocks that scale. (See their [public case study](https://www.bloomberg.com/company/stories/closing-the-agentic-ai-productionization-gap-bloomberg-embraces-mcp/))
+**Bridging the Production Gap**: Enterprises often struggle to take AI pilots and connect them to
+real systems. Bloomberg's internal use of MCP proved illuminating: by decoupling agents from backend
+systems, they dramatically reduced integration friction and let engineers reuse connectors across
+domains. MCP turned custom hacks into modular building blocks that scale. (See their
+[public case study](https://www.bloomberg.com/company/stories/closing-the-agentic-ai-productionization-gap-bloomberg-embraces-mcp/))
 
-**An Ecosystem of Reusable Tools**: The goal is to make it easier for teams to turn 
-their own APIs or datasets into MCP connectors. The future involves a 
-marketplace of domain-specific MCP tools. Already, the broader AI community is 
-publishing connectors for things like [Notion, Slack, BigQuery, and more](https://github.com/modelcontextprotocol/servers) 
-(via MCP libraries). Ogment.ai both consume and contribute to this ecosystem, 
-aiming to make platforms more composable and agent-friendly over time.
+**An Ecosystem of Reusable Tools**: The goal is to make it easier for teams to turn their own APIs
+or datasets into MCP connectors. The future involves a marketplace of domain-specific MCP tools.
+Already, the broader AI community is publishing connectors for things like
+[Notion, Slack, BigQuery, and more](https://github.com/modelcontextprotocol/servers) (via MCP
+libraries). Ogment.ai both consume and contribute to this ecosystem, aiming to make platforms more
+composable and agent-friendly over time.
 
-**Evolution, Not Revolution**: Despite early missteps, MCP is evolving. Remember 
-those complaints about missing features? Many are being worked on, either within 
-the MCP spec or as extensions. For example, better error-handling conventions and 
-tracing hooks are on the roadmap, often informed by lessons from [gRPC](https://grpc.io) 
-and REST, as well as advanced agentic features like long running tasks and more 
-support for user elicitation. The current state of MCP isn't the final word—it's 
-a 1.0 (or 2.0) that's rapidly improving in response to real-world use.
+**Evolution, Not Revolution**: Despite early missteps, MCP is evolving. Remember those complaints
+about missing features? Many are being worked on, either within the MCP spec or as extensions. For
+example, better error-handling conventions and tracing hooks are on the roadmap, often informed by
+lessons from [gRPC](https://grpc.io) and REST, as well as advanced agentic features like long
+running tasks and more support for user elicitation. The current state of MCP isn't the final
+word—it's a 1.0 (or 2.0) that's rapidly improving in response to real-world use.
 
-**Alignment with AI's Future**: The most exciting thing about MCP is not its 
-current utility, but what it hints at: agents that discover new tools at runtime, 
-share context, and delegate tasks. As AI systems move from monolithic models to 
-ecosystems of collaborating agents, a standard like MCP could serve as the 
-connective tissue. That vision aligns deeply with this mission: making AI-native 
-product experiences, where APIs and data are first-class tools for agents to 
-orchestrate. Extensions like [MCP-UI](https://mcpui.dev/) even promise to bring even more expressivity 
-to AI-native applications.
+**Alignment with AI's Future**: The most exciting thing about MCP is not its current utility, but
+what it hints at: agents that discover new tools at runtime, share context, and delegate tasks. As
+AI systems move from monolithic models to ecosystems of collaborating agents, a standard like MCP
+could serve as the connective tissue. That vision aligns deeply with this mission: making AI-native
+product experiences, where APIs and data are first-class tools for agents to orchestrate. Extensions
+like [MCP-UI](https://mcpui.dev/) even promise to bring even more expressivity to AI-native
+applications.
 
 ## Conclusion
 
-MCP is flawed, opinionated, and evolving—and that's exactly why builders should 
-care. The critiques are real and meaningful, and they should not be dismissed. At 
-the same time, tools are already being built, momentum is accelerating, and 
-[major industry support](https://www.anthropic.com/news/model-context-protocol) 
-is a game changer.
+MCP is flawed, opinionated, and evolving—and that's exactly why builders should care. The critiques
+are real and meaningful, and they should not be dismissed. At the same time, tools are already being
+built, momentum is accelerating, and
+[major industry support](https://www.anthropic.com/news/model-context-protocol) is a game changer.
 
-MCP isn't just theory: it's a strategic bet on how APIs and data will be 
-accessed by agent-based interfaces. MCP has the potential to become the 
-de facto substrate for [AI interoperability](https://www.anthropic.com/news/model-context-protocol). 
-So while I don't expect it to be perfect today, the community is actively 
-exploring it, learning from its failures, and aiming to contribute to its evolution.
+MCP isn't just theory: it's a strategic bet on how APIs and data will be accessed by agent-based
+interfaces. MCP has the potential to become the de facto substrate for
+[AI interoperability](https://www.anthropic.com/news/model-context-protocol). So while I don't
+expect it to be perfect today, the community is actively exploring it, learning from its failures,
+and aiming to contribute to its evolution.
 
-If you're a founder or product leader thinking about AI agents, MCP is a lever 
-worth exploring now—not because it's mature, but because it's shaping the future. 
-And if you want to chat about building with MCP or agent-first infrastructure, I'd 
-love to hear from you.
-
+If you're a founder or product leader thinking about AI agents, MCP is a lever worth exploring
+now—not because it's mature, but because it's shaping the future. And if you want to chat about
+building with MCP or agent-first infrastructure, I'd love to hear from you.

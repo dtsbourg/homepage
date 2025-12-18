@@ -142,11 +142,16 @@ function NavItem({
   children: React.ReactNode
 }) {
   let pathname = usePathname()
-  
+
   // Check if current path matches this nav item
   // For /articles, also match /en/articles and /fr/articles
-  let isActive = pathname === href || 
-    (href === '/articles' && (pathname === '/en/articles' || pathname === '/fr/articles' || pathname.startsWith('/en/articles/') || pathname.startsWith('/fr/articles/')))
+  let isActive =
+    pathname === href ||
+    (href === '/articles' &&
+      (pathname === '/en/articles' ||
+        pathname === '/fr/articles' ||
+        pathname.startsWith('/en/articles/') ||
+        pathname.startsWith('/fr/articles/')))
 
   return (
     <li>
@@ -195,7 +200,7 @@ function ThemeToggle() {
     <button
       type="button"
       aria-label={mounted ? `Switch to ${otherTheme} theme` : 'Toggle theme'}
-      className="group rounded-full bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition dark:bg-zinc-800/90 dark:ring-white/10 hover:ring-lavender dark:hover:ring-white/20"
+      className="group rounded-full bg-white/90 px-3 py-2 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur transition hover:ring-lavender dark:bg-zinc-800/90 dark:ring-white/10 dark:hover:ring-white/20"
       onClick={() => setTheme(otherTheme)}
     >
       <SunIcon className="h-6 w-6 fill-zinc-100 stroke-zinc-500 transition group-hover:fill-zinc-200 group-hover:stroke-zinc-700 dark:hidden [@media(prefers-color-scheme:dark)]:fill-lavender/20 [@media(prefers-color-scheme:dark)]:stroke-lavender [@media(prefers-color-scheme:dark)]:group-hover:fill-lavender [@media(prefers-color-scheme:dark)]:group-hover:stroke-lavender" />
@@ -203,7 +208,6 @@ function ThemeToggle() {
     </button>
   )
 }
-
 
 function clamp(number: number, a: number, b: number) {
   let min = Math.min(a, b)
@@ -372,17 +376,14 @@ export function Header() {
       >
         {isHomePage && (
           <>
-            <div
-              className="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"
-            />
+            <div className="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]" />
             <Container
               className="top-0 order-last -mb-3 pt-3"
               style={{
                 position:
                   'var(--header-position)' as React.CSSProperties['position'],
               }}
-            >
-            </Container>
+            ></Container>
           </>
         )}
         <div

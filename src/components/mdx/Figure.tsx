@@ -17,9 +17,14 @@ function parseMarkdownLinks(text: string): ReactNode[] {
       parts.push(text.slice(lastIndex, match.index))
     }
     parts.push(
-      <a key={match.index} href={match[2]} target="_blank" rel="noopener noreferrer">
+      <a
+        key={match.index}
+        href={match[2]}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         {match[1]}
-      </a>
+      </a>,
     )
     lastIndex = match.index + match[0].length
   }
@@ -34,11 +39,7 @@ function parseMarkdownLinks(text: string): ReactNode[] {
 export default function Figure({ caption, alt, ...imageProps }: FigureProps) {
   return (
     <figure className="my-8">
-      <Image
-        alt={alt}
-        {...imageProps}
-        className="rounded-lg"
-      />
+      <Image alt={alt} {...imageProps} className="rounded-lg" />
       {caption && (
         <figcaption className="mt-3 text-center text-sm text-zinc-500 dark:text-zinc-400 [&_a]:text-teal-500 [&_a]:underline [&_a]:underline-offset-2 hover:[&_a]:text-teal-600 dark:hover:[&_a]:text-teal-400">
           {parseMarkdownLinks(caption)}
@@ -47,4 +48,3 @@ export default function Figure({ caption, alt, ...imageProps }: FigureProps) {
     </figure>
   )
 }
-
