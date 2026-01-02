@@ -10,7 +10,7 @@ interface TableOfContentsProps {
 
 export default function TableOfContents({ items }: TableOfContentsProps) {
   return (
-    <nav className="my-8 rounded-xl border border-zinc-200 bg-zinc-50/50 p-5 dark:border-zinc-700/50 dark:bg-zinc-800/30">
+    <nav className="not-prose my-8 rounded-xl border border-zinc-200 bg-zinc-50/50 p-5 dark:border-zinc-700/50 dark:bg-zinc-800/30">
       <div className="mb-4 flex items-center gap-2">
         <svg
           className="h-5 w-5 text-zinc-500 dark:text-zinc-400"
@@ -32,7 +32,7 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
           Table of Contents
         </span>
       </div>
-      <ol className="space-y-0.5 text-sm">
+      <ul className="space-y-0.5 text-sm">
         {items.map((item, index) => {
           const id = item.anchor.startsWith('#')
             ? item.anchor.slice(1)
@@ -40,22 +40,19 @@ export default function TableOfContents({ items }: TableOfContentsProps) {
           const level = item.level || 2
 
           return (
-            <li key={index}>
+            <li key={index} className="list-none">
               <a
                 href={`#${id}`}
                 className={`block rounded-md px-3 py-1.5 text-zinc-600 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-700/50 dark:hover:text-zinc-200 ${
                   level === 3 ? 'ml-4' : ''
                 }`}
               >
-                <span className="mr-2 font-medium text-zinc-400 dark:text-zinc-500">
-                  {index + 1}.
-                </span>
                 {item.title}
               </a>
             </li>
           )
         })}
-      </ol>
+      </ul>
     </nav>
   )
 }
