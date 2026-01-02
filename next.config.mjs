@@ -1,5 +1,6 @@
 import rehypePrism from '@mapbox/rehype-prism'
 import rehypeKatex from 'rehype-katex'
+import rehypeSlug from 'rehype-slug'
 import nextMDX from '@next/mdx'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
@@ -109,7 +110,7 @@ const withMDX = nextMDX({
   extension: /\.mdx?$/,
   options: {
     remarkPlugins: [remarkGfm, remarkMath],
-    rehypePlugins: [rehypePrism, rehypeKatex],
+    rehypePlugins: [rehypeSlug, rehypePrism, rehypeKatex],
   },
 })
 
