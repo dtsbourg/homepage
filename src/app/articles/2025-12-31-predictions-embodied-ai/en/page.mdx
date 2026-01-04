@@ -16,47 +16,47 @@ import openx from '../openx.png'
 import Threedgs from '../3dgs.png'
 
 export const article = {
-  author: 'Dylan Bourgeois',
-  date: '2025-12-31',
-  title: '12 Predictions for Embodied AI and Robotics in 2026',
-  description:
-    'Twelve falsifiable predictions for embodied AI in 2026, from VLA scaling laws to humanoid safety incidents. The models are getting good enough; the deployment wall is the real test.',
-  slug: 'predictions-embodied-ai',
-  lang: 'en',
+    author: 'Dylan Bourgeois',
+    date: '2025-12-31',
+    title: '12 Predictions for Embodied AI and Robotics in 2026',
+    description:
+        'Twelve falsifiable predictions for embodied AI in 2026, from VLA scaling laws to humanoid safety incidents. The models are getting good enough; the deployment wall is the real test.',
+    slug: 'predictions-embodied-ai',
+    lang: 'en',
 }
 
 export const metadata = {
-  title: article.title,
-  description: article.description,
+    title: article.title,
+    description: article.description,
 }
 
 export default (props) => <ArticleLayout article={article} {...props} />
 
-Predictions are notoriously a fool's errand. As Rod Brooks' puts in his own
+Predictions are notoriously a fool's errand. As Rod Brooks puts it in his own
 [yearly predictions](https://rodneybrooks.com/predictions-scorecard-2026-january-01/), we are all
 susceptible to `FOBAWTPALSL`: Fear Of Being A Wimpy Techno-Pessimist And Looking Stupid Later these
 days. This fear, combined with its cousin `FOMO` (Fear Of Missing Out), drives herd behavior in
 establishing the zeitgeist on almost any technology topic.
 
-Now, I'm no Rodney Brooks, so I won't pretend to be able to predict the future. Having been in the
-space for a while though, I can say 2025 was a particularly interesting year. The sentiment around
-robotics and the newly minted "embodied AI" has shifted dramatically, to the point where it has now
-become a major political issue, a favored investment thesis, and an attractive outlet for the
-smartest minds in the world. We saw countless exciting (and usually slightly worrying) demos,
-followed by spectacular failures. Throughout, the discourse has been extremely polarized, with some
-arguing that the sky is falling, and others that the sky is the limit.
+Now, I'm no Rodney Brooks, so I won't be able to predict the future. Having been in the space for a
+while though, I can say 2025 was a particularly interesting year. The sentiment around robotics and
+the newly minted "embodied AI" has shifted dramatically, to the point where it has now become a
+major political issue, a favored investment thesis, and an attractive outlet for the smartest minds
+in the world. We saw countless exciting (and sometimess worrying) demos, followed by spectacular
+failures. Throughout, the discourse has been extremely polarized, with some arguing that the sky is
+falling, and others that the sky is the limit.
 
 As we enter 2026, I thought it might be fun to write down some "predictions" for the year ahead.
-What follows are twelve predictions for 2026. Starting with the foundational technology shifts (VLA
-models and how they're changing), we'll then move through the hardware and sensing that enables
-them, then to deployment realities, market drivers, and finally the safety and measurement
-challenges the field must confront.
+What follows are twelve such bets. Starting with the foundational technology shifts (VLA models and
+how they're changing), we'll then move through the hardware and sensing that enables them, then to
+deployment realities, market drivers, and finally the safety and measurement challenges the field
+must confront.
 
 Each prediction includes a confidence level and an explanation of why I might be wrong. I've tried
-to keep them specific, and falsifiable by design, so we can check again on them in January 2027. I
+to keep them specific, and falsifiable by design, so we can check on them again in January 2027. I
 usually get asked about these topics a lot, so I figured it might be interesting to state them
-plainly, and more importantly, used them as the basis for discussion. If you're interested in
-proving me wrong, to my face, please do! [Reach out](mailto:contact@dtsbourg.me) and let's chat.
+plainly, and more importantly, use them as the basis for discussion. If you're interested in proving
+me wrong, to my face, please do! [Reach out](mailto:contact@dtsbourg.me) and let's chat.
 
 Alright, let's get to it!
 
@@ -296,7 +296,8 @@ Robotics Foundation signaled that even "open" infrastructure can consolidate.
 Data costs might prove insurmountable. Either through vast capital expenditure or through "trojan
 horse" deployments, well funded companies could generate more data in a day than the entire
 open-source community collects in a year. Proprietary labs might simply stop publishing comparable
-numbers, making the gap unmeasurable.
+numbers, making the gap unmeasurable. In the LLM world, open-source labs like Mistral publish
+smaller models but keep the larger ones proprietary. This pattern might carry over to embodied AI.
 
 ## 5. Mobile robots will continue to outpace humanoids in commercial deployments
 
@@ -410,8 +411,8 @@ approaches can't provide.
 
 <Prediction confidence={80}>
 
-In 2026, total defense robotics investment (government contracts + defense-focused VC) will grow by
-at least 100% year-over-year.
+In 2026, total defense robotics investment (defense-focused VC) will grow by at least 100%
+year-over-year.
 
 </Prediction>
 
@@ -419,6 +420,13 @@ At this point we're all well aware of the shifting geopolitical tides. Across th
 are gearing up for existing and future conflicts. This has driven large spending sprees and even
 larger amounts of investments into defense tech. What used to be a taboo has become a point of pride
 and emphasis for many investors.
+
+In Europe alone, investment in defense robotics reached
+[>$2B in 2025](https://resiliencemedia.co/state-of-defence-tech-2025-report-funding-for-european-defence-startups-surpasses-1-5-billion/).
+2025 featured some of the largest defense AI contracts awarded by the federal government, and its
+aptly renamed Department of War, in recent memory. The top 10 awards had a cumulative value of $38.3
+billion, [according to GovCon Daily research](https://www.executivegov.com/articles/biggest-ai-defense-contracts-fy-2025).
+
 
 <Figure src={defense} />
 
