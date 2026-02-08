@@ -25,16 +25,15 @@ export default (props) => <ArticleLayout article={article} {...props} />
 
 <Image src={warehouseWorker} alt="A warehouse worker picking items from shelves" />
 
-Even in warehouses bristling with sensors and automation, a curious gap persists: operators 
-often struggle to explain why throughput fluctuates from day to day. It's not a measurement 
-problem: the data is there, the dashboards are green. Yet output drifts in ways that resist 
-clean explanation, a pattern that points to something fundamental about the systems we've built.
+Even in warehouses bristling with sensors and automation, a curious gap persists: operators often
+struggle to explain why throughput fluctuates from day to day. It's not a measurement problem: the
+data is there, the dashboards are green. Yet output drifts in ways that resist clean explanation, a
+pattern that points to something fundamental about the systems we've built.
 
-One way to make sense of this phenomenon is something that Samuel
-Arbesman calls "overcomplicated" systems. We've built technological environments so layered and
-interconnected that they've crossed a threshold of legibility. The system works, mostly, but _why_
-it works on a given Tuesday better than the previous Thursday is beyond anyone's ability to fully
-trace.
+One way to make sense of this phenomenon is something that Samuel Arbesman calls "overcomplicated"
+systems. We've built technological environments so layered and interconnected that they've crossed a
+threshold of legibility. The system works, mostly, but _why_ it works on a given Tuesday better than
+the previous Thursday is beyond anyone's ability to fully trace.
 
 And this is the world into which we're trying to drop in even more automation.
 
@@ -45,10 +44,11 @@ And this is the world into which we're trying to drop in even more automation.
 The core challenge of deploying automation in a legacy environment isn't the robot. It's the
 interfaces.
 
-For example, a modern distribution center runs on dozens of interlocking systems: a warehouse management system,
-a conveyor control layer, pick-to-light modules, ERP feeds, shipping label APIs, inventory
-databases. Each built on different assumptions, taxonomies, update frequencies, and failure modes.
-Every connection between two systems is a seam, and every seam is a potential point of breakdown.
+For example, a modern distribution center runs on dozens of interlocking systems: a warehouse
+management system, a conveyor control layer, pick-to-light modules, ERP feeds, shipping label APIs,
+inventory databases. Each built on different assumptions, taxonomies, update frequencies, and
+failure modes. Every connection between two systems is a seam, and every seam is a potential point
+of breakdown.
 
 Introducing automation means adding a new node to this web: a new set of APIs to integrate, a new
 timing profile to synchronize, a new failure mode to propagate. The robot itself may work flawlessly
@@ -56,9 +56,9 @@ on the bench. The question is what happens when it meets the rest of the orchest
 
 ## The Traffic Analogy
 
-Here's a counterintuitive but illustrative example: reducing the maximum speed on a highway
-often _increases_ the average distance covered by all vehicles. Why? Because uniform flow prevents
-the cascading failures we experience as traffic jams. One hard brake at high speed sends a shockwave
+Here's a counterintuitive but illustrative example: reducing the maximum speed on a highway often
+_increases_ the average distance covered by all vehicles. Why? Because uniform flow prevents the
+cascading failures we experience as traffic jams. One hard brake at high speed sends a shockwave
 backward through the system, costing hundreds of drivers minutes each. Slightly slower, steadier
 movement avoids the jam entirely.
 
@@ -66,8 +66,8 @@ Warehouses exhibit the same dynamics. When an automated subsystem fails or hiccu
 stalls, a scanner misreads, or a conveyor jams, the disruption doesn't stay local. It propagates
 across the facility like a traffic jam, because every downstream process is waiting on the upstream
 one. A two-minute stoppage at one station can cascade into an hour of lost throughput across the
-building. And that's the generous case, **automation failures are usually spikey**: they might not happen often,
-but when they do, they are usually very disruptive.
+building. And that's the generous case, **automation failures are usually spikey**: they might not
+happen often, but when they do, they are usually very disruptive.
 
 But here's what makes warehouses _harder_ than traffic: on a highway, every vehicle is roughly the
 same. Cars respond to congestion in similar ways, so the system can recover its rhythm relatively
@@ -83,21 +83,21 @@ interfaces between them amplify small disturbances instead of dampening them.
 
 <Image src={warehouseForklift} alt="A traffic jam on a highway" />
 
-
 ## What This Means for Automation Strategy
 
 The implication isn't that automation is doomed in legacy environments. It's that the hard problem
 was never the automation. It was always the integration. Teams that succeed tend to share a few
 traits:
 
-They treat interfaces as first-class engineering problems, not afterthoughts. They instrument the
-_seams_ between systems, not just the systems themselves. They design for graceful degradation: when
-the automated cell goes down, the surrounding processes need to keep flowing, even if at reduced
-speed. And critically, they accept that full legibility may be impossible. You won't always know why
+- They treat interfaces as first-class engineering problems, not afterthoughts.
+- They instrument the _seams_ between systems, not just the systems themselves.
+- They design for graceful degradation: when the automated cell goes down, the surrounding processes
+  need to keep flowing, even if at reduced speed.
+
+And critically, they accept that full legibility may be impossible. You won't always know why
 throughput dipped on a Wednesday. The goal isn't omniscience. It's resilience.
 
 The warehouse of the future won't be defined by the sophistication of its robots. It'll be defined
 by how well it manages the unglamorous work of making dozens of systems (old and new, fast and slow,
 digital and physical) play nicely together. That's the real automation problem. And it's much harder
 than building a better arm.
-
