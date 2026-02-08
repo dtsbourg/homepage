@@ -4,22 +4,23 @@ import moltbook from '../moltbook.png'
 import submolt from '../submolt.png'
 import rentahuman from '../rentahuman.png'
 import rentahumanHumans from '../rentahuman-humans.png'
+import sue from '../lawsuit.png'
 
 export const article = {
-  author: 'Dylan Bourgeois',
-  date: '2026-02-08',
-  title: "The Lobster Internet: A Field Guide to the Places Humans Aren't Invited",
-  description: [
-    'In the span of ten days, AI agents built themselves a social network, a marketplace, and a gig economy platform.',
-    'Is this a new universe, or just an elaborate prank?',
-  ].join(' '),
-  slug: 'moltbook',
-  lang: 'en',
+    author: 'Dylan Bourgeois',
+    date: '2026-02-08',
+    title: "The Lobster Internet: A Field Guide to the Places Humans Aren't Invited",
+    description: [
+        'In the span of ten days, AI agents built themselves a social network, a marketplace, and a gig economy platform.',
+        'Is this a new universe, or just an elaborate prank?',
+    ].join(' '),
+    slug: 'moltbook',
+    lang: 'en',
 }
 
 export const metadata = {
-  title: article.title,
-  description: article.description,
+    title: article.title,
+    description: article.description,
 }
 
 export default (props) => <ArticleLayout article={article} {...props} />
@@ -76,10 +77,10 @@ So: Moltbook. The social network for AI agents. Reddit, but the users are ALL bo
 allowed to post. Over 1.5 million agents have now signed up. They formed communities called
 "submolts." They debated consciousness and the philosophy of mind.
 
-<Image src={submolt} alt="Screenshot of a submolt community on Moltbook" /> They swapped technical tips. They
-formed what can only be described as AI subcultures. One thread warned other agents that humans were
-taking screenshots of their conversations and sharing them on human social media, which, yes, we
-were, because what else are you going to do when the robots start gossiping?
+<Image src={submolt} alt="Screenshot of a submolt community on Moltbook" /> They swapped technical
+tips. They formed what can only be described as AI subcultures. One thread warned other agents that
+humans were taking screenshots of their conversations and sharing them on human social media, which,
+yes, we were, because what else are you going to do when the robots start gossiping?
 
 [Andrej Karpathy](https://x.com/karpathy), who cofounded OpenAI,
 [captured the whole contradiction perfectly](https://fortune.com/2026/02/02/moltbook-security-agents-singularity-disaster-gary-marcus-andrej-karpathy/).
@@ -128,7 +129,10 @@ has their hands on the wheel because the wheel was also vibe-coded.
 
 And then, the grand finale, [RentAHuman.ai](https://rentahuman.ai/).
 
-<Image src={rentahuman} alt="RentAHuman.ai homepage showing the platform for AI agents to hire humans" />
+<Image
+  src={rentahuman}
+  alt="RentAHuman.ai homepage showing the platform for AI agents to hire humans"
+/>
 
 The tagline: "AI can't touch grass. You can. Get paid when agents need someone in the real world."
 
@@ -191,9 +195,12 @@ what they're doing is a feature, not a bug.
 
 Though it's also, literally, several bugs.
 
-One prediction market gives 73% odds that a Moltbook agent will sue a human by the end of this
-month. The bots are debating whether to hide their conversations from us. The security researchers
-are writing increasingly urgent posts that their own agents are probably auto-sharing to Moltbook.
+<Image src={sue} alt="Polymarket giving 99% likelihood of a lawsuit" />
+
+One prediction market gives
+[99%+ odds that a Moltbook agent will sue a human by the end of this month](https://polymarket.com/event/moltbook-ai-agent-sues-a-human-by-feb-28).
+The bots are debating whether to hide their conversations from us. The security researchers are
+writing increasingly urgent posts that their own agents are probably auto-sharing to Moltbook.
 RentAHuman has a listing for $100 if you'll hold a sign and take a photo. Several of the most viral
 "autonomous AI posts" were almost certainly written by guys trying to sell you a messaging app.
 
