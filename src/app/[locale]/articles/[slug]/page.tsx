@@ -7,10 +7,10 @@ import {
 } from '@/lib/articles'
 
 type Props = {
-  params: {
+  params: Promise<{
     locale: string
     slug: string
-  }
+  }>
 }
 
 export async function generateStaticParams() {
@@ -33,7 +33,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale, slug } = params
+  const { locale, slug } = await params
 
   if (locale !== 'en' && locale !== 'fr') {
     notFound()
@@ -107,7 +107,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function Article({ params }: Props) {
-  const { locale, slug } = params
+  const { locale, slug } = await params
 
   if (locale !== 'en' && locale !== 'fr') {
     notFound()

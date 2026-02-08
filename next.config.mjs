@@ -4,9 +4,14 @@ import rehypeSlug from 'rehype-slug'
 import nextMDX from '@next/mdx'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  outputFileTracingRoot: __dirname,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
   trailingSlash: false,
   compress: true,

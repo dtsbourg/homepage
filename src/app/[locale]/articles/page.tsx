@@ -97,11 +97,11 @@ function Article({
 }
 
 type Props = {
-  params: { locale: string }
+  params: Promise<{ locale: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { locale } = params
+  const { locale } = await params
 
   if (locale !== 'en' && locale !== 'fr') {
     notFound()
@@ -121,7 +121,7 @@ export async function generateStaticParams() {
 }
 
 export default async function ArticlesIndex({ params }: Props) {
-  const { locale } = params
+  const { locale } = await params
 
   if (locale !== 'en' && locale !== 'fr') {
     notFound()
