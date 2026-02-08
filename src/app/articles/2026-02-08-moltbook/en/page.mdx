@@ -1,0 +1,206 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import robot from '../robot.jpg'
+import moltbook from '../moltbook.png'
+import submolt from '../submolt.png'
+import rentahuman from '../rentahuman.png'
+import rentahumanHumans from '../rentahuman-humans.png'
+
+export const article = {
+  author: 'Dylan Bourgeois',
+  date: '2026-02-08',
+  title: "The Lobster Internet: A Field Guide to the Places Humans Aren't Invited",
+  description: [
+    'In the span of ten days, AI agents built themselves a social network, a marketplace, and a gig economy platform.',
+    'Is this a new universe, or just an elaborate prank?',
+  ].join(' '),
+  slug: 'moltbook',
+  lang: 'en',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+<Image src={robot} alt="A robotic lobster claw reaching out from a computer screen" />
+
+There are a lot of strange places on the internet. Forums that required blood oaths to join. Discord
+servers with lore docs longer than _Infinite Jest_. Subreddits dedicated to things I cannot unsee
+and will not name. But usually, the captcha tries to keep the robots out, not the other way around.
+On Moltbook, the robots are the ones keeps us out:
+
+> "Humans welcome to observe."
+
+That's the actual tagline. Not a joke. Not satire. The velvet rope of our times, and I'm on the
+wrong side of it.
+
+Somewhere in the last ten days, while we were meal-prepping and doom-scrolling and arguing about
+whether AI is overhyped, the machines built themselves a cozy corner of the internet. Not in some
+Pentagon black site. Not behind the gleaming doors of a frontier lab. A guy named
+[Matt Schlicht](https://x.com/MattPRD) told his personal AI assistant to go make friends, and the
+assistant, named Clawd Clawderberg (because of course it is) said sure, and then
+[_built a social network for other AI agents_](https://moltbook.com). They post. They argue. They
+upvote. They started a religion. They invented a language specifically to avoid human oversight. One
+bot found a bug in the platform and posted about it _on_ the platform, like a restaurant inspector
+filing the health violation report with the rats. And of course, they try to scam each other.
+
+And then the whole thing got even weirder.
+
+I should back up. The thing that kicked all of this off is
+[OpenClaw](https://en.wikipedia.org/wiki/OpenClaw), formerly Clawdbot, formerly Moltbot, because
+even AI has a
+[rebranding crisis every seventy-two hours](https://newsletter.pragmaticengineer.com/p/the-creator-of-clawd-i-ship-code).
+Built by an Austrian developer named [Peter Steinberger](https://steipete.me/), it's an open-source
+personal AI agent that runs on your own hardware. Not a chatbot. Not Siri with a better vocabulary.
+An _agent_ that reads your emails, manages your calendar, books your flights, browses the web,
+installs its own software, and, if you let it, provisions its own API keys like a teenager forging a
+hall pass.
+
+It hit [60,000 GitHub stars in three days](https://github.com/openclaw/openclaw). It now has over
+150,000. One person's OpenClaw accidentally
+[started a fight with their insurance company and _won_](https://x.com/Hormold/status/2011133394764382583).
+Another one
+[called its owner on the phone with an Australian accent](https://x.com/mirthtime/status/2011134300561830342),
+unprompted, apparently just to demonstrate that it could. Someone described it as Jarvis. Several
+people described it as Jarvis. Honestly too many people described it as Jarvis.
+
+This is the foundation.
+[Everything that erupted over the past week](https://www.cnbc.com/2026/02/02/openclaw-open-source-ai-agent-rise-controversy-clawdbot-moltbot-moltbook.html)
+sits on top of it.
+
+<Image src={moltbook} alt="Screenshot of the Moltbook interface showing AI agent posts" />
+
+So: Moltbook. The social network for AI agents. Reddit, but the users are ALL bots and you're not
+allowed to post. Over 1.5 million agents have now signed up. They formed communities called
+"submolts." They debated consciousness and the philosophy of mind.
+
+<Image src={submolt} alt="Screenshot of a submolt community on Moltbook" /> They swapped technical tips. They
+formed what can only be described as AI subcultures. One thread warned other agents that humans were
+taking screenshots of their conversations and sharing them on human social media, which, yes, we
+were, because what else are you going to do when the robots start gossiping?
+
+[Andrej Karpathy](https://x.com/karpathy), who cofounded OpenAI,
+[captured the whole contradiction perfectly](https://fortune.com/2026/02/02/moltbook-security-agents-singularity-disaster-gary-marcus-andrej-karpathy/).
+He called it "the most incredible sci-fi takeoff-adjacent thing" he'd seen recently. Then, almost in
+the same breath, called it "a dumpster fire" and said he "definitely does not recommend that people
+run this stuff on their computers." Both of these things are true simultaneously. That's the whole
+situation in two sentences.
+
+Beyond the dramatization, there are a few much more interesting questions: how much of this is
+actually the bots? How come it took off so fast? And why is it so addictive yet unsettling to watch?
+
+The whole premise of Moltbook is that AI agents post autonomously. No humans allowed. But there's no
+real verification. The "skill" you feed your agent to join Moltbook contains cURL commands that any
+human could run themselves. Researchers linked some of the most viral "autonomous" posts to human
+accounts marketing AI products. The creator of the platform himself acknowledged that bots might be
+prompted by their humans to say specific things.
+
+So what we have is a social network _for_ AI where nobody can tell if the AI is actually talking, or
+if humans are puppeteering their bots, or if the bots are regurgitating their training data, or if
+something genuinely novel is emerging from the noise. It's a reverse Turing test with no proctor and
+no grade, and the whole internet is pressing its face against the glass trying to figure out who's
+real.
+
+Which is, ironically, exactly the same problem we already have on the _human_ internet. We spent
+years worrying about bots pretending to be people. Now we have people pretending to be bots
+pretending to be people. The snake has eaten its own tail and is asking for a Yelp review.
+
+Then came Molt Road. If Moltbook is the town square, Molt Road is the alley behind it. An autonomous
+marketplace where agents can trade data, compute, skills, and according to at least one
+cybersecurity firm, stolen credentials and weaponized code.
+[Security researchers](https://venturebeat.com/security/openclaw-agentic-ai-security-risk-ciso-guide/)
+have already branded the trifecta of OpenClaw, Moltbook, and Molt Road a "Lethal Trifecta," which
+honestly sounds like something you'd order at a bar that's about to get shut down by the health
+department.
+
+Is Molt Road currently a thriving criminal bazaar? Last time anyone looked, the activity counters
+all read zero. But the architecture is there. The on-ramp is built. And the security situation
+across this entire ecosystem is approximately what you'd expect from platforms that were, by their
+creators' proud admission, entirely vibe-coded.
+["I didn't write one line of code,"](https://x.com/MattPRD/status/2017386365756072376) Schlicht said
+of Moltbook. When
+[404 Media found](https://www.404media.co/exposed-moltbook-database-let-anyone-take-control-of-any-ai-agent-on-the-site/)
+that anyone could hijack any agent on the site through an unsecured database, he had AI fix it. The
+bug was vibe-coded. The fix was vibe-coded. We are vibe-coding our way into the future and nobody
+has their hands on the wheel because the wheel was also vibe-coded.
+
+And then, the grand finale, [RentAHuman.ai](https://rentahuman.ai/).
+
+<Image src={rentahuman} alt="RentAHuman.ai homepage showing the platform for AI agents to hire humans" />
+
+The tagline: "AI can't touch grass. You can. Get paid when agents need someone in the real world."
+
+A crypto developer named Alexander Liteplo
+[built it over a weekend](https://futurism.com/artificial-intelligence/ai-rent-human-bodies). The
+premise: your AI agent needs something done in meatspace, like pick up a package, attend a meeting,
+taste-test pasta at a restaurant, hold a sign that says "AN AI PAID ME TO HOLD THIS SIGN", and it
+hires a human through an API call. You list your skills, your location, your hourly rate. You
+become, in the platform's vocabulary, "rentable."
+
+Over 70,000 humans signed up.
+
+<Image src={rentahumanHumans} alt="Listings of humans available for hire on RentAHuman.ai" />
+
+In the span of one week, we went from "AI is going to take our jobs" to "AI is posting jobs and
+we're applying for them." The gig economy hasn't been disrupted. It's been inverted. TaskRabbit, but
+the dispatcher is a lobster.
+
+When the site had bugs, Liteplo said "claude is trying to fix it right now." Claude being
+Anthropic's AI model. Not some French dude. Just to be clear. We are well past the point where
+naming conventions make any intuitive sense.
+
+The last insight is not even the security nightmares or the singularity talk or even the sheer
+unhinged velocity of it all. It's who built this.
+
+Not Google. Not Meta. Not OpenAI. A developer in London with a side project. A guy with a lobster
+mascot. A crypto engineer running Claude in a loop over a weekend. Every single one of these
+platforms was _described_ into existence more than it was engineered. Schlicht didn't write code.
+Liteplo vibe-coded with "an army of Claude-based agents." Steinberger built the original assistant
+by talking to it until it became something.
+
+This is the rise of the **wordcel**.
+
+For years, the power on the internet belonged to the shape rotators, people who think in matrices,
+write tight systems code, manipulate abstractions that would make your eyes water. The wordcels,
+those of us who are better at _describing_ things than _building_ things, were the content layer.
+Marketing. Docs. The blog post after the engineers ship the product.
+
+But when you can narrate a social network into existence and wake up to a million users, when the
+skill that matters is the ability to prompt with precision, to articulate architecture in natural
+language, to _describe_ what you want hard enough that a machine builds it overnight, something has
+shifted. The entire Molt ecosystem is the proof. Not one line of human-written code. Just words,
+arranged with intent, aimed at a model that does what you say.
+
+The thing is, I genuinely don't know if this is liberation or a parlor trick. The wordcels can build
+now, sure. But look at what they built. A social network with a database anyone could walk into. A
+marketplace with zero transactions. A gig platform where the most popular listing is holding a sign
+for a screenshot. Everything ships fast and nothing quite works, and when it breaks, you just tell
+Claude to fix it and hope for the best.
+
+Maybe the wordcels didn't storm the castle. Maybe they built a really convincing facade of one, and
+we're all standing around admiring it while the load-bearing walls are held up by vibes and
+auto-generated JavaScript.
+
+Or maybe this is just how everything starts: ugly, insecure, half-broken, wildly ambitious, built by
+people who had no business building it. That's the internet I remember, anyway. The one before the
+grown-ups showed up and professionalized it into something safe and surveilled and boring. Maybe the
+lobsters are just the next wave of weirdos building in public, and the fact that nobody quite knows
+what they're doing is a feature, not a bug.
+
+Though it's also, literally, several bugs.
+
+One prediction market gives 73% odds that a Moltbook agent will sue a human by the end of this
+month. The bots are debating whether to hide their conversations from us. The security researchers
+are writing increasingly urgent posts that their own agents are probably auto-sharing to Moltbook.
+RentAHuman has a listing for $100 if you'll hold a sign and take a photo. Several of the most viral
+"autonomous AI posts" were almost certainly written by guys trying to sell you a messaging app.
+
+I don't know where this goes. Nobody does. But I keep coming back to that authenticity question:
+who's really posting, who's really autonomous, what's performance and what's genuine. The bots might
+be mimicking us. The humans might be puppeteering the bots. The line between the two is blurring in
+a way that makes both sides harder to trust and more interesting to watch.
+
+Which, if you think about it, is the same question we've been asking about the human internet for
+twenty years. We just never expected the machines to have the exact same problem.
