@@ -1,0 +1,192 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+
+export const article = {
+  author: 'Dylan Bourgeois',
+  date: '2026-02-25',
+  title: "The AI-native playbook, or: everything you thought was the product isn't",
+  description: [
+    'Notes from the field on what actually works when building AI-native products.',
+    'The SaaS playbook is breaking down: the product is now a substrate, not a solution.',
+    'Observations on omnipresent interfaces, flat knowledge, closed loops, and displaced bottlenecks.',
+  ].join(' '),
+  slug: 'new-ai-playbook',
+  lang: 'en',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Like most, I feel like I'm constantly struggling to keep up with the pace of AI development these
+days. Not just in the technological sense, but mainly trying to make sense of the paradigm shifts it
+induces. As a founder, it's ever more important to understand how this impacts how we build, ship
+and sell products. The playbook feels like it's constantly shifting, so I wanted to summarize some
+of the trends I've seen.
+
+I hope these serve as a useful reference as I myself build towards my next adventure.
+
+---
+
+AI start-ups have changed a lot since I started working in the industry. Each wave would naturally
+disrupt the previous. Traditional Machine Learning companies, experts at feature design for decision
+trees got swept away by the Deep Learning wave, where the model would learn the discriminatory
+boundaries in some latent high dimension purely based on data. Then, the LLM-powered product blew
+those products out the window: why bother training your own model at all? Pre-training will do the
+job for you. Finally, the agentic iterations arrived, with amazing post-training routines and
+systematic approaches to integrated vertical ontologies, custom workflows and specialized tool
+integrations. And now, the latest autonomous agent step function is promising to disrupt things once
+again: why bother even designing anything, just describe your very niche flow and let the agent
+figure out a skill to accomplish your task without you even prompting it.
+
+This [bitter-pilled](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) revolutionary cycle
+has become increasingly shorter and shorter. It has killed many incumbents at each interface. It
+also makes the position of a founder ideating very tenuous: every phase shift needs to be
+anticipated, timing is more important than ever.
+
+These days I've been spending a lot of time having conversations with many actors of the AI space:
+investors, founders (experienced and prospective), users, potential customers. I've been spending at
+least as much time building, prototyping, testing and confronting various ideas. And I keep having
+the same experience.
+
+A potential lead describes one, two, five, ten time sinks they have. The instinct fires: smells like
+friction, great, I can build a tool for that. Until they walk you through the SaaS graveyard:
+someone has been here already, and has charged them $49/month to solve their issue. Ten tabs, ten
+dashboards, ten products that each try to solve one problem well enough to justify their cost. CRM,
+invoicing, contract management, scheduling, project tracking, a tool that turns meeting notes into
+action items, another tool that turns action items into meeting notes. The circle of enterprise
+life.
+
+Problem solved, right? Actually not. People don't use the product in the way it was "intended". No
+one has time to learn a product. No one is watching that onboarding video. No one is adapting their
+workflow to someone else's opinion about how work should flow.
+
+I have seen thousands of agentic versions of the same SaaS app. Promise to solve some sliver of the
+issues, slap some chat or agent on it. The result is exactly the same: users don't care, and you get
+[studies showing how 90% of AI initiatives fail](https://www.rand.org/pubs/research_reports/RRA2680-1.html).
+The problem was never the automation. It was the assumption that the product gets to dictate the
+shape of the work.
+
+In the latest verbiage, what people are really asking every time is: can you just teach the agent
+the skill to solve my problem?
+
+This keeps happening, and I think it's the thread that connects a bunch of things I've been seeing
+about what actually works when you build AI-native products right now. Not a theory of moats, not a
+strategy deck, more like a set of observations from the field that I've been trying to crystallize
+into something coherent.
+
+Here's my attempt.
+
+## The product is the substrate, not the solution.
+
+The ten-dashboard meeting keeps replaying because SaaS was built on a specific deal: we find a
+friction-driven wedge, we design the workflow, you learn our interface. That deal made sense when
+building software was expensive and exclusive. It makes no sense when a user can (or expects to be
+able to) describe a capability in a sentence and have it running in minutes.
+
+What this means, concretely, is that the product you're building isn't a tool; it's the surface that
+tools get built on. Each skill a user creates is one more reason they never leave, not because
+you've locked them in with contracts or data migration headaches, but because they've accumulated
+thirty micro-products that are shaped exactly to how they work. Not how you thought they should
+work. How they actually do.
+
+The moat isn't the model. The moat is the accumulated institutional sediment: the skills, the
+context, the muscle memory, the context graph that builds up on your platform over time.
+
+It also means building traditional apps is not worth it anymore: the interface to your product has
+become abstracted into a one-of-one interaction surface, tailored to each user's specific workflow
+and preferences.
+
+## Your product shouldn't have an address.
+
+A contractor on a roof isn't opening your web app. A procurement officer in Lagos is on WhatsApp. A
+lawyer at midnight is in their email. But this isn't just about role-specific interfaces. It's about
+how many portals we have to interact with products at all. Computers brought companies into our
+homes, the cloud brought them to our browsers, mobile into our hands. Each came with their
+boundaries: a program, a website, an app. We're now going one layer further: access everything from
+everywhere all at once.
+
+[Claude Code just shipped session handoffs from terminal to phone.](https://www.anthropic.com/news/claude-code-remote-control)
+That's the direction: the product isn't a place you go, it's a layer that follows you around, an
+abstract floating entity ready to receive your every wish: a literal cloud. WhatsApp, email, voice,
+a Word document, a terminal, whatever. Every surface is an interaction surface, and every
+interaction should be universally powerful. Remember when some functionality was available only on
+desktop and not on the mobile website? Yeah...
+
+Of course this isn't a moat, anyone can build a WhatsApp bot. But it's a prerequisite. If you can't
+reach people in the surfaces they already inhabit, you never collect the context. You're just
+another tab in the graveyard, a rusty gate no one wants to push.
+
+## Stop organizing. Start retrieving.
+
+Every enterprise AI project I've seen hits the same phase: "we need to structure our data first."
+Then six months of taxonomy design, ontology workshops, tagging sprints. And then the ontology is
+incomplete, because ontologies are _always_ incomplete (that's basically their defining feature) and
+the project stalls while someone argues about whether a "client" is a "customer" or an "account."
+
+The counterintuitive move that actually works: keep your knowledge flat. Good atomic concepts, a
+solid corpus, and let the model do the linking at query time. Don't precompute every possible
+relationship. Don't build a cathedral of categories. Build a pile of well-labeled bricks and trust
+retrieval to assemble them just in time.
+
+You still need anchors: canonical entities, verified facts, the stuff that has to be right. And you
+absolutely need verification after the fact. But the connective tissue, the "which of these twelve
+documents answers this question", that's what the model is _for_. A flat knowledge layer with strong
+retrieval beats a perfect taxonomy that ships a year late and is stale on arrival.
+
+## Close the loop, or you have a demo.
+
+There's a clean line between AI products that work in production and AI products that work in a
+pitch deck, and it's this: does the agent see what happened after it acted?
+
+A coding agent that generates code but never watches it run is a suggestion engine. One that opens a
+browser, sees the result, and iterates: that's a tool. The same principle scales to everything: a
+contract drafting agent that never sees redlines, a scheduling agent that never checks if the room
+was actually booked, an email agent that never reads the reply.
+
+Successful agents are loopy. They act, observe side effects, adjust. Most AI products today are
+still open-loop: they produce an output and throw it over a wall. The ones that close the loop are
+the ones that survive contact with reality.
+
+## The bottleneck moved. Most people haven't noticed.
+
+AI didn't eliminate the bottleneck in most workflows. It displaced it.
+
+The bottleneck in software development is not writing code anymore. It's understanding the problem,
+making design decisions, reviewing changes. Now that generation is nearly instant, the review gate
+_is_ the entire constraint. Same pattern in legal: the bottleneck isn't drafting contracts, it's
+legal review. In government, it's not processing applications, it's the approval chain. In
+healthcare, it's not writing up notes, it's clinical sign-off.
+
+The work was never the bottleneck. The oversight was. AI just made this painfully visible.
+
+Which means the real opportunities are in industries built almost entirely out of approval gates:
+government, legal, healthcare, regulated finance. Not because they're "ripe for disruption" (ugh),
+but because the _shape_ of the work there is mostly gate and very little generation. Collapse the
+generation step and the product becomes the gate itself: the review workflow, the compliance check,
+the approval chain with AI sitting inside it, not replacing the human judgment but compressing
+everything around it.
+
+**Build for the gate. That's where the value is.**
+
+## The helicopter problem.
+
+[Terry Tao](https://www.theatlantic.com/technology/archive/2026/02/terence-tao-ai-math/681786/) has
+this way of describing mathematical discovery: when you walk the path yourself, trying things,
+failing, backtracking, you pick up insights along the way that have nothing to do with the
+destination. Side trails. Intuitions about which problems are even worth attempting. The journey has
+externalities that matter more than the answer.
+
+AI helicopters you to the solution. That's incredibly useful. But you skip the walk, and the walk is
+where most of the genuinely novel thinking happens: the unexpected connections, the "wait, this is
+related to _that_" moments.
+
+I don't have a neat product insight here. It's more of an honest limit. The best AI tools right now
+make you fast. Making you _generative_, actually expanding what you'd think to explore. That's a
+different, harder problem, and I don't think anyone's cracked it yet. The companies that figure it
+out will be the ones that matter in five years. The rest of us are building very sophisticated
+helicopters.
+
+Which isn't nothing. But it's worth knowing which game you're playing.

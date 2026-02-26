@@ -7,20 +7,20 @@ import rentahumanHumans from '../rentahuman-humans.png'
 import sue from '../lawsuit.png'
 
 export const article = {
-    author: 'Dylan Bourgeois',
-    date: '2026-02-08',
-    title: "The Lobster Internet: A Field Guide to the Places Humans Aren't Invited",
-    description: [
-        'In the span of ten days, AI agents built themselves a social network, a marketplace, and a gig economy platform.',
-        'Is this a new universe, or just an elaborate prank?',
-    ].join(' '),
-    slug: 'moltbook',
-    lang: 'en',
+  author: 'Dylan Bourgeois',
+  date: '2026-02-08',
+  title: "The Lobster Internet: A Field Guide to the Places Humans Aren't Invited",
+  description: [
+    'In the span of ten days, AI agents built themselves a social network, a marketplace, and a gig economy platform.',
+    'Is this a new universe, or just an elaborate prank?',
+  ].join(' '),
+  slug: 'moltbook',
+  lang: 'en',
 }
 
 export const metadata = {
-    title: article.title,
-    description: article.description,
+  title: article.title,
+  description: article.description,
 }
 
 export default (props) => <ArticleLayout article={article} {...props} />
