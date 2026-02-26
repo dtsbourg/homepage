@@ -1,21 +1,21 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
 
 export const article = {
-  author: 'Dylan Bourgeois',
-  date: '2026-02-25',
-  title: "The AI-native playbook, or: everything you thought was the product isn't",
-  description: [
-    'Notes from the field on what actually works when building AI-native products.',
-    'The SaaS playbook is breaking down: the product is now a substrate, not a solution.',
-    'Observations on omnipresent interfaces, flat knowledge, closed loops, and displaced bottlenecks.',
-  ].join(' '),
-  slug: 'new-ai-playbook',
-  lang: 'en',
+    author: 'Dylan Bourgeois',
+    date: '2026-02-25',
+    title: "The AI-native playbook, or: everything you thought was the product isn't",
+    description: [
+        'Notes from the field on what actually works when building AI-native products.',
+        'The SaaS playbook is breaking down: the product is now a substrate, not a solution.',
+        'Observations on omnipresent interfaces, flat knowledge, closed loops, and displaced bottlenecks.',
+    ].join(' '),
+    slug: 'new-ai-playbook',
+    lang: 'en',
 }
 
 export const metadata = {
-  title: article.title,
-  description: article.description,
+    title: article.title,
+    description: article.description,
 }
 
 export default (props) => <ArticleLayout article={article} {...props} />
@@ -150,7 +150,7 @@ Successful agents are loopy. They act, observe side effects, adjust. Most AI pro
 still open-loop: they produce an output and throw it over a wall. The ones that close the loop are
 the ones that survive contact with reality.
 
-## The bottleneck moved. Most people haven't noticed.
+## Validation is the new friction
 
 AI didn't eliminate the bottleneck in most workflows. It displaced it.
 
