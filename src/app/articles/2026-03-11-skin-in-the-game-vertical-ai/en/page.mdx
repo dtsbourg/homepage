@@ -1,0 +1,504 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import Callout from '@/components/mdx/Callout'
+import TableOfContents from '@/components/mdx/TableOfContents'
+import Figure from '@/components/mdx/Figure'
+import cover from '../pexels-pixabay-210158.jpg'
+import retroComputer from '../pexels-coldbeer-277046249-12950487.jpg'
+import gate from '../david-werbrouck-5GwLlb-_UYk-unsplash.jpg'
+import done from '../pexels-cottonbro-5185164.jpg'
+import exam from '../navy-medicine-yhTtJm0E_hk-unsplash.jpg'
+import rillet from '../rillet.png'
+
+export const article = {
+  author: 'Dylan Bourgeois',
+  date: '2026-03-11',
+  title: 'Skin in the Game: How to Build Vertical AI That Survives',
+  description: '',
+  slug: 'skin-in-the-game-vertical-ai',
+  lang: 'en',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+> Foundation models are eating software from both ends. Here's where the value actually lives, and
+> how to build something that lasts.
+
+Nearly \$1 trillion was wiped from software and services stocks in a matter of weeks.
+[FactSet](https://www.factset.com/) dropped from a \$20B peak to under \$8B.
+[Thomson Reuters](https://www.thomsonreuters.com/) shed almost half its market cap in a year.
+Anthropic, OpenAI, and Google are verticalizing fast. They are doing so not just building better
+models, but going after workflows directly.
+
+Every founder building in a specific vertical is running the same thought experiment: what is my
+company actually _for_ in a world where the infrastructure layer is becoming the product layer?
+
+The answer exists. But it requires being honest about what you're building, who's paying for it, and
+which parts of your defensibility are real versus inherited from a world that's already gone. After
+spending a lot time reading, discussing and thinking about it, here are seven things I believe. Like
+our [last post](/en/articles/new-ai-playbook), see this as a playbook, a note to self that I hope to
+re-visit regularly on my own journey. Hopefully you find some value in it as well.
+
+<TableOfContents
+  items={[
+    {
+      title: '01. The Margin Expansion Window Is Real, but Temporary',
+      anchor: '01-the-margin-expansion-window-is-real-but-temporary',
+    },
+    {
+      title: '02. Close the Loop. Own the Outcome.',
+      anchor: '02-close-the-loop-own-the-outcome',
+    },
+    {
+      title: '03. The Gate Is the Moat',
+      anchor: '03-the-gate-is-the-moat',
+    },
+    {
+      title: "04. Five Moats Are Gone. Know Which Ones You're Actually Left With.",
+      anchor: '04-five-moats-are-gone-know-which-ones-youre-actually-left-with',
+    },
+    {
+      title: '05. UX Is Dead. Domain Expertise Is the New Product.',
+      anchor: '05-ux-is-dead-domain-expertise-is-the-new-product',
+    },
+    {
+      title: '06. The Agent Is the New Orchestrator',
+      anchor: '06-the-agent-is-the-new-orchestrator',
+    },
+    {
+      title: '07. The death and re-birth of the Services play',
+      anchor: '07-the-death-and-re-birth-of-the-services-play',
+    },
+  ]}
+/>
+
+## 01. The Margin Expansion Window Is Real, but Temporary
+
+The services opportunity is genuinely large. Services is a \$16 trillion global market. Software is
+\$1 trillion. Professional services firms run at 30-40% margins on a good day. Software companies
+run at 70-85%. AI narrows that gap. Not by converting services firms into software companies, but by
+making services firms dramatically more leveraged per person. The margins improve. The ratio of
+people to output improves. That's a real and compelling opportunity.
+
+But two things are true simultaneously. The window is real, but it's also dynamic: it's not a
+permanent state you capture once.
+
+First, not all margin expansion is durable. As competitors adopt the same AI capabilities, services
+will re-commoditize on price. As JC Bahr-de Stefano
+[points out](https://x.com/jbahrdestefano/status/2026690313599733918?s=20), as clients realize AI is
+doing work they previously paid junior staff for, they'll demand those savings be passed through.
+The compression comes from both sides. The durable margin lives in the premium that sits on top of
+the automated output: the accountability layer, the liability layer, the relationship layer, not in
+the automation itself.
+
+Second, a meaningful portion of the services market was never about output. Companies hire Big Four
+firms not because the audit is uniquely valuable, but because _"we followed expert guidance"_ is a
+defensible position if something goes wrong. They bring in outside consultants to recommend layoffs
+so the decision isn't pinned on internal leadership. AI can replicate the output of that audit. It
+cannot do the blame-absorbing work. A board cannot point to a model and claim they relied on expert
+guidance. That portion of the market, the CYA layer, is more durable than it looks, and also
+structurally unavailable to pure-output AI products.
+
+The implication: the right model isn't selling tools to professionals. It's doing the work yourself,
+capturing the margin directly, and expanding toward the judgement-heavy, insourced work as your
+system compounds data and trust. Sequoia's Julien Bek frames it cleanly: a copilot sells the tool,
+an autopilot sells the work. **The work budget in any profession is six times the tool budget**.
+Autopilots capture it from day one.
+
+The best wedge is where outsourcing already exists, because if a task is already sent outside the
+company, three things are true: the company has accepted it can be done externally, there's an
+existing budget line that substitutes cleanly, and the buyer is already purchasing an outcome.
+Replacing an outsourcing contract with an AI-native provider is a vendor swap. Replacing headcount
+is a reorg. One is a six-month sales cycle. The other is a multi-year political process.
+
+<Figure src={cover} alt="Looking up through a circular architectural structure at the sky" />
+
+## 02. Close the Loop. Own the Outcome.
+
+The companies that survive and compound in vertical AI are not the ones with the best model or the
+cleanest interface. They're the ones with skin in the game, the ones who own the outcome, not just
+the workflow layer in between.
+
+There's a useful frame here from Nihar Bobba: think of last mile length as your primary strategic
+variable.
+
+- **Short last mile**, like marketing copy, basic drafting, research copilots, is already being
+  absorbed by foundation models.
+- **Medium last mile** (contract analysis, workflow automation) is where most vertical AI companies
+  have landed, and where Anthropic and OpenAI are now planting flags.
+- **Long last mile** is where the structural defensibility lives: tax compliance with actual filing,
+  audit-ready accounting, licensed professional services, cross-border regulatory coordination,
+  healthcare under FDA and HIPAA requirements.
+
+Real-world accountability. Real liability.
+
+Three questions determine where you actually sit:
+
+- **Who is the principal?** Are you a tool for someone else, or the entity responsible for the
+  outcome?
+- **Who owns the liability?** When something goes wrong, whose problem is it?
+- **Who holds the relationship?** With regulators, auditors, authorities, who do they call?
+
+If the answer to all three is your customer, _you're a tool_. Foundation model creep is a real
+strategic threat to your business. If the answer is you, you're building something that compounds
+rather than erodes.
+
+Owning the outcome isn't one thing. It arrives through at least three distinct paths:
+
+**Unique insight and real-world coordination.** Some companies own outcomes because they discovered
+a coordination layer nobody else had mapped. [Outpost](https://www.outpostnow.com/) handles
+cross-border tax compliance for merchants: they don't calculate taxes, they coordinate filings
+across jurisdictions, face audits, and absorb the entire tax liability on behalf of customers. The
+moat isn't the technology. It's the discovery that owning the liability end-to-end was possible, and
+building the infrastructure to do it before anyone else.
+
+**Superior technical choices.** Some companies own outcomes because they made architectural
+decisions that let them take on scope others shy away from. [Monk](https://monk.com/) manages
+complex billing and revenue across contract types with edge case handling and customer interaction
+depth that allows them to own outcomes that less technically precise products can't touch.
+
+**Deep entrenchment and behavioral change.** Some companies own outcomes because they didn't just
+implement software: they changed how a team operates. [Basis](https://www.getbasis.ai/) builds AI
+workers for accounting firms, but the real work is training accountants to trust AI workflows,
+owning the audit trail, and embedding into how firms function every day. The switching cost isn't
+the interface. It's the organizational muscle memory rebuilt around your product.
+[Rillet](https://www.rillet.com/) is making a different bet in the same vertical: rather than
+embedding into existing firms, they're building the AI-native ERP that closes the books entirely, in
+_zero days_ (their flagship promise). It's not a tool for accountants, but a replacement for the
+category of work. Same vertical, opposite product philosophy. Basis bets that the accounting firm
+survives but transforms. Rillet bets that the work gets absorbed into software that owns the outcome
+directly. Both are legitimate paths to a long last mile. Which is right depends on how quickly the
+institutional trust problem gets solved, and that's an empirical question, not a philosophical one.
+
+The pricing consequence of owning outcomes is underappreciated. When you compete on output, you're
+priced on features and usage. When you own liability, you're priced on certainty. That converts
+cost-center pricing into something closer to insurance pricing. Tax calculation software is a
+commodity. The compliance platform that files on your behalf and faces audits is worth a premium
+that compounds every year you don't get a client audited. Foundation models can replicate output.
+They cannot replicate E&O coverage, regulatory credentialing, or the professional relationship
+clients are actually paying the premium for.
+
+<Figure src={retroComputer} alt="Person working at a vintage computer terminal" />
+
+## 03. The Gate Is the Moat
+
+Here's a concept I think is underexplored in the current discourse: not all processes are created
+equal. Some have mandatory staging gates: checkpoints that are legally required, contractually
+enforced, or institutionally non-negotiable. They cannot be skipped, automated away, or
+disintermediated regardless of how capable the underlying model becomes.
+
+A tax return must be signed by a licensed CPA before it's filed. A drug must pass each phase of FDA
+review before the next phase begins. An audit opinion must be issued by a credentialed firm. A
+mortgage must close with a licensed professional certifying compliance. An insurance policy must be
+bound by a licensed broker. These aren't process inefficiencies waiting to be removed. They're
+structural features of how accountability works in regulated industries. The gate exists because
+someone needs to be legally responsible for what happens next.
+
+If your product sits at the gate, i.e. if you are the entity that signs, certifies, issues, or
+approves, you own a position that no amount of model improvement can displace. The gate is the moat.
+
+This is different from owning a workflow. Workflows can be automated, rerouted, or replaced. Gates
+cannot. A better model might do 95% of the work leading up to the gate faster and more accurately
+than before. That makes whoever owns the gate _more_ valuable, not less, because the volume of work
+flowing through the gate increases while the number of credentialed entities who can sign off on it
+stays constrained.
+
+The practical implication for product design: map the mandatory gates in your vertical before you
+map the workflows. Ask where the process has legally or contractually enforced handoffs that require
+a credentialed principal. Then ask whether your product can own that position. Not sit adjacent to
+it, own it.
+
+Consider the difference between a legal AI tool that helps a lawyer draft a brief (useful, exposed)
+versus an AI-native legal service that owns the malpractice (durable). The lawyer is the gate. The
+tool has no skin in the game. The service is the gate. Everything upstream becomes faster and
+cheaper with better models; the gate gets more valuable.
+
+The same logic applies in less obvious verticals. In construction, a building permit requires a
+licensed engineer to stamp drawings; that's a gate. In healthcare, a prescription requires a
+licensed clinician to authorize; that's a gate. In financial services, a securities trade requires a
+licensed broker-dealer; that's a gate. In insurance, a policy requires a licensed carrier to bind;
+that's a gate.
+
+The companies that will look obvious in retrospect are the ones that identified the gate in their
+vertical, built the credentialing and compliance infrastructure to own it, and then used AI to
+accelerate everything upstream. The gate is non-negotiable. The work before the gate is increasingly
+automated. The entity at the gate captures both the trust premium and the efficiency gain.
+
+One important nuance: mandatory gates aren't just regulatory. Some are institutional, i.e. not
+legally required, but socially enforced in ways that are equally durable. The Big Four audit is not
+legally mandated in most cases, but a Fortune 500 board that skips it has no cover if something goes
+wrong. The gate is real even when it isn't written into a statute. Map both kinds.
+
+<Figure src={gate} alt="Silhouette of a person behind vertical slats of light" />
+
+## 04. Five Moats Are Gone. Know Which Ones You're Actually Left With.
+
+Nicolas Bustamante has spent a decade on both sides of this. First building the vertical software
+LLMs are now threatening at [Doctrine](https://www.doctrine.fr/), then building the kind that does
+the threatening at [Fintool](https://fintool.com/). His breakdown of what LLMs do to each of the ten
+traditional moats of vertical software is the most useful diagnostic I've found.
+
+Here is the honest summary:
+
+Gone are:
+
+- **Learned interfaces**. A decade of muscle memory built around function codes and keyboard
+  shortcuts evaporates when the interface is a natural language conversation. The switching cost
+  that justified \$25K per seat dissolves. As Bustamante notes, _"LLMs collapse all proprietary
+  interfaces into one chat."_
+
+- **Custom workflows and business logic.** What took years of domain expert interviews and careful
+  engineering (thousands of if/then branches, validation rules, compliance logic) can now be encoded
+  in a markdown file by a domain expert who has never written code. Years of engineering versus one
+  week of writing.
+
+- **Public data access.** Making public information structured and queryable was a genuine service.
+  It no longer requires specialized engineering. Frontier models already know how to navigate a
+  10-K, parse a nested table, reconcile GAAP and non-GAAP. The scaffolding that took decades to
+  build is now a commodity capability baked into the model.
+
+- **Talent scarcity as a barrier.** The bottleneck used to be finding people who understood both the
+  domain and the technology. That bottleneck is gone. Domain experts can now encode methodology
+  directly. The barrier to entry collapses.
+
+- **Bundling.** The agent is the bundle now. Alerts, watchlists, screening... These are prompts, not
+  modules. When the integration layer moves to the AI, the premium for an all-in-one platform
+  evaporates.
+
+Holding, for now:
+
+- **Proprietary data. **If your data cannot be replicated, licensed, or synthesized elsewhere, LLMs
+  make it more valuable, not less. In an agent world, proprietary data is the scarce input
+  everything competes to access. [Bloomberg](https://www.bloomberg.com/)'s real-time pricing from
+  trading desks can't be scraped. [S&P](https://www.spglobal.com/)'s credit ratings are opinions
+  backed by a regulated methodology and decades of default history. An LLM can't issue a credit
+  rating. The test: can someone else get it? If yes, exposed. If no, your pricing power may actually
+  increase.
+
+- **Regulatory and compliance lock-in.** HIPAA doesn't care about GPT-5. FDA certification doesn't
+  get easier because a new model dropped. In healthcare EHR, life sciences, and financial compliance
+  reporting, the switching cost is implementation cycles, certification requirements, and patient or
+  regulatory safety risk. LLMs are barely relevant to this equation in the medium term.
+
+- **Network effects** When every counterparty uses the same platform for communication, you use it
+  too. Not because of features, because of the network. This applies to agent-to-agent communication
+  layers now as much as person-to-person ones. The network effects of shared tooling create a shared
+  language that is powerfully self-reinforcing and that better models don't dissolve.
+
+- **Transaction embedding.** If your software processes payments, originates loans, or settles
+  anything, an LLM sits on top of you as a better interface. The rails stay essential.
+
+The diagnostic: ask three questions about any vertical software business. Is the data proprietary?
+Is there regulatory lock-in? Is the software embedded in the transaction? Three yes answers and
+you're probably fine. Zero and you're in serious trouble. The repricing in public markets is largely
+correct: companies whose moats were interface-driven are getting hit hardest, and they should be.
+
+## 05. UX Is Dead. Domain Expertise Is the New Product.
+
+The shift in what it means to build software for a vertical is as significant as any of the moat
+changes above, and it's still underappreciated.
+
+The old model: hire engineers who understand the domain (rare, expensive, slow to onboard), spend
+months encoding business logic in code, build a UI, train customers to use it, staff a CSM function
+to manage the interface change management every time you update. The interface was the product.
+Maintaining it was a major cost center.
+
+The new model: domain experts encode their methodology directly, in plain language, which can be
+encoded as simply as a `SKILLS.md` file, and the model executes it. No Python. No APIs. No UI to
+maintain. No CSM army teaching keyboard shortcuts. The chat interface absorbs all of that
+scaffolding.
+
+This changes what product design actually means. Your job as a product designer is no longer to
+build an interface people learn. It's to absorb, condense, and operationalize domain expertise, to
+take the 40-page template one team uses and the shared spreadsheet the team down the hall uses and
+encode both of them accurately enough that the system behaves correctly for each. Flat, readable,
+auditable, updateable. Skills files, not codebases.
+
+The talent implication is the inverse of what people expect. **Talent scarcity doesn't go away, it
+inverts.** The scarce resource is no longer the engineer who understands the domain. It's the domain
+expert who understands the process well enough to encode it precisely. The 10x accountant, the 10x
+underwriter, the 10x compliance officer, the person who has done 500 of these and can articulate
+exactly how they think, becomes dramatically more valuable because they can now translate directly
+into software without an engineering intermediary.
+
+This also makes software fractal in a way it never was before. **The same product can operate at
+company-wide, team-wide, and individual levels simultaneously**. Each runs slighlty different
+variations of the same underlying model, because the customization layer is encoded in language
+rather than hardcoded in a codebase. An institution has a standard process. A team has a variant. An
+MD has preferences. All of these can coexist inside the same product. The institutional knowledge
+that George Sivulka describes, the 10% that is idiosyncratic to a specific team's way of working,
+where deals get done and careers are made, can now be encoded and preserved in ways that compound
+over time rather than living exclusively in people's heads.
+
+<Figure src={done} alt="Hand placing a 'Done' sticky note on a CRT monitor" />
+
+## 06. The Agent Is the New Orchestrator
+
+The incentive to bundle many products into one to build a moat is gone, but something more
+interesting is replacing it.
+
+The old bundle logic: keep customers by making them dependent on your entire ecosystem. Bloomberg
+started with market data, then added messaging, news, analytics, trading, compliance. Each module
+added switching costs because customers had built workflows around the whole stack.
+[S&P Global](https://www.spglobal.com/)'s \$44B acquisition of [IHS Markit](https://ihsmarkit.com/)
+was exactly this strategy.
+
+The new reality: when the integration layer moves from the software vendor to the AI agent, the
+incentive to buy a bundle evaporates. The agent is the bundle. An alert is a prompt. A watchlist is
+a prompt. Portfolio screening is a prompt. The agent orchestrates across specialized tools in a
+single workflow (pulling data from one source, running analytics through another, compiling results)
+and the user never knows or cares which providers were queried. The agent owns the customer
+relationship. The software vendors become suppliers competing on price to feed the platform.
+
+This is aggregation theory in real time. The aggregator, i.e. the agent, captures the user
+relationship and the margin. The suppliers compete to be routed to. If your moat was that customers
+paid your premium to access a bundle of capabilities they now get from an orchestrating agent, your
+pricing power is structurally under pressure.
+
+The companies that survive this transition are the ones that move from supplying capabilities to
+owning the agent itself. This means owning the workflow, the data, and the outcome, not just one
+component of it. The agent that knows your process, holds your history, and coordinates your
+regulatory relationships is not a commodity tool. It's load-bearing infrastructure. It's also slowly
+replacing your system-of-record.
+
+_Intelligence_ versus _judgement_ matters here for how you sequence the build. _Intelligence_ is
+rules-based work: complex rules, perhaps, but rules. Parsing, coding, screening, drafting against a
+spec. This is where automation wins earliest and most completely. _Judgement_ requires experience
+and taste built over years: knowing which risk matters, when a contract clause is genuinely
+dangerous versus standard, how to structure a recommendation when the data points in multiple
+directions. The frontier shifts over time as AI systems accumulate proprietary data on what good
+judgement looks like in a domain. Copilots and autopilots converge. The autopilots being built now
+are accumulating the data advantage that will let them handle more of the judgement layer over time.
+The copilots that don't make that move will be replaced.
+
+<Figure src={exam} alt="Vintage photograph of an optometrist examining a patient" />
+
+## 07. The death and re-birth of the Services play
+
+After years of taboo, are services companies sexy again? Are they venture scale?
+
+Not software companies that happen to serve a vertical. Not AI tools that make existing
+professionals more productive. Actual firms, entities that employ credentialed professionals, carry
+liability, hold regulatory relationships, and deliver outcomes, but with a radically different ratio
+of humans to output underneath.
+
+The logic follows from everything above. If the gate is the moat, and the gate requires a licensed
+principal, and AI can accelerate everything upstream of the gate dramatically, then the winning
+entity is not a software company at all. It's a firm that uses software as its leverage layer rather
+than its product. An accounting firm that closes books for 10x the clients per CPA. An insurance
+brokerage that binds policies with a fraction of the human overhead. A legal entity that owns
+malpractice on work that AI drafts and a lawyer reviews in minutes rather than hours.
+
+These are services businesses. The margins are not software margins. But in a \$16 trillion market,
+you don't need software margins to build something massive, and the margins are structurally better
+than the incumbent services firms they're replacing, because the leverage per credentialed
+professional is an order of magnitude higher.
+
+This also reframes the copilot-to-autopilot transition in an interesting way. The question isn't
+just whether AI takes over the work. It's who the AI works for. Copilots work for the professional
+who retains the relationship, the liability, the billing. Autopilots work for the firm, who retains
+the relationship, the liability, the billing, and happens to deploy AI to do the work. The same
+technology, entirely different business structure and value capture.
+
+What makes this hard is the trust problem. A Fortune 500 doesn't hand audit work to an unknown firm,
+however capable. The credentialing and brand equity that incumbents have built over decades is real,
+and it doesn't transfer automatically to an AI-native entity. This is why the most successful
+AI-native service firms are likely to follow one of two paths: either they build credentialing from
+scratch in categories where the incumbents are genuinely broken (accounting, where the talent
+shortage is structural; claims adjusting, where the adjuster workforce is aging out), or they
+acquire the credentialing by taking over existing practices and transforming them from the inside.
+
+Rillet is betting on the first path in accounting: building the infrastructure to own the outcome
+directly before the incumbents figure out how to match them. [Meroka](https://www.meroka.com/) is
+betting on the second in primary care: acquiring independent physician practices, transitioning them
+to employee ownership, and building AI as the management layer. Both are building firms, not tools.
+And both are betting that the gate, the licensed professional who certifies the outcome, is worth
+more, not less, as AI does more of the work upstream.
+
+The categories where incumbents are genuinely broken are worth naming, because structural
+dysfunction is a forcing function that makes adoption urgent rather than optional.
+
+Accounting (\$50-80B outsourced in the US alone) is the clearest case: 75% of CPAs are nearing
+retirement, the licensing pipeline is years long, and firms are already turning away work. The
+shortage is structural, not cyclical, which is why both Rillet (building the AI-native ERP to close
+the books entirely) and Basis (embedding into existing firms and owning the audit trail) can coexist
+as bets on the same broken market.
+
+<Figure
+  src={rillet}
+  alt="Screenshot of the Rillet platform showing its AI-native accounting features"
+/>
+
+_Insurance brokerage_ (\$140-200B) and _claims adjusting_ (\$50-80B) face similar workforce
+dynamics, with the added advantage of extreme fragmentation, tens of thousands of small operators
+running identical processes, no single incumbent controlling the customer relationship, and massive
+outsourcing already in place. _Tax advisory_ (\$30-35B), _IT managed services_ (\$100B+), and
+_supply chain procurement_ (\$200B+) share a common trait: the overwhelming majority of the work is
+pure intelligence, already outsourced, with outcome-oriented buyers and existing budget lines ready
+to be substituted. _Management consulting_ (\$300-400B) is the largest and hardest (mostly
+judgement, which makes full automation premature) but the more interesting question is whether AI
+disaggregates it into intelligence components (data gathering, benchmarking) and judgement
+components (the recommendation, the room read), with the former automated and the latter becoming
+more expensive. **The firm that owns both captures the margin expansion that incumbents are
+currently defending against.**
+
+<Callout type="info" title="A European view">
+  Interestingly, I believe this opportunity is arguably more pronounced in Europe than anywhere
+  else. European businesses have historically relied on external consulting and professional
+  services at rates that dwarf US equivalents. The institutional preference for outside expertise,
+  the relative shyness to build things internally, and the regulatory complexity across
+  jurisdictions all point in the same direction. At the same time, European enterprises have been
+  slower to adopt new software tools, which has left the services layer thick, expensive, and
+  largely untouched. For a founder building an AI-native services firm in Europe, that isn't a
+  headwind, it's the market. The outsourcing contracts already exist. The buyers are already
+  outcome-oriented. And the regulatory fragmentation across EU member states, which makes
+  cross-border compliance genuinely hard, is exactly the kind of complexity that creates mandatory
+  gates worth owning.
+</Callout>
+
+The historical analogy that keeps coming to mind: the emergence of the Big Four wasn't inevitable.
+It was the result of a particular moment: the rise of public capital markets, new regulatory
+requirements, and the need for independent certification, where a new kind of professional services
+firm crystallized around a structural need. We may be in a similar moment. The regulatory
+requirements aren't going away. The certification needs aren't going away. But the firms that own
+the certification are about to look very different.
+
+The ones that survive won't be the old firms that adopted AI. They'll be new entities that were born
+around AI and built the credentialing on top of it. That's skin in the game.
+
+---
+
+The companies that look obvious in five years will be the ones that found the gate in their
+vertical, built the credentialing to own it, and used AI to accelerate everything upstream. The gate
+is non-negotiable. The work before it is increasingly automated. The entity at the gate captures
+both the trust premium and the efficiency gain.
+
+That's what skin in the game actually means.
+
+---
+
+Many of the thoughts above were synthesized from the great essays of:
+
+- JC Bahr-de Stefano —
+  [Services Won't Become Software](https://x.com/jbahrdestefano/status/2026690313599733918?s=20)
+  (BTV)
+- Nihar Bobba —
+  [Will Vertical AI Survive?](https://better-tomorrow-ventures.ghost.io/will-vertical-ai-survive/)
+  (BTV)
+- George Sivulka —
+  [In Defense of Vertical Software](https://x.com/gsivulka/status/2024187126020272197)
+- Nicolas Bustamante —
+  [10 Years Building Vertical Software](https://x.com/nicbstme/status/2023501562480644501)
+- Julien Bek —
+  [Services: The New Software](https://sequoiacap.com/article/services-the-new-software/) (Sequoia
+  Capital, March 2026)
+
+Also many thanks to everyone who's taken the time to discuss these topics with me and informed my
+views, including among many others: [Jason Chen](https://www.linkedin.com/in/jasonchen623),
+[Kelley Mak](https://www.linkedin.com/in/kelleymak/), [Antoine de Mereuil](https://www.linkedin.com/in/antoinedemereuil/),
+[Darragh Collins](https://www.linkedin.com/in/darragh-collins-23198658/),
+[Varun Sridhar](https://www.linkedin.com/in/varun-sridhar-439a318a/).

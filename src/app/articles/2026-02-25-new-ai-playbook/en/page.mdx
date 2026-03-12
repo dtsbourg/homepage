@@ -2,21 +2,21 @@ import { ArticleLayout } from '@/components/ArticleLayout'
 import cover from '../google-deepmind--xIKlWf7Z4A-unsplash.jpg'
 
 export const article = {
-    author: 'Dylan Bourgeois',
-    date: '2026-02-25',
-    title: "The new, new AI-native playbook, or: everything you thought was the product isn't",
-    description: [
-        'Notes from the field on what actually works when building AI-native products.',
-        'The SaaS playbook is breaking down: the product is now a substrate, not a solution.',
-        'Observations on omnipresent interfaces, flat knowledge, closed loops, and displaced bottlenecks.',
-    ].join(' '),
-    slug: 'new-ai-playbook',
-    lang: 'en',
+  author: 'Dylan Bourgeois',
+  date: '2026-02-25',
+  title: "The new, new AI-native playbook, or: everything you thought was the product isn't",
+  description: [
+    'Notes from the field on what actually works when building AI-native products.',
+    'The SaaS playbook is breaking down: the product is now a substrate, not a solution.',
+    'Observations on omnipresent interfaces, flat knowledge, closed loops, and displaced bottlenecks.',
+  ].join(' '),
+  slug: 'new-ai-playbook',
+  lang: 'en',
 }
 
 export const metadata = {
-    title: article.title,
-    description: article.description,
+  title: article.title,
+  description: article.description,
 }
 
 export default (props) => <ArticleLayout article={article} {...props} />
@@ -31,20 +31,20 @@ I hope these serve as a useful reference as I myself build towards my next adven
 
 <Image src={cover} alt="" />
 
-
 AI start-ups have changed a lot since I started working in the industry. Each wave would naturally
 disrupt the previous. Traditional Machine Learning companies, experts at feature design for decision
-trees got swept away by the Deep Learning wave, where an implicit model would learn the discriminatory
-boundaries in some latent high dimension purely based on data. A few years later, the LLM-powered product blew
-those out the window: why bother training your own model at all? Pre-training will do the
-job for you. After that, the agentic iterations arrived, with amazing post-training routines and
-systematic approaches to integrated vertical ontologies, custom workflows and specialized tool
-integrations. And now, the latest autonomy step function is promising to disrupt things once
-again: why bother even designing anything? Just describe your very niche flow and let a self-configuring agent
-figure out a skill to accomplish your task autonomously, in the background.
+trees got swept away by the Deep Learning wave, where an implicit model would learn the
+discriminatory boundaries in some latent high dimension purely based on data. A few years later, the
+LLM-powered product blew those out the window: why bother training your own model at all?
+Pre-training will do the job for you. After that, the agentic iterations arrived, with amazing
+post-training routines and systematic approaches to integrated vertical ontologies, custom workflows
+and specialized tool integrations. And now, the latest autonomy step function is promising to
+disrupt things once again: why bother even designing anything? Just describe your very niche flow
+and let a self-configuring agent figure out a skill to accomplish your task autonomously, in the
+background.
 
-This [bitter-lesson pilled](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) revolutionary cycle
-has become increasingly shorter and shorter. It has killed many incumbents at each step. It
+This [bitter-lesson pilled](http://www.incompleteideas.net/IncIdeas/BitterLesson.html) revolutionary
+cycle has become increasingly shorter and shorter. It has killed many incumbents at each step. It
 also makes the position of a founder ideating very tenuous: every phase shift needs to be
 anticipated, timing is more important than ever.
 
@@ -53,13 +53,13 @@ investors, founders (experienced and prospective), users, potential customers. I
 least as much time building, prototyping, testing and confronting various ideas. And I keep having
 the same experience.
 
-A potential lead describes one, two, five, ten time sinks they have. The builder in me fires up: smells like
-friction, great, I can make a tool for that. Until they walk you through their personal SaaS graveyard.
-Someone has been here already, and has charged them $49/month to solve their issue. Ten tabs, ten
-dashboards, ten products that each try to solve one problem well enough to justify their cost. CRM,
-invoicing, contract management, scheduling, project tracking, a tool that turns meeting notes into
-action items, another tool that turns action items into meeting notes. The circle of enterprise
-life.
+A potential lead describes one, two, five, ten time sinks they have. The builder in me fires up:
+smells like friction, great, I can make a tool for that. Until they walk you through their personal
+SaaS graveyard. Someone has been here already, and has charged them $49/month to solve their issue.
+Ten tabs, ten dashboards, ten products that each try to solve one problem well enough to justify
+their cost. CRM, invoicing, contract management, scheduling, project tracking, a tool that turns
+meeting notes into action items, another tool that turns action items into meeting notes. The circle
+of enterprise life.
 
 Problem solved, right? Actually not. People don't use the product in the way it was "intended". No
 one has time to learn a product. No one is watching that onboarding video. No one is adapting their
