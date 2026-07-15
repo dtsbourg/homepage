@@ -1,0 +1,373 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import TableOfContents from '@/components/mdx/TableOfContents'
+import Figure from '@/components/mdx/Figure'
+import cover from '../overpainted-group-photo.jpeg'
+import grille from '../grass-poem-strips.jpeg'
+import simulacra from '../simulacra-and-simulation.webp'
+import erasure from '../overpainted-portrait.webp'
+
+export const article = {
+  author: 'Dylan Bourgeois',
+  date: '2026-07-15',
+  title: 'Nobody voted on this: how to build a team that can still change its own mind',
+  description: [
+    'A team can get faster, flatter, and happier while quietly losing the ability to decide how it works.',
+    "Notes on how to tell whether your team still authors its own arrangement, through Guattari's idea of transversality, and what to do about it.",
+  ].join(' '),
+  slug: 'nobody-voted-on-this',
+  lang: 'en',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+> A team can get faster, flatter, and happier while quietly losing the ability to decide how it
+> works. Here are some notes on how to tell, and what to do about it.
+
+Watch a team adopt AI tooling and you will see something that looks like a win. Cycle time drops.
+The hierarchy flattens, because the junior person and the senior person now ship work that is harder
+to tell apart. Autonomy scores go up. Nobody is unhappy.
+
+Then ask one question: when did you last change the tool, rather than change yourselves to fit the
+tool?
+
+Most teams cannot answer. They have spent a year reorganizing around what the tooling makes easy,
+and the reorganization was so comfortable that nobody logged it as a decision. The norms shifted.
+The definition of a good pull request shifted. The cadence of review shifted. None of it was voted
+on, because none of it arrived as a proposal. It arrived as a default.
+
+I want to argue that this is the central problem in organizational design right now, that neither of
+the two dominant framings can see it, and that the useful vocabulary for it was worked out sixty
+years ago in a psychiatric clinic in the Loir-et-Cher.
+
+<Figure
+  src={cover}
+  alt="An Edwardian group portrait at a dinner table, overwritten with sweeping red calligraphic flourishes"
+/>
+
+<TableOfContents
+  items={[
+    {
+      title: '01. Two readings, both wrong',
+      anchor: '01-two-readings-both-wrong',
+    },
+    {
+      title: '02. A psychiatric clinic in the Loir-et-Cher',
+      anchor: '02-a-psychiatric-clinic-in-the-loir-et-cher',
+    },
+    {
+      title: '03. The coefficient',
+      anchor: '03-the-coefficient',
+    },
+    {
+      title: '04. Subject-groups and subjugated groups',
+      anchor: '04-subject-groups-and-subjugated-groups',
+    },
+    {
+      title: '05. Where the defaults come from',
+      anchor: '05-where-the-defaults-come-from',
+    },
+    {
+      title: '06. The authorship worry is standing in the wrong place',
+      anchor: '06-the-authorship-worry-is-standing-in-the-wrong-place',
+    },
+    {
+      title: '07. What to actually do',
+      anchor: '07-what-to-actually-do',
+    },
+    {
+      title: 'The test, again',
+      anchor: 'the-test-again',
+    },
+  ]}
+/>
+
+## 01. Two readings, both wrong
+
+The **vertical reading** asks who approves the output. Human in the loop, sign-off authority,
+escalation paths, an accountable name at the bottom of the document. This is the governance
+conversation, and it is a real conversation. It is also entirely about positions in a hierarchy,
+which means it takes the hierarchy as the thing to be arranged.
+
+The **horizontal reading** says the hierarchy is over. Everyone has a copilot. The leverage per
+person went up across the board, the org chart flattens, the distinction between senior and junior
+work compresses. This is the AI-native org post that gets written every week.
+
+The two look opposed. They are not. Both take the _arrangement_ as given and argue about where
+people sit inside it. Neither asks where the arrangement came from, or whether the team can reach
+it.
+
+That question has a name.
+
+## 02. A psychiatric clinic in the Loir-et-Cher
+
+La Borde opened in 1953 at Cour-Cheverny, founded by the psychiatrist Jean Oury. Félix Guattari
+arrived in 1955 and stayed for the rest of his life. Most people know Guattari, if at all, as the
+co-author of _A Thousand Plateaus_, which is a difficult book. The clinic work is not difficult, and
+it is where his one genuinely portable idea comes from.
+
+Oury and Guattari were treating an institution as much as they were treating patients. Their
+diagnosis had two failure modes.
+
+The **vertical** failure is the pyramid: information up, orders down, everyone certain of their
+level and blind to every other one. The **horizontal** failure is the ward where everyone is
+nominally equal and nobody talks. Flatness without contact. Guattari's claim is that these are not
+opposites. They are the same failure wearing different clothes, because in both cases the group
+_receives_ its structure rather than making it.
+
+**Transversality** is his name for a third axis that cuts across both. It is not a value between
+vertical and horizontal. It is a measure of how much a group can encounter itself and rearrange its
+own arrangement.
+
+At La Borde this was material. The clinic ran _la grille_, a rotating rota of tasks: doctors did
+laundry, nurses ran sessions, patients worked the kitchen. This was not therapeutic play-acting or a
+flat-hierarchy gesture. The point was mechanical. Once the role rotates, the role stops being
+identical to the person occupying it, and the group becomes able to see the structure it is standing
+in. A structure you can see is a structure you can argue with.
+
+<Figure
+  src={grille}
+  alt="A Korean poem printed on horizontal strips that slide and rearrange, its lines breaking apart"
+/>
+
+## 03. The coefficient
+
+Guattari's image for this is odd and good. Picture horses in a field wearing adjustable blinkers.
+Blinkers shut tight and they collide blindly, each one working from a view that excludes everyone
+else. Open them and the field becomes navigable.
+
+The **coefficient of transversality** is how far open the blinkers are: how much of the whole any
+position in the group can see.
+
+Two things matter about this. First, it is a dial rather than a switch. No group is transparent to
+itself, and full transparency is not the goal. Second, and this is the whole idea, the dial is
+adjustable _by the group_. A group with a high coefficient is one that can reach its own settings.
+
+## 04. Subject-groups and subjugated groups
+
+The distinction Guattari draws from this is the one you can actually use on a Monday.
+
+A **subject-group** produces its own enunciation. It can state its purpose in its own words, and it
+can modify its own structure.
+
+A **subjugated group** receives its law from elsewhere. It hears its own purpose described by
+someone who is not in the room. It can be busy, effective, and pleasant to work in. It cannot change
+its own terms, and usually it has stopped noticing that this is a thing groups do.
+
+Same people. Same org chart. Same headcount. Different coefficient.
+
+This is why the two readings in section 01 miss. A subjugated group can be perfectly flat. It can be
+high-autonomy and high-morale and shipping fast, because subjugation is not about who reports to
+whom. A team whose norms, cadence, and working definition of good work are set by what the tooling
+makes easy is receiving its law from a vendor's defaults. Flat, autonomous-feeling, and legislated
+from outside.
+
+**The test:** name three things you changed in the tool this quarter. Name three things you changed
+in yourselves to fit the tool. If the second list is longer, you know what you are.
+
+That is not a vibes question. It has an answer, and the answer is in your commit history.
+
+## 05. Where the defaults come from
+
+It is worth being precise about the mechanism, because "the vendor sets your defaults" sounds like a
+complaint about procurement, and it is not.
+
+Baudrillard, writing about opinion polling in 1978, made a structural observation that has aged
+strangely well. A poll does not measure what you think. It hands you a menu and records which item
+you point at. The menu was drawn before you arrived, and whatever you pick confirms that the menu
+was the right menu. He called this the referendum form: reality reorganized into A/B, and therefore
+computable, and therefore already latent in the question.
+
+Look at what preference training literally is. Two completions, A and B, both sampled from the
+model. You pick one. The gradient flows back into the thing that generated both options. The
+preference is real. The _space_ the preference ranges over was drawn upstream of the preferring.
+
+I want to hold the line on how far this goes, because the strong version is wrong and will make your
+argument worse. Baudrillard wanted to say the loop is sealed and no information passes. It obviously
+does; models change because of that signal. What survives is the structural point, which is sharper
+anyway: **the range of what can be preferred is set upstream of the preferring.** Take the structure
+and leave the fatalism.
+
+Now scale that up one level, from the model to the team. Your team is also being handed a menu. The
+skills file someone wrote in month one, the eval set nobody has looked at since, the default review
+cadence that came with the tool: these are the options the team will express preferences over, and
+the team will get very good at expressing preferences over them. The blinkers are not malicious.
+They are just narrow, and nobody remembers installing them.
+
+<Figure
+  src={simulacra}
+  alt="Cover of Jean Baudrillard's Simulacra and Simulation: a chrome sphere reflecting a landscape"
+/>
+
+## 06. The authorship worry is standing in the wrong place
+
+There is a standing objection here that needs clearing, because it eats every conversation about AI
+and work.
+
+The worry: if a model writes it, who is the author? Something has been lost. The work is no longer
+yours.
+
+The objection to the objection is old, and it predates Guattari by decades. Bakhtin's line is that
+words arrive already inhabited by other people's voices. Every utterance is a reply to prior
+utterances and an anticipation of the next. You inherited the genre, the cadence, the moves, the
+vocabulary. You are answering arguments you half-remember reading. Deleuze and Guattari radicalize
+this into the **collective assemblage of enunciation**: individual enunciation never existed in the
+first place, and all discourse is indirect discourse.
+
+So the anxiety quietly assumes you were the sole origin before the model showed up. You were not.
+Otherness in your work is not new. What changes is the _distribution_: which parts of the assemblage
+do which work, and where the credit lands.
+
+That is not the same as saying there is nothing to worry about, and this is where most versions of
+this argument stop one move too early. Guattari's entire point is that assemblages differ, and that
+the differences are the object of study. Three things genuinely change:
+
+- **Speed.** The other voices arrive faster than you can metabolize them. At some point a difference
+  in rate is a difference in kind.
+- **Particularity.** Bakhtin's borrowed voices belong to someone. A teacher you owe, a writer you
+  are arguing with. A model's voices are a statistical aggregate, and you cannot answer back to a
+  distribution.
+- **Erasure.** The corpus had authors. They have been laundered out of the assemblage.
+
+The worry does not evaporate. It **relocates**, from authenticity to composition and power, which is
+a much more interesting place for it to live and a much more tractable one. Authenticity is not an
+engineering problem. Composition is.
+
+<Figure
+  src={erasure}
+  alt="A woman painting thick blue brushstrokes across another person's face, obscuring it"
+/>
+
+## 07. What to actually do
+
+The obvious move here is to steal the grille: rotate people through positions and let the
+arrangement become visible. I think that is wrong, and the reason it is wrong is the useful part.
+
+The grille worked at La Borde because the clinic had a problem you do not have. It was a permanent
+institution with fused role identity. A doctor had been a doctor for twenty years and would be one
+for twenty more, and the role had grown into the person. Rotation broke the fusion. A team of
+fifteen people building something does not have that problem. The roles are already fluid, and
+rotation for its own sake mostly costs you context.
+
+So rotation was never the mechanism. The mechanism is the **encounter**: an assumption becomes
+visible when someone who did not make it reads it, and it becomes changeable when that person has
+standing to change it. Rotation is one way to force an encounter, and it was the way available in a
+psychiatric clinic in 1955. It is probably not yours.
+
+### Ownership: individual, with obligatory contestation
+
+There is a real tension here that rotation dodges rather than resolves, and it is the vertical and
+horizontal failure replayed one level down.
+
+_Collective ownership_ of the configuration. Everyone can edit the skills files. In practice nobody
+does, because nobody is answerable for them. The config drifts, accretes, and becomes load-bearing
+by neglect. Within a year it is a set of decisions nobody remembers making. That is the horizontal
+failure exactly: flat, equal, no contact, and receiving its law from a document nobody is reading.
+
+_Individual ownership._ One person owns the config, keeps it coherent, knows why every line is
+there. This works, and it produces the vertical failure. The team receives its arrangement from a
+colleague instead of from a vendor. Marginally better, because the colleague is in the room and can
+be argued with. Still legislation.
+
+The way out is not to split the difference and not to pass the parcel. **Keep ownership individual
+and make contestation obligatory.** Someone owns the config, because coherence needs an owner and
+drift is the bigger enemy of the two. Someone who is not the owner has a standing job to argue with
+it, and that person changes.
+
+The difference from rotation matters. The contestant does not take over. They read it with intent to
+disagree and produce an actual disagreement. That is a two-hour job rather than a quarter-long
+handoff, it does what rotation was supposed to do, and it costs no context. The owner keeps the
+coherence. The contestant keeps the coefficient.
+
+The signal that it is working: the config changed, and not because the owner changed their mind.
+
+### The model boundary: you are permanently the reviewer
+
+The version of this point that gets made usually says reviewers who never draft become rubber
+stamps, so rotate them. That describes a division of labor no engineering team has. Developers draft
+and review constantly, sometimes inside the same hour. Nobody spends three months only reviewing.
+
+The asymmetry is somewhere else. Relative to your colleagues you do both. **Relative to the model,
+you only ever judge.** The model generates, you accept or reject. That position does not rotate, and
+it cannot, because there is nothing on the other side to swap with.
+
+This collides with [a distinction I have used before](/en/articles/skin-in-the-game-vertical-ai) and
+did not push hard enough. Intelligence is rules-based work; judgement requires experience and taste
+built over years. The question that framing raises and does not answer is where the taste comes from
+once you stop doing the work. Judgement was never free-standing. It is a residue of having produced
+the thing badly a few hundred times.
+
+The easy version of the worry is that judgement atrophies from disuse. That is the optimistic
+version. Judgement does not just drain. It gets refilled.
+
+Section 05 said the range of what can be preferred is set upstream of the preferring. That was a
+claim about the option space. At the model boundary it goes one level deeper, into the criterion.
+After five hundred model outputs, your sense of what a good function looks like has model-shaped
+priors in it. You are still judging, and you are judging with a yardstick that the thing being
+judged helped manufacture. Meanwhile the loop closes at the level of the team rather than the
+weights: what you accept becomes the local definition of good work, and what you were offered to
+accept came from the model. Nobody has to be fine-tuning anything for this to be a closed circuit.
+
+The terminal version is already shipping. The model drafts, a second model reviews the draft, and
+you approve the review. At that point you are not a reviewer. You are a notary.
+
+The obvious objection is that this proves too much. Every tool shapes the taste of the person using
+it. Developers raised on one framework have framework-shaped priors, writers who read one author
+write like him, and nobody calls that a catastrophe. Fair, and the answer is the three differences
+from section 06. _Speed_: the priors arrive faster than you can examine them. _Particularity_: a
+framework has authors you can argue with, and a distribution does not. _Erasure_: you cannot trace
+which piece of your judgement you borrowed from where. The mechanism is old. The rate and the
+anonymity are not.
+
+So the practice is not a rotation, it is a calibration. Some of the work gets done unassisted, on a
+cadence, not for the output and not out of principle. To keep the judging attached to something that
+is not itself model output.
+
+This doubles as your control. You cannot say what the tooling changed if there is no unexposed
+baseline to compare against, and the argument about whether to bring the baseline back inside the
+tooling is itself the transversal move. It forces the team to say out loud what the tool is for.
+
+### Notice the adaptations
+
+When the team changes a norm to fit the tooling, make a note of it somewhere you will come across it
+again. Nothing formal, no ceremony. These changes are invisible now not because anyone hid them but
+because each one is individually too small to register, and the aggregate is the entire arrangement.
+
+Then occasionally set that list beside the list of changes you made _to_ the tooling, and see which
+one is longer.
+
+There is a version of this I am already committed to, and it is worth naming the bias.
+[I have argued](/en/articles/skin-in-the-game-vertical-ai) that the product design job in vertical
+AI is to encode domain expertise in flat, readable, auditable files rather than codebases: skills
+files, not code. That argument was about cost and speed. The org argument is better. **A skills file
+is the artifact that makes the arrangement modifiable by the people standing in it.** A codebase
+legislates. A markdown file can be argued with by the accountant, and an accountant who can argue
+with the configuration is in a subject-group. The reason to build [Rig](https://userig.xyz) around a
+portable manifest is not developer ergonomics. It is the coefficient.
+
+## The test, again
+
+The vertical question is who signs. The horizontal question is who is augmented. Both are answerable
+and both leave the important thing untouched.
+
+The transversal question: can this group see and modify its own arrangement, or is the arrangement
+arriving from outside it?
+
+You do not answer that with a survey, because a survey is a menu. You answer it by looking at what
+your team changed this quarter, and what changed your team.
+
+---
+
+**Notes and reading**
+
+- Guattari, "La transversalité" (1964), collected in _Psychanalyse et transversalité_. The
+  subject-group distinction runs through the same volume.
+- Nicolas Philibert's documentary _La moindre des choses_ (1996), the best way into the clinic
+  itself.
+- Bakhtin on inhabited speech, in _The Dialogic Imagination_.
+- Baudrillard on the referendum form, in _À l'ombre des majorités silencieuses_ (1978), which is
+  short and worth the afternoon.
