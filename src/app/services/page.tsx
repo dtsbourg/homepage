@@ -209,10 +209,11 @@ const advisoryEngagements: Engagement[] = [
     logo: logoStealth,
   },
   {
-    name: 'Stealth',
+    name: 'Tactimetry',
     role: 'Advisor',
     description:
-      'The payroll system for your AI workforce. Advising on AI strategy, go-to-market, and market positioning.',
+      'On-brand creative intelligence for performance marketing, helping teams find winning angles and ship high-converting creative faster. Advising on AI strategy, go-to-market, and market positioning.',
+    link: { url: 'https://tactimetry.com', label: 'tactimetry.com' },
     logo: logoStealth,
   },
 ]
