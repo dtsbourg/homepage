@@ -11,6 +11,7 @@ import logoStealth from '@/images/logos/ghost.svg'
 import logoPace from '@/images/logos/pace.svg'
 import logoComma from '@/images/logos/comma.svg'
 import logoAstra from '@/images/logos/astra.svg'
+import logoTactimetry from '@/images/logos/tactimetry.svg'
 
 function LightBulbIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -214,7 +215,7 @@ const advisoryEngagements: Engagement[] = [
     description:
       'On-brand creative intelligence for performance marketing, helping teams find winning angles and ship high-converting creative faster. Advising on AI strategy, go-to-market, and market positioning.',
     link: { url: 'https://tactimetry.com', label: 'tactimetry.com' },
-    logo: logoStealth,
+    logo: logoTactimetry,
   },
 ]
 
