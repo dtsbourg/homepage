@@ -126,13 +126,16 @@ export default function About() {
               </Link>
               , I built infrastructure enabling businesses to prepare for the
               emerging wave of AI agents interacting with their systems. This
-              work highlighted a critical gap: while agents are becoming more
-              capable, their ability to learn and adapt remains fundamentally
-              limited by current training paradigms. I&apos;m now focused on
-              post-training methods and curriculum learning, developing
-              approaches that allow intelligent systems to continuously improve
-              through structured experience, moving beyond static pre-training
-              toward truly adaptive intelligence.
+              work highlighted a critical gap: the tools became far more capable,
+              but the organizations using them did not change shape. Processes,
+              KPIs, reporting structures, and workflows were all built for a world
+              where output is scarce and where humans do all of it. Both
+              assumptions break once the marginal cost of output trends toward zero
+              and agents become collaborators rather than tools. I&apos;m now
+              focused on that shift, on how people and agents work together and how
+              agents increasingly work with each other, and on building the tools
+              that make that collaboration legible and adaptable for the teams
+              living inside it.
             </p>
           </Prose>
         </div>
