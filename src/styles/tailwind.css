@@ -22,3 +22,65 @@
     loading: lazy;
   }
 }
+
+/* Pointer-following border glow for cards (see components/GlowCard.tsx) */
+.glow-card {
+  --gx: 50%;
+  --gy: 0%;
+  position: relative;
+  isolation: isolate;
+}
+
+.glow-card::before,
+.glow-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+/* Specular ring: a bright highlight on the border that follows the pointer */
+.glow-card::before {
+  z-index: 1;
+  padding: 2px;
+  background: radial-gradient(
+    320px circle at var(--gx) var(--gy),
+    rgb(var(--glow) / 1) 0%,
+    rgb(var(--glow) / 1) 15%,
+    rgb(var(--glow) / 0.55) 40%,
+    transparent 68%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* Soft fill: a spotlight inside the card, under the content */
+.glow-card::after {
+  z-index: -1;
+  background: radial-gradient(
+    420px circle at var(--gx) var(--gy),
+    rgb(var(--glow) / 0.18),
+    transparent 62%
+  );
+}
+
+.glow-card:hover::before,
+.glow-card:hover::after {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-card::before,
+  .glow-card::after {
+    transition: none;
+  }
+}

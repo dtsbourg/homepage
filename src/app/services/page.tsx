@@ -1,8 +1,10 @@
 import { type Metadata } from 'next'
 import Image, { type ImageProps } from 'next/image'
+import Link from 'next/link'
 
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
+import { GlowCard } from '@/components/GlowCard'
 import { Section } from '@/components/Section'
 import { MailIcon } from '@/components/SocialIcons'
 
@@ -12,22 +14,7 @@ import logoPace from '@/images/logos/pace.svg'
 import logoComma from '@/images/logos/comma.svg'
 import logoAstra from '@/images/logos/astra.svg'
 import logoTactimetry from '@/images/logos/tactimetry.svg'
-
-function LightBulbIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" {...props}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 0 0 1.5-.189m-1.5.189a6.01 6.01 0 0 1-1.5-.189m3.75 7.478a12.06 12.06 0 0 1-4.5 0m3.75 2.383a14.406 14.406 0 0 1-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 1 0-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
-    </svg>
-  )
-}
-
-function UsersIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" {...props}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
-    </svg>
-  )
-}
+import logoAttune from '@/images/logos/attune.svg'
 
 function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -38,6 +25,34 @@ function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
       />
     </svg>
   )
+}
+
+function ChevronRightIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M6.75 5.75 9.25 8l-2.5 2.25"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
+interface Offering {
+  name: string
+  description: string
+  bullets: string[]
+}
+
+interface Engagement {
+  name: string
+  role: string
+  description: string
+  link?: { url: string; label: string }
+  logo: ImageProps['src']
 }
 
 function CheckIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -54,55 +69,27 @@ function CheckIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
-interface Offering {
-  name: string
-  tagline: string
-  icon: React.ComponentType<React.ComponentPropsWithoutRef<'svg'>>
-  description: string
-  bullets: string[]
-}
-
-interface Engagement {
-  name: string
-  role: string
-  description: string
-  link?: { url: string; label: string }
-  logo: ImageProps['src']
-}
-
 function OfferingCard({ offering }: { offering: Offering }) {
-  let Icon = offering.icon
-
   return (
-    <div className="group relative rounded-2xl border border-zinc-100 p-8 transition-colors hover:border-zinc-200 dark:border-zinc-700/40 dark:hover:border-zinc-600/50">
-      <div className="flex items-center gap-3">
-        <div className="flex h-10 w-10 flex-none items-center justify-center rounded-lg bg-darkLavender/10 dark:bg-lavender/10">
-          <Icon className="h-5 w-5 text-darkLavender dark:text-lavender" />
-        </div>
-        <div>
-          <h3 className="text-lg font-semibold text-zinc-800 dark:text-zinc-100">
-            {offering.name}
-          </h3>
-          <p className="text-sm font-medium text-darkLavender dark:text-lavender">
-            {offering.tagline}
-          </p>
-        </div>
-      </div>
-      <p className="mt-4 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+    <GlowCard className="flex flex-col rounded-2xl border border-zinc-200 bg-gradient-to-b from-white to-zinc-50 p-8 dark:border-zinc-700/60 dark:from-zinc-900/60 dark:to-zinc-900/20">
+      <h2 className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
+        {offering.name}
+      </h2>
+      <p className="mt-4 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
         {offering.description}
       </p>
-      <ul className="mt-6 space-y-3">
+      <ul role="list" className="mt-6 space-y-3">
         {offering.bullets.map((bullet) => (
           <li
             key={bullet}
-            className="flex items-start gap-2.5 text-sm leading-6 text-zinc-600 dark:text-zinc-400"
+            className="flex items-start gap-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400"
           >
             <CheckIcon className="mt-1 h-4 w-4 flex-none text-darkLavender dark:text-lavender" />
             <span>{bullet}</span>
           </li>
         ))}
       </ul>
-    </div>
+    </GlowCard>
   )
 }
 
@@ -167,8 +154,6 @@ function EngagementsSection({
 const offerings: Offering[] = [
   {
     name: 'AI Product Strategy & Engineering',
-    tagline: 'Ship AI-powered products with confidence',
-    icon: LightBulbIcon,
     description:
       'Understand how AI will reshape your product, then build it. From early-stage strategy to production-grade AI engineering.',
     bullets: [
@@ -180,8 +165,6 @@ const offerings: Offering[] = [
   },
   {
     name: 'AI Transformation & Enablement',
-    tagline: 'Prepare your team for the AI era',
-    icon: UsersIcon,
     description:
       'Help your engineering organization understand how AI changes the way they work, and equip them to thrive.',
     bullets: [
@@ -217,6 +200,13 @@ const advisoryEngagements: Engagement[] = [
     link: { url: 'https://tactimetry.com', label: 'tactimetry.com' },
     logo: logoTactimetry,
   },
+  {
+    name: 'Attune',
+    role: 'Advisor',
+    description:
+      'AI companion that helps people feel connected to mind and body, grounded in somatic therapy. Advising on AI strategy and product.',
+    logo: logoAttune,
+  },
 ]
 
 const ventureEngagements: Engagement[] = [
@@ -249,49 +239,63 @@ const ventureEngagements: Engagement[] = [
 export const metadata: Metadata = {
   title: 'Services',
   description:
-    'AI advisory and consulting for companies building with embodied intelligence, spatial AI, and applied machine learning.',
+    'AI strategy, engineering, and team enablement for companies whose processes, KPIs, and workflows were built for a world where output was scarce.',
 }
 
 export default function Services() {
   return (
     <Container className="mt-16 sm:mt-32">
-      <header className="max-w-2xl">
-        <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl dark:text-zinc-100">
-          AI strategy, from research to production.
+      <header className="max-w-4xl">
+        <h1 className="text-4xl font-bold tracking-tight text-zinc-800 [text-wrap:balance] sm:text-5xl dark:text-zinc-100">
+          Output is no longer scarce. Your processes still assume it is.
         </h1>
-        <p className="mt-6 text-base text-zinc-600 dark:text-zinc-400">
-          I help companies turn AI ambition into shipped products. Whether
-          you&apos;re deploying AI systems internally, evaluating vendors and competition,
-          or defining your organization&apos;s AI strategy, I bring
-          deep technical expertise and a founder&apos;s sense of urgency.
+        <p className="mt-6 max-w-2xl text-lg text-zinc-600 dark:text-zinc-400">
+          I help companies ship AI products and rebuild the processes, KPIs, and
+          workflows those products make obsolete.
         </p>
+        <Link
+          href="/en/articles/new-ai-playbook"
+          className="mt-6 inline-flex items-center gap-1.5 rounded-full border border-zinc-200 bg-white/60 px-4 py-1.5 text-sm text-zinc-600 transition-colors hover:border-zinc-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-darkLavender focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50 motion-reduce:transition-none dark:border-zinc-700/60 dark:bg-zinc-900/60 dark:text-zinc-400 dark:hover:border-zinc-600 dark:focus-visible:ring-lavender dark:focus-visible:ring-offset-black"
+        >
+          Read the argument:
+          <span className="font-semibold text-darkLavender dark:text-lavender">
+            The new AI-native playbook
+          </span>
+          <ChevronRightIcon className="h-4 w-4 text-darkLavender dark:text-lavender" />
+        </Link>
       </header>
 
-      <div className="mt-16 grid grid-cols-1 gap-8 sm:mt-20 lg:grid-cols-2">
-        {offerings.map((offering) => (
-          <OfferingCard key={offering.name} offering={offering} />
-        ))}
-      </div>
+      <section aria-label="Ways to work together" className="mt-12">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+          {offerings.map((offering) => (
+            <OfferingCard key={offering.name} offering={offering} />
+          ))}
+        </div>
+      </section>
 
-      <div className="mt-12 flex flex-col items-start justify-between gap-8 rounded-2xl bg-zinc-800 p-8 dark:bg-zinc-800/50 dark:ring-1 dark:ring-zinc-700/40 sm:flex-row sm:items-center sm:p-10">
-        <div>
-          <h3 className="text-lg font-semibold text-zinc-100">
-            Every company has a unique situation.
-          </h3>
-          <p className="mt-1 text-sm text-zinc-400">
-            Whether you need a one-off architecture review or an ongoing
-            advisory engagement, I&apos;d love to hear what you&apos;re
-            building.
+      <div className="mt-16 flex flex-col items-start justify-between gap-8 rounded-2xl bg-zinc-800 p-8 sm:flex-row sm:items-center sm:p-10 dark:bg-zinc-800 dark:ring-1 dark:ring-zinc-700">
+        <div className="max-w-xl">
+          <h2 className="text-xl font-semibold tracking-tight text-zinc-100">
+            Tell me what you&apos;re building.
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-zinc-400">
+            The first reply is a straight read on scope, fit, and whether
+            I&apos;m the right person for it. If I&apos;m not, I&apos;ll say so
+            and point you somewhere better.
           </p>
         </div>
-        <a
-          href="mailto:contact@dtsbourg.me"
-          className="group relative inline-flex flex-none items-center gap-2 overflow-hidden rounded-lg bg-darkLavender px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-darkLavender/25 transition-all duration-300 hover:shadow-xl hover:shadow-darkLavender/30 dark:bg-lavender dark:text-zinc-900 dark:shadow-lavender/20 dark:hover:shadow-lavender/30"
-        >
-          <span className="absolute inset-0 bg-white/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-          <span className="relative">Get in touch</span>
-          <MailIcon className="relative h-4 w-4 fill-white transition-transform duration-300 group-hover:translate-x-0.5 dark:fill-zinc-900" />
-        </a>
+        <div className="flex flex-none flex-col items-start gap-3 sm:items-end">
+          <a
+            href={`mailto:contact@dtsbourg.me?subject=${encodeURIComponent('Working together')}`}
+            className="inline-flex items-center gap-2 rounded-lg bg-darkLavender px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-darkLavender/25 transition-shadow hover:shadow-xl hover:shadow-darkLavender/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-800 motion-reduce:transition-none dark:bg-lavender dark:text-zinc-900 dark:shadow-lavender/20 dark:hover:shadow-lavender/35"
+          >
+            Get in touch
+            <MailIcon className="h-4 w-4 fill-current" />
+          </a>
+          <span className="select-all text-sm text-zinc-400">
+            contact@dtsbourg.me
+          </span>
+        </div>
       </div>
 
       <div className="mt-24 sm:mt-32">
@@ -302,16 +306,19 @@ export default function Services() {
           Companies and funds I&apos;m currently working with.
         </p>
         <div className="mt-12 space-y-24">
-        <EngagementsSection title="Advisory">
-          {advisoryEngagements.map((engagement, index) => (
-            <EngagementCard key={`${engagement.name}-${index}`} engagement={engagement} />
-          ))}
-        </EngagementsSection>
-        <EngagementsSection title="Venture">
-          {ventureEngagements.map((engagement) => (
-            <EngagementCard key={engagement.name} engagement={engagement} />
-          ))}
-        </EngagementsSection>
+          <EngagementsSection title="Advisory">
+            {advisoryEngagements.map((engagement, index) => (
+              <EngagementCard
+                key={`${engagement.name}-${index}`}
+                engagement={engagement}
+              />
+            ))}
+          </EngagementsSection>
+          <EngagementsSection title="Venture">
+            {ventureEngagements.map((engagement) => (
+              <EngagementCard key={engagement.name} engagement={engagement} />
+            ))}
+          </EngagementsSection>
         </div>
       </div>
     </Container>
