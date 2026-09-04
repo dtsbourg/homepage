@@ -17,7 +17,6 @@ const nextConfig = {
   compress: true,
   poweredByHeader: false,
   experimental: {
-    optimizeCss: true,
     optimizePackageImports: ['@headlessui/react', 'clsx'],
   },
   compiler: {
