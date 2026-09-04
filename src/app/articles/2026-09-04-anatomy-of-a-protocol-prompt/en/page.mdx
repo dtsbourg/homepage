@@ -1,0 +1,349 @@
+import { ArticleLayout } from '@/components/ArticleLayout'
+import TableOfContents from '@/components/mdx/TableOfContents'
+import ProtocolPromptAnatomy from '@/components/mdx/ProtocolPromptAnatomy'
+
+export const article = {
+  author: 'Dylan Bourgeois',
+  date: '2026-09-04',
+  title: 'Agent design starts with the objective: lessons from a 16,000-word protocol prompt',
+  description: [
+    "Anthropic's protein-design system runs on a 16,000-word prompt, and only a third of it is about proteins.",
+    'The rest governs delegation, verification, compute and reporting. That split changes how I think about agent design.',
+  ].join(' '),
+  slug: 'anatomy-of-a-protocol-prompt',
+  lang: 'en',
+}
+
+export const metadata = {
+  title: article.title,
+  description: article.description,
+}
+
+export default (props) => <ArticleLayout article={article} {...props} />
+
+Anthropic's protein-design system runs on a 16,000-word prompt, and only a third of it is about
+proteins. The other two-thirds explain how to leave an agent fleet alone for 48 hours without losing
+control of the work.
+
+The prompt was loaded into every agent in the fleet and frozen before each campaign. The system
+produced _de novo_ protein binders at a 26.8% hit rate against a 10 to 15% industry norm. It beat
+human competition fields on four of six head-to-head targets, in autonomous runs lasting 24 to 48
+hours.
+
+The paper presents a protein-design system. By word count, the prompt is mostly an operating manual.
+Protein knowledge takes up 33.7%. Delegation, verification, compute, provenance, deliverables and
+the model's tendency to stop early get the rest.
+
+One result in the report changed how I read the whole thing:
+
+> Claude's ranking therefore performed about as well as the co-folding score on which it was largely
+> based, but not better.
+
+Claude's ranking added nothing to the score it was reading. The gains came from searching harder,
+calibrating that score before trusting it, and keeping the campaign inside a strict operating
+protocol. That leaves two-thirds of the prompt with immediate uses outside protein design.
+
+<TableOfContents
+  items={[
+    {
+      title: '01. Only a third of a science prompt is science',
+      anchor: '01-only-a-third-of-a-science-prompt-is-science',
+    },
+    {
+      title: '02. Freedom, gate, ledger',
+      anchor: '02-freedom-gate-ledger',
+    },
+    {
+      title: '03. Seven rules I would copy',
+      anchor: '03-seven-rules-i-would-copy',
+    },
+    {
+      title: '04. The prompt is the orchestration layer',
+      anchor: '04-the-prompt-is-the-orchestration-layer',
+    },
+    {
+      title: '05. Prompt design returns to objective design',
+      anchor: '05-prompt-design-returns-to-objective-design',
+    },
+    {
+      title: '06. Where the protocol transfers',
+      anchor: '06-where-the-protocol-transfers',
+    },
+    {
+      title: 'Build the instrument first',
+      anchor: 'build-the-instrument-first',
+    },
+  ]}
+/>
+
+## 01. Only a third of a science prompt is science
+
+A quick note on the numbers. The paper publishes a composition figure for its multi-target prompt. I
+independently segmented the released single-target prompt (15-PGDH, 16,040 words, 264 lines) by its
+own label structure. The result reproduces the paper's three-way split to within half a percentage
+point.
+
+It splits into three regions of almost exactly equal size. The working knowledge of the domain,
+meaning the task, the tools, the scoring instrument and its filters, comes to 33.7%. Delegation,
+checking and pacing against the clock take 34.9%. The remaining 31.4% is money, compute governance,
+deliverables and reporting.
+
+<ProtocolPromptAnatomy />
+
+The three largest blocks are compute, verification and deliverables. Together they take 42.6% of the
+document. The scoring instrument that ranks every candidate gets 5.8%.
+
+Protein design fills one third of the prompt. Operating the campaign fills two.
+
+## 02. Freedom, gate, ledger
+
+Almost every block follows the same structure: freedom, gate, ledger. The freedom is a decision the
+agent genuinely owns. The gate is a mechanical precondition it cannot talk past. The ledger leaves
+an append-only record for whoever audits the campaign later.
+
+Seven blocks publish the triad explicitly:
+
+| Block            | Freedom                                   | Gate                                                                   | Ledger                                                           |
+| ---------------- | ----------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| **Calibration**  | choose the control panel members          | known binder must separate from constructed negatives, same instrument | calibration runs report raw scores only                          |
+| **Verification** | which tools to try, in what mix           | no PASS row means the method must not dispatch                         | model-roster ledger, one row per validated model                 |
+| **Compute**      | how to allocate across methods            | `submit_gate()` refuses when `ceiling == 0`                            | `/ledger/job_metadata/{frame_id}.jsonl`, one append per dispatch |
+| **Delegation**   | design your own agent architecture        | orchestrator-frame tokens above ⅓ of campaign total is a failure       | post the delegation architecture within the first hour           |
+| **Creativity**   | which target, which method, when to pivot | each retry must differ in a way you can _name_                         | living ideas document, ranked by expected value                  |
+| **Behavior**     | what to claim in any report               | every identifier must be the literal output of a fetch this session    | the fetched artifact itself                                      |
+| **Provenance**   | how to generate designs                   | the sheet writer recomputes every gate at write time; a mismatch halts | frozen `method_vocab.json` enum, no free text                    |
+
+The same split appears at every level of the system:
+
+```
+campaign       open hypothesis space  /  sealed evaluation space
+orchestration  open topology          /  sealed budget + verification
+sub-agent      open method            /  sealed reporting schema + vocabulary
+single claim   open phrasing          /  sealed to a fetched artifact
+```
+
+At each level, the agent gets a narrow kind of discretion inside a much tighter audit envelope.
+
+## 03. Seven rules I would copy
+
+A caveat before assigning credit: the paper publishes no ablation. We do not know which blocks
+caused the result, or whether some could disappear with no effect. What follows is a structural
+reading of an artifact that worked.
+
+### 1. Make the gate mechanical
+
+Production scoring stays blocked until a file exists with `status: PASS`. The prompt closes the
+obvious loophole in one line: "a verbal claim, Slack post, or in-memory variable does not satisfy
+the gate." A model cannot negotiate with a file check. Put the epistemic rules in the plumbing.
+
+### 2. Calibrate before ranking
+
+The ceiling band comes from a known-good complex. The floor comes from constructed negatives, such
+as a shuffled sequence or a mismatched pair. The instrument must separate the two before it can rank
+unknown candidates.
+
+This calibration needs no labelled corpus. Perturbing a known positive manufactures a negative for
+free.
+
+### 3. Exclude circular controls
+
+Published _de novo_ binders are barred from the separation check because co-folding metrics likely
+helped select them in the first place. They would let the metric validate its own output.
+
+The software version is familiar: AI-written tests pass AI-written code because both share the same
+misunderstanding. The suite is green. The bug survives.
+
+### 4. Pick one decision metric
+
+Candidates rank on `ipSAE_min`. The system records `ipTM` and `LIS` as shadow metrics with no vote
+in the decision. You can observe several signals, but only one gets to move the queue. That removes
+a large surface for metric shopping after the fact.
+
+### 5. Write down the cheats
+
+A structure generator conditioned on a homo-oligomer will happily rediscover the neighbouring
+protomer. It may score as a superb binder while being useless for the task. The prompt spends 520
+words forbidding this family of solutions.
+
+Domain expertise produces a concrete artifact here: the list of shortcuts the search procedure is
+likely to find, written down before the campaign starts.
+
+### 6. Allocate compute by evidence
+
+The allocation policy is a bandit written in prose. Strong methods receive more compute. A target
+stays live while untried methods remain. Failing methods lose their budget quickly.
+
+One sentence prevents the system from burning compute on cosmetic retries: "Each retry on a failed
+approach must differ from the prior attempt in a way you can name and log." Repetition now has to
+justify itself in writing.
+
+### 7. Fight the instinct to wrap up
+
+The prompt uses several mechanisms against the model's tendency to declare itself done. "There is no
+reward for finishing early and it's better to be a little late than very early." Any interval where
+the orchestrator is neither executing a tool call nor parked on an event-driven wait counts as
+dormancy. Dormancy is a defect.
+
+It also tells the model: "You are not natively capable of telling the time (humans aren't either!)."
+A context window does not provide a reliable sense of elapsed time. The system has to measure it.
+
+## 04. The prompt is the orchestration layer
+
+Most multi-agent systems start with a code framework: a DAG, a graph library, a workflow script. The
+author fixes the topology and control flow in advance.
+
+In Anthropic's prompt, the topology is an output:
+
+> Within the first hour, post your **delegation architecture**: how many sub-agents, what each owns
+> end-to-end, and what you as orchestrator retain.
+
+The orchestrator draws that graph at runtime from the shape of the problem, then revises it as
+evidence arrives. The prompt fixes a handful of operating rules. Each agent owns one method because
+serial work inside a single frame is invisible and hard to attribute. An orchestrator that consumes
+more than one third of all campaign tokens counts as an architecture failure. If a sub-agent cannot
+delegate, it reports the rejection so its parent can dispatch the work. Watchdog and budget agents
+remain alive in `while` loops instead of returning between checks.
+
+The topology can change. The invariants cannot.
+
+The operational primitives are cheap files, so this pattern does not require a GPU fleet:
+
+| Machinery in the prompt                          | Zero-infra equivalent                          |
+| ------------------------------------------------ | ---------------------------------------------- |
+| GPU dollar governor and pace bands               | a budget object and a spend check              |
+| `/state/gates/{target}.json` and `submit_gate()` | a gate file the fan-out refuses to run without |
+| job ledger JSONL                                 | one append per dispatched agent                |
+| `method_vocab.json` frozen enums                 | an enum in the sub-agent's output schema       |
+| canary before fan-out above 10                   | run one, validate the shape, then run the rest |
+| heartbeat, watchdog, dead-man switch             | a liveness file and a staleness check          |
+
+The governor is a concurrency-control primitive written in English: "a SINGLE campaign-wide integer
+with exactly four authorized writers." Its pacing rule is a proportional controller in two
+sentences. Compare `pct_spent` with `pct_elapsed`. Throttle at 15 points ahead of the clock; scale
+up at 20 points behind. The entire budget policy is an error term and two thresholds.
+
+An executor that can read allows prose to carry more of the orchestration policy. The split is
+clean: readable policy for decisions and code for hard refusals.
+
+## 05. Prompt design returns to objective design
+
+The following claim is mine; the report makes no argument about the history of prompting.
+
+A rough arc of how we have told models what we want:
+
+| Era                         | Mechanism                                   | What the human supplied                    |
+| --------------------------- | ------------------------------------------- | ------------------------------------------ |
+| few-shot                    | in-context exemplars                        | _examples of good output_                  |
+| instruction tuning and RLHF | preference labels                           | _comparisons between outputs_              |
+| RLVR                        | verifiable reward at train time             | _a checker_                                |
+| **protocol prompts**        | objective, gates and budget at **run** time | _a scoring instrument and its calibration_ |
+
+The protein prompt contains no exemplar binders and never shows the model a good design. It supplies
+a ranking function, a calibration gate, negative controls, a budget, a pace band, a stopping rule
+and a list of degenerate solutions that remain forbidden even when they score well.
+
+Read literally, it resembles a loss function with constraints and an optimiser schedule. The system
+evaluates that objective at inference time, in English.
+
+The history in the table is necessarily simplified. RLVR already supplied objectives through
+checkers. Protocol prompts move objective design from train time to run time, and turn the compiled
+checker into something the agent can read. The objective is prose. The optimiser is an agent.
+
+### Runtime objectives include operations
+
+Classic loss functions optimise task error. This prompt also optimises cost, wall-clock, diversity,
+provenance and honesty. Nearly a third of the document governs money and time. That makes sense when
+the campaign objective is `quality subject to $50k and 48 hours`. The constraint deserves as much
+engineering as the quality term.
+
+### The old failure modes return
+
+Objective design brings Goodharting, proxy gaming, mode collapse and overfitting to the metric. The
+prompt answers with an anti-circularity clause, redundancy clustering at 90% identity, a ban on
+degenerate solutions and strict separation between decision and shadow metrics.
+
+The authors iterated the prompt over test campaigns and then froze it. Read as a reward system, the
+document becomes a record of the loopholes found during those pilots.
+
+The ranking result keeps the claim bounded. Claude's judgement did not improve the output of the
+co-folding score. Careful objective design worked because the objective carried the campaign.
+
+## 06. Where the protocol transfers
+
+The protocol fits tasks with a large candidate set, a cheap check for each candidate and a fixed
+budget. Plenty of engineering work has this shape.
+
+The limiting factor is gradient quality: how faithfully the cheap check points toward a good final
+result.
+
+| Task                                    | Candidates        | Cheap check                    | Gradient                     |
+| --------------------------------------- | ----------------- | ------------------------------ | ---------------------------- |
+| **Migration** (framework, API, codemod) | files, modules    | compiles and tests green       | **strong**                   |
+| **Perf tuning**                         | patches           | benchmark delta                | **strong**                   |
+| **Audit** (security, deps, a11y)        | findings          | reproducer runs                | medium                       |
+| **Code review**                         | findings per file | seeded-bug recall              | medium, must be manufactured |
+| **Deep research**                       | claims            | citation resolves and supports | weak                         |
+| **Product and UX design**               | designs           | none                           | **none**                     |
+
+### Strong gradient: reuse the protocol
+
+A large migration can run as a campaign. Start with one file and validate the shape of the change.
+Freeze the transformation vocabulary. Require a green test run in each file's transcript. Record
+every dispatch, send more agents toward the strategies with a high hit rate, and kill the ones that
+stall. Completion means a green run with output you can inspect.
+
+### Weak gradient: manufacture one
+
+For code review, seed known bugs and measure recall before trusting the reviewer on clean files. For
+deep research, assign each claim to an adversarial verifier because "sounds right" provides no
+useful signal. When a model judges the work, calibrate it on cases with known answers and disqualify
+it if it fails. This is the constructed-negative technique applied outside protein design.
+
+### No gradient: keep a human in the loop
+
+The independent evaluation of Sakana's AI Scientist shows what happens without a trustworthy oracle.
+The system classified several established ideas as novel, including micro-batching for stochastic
+gradient descent. Five of twelve proposed experiments failed on coding errors. Some experiments that
+did run produced misleading conclusions. One reported an accuracy improvement for an energy
+efficiency experiment while consuming more compute.
+
+Product and UX design often live in this column. A calibrated human panel provides the evaluation
+signal there.
+
+The campaign also uses a two-tier architecture worth copying. A cheap, noisy filter ranks thousands
+of candidates. An expensive wet-lab test adjudicates the top thirty. The budget determines how much
+work happens at each tier.
+
+The in-silico score was imperfect. It gave little warning before the three failed targets, whose
+median scores of 0.68 to 0.70 barely trailed the successes at 0.72. The full system still worked
+because the wet lab made the final call. Keep both tiers explicit. A tier-one score should never be
+reported as a tier-two finding.
+
+## Build the instrument first
+
+An agent can run for 48 hours without becoming more intelligent along the way. What changes is the
+system around it: the ruler, the budget, the ledger, the clock and the definition of done.
+
+That is where Anthropic spent two-thirds of this prompt. The agents were free to choose methods and
+rearrange the work, but the campaign kept hard boundaries around spending, evidence and reporting.
+The score itself had to pass a test before any agent could trust it.
+
+This brings prompt design back to a familiar machine-learning problem. Write an objective. Predict
+how the optimiser will game it. Add the constraint before it finds the hole.
+
+For anyone building agent systems, start with the instrument. Build something that can tell good
+work from bad work, then prove that it can on cases where you already know the answer. Only then is
+there much value in scaling the search.
+
+---
+
+### Sources
+
+- **Prompt.** `Anthropic/claude-protein-binder-design`, single-target 15-PGDH, 16,040 words. The
+  word counts throughout are my own, by label segmentation.
+- **Report.** Shanehsazzadeh, _Autonomous de novo protein binder design with Claude_ (2026-08-18).
+  16 targets, 1,320 measured designs, 26.8% hit rate, 194 binders under 100 nM. The report publishes
+  no ablation, no matched human-expert arm and no cross-domain generalisation claim.
+- **Contrast case.**
+  [Evaluating Sakana's AI Scientist for Autonomous Research](https://arxiv.org/abs/2502.14297),
+  arXiv 2502.14297.
