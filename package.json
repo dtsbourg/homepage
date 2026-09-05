@@ -39,6 +39,7 @@
     "remark-gfm": "^4.0.0",
     "remark-math": "^6.0.0",
     "tailwindcss": "^3.4.1",
+    "thinking-orbs": "^0.3.1",
     "typescript": "^5.3.3"
   },
   "devDependencies": {

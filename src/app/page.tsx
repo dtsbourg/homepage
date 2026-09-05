@@ -17,7 +17,7 @@ import logoEPFL from '@/images/logos/epfl.svg'
 import logoClaryo from '@/images/logos/claryo.svg'
 import logoRobust from '@/images/logos/robust.png'
 import logoStanford from '@/images/logos/stanford.svg'
-import illustrationImage from '@/images/bg-new.svg'
+import { Illustration } from '@/components/Illustration'
 import logoOgment from '@/images/logos/ogment.png'
 import logoStealth from '@/images/logos/ghost.svg'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
@@ -200,23 +200,6 @@ function Resume() {
         See my CV
         <DownloadIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
       </Button>
-    </div>
-  )
-}
-
-function Illustration() {
-  return (
-    <div className="relative">
-      <Image
-        src={illustrationImage}
-        alt="Dylan Bourgeois working at his desk."
-        width={1200}
-        height={800}
-        className="rounded-2xl"
-        priority={true}
-        unoptimized={true}
-        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-      />
     </div>
   )
 }
