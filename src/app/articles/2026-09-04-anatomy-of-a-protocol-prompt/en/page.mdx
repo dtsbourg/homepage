@@ -8,7 +8,7 @@ export const article = {
   title: 'Agent design starts with the objective: lessons from a 16,000-word protocol prompt',
   description: [
     "Anthropic's protein-design system runs on a 16,000-word prompt, and only a third of it is about proteins.",
-    'The rest governs delegation, verification, compute and reporting. That split changes how I think about agent design.',
+    "OpenAI's proposed Navier-Stokes proof now shows a similar process, alongside harder questions about validation and provenance.",
   ].join(' '),
   slug: 'anatomy-of-a-protocol-prompt',
   lang: 'en',
@@ -43,6 +43,12 @@ Claude's ranking added nothing to the score it was reading. The gains came from 
 calibrating that score before trusting it, and keeping the campaign inside a strict operating
 protocol. That leaves two-thirds of the prompt with immediate uses outside protein design.
 
+Four days after I finished this analysis, OpenAI published a much larger example. Its
+[Navier-Stokes campaign](https://openai.com/index/navier-stokes-solution/) involved roughly 10,000
+concurrent agents, 2.7 million messages and 130 billion output tokens over 88 hours. The domain and
+scale are completely different, but both teams faced the same operating problem: coordinate a large
+search without losing the evidence along the way. I return to that campaign in the final section.
+
 <TableOfContents
   items={[
     {
@@ -68,6 +74,10 @@ protocol. That leaves two-thirds of the prompt with immediate uses outside prote
     {
       title: '06. Where the protocol transfers',
       anchor: '06-where-the-protocol-transfers',
+    },
+    {
+      title: '07. The Navier-Stokes case',
+      anchor: '07-the-navier-stokes-case',
     },
     {
       title: 'Build the instrument first',
@@ -319,14 +329,76 @@ median scores of 0.68 to 0.70 barely trailed the successes at 0.72. The full sys
 because the wet lab made the final call. Keep both tiers explicit. A tier-one score should never be
 reported as a tier-two finding.
 
+## 07. The Navier-Stokes case
+
+On September 8, OpenAI published a proposed resolution of the Navier-Stokes Millennium Prize
+Problem, with an analytical proof and a Lean formalisation of a finite-time singularity. Both are
+now public and will need outside scrutiny. OpenAI's account of how the agents found the proof reads
+like a larger, less tidy version of the protocol in this article.
+
+OpenAI started groups on every variant of the Millennium Prize problem, with separate groups
+searching for a proof and a disproof. It also assigned agents to easier neighbouring problems. About
+100 agents spent roughly 50 hours on one of those and found a result for the Euler equations. That
+result changed the allocation. OpenAI shifted agents away from the other Millennium Problems, gave
+them the Euler solution as context and concentrated the campaign on Navier-Stokes.
+
+The groups explored different approaches in parallel. Codex periodically consolidated useful
+intermediate results and fed them back into subsequent prompts. The group that found the
+Navier-Stokes construction followed one of those cross-pollinated lines. After 88 hours of search,
+GPT-6 Astra spent another 17 hours on the Lean formalisation.
+
+The system seeded diversity at the start, ran easier probes alongside the main problem, moved
+compute when evidence appeared and carried discoveries across groups. The final claim then went
+through a verifier that could refuse it mechanically. At 10,000 agents, these choices stop being
+workflow preferences. Without them, 130 billion output tokens become a very expensive pile of local
+conversations.
+
+The comparison also puts a limit on my argument. Anthropic froze its prompt before the protein
+campaigns, and Claude's judgement did not improve on the co-folding score. OpenAI describes a
+different setup. It credits a step change in model capability, upgraded the agents to a
+further-trained model during the campaign and made several human allocation decisions along the way.
+This is no clean test of protocol design in isolation.
+
+There is a second uncertainty around where the discovery begins. In a
+[statement published the same day](https://cims.nyu.edu/%7Etristanb/statement.pdf), NYU
+mathematician Tristan Buckmaster writes that the route through smooth forced blowups follows a
+research program opened by Diego Córdoba and Luis Martínez-Zoroa. Buckmaster and Levent Alpöge had
+spent the past year extending that program with help from Claude and Codex. He says information
+about their progress reached OpenAI before its Navier-Stokes campaign began. Their Codex sessions
+contained drafts of the project, so he asked whether the internal model had accessed those sessions
+or trained on them. He was told that the model did not look up user data; he says his question about
+training went unanswered.
+
+Buckmaster is explicit about the limits of that account. He had not seen OpenAI's proof, did not
+know whether their data was used and stopped short of accusing OpenAI of using it. OpenAI says that
+neither its researchers nor its agents saw Buckmaster and Alpöge's work before publication, and that
+no specific user data was accessed. It also says it cannot rule out de-identified product data
+having contributed to model training.
+
+These are different questions. A proof can survive independent verification while the history of the
+discovery remains contested. "Autonomous" compresses a long chain of human inputs: the researchers
+who opened the mathematical route, the progress that shaped which problem was tried, the operators
+who redirected the agents and the data that shaped the model. The proof and its provenance both need
+scrutiny.
+
+The comparison separates two levers. Model capability determines which ideas the search can reach.
+The protocol determines whether a large campaign can recognise progress, share it, spend behind it
+and verify the result. Ten thousand copies of a weak model remain weak. Ten thousand poorly
+coordinated copies of a strong one produce noise at an extraordinary scale.
+
 ## Build the instrument first
 
-An agent can run for 48 hours without becoming more intelligent along the way. What changes is the
-system around it: the ruler, the budget, the ledger, the clock and the definition of done.
+An agent can run for 48 or 88 hours without becoming more intelligent along the way. What changes is
+the system around it: the ruler, the budget, the ledger, the clock and the definition of done. In
+OpenAI's case, the model changed too. The distinction matters.
 
 That is where Anthropic spent two-thirds of this prompt. The agents were free to choose methods and
 rearrange the work, but the campaign kept hard boundaries around spending, evidence and reporting.
 The score itself had to pass a test before any agent could trust it.
+
+OpenAI's account shows why that share grows with scale: coordination failures compound as quickly as
+good ideas do. A stronger model expands the reachable space. Agent design decides how the campaign
+explores it and which results deserve to survive.
 
 This brings prompt design back to a familiar machine-learning problem. Write an objective. Predict
 how the optimiser will game it. Add the constraint before it finds the hole.
@@ -347,3 +419,10 @@ there much value in scaling the search.
 - **Contrast case.**
   [Evaluating Sakana's AI Scientist for Autonomous Research](https://arxiv.org/abs/2502.14297),
   arXiv 2502.14297.
+- **Navier-Stokes campaign.** OpenAI,
+  [On the Navier-Stokes Millennium Prize Problem](https://openai.com/index/navier-stokes-solution/)
+  (2026-09-08), with the accompanying
+  [Lean formalisation](https://github.com/openai/NavierStokesAndEuler).
+- **Discovery lineage.** Tristan Buckmaster,
+  [Statement on the Euler and Navier-Stokes work](https://cims.nyu.edu/%7Etristanb/statement.pdf)
+  (2026-09-08).
