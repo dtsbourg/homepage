@@ -4,9 +4,8 @@ import Link from 'next/link'
 
 import { Card } from '@/components/Card'
 import { Container } from '@/components/Container'
-import { GlowCard } from '@/components/GlowCard'
+import { ServiceList, type Service } from '@/components/ServiceList'
 import { Section } from '@/components/Section'
-import { MailIcon } from '@/components/SocialIcons'
 
 import logoAzard from '@/images/logos/azard.svg'
 import logoStealth from '@/images/logos/ghost.svg'
@@ -27,6 +26,20 @@ function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
+function ArrowUpRightIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
+      <path
+        d="M4.5 11.5L11.5 4.5M11.5 4.5H6M11.5 4.5V10"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
+
 function ChevronRightIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
     <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
@@ -41,56 +54,12 @@ function ChevronRightIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   )
 }
 
-interface Offering {
-  name: string
-  description: string
-  bullets: string[]
-}
-
 interface Engagement {
   name: string
   role: string
   description: string
   link?: { url: string; label: string }
   logo: ImageProps['src']
-}
-
-function CheckIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
-  return (
-    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M3.5 8.5L6.5 11.5L12.5 4.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  )
-}
-
-function OfferingCard({ offering }: { offering: Offering }) {
-  return (
-    <GlowCard className="flex flex-col rounded-2xl border border-zinc-200 bg-gradient-to-b from-white to-zinc-50 p-8 dark:border-zinc-700/60 dark:from-zinc-900/60 dark:to-zinc-900/20">
-      <h2 className="text-lg font-semibold tracking-tight text-zinc-800 dark:text-zinc-100">
-        {offering.name}
-      </h2>
-      <p className="mt-4 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-        {offering.description}
-      </p>
-      <ul role="list" className="mt-6 space-y-3">
-        {offering.bullets.map((bullet) => (
-          <li
-            key={bullet}
-            className="flex items-start gap-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400"
-          >
-            <CheckIcon className="mt-1 h-4 w-4 flex-none text-darkLavender dark:text-lavender" />
-            <span>{bullet}</span>
-          </li>
-        ))}
-      </ul>
-    </GlowCard>
-  )
 }
 
 function EngagementCard({ engagement }: { engagement: Engagement }) {
@@ -151,28 +120,36 @@ function EngagementsSection({
   )
 }
 
-const offerings: Offering[] = [
+const services: Service[] = [
   {
-    name: 'AI Product Strategy & Engineering',
+    name: 'AI Strategy',
     description:
-      'Understand how AI will reshape your product, then build it. From early-stage strategy to production-grade AI engineering.',
-    bullets: [
-      'Assess how AI changes your product landscape and competitive position',
-      'Define an AI roadmap tied to real business outcomes',
-      'End-to-end AI engineering: architecture, design, evaluation, and deployment',
-      'Deep expertise across agentic systems, RAG, model selection, embodied AI, and spatial intelligence',
-    ],
+      'Assess how AI changes your product landscape and competitive position, then define a roadmap tied to real business outcomes rather than demos.',
   },
   {
-    name: 'AI Transformation & Enablement',
+    name: 'AI Engineering',
     description:
-      'Help your engineering organization understand how AI changes the way they work, and equip them to thrive.',
-    bullets: [
-      'Talks and workshops on AI for engineering teams and leadership',
-      'Developer re-training: integrating AI tools into daily workflows',
-      'Process and architecture audits to identify automation opportunities',
-      'Build internal AI competency so your team owns it long-term',
-    ],
+      'End-to-end delivery: architecture, design, evaluation, and deployment of production-grade AI systems, from first prototype to something your team can run.',
+  },
+  {
+    name: 'Agentic Systems',
+    description:
+      'Deep expertise in agentic architectures across industries, from robotics to AI-native services. The systems where people and agents work side by side.',
+  },
+  {
+    name: 'Process Redesign',
+    description:
+      'Audits of your processes and architecture to find what AI makes obsolete, what it makes possible, and which KPIs no longer measure anything.',
+  },
+  {
+    name: 'Team Enablement',
+    description:
+      'Developer re-training that puts AI tools into daily workflows, and the in-house competency to own it long term.',
+  },
+  {
+    name: 'Talks & Workshops',
+    description:
+      'Sessions for engineering teams and leadership on how AI changes the way software gets built, and where to start.',
   },
 ]
 
@@ -265,36 +242,31 @@ export default function Services() {
         </Link>
       </header>
 
-      <section aria-label="Ways to work together" className="mt-12">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-          {offerings.map((offering) => (
-            <OfferingCard key={offering.name} offering={offering} />
-          ))}
-        </div>
+      <section aria-label="Ways to work together" className="mt-20">
+        <ServiceList services={services} />
       </section>
 
-      <div className="mt-16 flex flex-col items-start justify-between gap-8 rounded-2xl bg-zinc-800 p-8 sm:flex-row sm:items-center sm:p-10 dark:bg-zinc-800 dark:ring-1 dark:ring-zinc-700">
-        <div className="max-w-xl">
-          <h2 className="text-xl font-semibold tracking-tight text-zinc-100">
-            Tell me what you&apos;re building.
-          </h2>
-          <p className="mt-2 text-sm leading-6 text-zinc-400">
-            The first reply is a straight read on scope, fit, and whether
-            I&apos;m the right person for it. If I&apos;m not, I&apos;ll say so
-            and point you somewhere better.
-          </p>
-        </div>
-        <div className="flex flex-none flex-col items-start gap-3 sm:items-end">
-          <a
-            href={`mailto:contact@dtsbourg.me?subject=${encodeURIComponent('Working together')}`}
-            className="inline-flex items-center gap-2 rounded-lg bg-darkLavender px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-darkLavender/25 transition-shadow hover:shadow-xl hover:shadow-darkLavender/35 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-800 motion-reduce:transition-none dark:bg-lavender dark:text-zinc-900 dark:shadow-lavender/20 dark:hover:shadow-lavender/35"
-          >
-            Get in touch
-            <MailIcon className="h-4 w-4 fill-current" />
-          </a>
-          <span className="select-all text-sm text-zinc-400">
-            contact@dtsbourg.me
-          </span>
+      <div className="mt-20 border-t border-zinc-200 pt-10 dark:border-zinc-700/60">
+        <div className="flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-xl">
+            <h2 className="text-2xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100">
+              Tell me what you&apos;re building.
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+              The ground is moving fast and the interesting problems are only
+              getting more interesting. I&apos;m always up for talking them
+              through.
+            </p>
+          </div>
+          <div className="flex-none">
+            <a
+              href={`mailto:contact@dtsbourg.me?subject=${encodeURIComponent('Working together')}`}
+              className="group inline-flex items-center gap-2 rounded-full bg-zinc-900 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-darkLavender focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-darkLavender focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-50 motion-reduce:transition-none dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-lavender dark:focus-visible:ring-lavender dark:focus-visible:ring-offset-black"
+            >
+              Start a conversation
+              <ArrowUpRightIcon className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 motion-reduce:transition-none" />
+            </a>
+          </div>
         </div>
       </div>
 
