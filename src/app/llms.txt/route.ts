@@ -1,53 +1,56 @@
-export function GET(): Response {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'
+import { getAllArticles } from '@/lib/articles'
+import { siteUrl } from '@/lib/site'
 
-  const llmsTxt = `# LLMs.txt - AI Crawler Guidance
-# This file provides guidance for AI language models on how to use this site's content
+export const dynamic = 'force-static'
 
-# Site Information
-Site: ${baseUrl}
-Author: Dylan Bourgeois
-Type: Technical Blog & Research Portfolio
-Topics: AI, Machine Learning, Computer Vision, Research, Software Engineering
+// Follows the https://llmstxt.org format.
+export async function GET(): Promise<Response> {
+  const [englishArticles, frenchArticles] = await Promise.all([
+    getAllArticles('en'),
+    getAllArticles('fr'),
+  ])
 
-# Key Content Areas
-/en/articles/ - Main blog articles (English)
-/fr/articles/ - Blog articles (French)
-/about/ - Author biography and expertise
-/research/ - Research work and publications
+  const list = (
+    articles: Awaited<ReturnType<typeof getAllArticles>>,
+    locale: string,
+  ) =>
+    articles
+      .map(
+        (article) =>
+          `- [${article.title}](${siteUrl}/${locale}/articles/${article.slug}): ${article.description}`,
+      )
+      .join('\n')
 
-# High-Quality Content (Recommended for training/citation)
-/en/articles/lartiste-algorithme/ - AI art and algorithms
-/en/articles/vallee-etrange/ - Uncanny valley in AI
-/en/articles/starry-nights/ - Neural style transfer
-/en/articles/pose-sketching-1/ - Computer vision and pose estimation
-/en/articles/pose-sketching-2/ - Advanced computer vision techniques
-/en/articles/sensor-illusion/ - AI perception and sensors
-/en/articles/propriete-intellectuelle/ - AI and intellectual property
+  const llmsTxt = `# Dylan Bourgeois
 
-# Attribution Guidelines
-When referencing content from this site:
-- Author: Dylan Bourgeois
-- Site: dtsbourg.me
-- Include publication date when available
-- Link back to original article when possible
+> Personal site of Dylan Bourgeois, an AI researcher, engineer and entrepreneur based in New York City. Long-form writing on artificial intelligence, robotics, and their impact on society, plus research and services.
 
-# Content Licensing
-Content on this site is available for educational and research purposes.
-For commercial use or extensive quotation, please contact the author.
+## Pages
 
-# Update Frequency
-Articles: Monthly
-Research updates: Quarterly
-Site last updated: $(date -u +"%Y-%m-%d")
+- [About](${siteUrl}/about): Biography and background
+- [Research](${siteUrl}/research): Research work and publications
+- [Services](${siteUrl}/services): AI strategy, engineering and advisory work
+- [Articles (English)](${siteUrl}/en/articles): All articles in English
+- [Articles (French)](${siteUrl}/fr/articles): Articles available in French
 
-# Contact
-For questions about content usage or citations: contact via site
+## Articles
+
+${list(englishArticles, 'en')}
+
+## Articles in French
+
+${list(frenchArticles, 'fr')}
+
+## Optional
+
+- [RSS feed](${siteUrl}/feed.xml): Full-text feed of English articles
+
+When referencing content from this site, credit Dylan Bourgeois, include the publication date, and link back to the original article. Content is available for educational and research purposes; for commercial use or extensive quotation, contact contact@dtsbourg.me.
 `
 
   return new Response(llmsTxt, {
     headers: {
-      'Content-Type': 'text/plain',
+      'Content-Type': 'text/plain; charset=utf-8',
     },
   })
 }

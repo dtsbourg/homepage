@@ -1,9 +1,4 @@
-import rehypePrism from '@mapbox/rehype-prism'
-import rehypeKatex from 'rehype-katex'
-import rehypeSlug from 'rehype-slug'
 import nextMDX from '@next/mdx'
-import remarkGfm from 'remark-gfm'
-import remarkMath from 'remark-math'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
 
@@ -12,7 +7,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   outputFileTracingRoot: __dirname,
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'mdx'],
+  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
   trailingSlash: false,
   compress: true,
   poweredByHeader: false,
@@ -20,7 +15,10 @@ const nextConfig = {
     optimizePackageImports: ['@headlessui/react', 'clsx'],
   },
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole:
+      process.env.NODE_ENV === 'production'
+        ? { exclude: ['error', 'warn'] }
+        : false,
   },
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -34,11 +32,28 @@ const nextConfig = {
         port: '',
         pathname: '/vi/**',
       },
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
     ],
+  },
+  async redirects() {
+    return [
+      // Article URLs from before the /en and /fr split
+      {
+        source:
+          '/articles/:date(\\d{4}-\\d{2}-\\d{2})-:slug([^/]+)/:locale(en|fr)',
+        destination: '/:locale/articles/:slug',
+        permanent: true,
+      },
+      {
+        source: '/articles/:date(\\d{4}-\\d{2}-\\d{2})-:slug([^/]+)',
+        destination: '/en/articles/:slug',
+        permanent: true,
+      },
+      {
+        source: '/articles/:slug',
+        destination: '/en/articles/:slug',
+        permanent: true,
+      },
+    ]
   },
   async headers() {
     return [
@@ -69,16 +84,7 @@ const nextConfig = {
           },
         ],
       },
-      {
-        source: '/_next/static/(.*)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          },
-        ],
-      },
-      // API routes caching
+      // Generated routes caching
       {
         source: '/sitemap.xml',
         headers: [
@@ -97,15 +103,6 @@ const nextConfig = {
           },
         ],
       },
-      {
-        source: '/feed.xml',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=3600, s-maxage=3600',
-          },
-        ],
-      },
     ]
   },
 }
@@ -113,8 +110,9 @@ const nextConfig = {
 const withMDX = nextMDX({
   extension: /\.mdx?$/,
   options: {
-    remarkPlugins: [remarkGfm, remarkMath],
-    rehypePlugins: [rehypeSlug, rehypePrism, rehypeKatex],
+    // Plugins are referenced by package name so Turbopack can serialize them
+    remarkPlugins: ['remark-gfm', 'remark-math'],
+    rehypePlugins: ['rehype-slug', '@mapbox/rehype-prism', 'rehype-katex'],
   },
 })
 

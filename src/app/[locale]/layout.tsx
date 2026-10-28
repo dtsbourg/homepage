@@ -1,5 +1,7 @@
 import { notFound } from 'next/navigation'
 
+import { isLocale } from '@/lib/site'
+
 export default async function LocaleLayout({
   children,
   params,
@@ -9,9 +11,11 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params
 
-  if (locale !== 'en' && locale !== 'fr') {
+  if (!isLocale(locale)) {
     notFound()
   }
 
-  return children
+  // The root <html> is shared by every page and stays lang="en", so mark
+  // the localized subtree here.
+  return <div lang={locale}>{children}</div>
 }

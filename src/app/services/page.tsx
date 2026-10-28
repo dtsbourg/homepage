@@ -14,6 +14,7 @@ import logoComma from '@/images/logos/comma.svg'
 import logoAstra from '@/images/logos/astra.svg'
 import logoTactimetry from '@/images/logos/tactimetry.svg'
 import logoAttune from '@/images/logos/attune.svg'
+import { alternates } from '@/lib/site'
 
 function LinkIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -217,6 +218,7 @@ export const metadata: Metadata = {
   title: 'Services',
   description:
     'AI strategy, engineering, and team enablement for companies whose processes, KPIs, and workflows were built for a world where output was scarce.',
+  alternates: alternates('/services'),
 }
 
 export default function Services() {

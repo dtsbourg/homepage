@@ -1,161 +1,98 @@
 #!/usr/bin/env node
 
-const { glob } = require('glob')
+// Downscales source images that are far larger than the site ever displays.
+// next/image already serves optimized variants, so this only keeps the repo
+// and build inputs small. Idempotent: resized files fall under MAX_EDGE and
+// are skipped on the next run.
+//
+// Usage: npm run images:compress
+
+const fg = require('fast-glob')
 const path = require('path')
 const fs = require('fs').promises
 const sharp = require('sharp')
 
-const ARTICLES_DIR = path.join(__dirname, '..', 'src', 'app', 'articles')
-const MARKERS_DIR = path.join(
-  __dirname,
-  '..',
-  'node_modules',
-  '.cache',
-  'image-compression',
-)
+const ROOT = path.join(__dirname, '..')
+const PATTERNS = [
+  'src/app/_articles/**/*.{jpg,jpeg,png}',
+  'src/images/**/*.{jpg,jpeg,png}',
+]
+// Article prose is ~670px wide, so 2400px covers 3x displays.
+const MAX_EDGE = 2400
+// Leave small files (mostly screenshots and charts) alone.
+const MIN_BYTES = 300 * 1024
 
-async function getImageFiles() {
-  const patterns = ['**/*.jpg', '**/*.jpeg', '**/*.png']
+function mb(bytes) {
+  return (bytes / 1024 / 1024).toFixed(2)
+}
 
-  const files = []
-  for (const pattern of patterns) {
-    const matches = await glob(pattern, {
-      cwd: ARTICLES_DIR,
-      absolute: true,
-      nodir: true,
+async function compressImage(file) {
+  const { size } = await fs.stat(file)
+  const { width, height } = await sharp(file).metadata()
+
+  if (Math.max(width, height) <= MAX_EDGE || size < MIN_BYTES) {
+    return null
+  }
+
+  // rotate() applies EXIF orientation before metadata is stripped
+  let pipeline = sharp(file)
+    .rotate()
+    .resize({
+      width: MAX_EDGE,
+      height: MAX_EDGE,
+      fit: 'inside',
+      withoutEnlargement: true,
     })
-    files.push(...matches)
-  }
+    .keepIccProfile()
 
-  return files
-}
+  pipeline = /\.png$/i.test(file)
+    ? pipeline.png({ compressionLevel: 9 })
+    : pipeline.jpeg({ quality: 82, mozjpeg: true })
 
-async function isAlreadyCompressed(filePath) {
-  const relativePath = path.relative(ARTICLES_DIR, filePath)
-  const markerPath = path.join(MARKERS_DIR, relativePath + '.marker')
-  try {
-    const markerStat = await fs.stat(markerPath)
-    const fileStat = await fs.stat(filePath)
-    // If marker exists and is newer than the file, skip compression
-    return markerStat.mtime > fileStat.mtime
-  } catch {
-    return false
-  }
-}
+  const output = await pipeline.toBuffer()
 
-async function markAsCompressed(filePath) {
-  const relativePath = path.relative(ARTICLES_DIR, filePath)
-  const markerPath = path.join(MARKERS_DIR, relativePath + '.marker')
-  await fs.mkdir(path.dirname(markerPath), { recursive: true })
-  await fs.writeFile(markerPath, new Date().toISOString())
-}
-
-async function compressImage(filePath) {
-  if (await isAlreadyCompressed(filePath)) {
-    console.log(
-      `⏭️  Skipping ${path.relative(ARTICLES_DIR, filePath)} (already compressed)`,
-    )
+  if (output.length >= size) {
     return null
   }
 
-  const ext = path.extname(filePath).toLowerCase()
-
-  const originalStats = await fs.stat(filePath)
-  const originalSize = originalStats.size
-
-  try {
-    const image = sharp(filePath)
-    const metadata = await image.metadata()
-
-    // Compress based on file type
-    if (ext === '.jpg' || ext === '.jpeg') {
-      await image.jpeg({ quality: 85, mozjpeg: true }).toFile(filePath + '.tmp')
-    } else if (ext === '.png') {
-      await image
-        .png({ quality: 85, compressionLevel: 9 })
-        .toFile(filePath + '.tmp')
-    } else {
-      return null
-    }
-
-    // Replace original with compressed
-    await fs.rename(filePath + '.tmp', filePath)
-
-    const newStats = await fs.stat(filePath)
-    const newSize = newStats.size
-    const savings = (((originalSize - newSize) / originalSize) * 100).toFixed(1)
-
-    // Only mark as compressed if we actually saved space
-    if (newSize < originalSize) {
-      await markAsCompressed(filePath)
-
-      return {
-        path: path.relative(ARTICLES_DIR, filePath),
-        originalSize,
-        newSize,
-        savings: parseFloat(savings),
-      }
-    } else {
-      // If the compressed version is larger, we still mark it to avoid recompressing
-      await markAsCompressed(filePath)
-      console.log(
-        `⚠️  ${path.relative(ARTICLES_DIR, filePath)}: compressed version was larger, keeping original`,
-      )
-      return null
-    }
-  } catch (error) {
-    console.error(
-      `❌ Error compressing ${path.relative(ARTICLES_DIR, filePath)}:`,
-      error.message,
-    )
-    // Clean up temp file if it exists
-    try {
-      await fs.unlink(filePath + '.tmp')
-    } catch {}
-    return null
-  }
+  await fs.writeFile(file, output)
+  return { file: path.relative(ROOT, file), before: size, after: output.length }
 }
 
 async function main() {
-  console.log('🔍 Finding images in articles...')
-  const imageFiles = await getImageFiles()
-  console.log(`📸 Found ${imageFiles.length} images\n`)
-
+  const files = await fg(PATTERNS, { cwd: ROOT, absolute: true })
   const results = []
 
-  for (const file of imageFiles) {
-    const result = await compressImage(file)
-    if (result) {
-      results.push(result)
-      const originalMB = (result.originalSize / 1024 / 1024).toFixed(2)
-      const newMB = (result.newSize / 1024 / 1024).toFixed(2)
-      console.log(
-        `✅ ${result.path}: ${originalMB}MB → ${newMB}MB (${result.savings}% reduction)`,
-      )
+  for (const file of files) {
+    try {
+      const result = await compressImage(file)
+      if (result) {
+        results.push(result)
+        console.log(
+          `${result.file}: ${mb(result.before)}MB → ${mb(result.after)}MB`,
+        )
+      }
+    } catch (error) {
+      console.error(`Error compressing ${file}:`, error.message)
     }
   }
 
-  if (results.length > 0) {
-    console.log('\n📊 Summary:')
-    const totalOriginal = results.reduce((sum, r) => sum + r.originalSize, 0)
-    const totalNew = results.reduce((sum, r) => sum + r.newSize, 0)
-    const totalSavings = (
-      ((totalOriginal - totalNew) / totalOriginal) *
-      100
-    ).toFixed(1)
-
-    console.log(`   Total compressed: ${results.length} images`)
-    console.log(
-      `   Original size: ${(totalOriginal / 1024 / 1024).toFixed(2)}MB`,
-    )
-    console.log(`   New size: ${(totalNew / 1024 / 1024).toFixed(2)}MB`)
-    console.log(`   Total savings: ${totalSavings}%`)
-  } else {
-    console.log('\n✨ All images are already compressed!')
+  if (results.length === 0) {
+    console.log('All images are already within limits.')
+    return
   }
+
+  const before = results.reduce((sum, r) => sum + r.before, 0)
+  const after = results.reduce((sum, r) => sum + r.after, 0)
+  console.log(
+    `\n${results.length} images: ${mb(before)}MB → ${mb(after)}MB (${(
+      (1 - after / before) *
+      100
+    ).toFixed(0)}% smaller)`,
+  )
 }
 
 main().catch((error) => {
-  console.error('Fatal error:', error)
+  console.error(error)
   process.exit(1)
 })

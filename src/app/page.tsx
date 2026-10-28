@@ -1,3 +1,4 @@
+import { type Metadata } from 'next'
 import Image, { type ImageProps } from 'next/image'
 import Link from 'next/link'
 import { Button } from '@/components/Button'
@@ -22,6 +23,11 @@ import logoOgment from '@/images/logos/ogment.png'
 import logoStealth from '@/images/logos/ghost.svg'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
+import { alternates } from '@/lib/site'
+
+export const metadata: Metadata = {
+  alternates: alternates('/'),
+}
 
 function BriefcaseIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (

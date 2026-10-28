@@ -4,43 +4,44 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 
 import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
+import { getTranslatedSlugs } from '@/lib/articles'
+import { siteUrl } from '@/lib/site'
 
 import '@/styles/tailwind.css'
+import '@/styles/prism.css'
+import 'katex/dist/katex.min.css'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me',
-  ),
+  metadataBase: new URL(siteUrl),
   title: {
     template: '%s | Dylan Bourgeois',
     default: 'Dylan Bourgeois | Crafting Artificially Intelligent Minds',
   },
   description:
-    'Dylan Bourgeois is an AI researcher and co-founder of Claryo. Explore his thoughts on artificial intelligence, robotics, and their impact on society.',
+    'Dylan Bourgeois is an AI researcher, engineer and entrepreneur based in New York City. Explore his thoughts on artificial intelligence, robotics, and their impact on society.',
   keywords: [
     'Dylan Bourgeois',
     'AI',
     'artificial intelligence',
     'robotics',
     'machine learning',
-    'Claryo',
     'research',
     'technology',
   ],
-  authors: [{ name: 'Dylan Bourgeois', url: 'https://dtsbourg.me' }],
+  authors: [{ name: 'Dylan Bourgeois', url: siteUrl }],
   creator: 'Dylan Bourgeois',
   publisher: 'Dylan Bourgeois',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me',
+    url: siteUrl,
     title: 'Dylan Bourgeois | Crafting Artificially Intelligent Minds',
     description:
-      'Dylan Bourgeois is an AI researcher, engineer and co-founder of Claryo. Explore his thoughts on artificial intelligence, robotics, and their impact on society.',
+      'Dylan Bourgeois is an AI researcher, engineer and entrepreneur based in New York City. Explore his thoughts on artificial intelligence, robotics, and their impact on society.',
     siteName: 'Dylan Bourgeois',
     images: [
       {
-        url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'}/portrait.jpg`,
+        url: `${siteUrl}/portrait.jpg`,
         width: 1200,
         height: 630,
         alt: 'Dylan Bourgeois',
@@ -51,10 +52,8 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Dylan Bourgeois | Crafting Artificially Intelligent Minds',
     description:
-      'Dylan Bourgeois is an AI researcher, engineer and co-founder of Claryo. Explore his thoughts on artificial intelligence, robotics, and their impact on society.',
-    images: [
-      `${process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'}/portrait.jpg`,
-    ],
+      'Dylan Bourgeois is an AI researcher, engineer and entrepreneur based in New York City. Explore his thoughts on artificial intelligence, robotics, and their impact on society.',
+    images: [`${siteUrl}/portrait.jpg`],
     creator: '@dtsbourg',
   },
   robots: {
@@ -68,37 +67,31 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  // Canonical URLs are set per page: a canonical here would be inherited by
+  // every page that doesn't override it and point them all at the homepage.
   alternates: {
-    canonical: process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me',
     types: {
-      'application/rss+xml': `${process.env.NEXT_PUBLIC_SITE_URL}/feed.xml`,
-    },
-    languages: {
-      'en-US': '/en',
-      'fr-FR': '/fr',
+      'application/rss+xml': `${siteUrl}/feed.xml`,
     },
   },
   verification: {
     google: process.env.GOOGLE_SITE_VERIFICATION,
   },
-  other: {
-    'dns-prefetch':
-      '//fonts.googleapis.com //img.youtube.com //www.youtube-nocookie.com',
-    preconnect: 'https://fonts.googleapis.com https://fonts.gstatic.com',
-  },
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const translatedSlugs = await getTranslatedSlugs()
+
   return (
     <html lang="en" className="h-full antialiased" suppressHydrationWarning>
       <body className="flex h-full bg-zinc-50 dark:bg-black">
         <Providers>
           <div className="flex w-full">
-            <Layout>{children}</Layout>
+            <Layout translatedSlugs={translatedSlugs}>{children}</Layout>
           </div>
         </Providers>
         <Analytics />

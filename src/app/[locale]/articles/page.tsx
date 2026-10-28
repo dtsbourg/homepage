@@ -5,6 +5,7 @@ import { Card } from '@/components/Card'
 import { SimpleLayout } from '@/components/SimpleLayout'
 import { type ArticleWithSlug, getAllArticles } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
+import { alternates, isLocale, type Locale, locales } from '@/lib/site'
 
 function ChevronRightIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
   return (
@@ -24,7 +25,7 @@ function Article({
   locale,
 }: {
   article: ArticleWithSlug
-  locale: string
+  locale: Locale
 }) {
   return (
     <article className="md:grid md:grid-cols-4 md:items-baseline">
@@ -100,43 +101,46 @@ type Props = {
   params: Promise<{ locale: string }>
 }
 
+const intros: Record<Locale, string> = {
+  en: 'All of my long-form thoughts on AI, robotics, and their interface with society, collected in chronological order.',
+  fr: "Un ensemble de réflexions approfondies sur l'IA, la robotique et leurs impacts sur la société, recueillies par ordre chronologique.",
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params
 
-  if (locale !== 'en' && locale !== 'fr') {
+  if (!isLocale(locale)) {
     notFound()
   }
 
   return {
-    title: locale === 'fr' ? 'Articles' : 'Articles',
-    description:
-      locale === 'fr'
-        ? "Un ensemble de réflexions approfondies sur l'IA, la robotique et leurs impacts sur la société, recueillies par ordre chronologique."
-        : 'All of my long-form thoughts on AI, robotics and their interface with society, collected in chronological order.',
+    title: 'Articles',
+    description: intros[locale],
+    alternates: alternates(`/${locale}/articles`, {
+      'en-US': '/en/articles',
+      'fr-FR': '/fr/articles',
+    }),
   }
 }
 
-export async function generateStaticParams() {
-  return [{ locale: 'en' }, { locale: 'fr' }]
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }))
 }
+
+export const dynamicParams = false
 
 export default async function ArticlesIndex({ params }: Props) {
   const { locale } = await params
 
-  if (locale !== 'en' && locale !== 'fr') {
+  if (!isLocale(locale)) {
     notFound()
   }
 
   let articles = await getAllArticles(locale)
-
   const title = locale === 'fr' ? 'Mes articles.' : 'My writing.'
-  const intro =
-    locale === 'fr'
-      ? "Un ensemble de réflexions approfondies sur l'IA, la robotique et leurs impacts sur la société, recueillies par ordre chronologique."
-      : 'All of my long-form thoughts on AI, robotics, and their interface with society, collected in chronological order.'
 
   return (
-    <SimpleLayout title={title} intro={intro}>
+    <SimpleLayout title={title} intro={intros[locale]}>
       <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
         <div className="flex max-w-3xl flex-col space-y-16">
           {articles.map((article) => (

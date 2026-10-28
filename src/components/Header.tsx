@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useSyncExternalStore } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -187,14 +187,19 @@ function DesktopNavigation(props: React.ComponentPropsWithoutRef<'nav'>) {
   )
 }
 
+function subscribeNoop() {
+  return () => {}
+}
+
 function ThemeToggle() {
   let { resolvedTheme, setTheme } = useTheme()
   let otherTheme = resolvedTheme === 'dark' ? 'light' : 'dark'
-  let [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  // false during SSR and hydration, true afterwards
+  let mounted = useSyncExternalStore(
+    subscribeNoop,
+    () => true,
+    () => false,
+  )
 
   return (
     <button
@@ -258,7 +263,7 @@ function Avatar({
   )
 }
 
-export function Header() {
+export function Header({ translatedSlugs }: { translatedSlugs: string[] }) {
   let isHomePage = usePathname() === '/'
 
   let headerRef = useRef<React.ElementRef<'div'>>(null)
@@ -415,7 +420,7 @@ export function Header() {
               </div>
               <div className="flex justify-end md:flex-1">
                 <div className="pointer-events-auto flex items-center gap-4">
-                  <LanguageToggle />
+                  <LanguageToggle translatedSlugs={translatedSlugs} />
                   <ThemeToggle />
                 </div>
               </div>

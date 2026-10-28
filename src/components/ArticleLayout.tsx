@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { AppContext } from '@/app/providers'
 import { Container } from '@/components/Container'
 import { Prose } from '@/components/Prose'
-import { type ArticleWithSlug } from '@/lib/articles'
+import { type Article } from '@/lib/articles'
 import { formatDate } from '@/lib/formatDate'
 
 function ArrowLeftIcon(props: React.ComponentPropsWithoutRef<'svg'>) {
@@ -25,54 +25,14 @@ export function ArticleLayout({
   article,
   children,
 }: {
-  article: ArticleWithSlug
+  article: Article
   children: React.ReactNode
 }) {
   let router = useRouter()
   let { previousPathname } = useContext(AppContext)
 
-  // Enhanced structured data for AI comprehension
-  const structuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    headline: article.title,
-    description: article.description,
-    image: [
-      `${process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'}/portrait.jpg`,
-    ],
-    datePublished: article.date,
-    dateModified: article.date,
-    author: {
-      '@type': 'Person',
-      name: article.author,
-      url: process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me',
-      jobTitle: 'AI Researcher & Engineer, Founder',
-      sameAs: ['https://twitter.com/dtsbourg', 'https://github.com/dtsbourg'],
-    },
-    publisher: {
-      '@type': 'Person',
-      name: 'Dylan Bourgeois',
-      url: process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me',
-    },
-    mainEntityOfPage: {
-      '@type': 'WebPage',
-      '@id': `${process.env.NEXT_PUBLIC_SITE_URL || 'https://dtsbourg.me'}/en/articles/${article.slug}`,
-    },
-    keywords: article.slug.split('-').join(', '),
-    inLanguage: article.lang || 'en',
-    isAccessibleForFree: true,
-    copyrightHolder: {
-      '@type': 'Person',
-      name: 'Dylan Bourgeois',
-    },
-  }
-
   return (
     <Container className="mt-16 lg:mt-32">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
       <div className="xl:relative">
         <div className="mx-auto max-w-2xl">
           {previousPathname && (

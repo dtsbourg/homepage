@@ -4,6 +4,6 @@ import { type MDXComponents } from 'mdx/types'
 export function useMDXComponents(components: MDXComponents) {
   return {
     ...components,
-    Image: (props: ImageProps) => <Image {...props} />,
+    Image: ({ alt, ...props }: ImageProps) => <Image alt={alt} {...props} />,
   }
 }

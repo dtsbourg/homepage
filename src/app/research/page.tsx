@@ -3,6 +3,7 @@ import { type Metadata } from 'next'
 import { Card } from '@/components/Card'
 import { Section } from '@/components/Section'
 import { SimpleLayout } from '@/components/SimpleLayout'
+import { alternates } from '@/lib/site'
 
 function ResearchSection({
   children,
@@ -52,7 +53,9 @@ function Publication({
 
 export const metadata: Metadata = {
   title: 'Research',
-  description: 'My Research',
+  description:
+    'Research on graph neural networks, explainability, machine learning for code, and real-time machine learning for particle physics.',
+  alternates: alternates('/research'),
 }
 
 export default function Speaking() {

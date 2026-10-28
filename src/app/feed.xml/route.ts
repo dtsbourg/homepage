@@ -1,15 +1,37 @@
-import assert from 'assert'
 import * as cheerio from 'cheerio'
 import { Feed } from 'feed'
 import { getAllArticles } from '@/lib/articles'
+import { siteUrl } from '@/lib/site'
 
-export async function GET(req: Request) {
-  let siteUrl = process.env.NEXT_PUBLIC_SITE_URL
+// Articles render through client components (ArticleLayout, interactive MDX
+// widgets), so the feed reuses the rendered page HTML instead of rendering
+// the MDX itself.
+async function getArticleHtml(url: string) {
+  const response = await fetch(url)
 
-  if (!siteUrl) {
-    throw Error('Missing NEXT_PUBLIC_SITE_URL environment variable')
+  if (!response.ok) {
+    throw new Error(`${response.status} fetching ${url}`)
   }
 
+  const $ = cheerio.load(await response.text())
+  const content = $('article [data-mdx-content]').first()
+
+  // Feed readers resolve relative URLs inconsistently, so make them absolute.
+  content.find('[src], [href], [srcset]').each((_, el) => {
+    const node = $(el)
+    for (const attr of ['src', 'href']) {
+      const value = node.attr(attr)
+      if (value?.startsWith('/')) {
+        node.attr(attr, new URL(value, siteUrl).toString())
+      }
+    }
+    node.removeAttr('srcset')
+  })
+
+  return content.html()
+}
+
+export async function GET(req: Request) {
   let author = {
     name: 'Dylan Bourgeois',
     email: 'contact@dtsbourg.me',
@@ -29,40 +51,41 @@ export async function GET(req: Request) {
     },
   })
 
-  // Get all English articles with their proper slugs
   const articles = await getAllArticles('en')
 
-  for (let article of articles) {
-    let url = String(new URL(`/en/articles/${article.slug}`, req.url))
-    let html = await (await fetch(url)).text()
-    let $ = cheerio.load(html)
+  const items = await Promise.all(
+    articles.map(async (article) => {
+      const path = `/en/articles/${article.slug}`
+      let content: string | null = null
 
-    let publicUrl = `${siteUrl}/en/articles/${article.slug}`
-    let articleEl = $('article').first()
-    let title = articleEl.find('h1').first().text()
-    let date = articleEl.find('time').first().attr('datetime')
-    let content = articleEl.find('[data-mdx-content]').first().html()
+      try {
+        content = await getArticleHtml(String(new URL(path, req.url)))
+      } catch (error) {
+        console.error(`Feed: falling back to description for ${path}`, error)
+      }
 
-    assert(typeof title === 'string')
-    assert(typeof date === 'string')
-    assert(typeof content === 'string')
+      return {
+        title: article.title,
+        id: `${siteUrl}${path}`,
+        link: `${siteUrl}${path}`,
+        description: article.description,
+        content: content ?? article.description,
+        author: [author],
+        contributor: [author],
+        date: new Date(article.date),
+      }
+    }),
+  )
 
-    feed.addItem({
-      title,
-      id: publicUrl,
-      link: publicUrl,
-      content,
-      author: [author],
-      contributor: [author],
-      date: new Date(date),
-    })
+  for (const item of items) {
+    feed.addItem(item)
   }
 
   return new Response(feed.rss2(), {
     status: 200,
     headers: {
       'content-type': 'application/xml',
-      'cache-control': 's-maxage=31556952',
+      'cache-control': 's-maxage=3600, stale-while-revalidate=86400',
     },
   })
 }
