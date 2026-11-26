@@ -418,6 +418,22 @@ coordinates the network writes to least, expecting it to miss them least. Cleari
 0.029 in KL, ten times more than three coordinates of median use. No weight statistic we tried
 predicted the cost, so we measured it. Four chosen that way cost 0.0033 together.
 
+## Cite this work
+
+A paper version of this article is archived on Zenodo with the code, the patches and the measured
+results: [doi:10.5281/zenodo.24570919](https://doi.org/10.5281/zenodo.24570919).
+
+```
+@misc{bourgeois2026installed,
+  author    = {Bourgeois, Dylan},
+  title     = {Installed, not trained: plugging programs into a model's weights},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.24570919},
+  url       = {https://doi.org/10.5281/zenodo.24570919}
+}
+```
+
 _Model: Qwen3.5-4B-Base, 32 layers, run at 32-bit precision. The patch occupies key head 5 of the
 first layer and its two value heads. Every figure uses measured values from the runs described._
 
