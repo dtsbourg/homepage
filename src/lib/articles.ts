@@ -13,6 +13,11 @@ export interface Article {
   date: string
   lang?: string
   slug: string
+  // Optional, for search and citation metadata.
+  keywords?: string[]
+  updated?: string
+  doi?: string
+  pdf?: string
 }
 
 export interface ArticleWithSlug extends Article {

@@ -39,7 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const article of await getAllArticles(locale)) {
       articlePages.push({
         url: `${siteUrl}/${locale}/articles/${article.slug}`,
-        lastModified: new Date(article.date),
+        lastModified: new Date(article.updated ?? article.date),
         changeFrequency: 'monthly',
         priority: 0.7,
       })
