@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { SKELETONS } from './skeletons'
 import './weights.css'
 
-// One figure of "Installing a program in a language model". The static markup comes from SKELETONS;
+// One figure of "Installed, not trained". The static markup comes from SKELETONS;
 // WeightsRuntime, placed once at the end of the article, brings every figure on the page to life.
 export default function WeightsFigure({
   name,

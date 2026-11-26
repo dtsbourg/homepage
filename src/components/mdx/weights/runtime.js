@@ -518,7 +518,7 @@ export function mount(ROOT, DATA, SKELETONS) {
     ;(() => {
       const g = sv('svg', {
         class: 'diagram',
-        viewBox: '0 0 760 250',
+        viewBox: '0 0 820 284',
         role: 'img',
         'aria-label':
           'A looped block repeats over depth; a pretrained model repeats over emitted tokens.',
@@ -547,7 +547,7 @@ export function mount(ROOT, DATA, SKELETONS) {
         }),
         sv('rect', {
           x: 70,
-          y: 168,
+          y: 206,
           width: 190,
           height: 30,
           rx: 6,
@@ -555,13 +555,13 @@ export function mount(ROOT, DATA, SKELETONS) {
         }),
         sv('text', {
           x: 165,
-          y: 187,
+          y: 225,
           'text-anchor': 'middle',
           text: 'state, held inside',
         }),
         sv('rect', {
           x: 70,
-          y: 96,
+          y: 112,
           width: 190,
           height: 38,
           rx: 6,
@@ -569,48 +569,49 @@ export function mount(ROOT, DATA, SKELETONS) {
         }),
         sv('text', {
           x: 165,
-          y: 119,
+          y: 135,
           'text-anchor': 'middle',
           class: 't-strong',
           text: 'one written block',
         }),
         sv('path', {
-          d: 'M165 168 L165 138',
+          d: 'M165 206 L165 156',
           class: 'wire',
           'marker-end': 'url(#l-a)',
         }),
         sv('path', {
-          d: 'M260 114 C322 114 322 183 264 183',
+          d: 'M260 131 C330 131 330 221 266 221',
           class: 'wire-prog',
           'marker-end': 'url(#l-p)',
         }),
-        sv('text', { x: 318, y: 142, text: 'as many times' }),
-        sv('text', { x: 318, y: 158, text: 'as needed' }),
-        sv('text', { x: 70, y: 228, text: 'Loop over depth.' }),
+        sv('text', { x: 326, y: 172, text: 'as many' }),
+        sv('text', { x: 326, y: 188, text: 'times as' }),
+        sv('text', { x: 326, y: 204, text: 'needed' }),
+        sv('text', { x: 70, y: 268, text: 'Loop over depth.' }),
         sv('line', {
-          x1: 400,
+          x1: 418,
           y1: 10,
-          x2: 400,
-          y2: 240,
+          x2: 418,
+          y2: 274,
           style: 'stroke:var(--rule)',
         }),
         sv('text', {
-          x: 426,
+          x: 444,
           y: 22,
           class: 't-strong',
           text: 'A pretrained language model',
         }),
       )
-      // right: 32 thin layers above a row of tokens; the newest token loops back
-      const x0 = 456,
-        w = 200
+      // right: 32 thin layers above a row of tokens; the token it writes comes back in
+      const x0 = 500,
+        w = 180
       for (let l = 0; l < 32; l++)
         g.append(
           sv('rect', {
             x: x0,
-            y: 150 - l * 3.6,
+            y: 186 - l * 3.4,
             width: w,
-            height: 2.6,
+            height: 2.4,
             rx: 1,
             class: l === 0 ? 'sq-prog' : '',
             style: l === 0 ? '' : 'fill:var(--axis)',
@@ -618,30 +619,34 @@ export function mount(ROOT, DATA, SKELETONS) {
         )
       g.append(
         sv('text', {
-          x: x0 - 8,
-          y: 154,
+          x: x0 - 10,
+          y: 190,
           'text-anchor': 'end',
           text: 'layer 0',
         }),
         sv('text', {
-          x: x0 - 8,
-          y: 44,
+          x: x0 - 10,
+          y: 86,
           'text-anchor': 'end',
           text: 'layer 31',
         }),
+        sv('path', {
+          d: `M${x0 + w / 2} 76 L${x0 + w / 2} 62`,
+          class: 'wire',
+          'marker-end': 'url(#l-a)',
+        }),
         sv('text', {
           x: x0 + w / 2,
-          y: 30,
+          y: 52,
           'text-anchor': 'middle',
           text: 'next token',
         }),
-        sv('path', { d: `M${x0 + w / 2} 36 L${x0 + w / 2} 32`, class: 'wire' }),
       )
       ;['령', 'ღ', 'ք', 'ש', '랑'].forEach((c, i) =>
         g.append(
           sv('rect', {
             x: x0 + i * 34,
-            y: 168,
+            y: 206,
             width: 30,
             height: 30,
             rx: 5,
@@ -649,7 +654,7 @@ export function mount(ROOT, DATA, SKELETONS) {
           }),
           sv('text', {
             x: x0 + i * 34 + 15,
-            y: 188,
+            y: 226,
             'text-anchor': 'middle',
             style: 'font-family:var(--tape);font-size:14px;fill:var(--ink)',
             text: c,
@@ -658,15 +663,15 @@ export function mount(ROOT, DATA, SKELETONS) {
       )
       g.append(
         sv('path', {
-          d: `M${x0 + w + 4} 40 C${x0 + w + 76} 40 ${x0 + w + 76} 183 ${x0 + 5 * 34 + 2} 183`,
+          d: `M${x0 + w / 2 + 40} 48 C${x0 + 240} 48 ${x0 + 240} 221 ${x0 + 4 * 34 + 36} 221`,
           class: 'wire-prog',
           'marker-end': 'url(#l-p)',
         }),
-        sv('text', { x: x0 + w + 20, y: 108, text: 'written,' }),
-        sv('text', { x: x0 + w + 20, y: 124, text: 'then read' }),
+        sv('text', { x: x0 + 236, y: 128, text: 'written,' }),
+        sv('text', { x: x0 + 236, y: 144, text: 'then read' }),
         sv('text', {
           x: x0,
-          y: 228,
+          y: 268,
           text: 'Loop over tokens. The text is the state.',
         }),
       )
@@ -752,27 +757,23 @@ export function mount(ROOT, DATA, SKELETONS) {
         $('alpha-line'),
         h(
           'div',
-          { class: 'tape', style: 'flex-wrap:nowrap;gap:8px' },
+          { class: 'decoded' },
           ln.map((c) =>
             h(
               'span',
-              {
-                style:
-                  'display:inline-flex;flex-direction:column;align-items:center;gap:3px',
-              },
+              { class: 'item' },
               hcell(c.sym, 'run'),
               h('span', {
-                style:
-                  'font:500 0.6875rem var(--mono);color:var(--ink-3);white-space:nowrap',
+                class: 'l1',
                 text: c.sym[1] === STOP ? 'end' : `disk ${c.sym[0]}`,
               }),
               h('span', {
-                style:
-                  'font:500 0.6875rem var(--mono);color:var(--ink-2);white-space:nowrap',
-                text:
-                  c.sym[1] === STOP
-                    ? ''
-                    : `bit ${c.sym[1][0]} · ${PEG[c.sym[1][1]]}`,
+                class: 'l2',
+                text: c.sym[1] === STOP ? '' : `bit ${c.sym[1][0]}`,
+              }),
+              h('span', {
+                class: 'l2',
+                text: c.sym[1] === STOP ? '' : `peg ${PEG[c.sym[1][1]]}`,
               }),
             ),
           ),
