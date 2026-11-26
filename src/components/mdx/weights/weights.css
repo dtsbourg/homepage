@@ -588,6 +588,271 @@
 .wi .tip b {
   font-weight: 600;
 }
+.wi .plug {
+  display: grid;
+  grid-template-columns: minmax(0, 25rem) auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+.wi .plug-col {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.wi .plug-col > h4,
+.wi .plug-colhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 1.9rem;
+  margin: 0 0 0.5rem;
+}
+.wi .plug-col > h4,
+.wi .plug-colhead h4 {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.wi .plug-colhead h4 {
+  margin: 0;
+}
+.wi .plug-colhead .btn {
+  min-width: 0;
+  padding: 0.22rem 0.8rem;
+  font-size: 0.8125rem;
+}
+.wi .plug-arrow {
+  align-self: center;
+  color: var(--ink-3);
+  font-size: 1.25rem;
+  line-height: 1;
+}
+@media (max-width: 900px) {
+  .wi .plug {
+    grid-template-columns: 1fr;
+  }
+  .wi .plug-arrow {
+    justify-self: center;
+    transform: rotate(90deg);
+  }
+}
+.wi .pkg {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 1rem 1.1rem 0.9rem;
+  flex: 1;
+}
+.wi .pkg-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.3rem 0.8rem;
+  margin-bottom: 0.9rem;
+}
+.wi .pkg-name {
+  font: 600 1rem var(--mono);
+  color: var(--ink);
+}
+.wi .pkg-state {
+  font: 500 0.8125rem var(--sans);
+  color: var(--ink-2);
+}
+.wi .pkg-label {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  margin: 0 0 0.45rem;
+}
+.wi .diagram.rail {
+  max-width: 21.75rem;
+}
+.wi .plug-status {
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  margin: 0.35rem 0 1rem;
+}
+.wi .pkg-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.wi .pkg-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: var(--band);
+  border-radius: 9px;
+  padding: 0.5rem 0.55rem 0.5rem 0.8rem;
+}
+.wi .pkg-row.is-on {
+  background: var(--prog-wash);
+}
+.wi .pkg-what {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+.wi .pkg-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.wi .pkg-meta {
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.wi .pkg-row .btn {
+  flex: none;
+  min-width: 4.9rem;
+}
+.wi .pkg-log {
+  font: 400 0.75rem/1.55 var(--mono);
+  color: var(--ink-3);
+  margin-top: 0.85rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--rule);
+  min-height: 4.2rem;
+  overflow-wrap: anywhere;
+}
+.wi .pkg-log div:last-child {
+  color: var(--ink-2);
+}
+.wi .plug-out {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+}
+.wi .plug-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.wi .plug-card h4 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+}
+.wi .chip {
+  font: 500 0.75rem var(--sans);
+  letter-spacing: 0;
+  text-transform: none;
+  border-radius: 999px;
+  padding: 0.12rem 0.55rem;
+  color: var(--ink);
+}
+.wi .chip-host {
+  background: var(--host-wash);
+}
+.wi .chip-prog {
+  background: var(--prog-wash);
+}
+.wi .plug-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 1.4rem;
+  flex: 1;
+}
+.wi .plug-body .plug-board {
+  width: 13.5rem;
+  max-width: 100%;
+}
+.wi .plug-info {
+  display: grid;
+  gap: 0.3rem;
+  min-width: 9rem;
+  flex: 1 1 9rem;
+}
+.wi .plug-detail {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--ink-2);
+  min-height: 1.3em;
+}
+.wi .plug-verdict {
+  margin-left: auto;
+  font: 600 0.9375rem var(--sans);
+  color: var(--paper);
+  border-radius: 999px;
+  padding: 0.32rem 0.85rem;
+  white-space: nowrap;
+}
+.wi .plug-verdict:empty {
+  display: none;
+}
+.wi .plug-verdict.ok {
+  background: var(--good);
+}
+.wi .plug-verdict.no {
+  background: var(--bad);
+}
+.wi .plug-card.is-ok {
+  box-shadow: inset 0 0 0 1.5px var(--good);
+  background: color-mix(in srgb, var(--good) 7%, var(--card));
+}
+.wi .plug-card.is-bad {
+  box-shadow: inset 0 0 0 1.5px var(--bad);
+  background: color-mix(in srgb, var(--bad) 8%, var(--card));
+}
+.wi .plug-stack {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.35rem;
+  min-width: 0;
+  max-width: 100%;
+}
+.wi .plug-stack .wrote {
+  min-height: 1.3em;
+}
+.wi .bad-bit {
+  color: var(--bad);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+.wi .plug-card .tape {
+  min-height: 1.35rem;
+}
+.wi .plug-card .cell.small {
+  width: 1.35rem;
+  height: 1.35rem;
+  font-size: 0.74rem;
+}
+@media (max-width: 620px) {
+  .wi .plug-card .cell.small {
+    width: 1.15rem;
+    height: 1.15rem;
+    font-size: 0.66rem;
+  }
+}
+.wi .grid110.mini .g {
+  width: 1rem;
+  height: 1rem;
+}
+.wi .grid110.mini .g.todo {
+  opacity: 0.45;
+}
+.wi .plug-card .grid110 .g:not(.on) {
+  background: var(--band);
+}
+.wi .plug-card .grid110 .g.seed.on {
+  background: var(--ink-3);
+}
+.wi .plug-card .grid110 .g.host.on {
+  background: var(--host);
+}
+.wi .plug-card .grid110 .g.bad {
+  box-shadow: 0 0 0 2px var(--bad);
+  position: relative;
+  z-index: 1;
+}
 .wi .diagram {
   display: block;
   width: 100%;
