@@ -1,5 +1,6 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
 import WeightsFigure from '@/components/mdx/weights/WeightsFigure'
+import TableOfContents from '@/components/mdx/TableOfContents'
 import WeightsRuntime from '@/components/mdx/weights/WeightsRuntime'
 import ogImage from '../og.png'
 
@@ -17,16 +18,19 @@ export default (props) => <ArticleLayout article={article} {...props} />
 
 We wrote a program into the weights of an open 4-billion-parameter model. No training: 2.6 million
 numbers in one attention head, worked out from formulas and shipped as a 10 MB patch. The patched
-model plays Tower of Hanoi for 1,023 moves without an error. A second build lets the model launch
-the program by itself.
+model plays Tower of Hanoi for 1,023 moves without an error. A larger edit lets the model start the
+program by itself.
 
-<WeightsFigure name="hero" wide hero>
+<WeightsFigure name="plugin" wide hero>
 
-**Figure 1.** Both rows replay text the model wrote. Top: Qwen3.5-4B-Base, shown four worked
-solutions and asked for the next size, writes legal moves for a while and then one that is not
-allowed. Bottom: the same model with the patch applied. A person types the first line; the model
-writes every later position of the puzzle, in borrowed letters, until it halts. The installed
-program ends on peg B for an odd number of disks and C for an even number.
+**Figure 1.** The idea. A program is a file of weights for one attention head. Installing it
+overwrites that head in the model's first layer, about six numbers in every ten thousand, and the
+model then runs the program one token at a time. Removing it restores the original bits. On the bare
+model, each panel replays what the unmodified model wrote when shown worked examples and asked for a
+new case: an illegal move after 47 of the 63 needed for six disks, no Rule 110 run right out of 12,
+and 6 of 20 ten-bit sums right. With the plugin installed, the panel is the program's table
+simulated in your browser. On the real model we have run two programs at once: Rule 110 and the
+adder currently share a head and an alphabet, and the third slot shown here is not built yet.
 
 </WeightsFigure>
 
@@ -45,7 +49,7 @@ program ends on peg B for an odd number of disks and C for an even number.
   </div>
   <div>
     <b>6 of 6</b>
-    <span>runs launched by the model itself: second build, main prompt</span>
+    <span>runs started by the model itself, with the larger edit</span>
   </div>
 </div>
 
@@ -59,6 +63,16 @@ We did something else. We treated the model as a machine you can install softwar
 not learned and not attached. It is written into weights the model already has, and from then on the
 model runs it natively, one token at a time.
 
+<WeightsFigure name="hero" wide hero>
+
+**Figure 2.** Both rows replay text the model wrote. Top: Qwen3.5-4B-Base, shown four worked
+solutions and asked for the next size, writes legal moves for a while and then one that is not
+allowed. Bottom: the same model with the patch applied. A person types the first line; the model
+writes every later position of the puzzle, in borrowed letters, until it halts. The installed
+program ends on peg B for an odd number of disks and C for an even number.
+
+</WeightsFigure>
+
 > **The rule.** No training of any kind. Every number we changed is a closed-form function of the
 > model's existing weights and a small table that describes the program. No gradients, no fitting to
 > examples, no search over what to write.
@@ -70,6 +84,29 @@ hands over its answer differently, which lets the model start the program on its
 small file: it nudges about a quarter of the model's numbers, each by a tiny amount. Most of this
 article is about the patch. The last third is about why the model could not launch it, and what
 fixed that.
+
+<TableOfContents
+  items={[
+    { title: 'The one loop a language model has', anchor: 'the-one-loop-a-language-model-has' },
+    { title: 'Tower of Hanoi is counting', anchor: 'tower-of-hanoi-is-counting' },
+    { title: 'The tape', anchor: 'the-tape' },
+    { title: 'Inside the head', anchor: 'inside-the-head' },
+    { title: 'Install, stack, uninstall', anchor: 'install-stack-uninstall' },
+    { title: 'Against prompting and fine-tuning', anchor: 'against-prompting-and-fine-tuning' },
+    { title: 'What it costs the host', anchor: 'what-it-costs-the-host' },
+    {
+      title: 'The host cannot launch what it cannot see',
+      anchor: 'the-host-cannot-launch-what-it-cannot-see',
+    },
+    { title: 'Write quietly, answer late', anchor: 'write-quietly-answer-late' },
+    { title: 'The host launches the program', anchor: 'the-host-launches-the-program' },
+    { title: 'How a weight is written', anchor: 'how-a-weight-is-written' },
+    { title: 'Related work', anchor: 'related-work' },
+    { title: 'Limits', anchor: 'limits' },
+    { title: 'Appendix: what broke along the way', anchor: 'appendix-what-broke-along-the-way' },
+    { title: 'Cite this work', anchor: 'cite-this-work' },
+  ]}
+/>
 
 ## The one loop a language model has
 
@@ -87,7 +124,7 @@ loop. The memory of the computation is the text written so far. We call that tex
 
 <WeightsFigure name="loop" wide>
 
-**Figure 2.** Two places a loop can live. A purpose-built network repeats one block over depth and
+**Figure 3.** Two places a loop can live. A purpose-built network repeats one block over depth and
 keeps its state inside. A pretrained model runs each of its layers once per token; its only loop is
 that the token it writes comes back in, so the state has to live in the text.
 
@@ -107,7 +144,7 @@ it and travels on. Where it meets a 0 it sets it, moves that disk one peg round,
 
 <WeightsFigure name="count" wide>
 
-**Figure 3.** Four disks, fifteen moves. Each row is the move number in binary with the lowest bit
+**Figure 4.** Four disks, fifteen moves. Each row is the move number in binary with the lowest bit
 on the left, so column 1 is the smallest disk. Outlined cells are the ones the carry passed through;
 the filled one is where it stopped, and that disk moves.
 
@@ -130,7 +167,7 @@ move, in these letters. Reading it takes a lookup table, and the model never tra
 
 <WeightsFigure name="alpha" wide>
 
-**Figure 4.** The 100 symbols of the Hanoi program. A symbol's script gives its column, which is its
+**Figure 5.** The 100 symbols of the Hanoi program. A symbol's script gives its column, which is its
 disk; its row gives the counter bit, the peg, and whether the carry travels on. Column 11 exists
 only to end a ten-disk line.
 
@@ -163,7 +200,7 @@ outvote it.
 
 <WeightsFigure name="head" wide>
 
-**Figure 5.** The patched head running in your browser from its real weights. Step through three
+**Figure 6.** The patched head running in your browser from its real weights. Step through three
 disks and watch each part act. Below, every row of the head's weights is drawn by what it reads on
 each of the 100 symbols, with the current symbol marked. Orange is "on", blue-grey is "off". Switch
 to the original weights to see the head as it shipped, on the same scale.
@@ -178,7 +215,7 @@ what it overwrote, so uninstalling restores the model bit for bit.
 
 <WeightsFigure name="scale" wide>
 
-**Figure 6.** The patch, to scale. The small square has 0.06% of the large one's area.
+**Figure 7.** The patch, to scale. The small square has 0.06% of the large one's area.
 
 </WeightsFigure>
 
@@ -189,7 +226,7 @@ adder for numbers up to ten bits. Both install into a second head with their own
 
 <WeightsFigure name="progs" wide>
 
-**Figure 7.** Three programs on one engine, all with the patch. The panel above is a simulation of
+**Figure 8.** Three programs on one engine, all with the patch. The panel above is a simulation of
 the tables in your browser, not the model; the table gives what the model itself did, checked
 against ordinary reference code. The smallest margin by which the right token won was 35 logits. The
 ten-disk run is 11,264 tokens and took about fourteen minutes on a laptop.
@@ -207,7 +244,7 @@ its tape can hold.
 
 <WeightsFigure name="vs" wide>
 
-**Figure 8.** Prompting and fine-tuning both work inside what they were shown and stop there. The
+**Figure 9.** Prompting and fine-tuning both work inside what they were shown and stop there. The
 fine-tuned model writes moves and the patched model writes positions, so their outputs are graded
 the same way, by replaying them, but they are not the same format. A dash means not tried.
 
@@ -232,7 +269,7 @@ deleting the head, four times as much, and most of all in Tamil and Arabic.
 
 <WeightsFigure name="cost" wide>
 
-**Figure 9.** Cost on unrelated text. Grey bars are controls: the same heads deleted and nothing
+**Figure 10.** Cost on unrelated text. Grey bars are controls: the same heads deleted and nothing
 installed. On English and code the patch costs what its head costs, and the launchable build several
 times more. On text in the tape scripts the patch costs four times its head. Free writing changes
 often under every version, the controls included. The three passages are ones we chose before
@@ -257,7 +294,7 @@ model cannot see how they ended, so it cannot learn how to end its own.
 
 <WeightsFigure name="blind" wide>
 
-**Figure 10.** Why the patched model cannot launch its own program. With the patch, the token that
+**Figure 11.** Why the patched model cannot launch its own program. With the patch, the token that
 starts a run is unrecognisable from the first layer on: its similarity to the same token in the
 unmodified model falls from 1 to about 0 and stays there, because the stream at that position is
 several thousand times its usual length. The launchable build, described next, keeps it at 0.94 or
@@ -290,7 +327,7 @@ unmodified model. Uninstalling it restores the weights to within rounding (the l
 
 <WeightsFigure name="quiet" wide>
 
-**Figure 11.** Top: the two designs side by side, drawn over the model's 32 layers. Bottom: the
+**Figure 12.** Top: the two designs side by side, drawn over the model's 32 layers. Bottom: the
 launchable build's last step. The relays turn a reference of 0.5 into a strong signal and an
 ordinary token's trace into almost none, so the bank of neurons only speaks when a program is
 running.
@@ -330,7 +367,7 @@ Installing a program does not teach the model how to use it well.
 
 <WeightsFigure name="launch" wide>
 
-**Figure 12.** The model launching installed programs. For Hanoi, a launch needs the model to write
+**Figure 13.** The model launching installed programs. For Hanoi, a launch needs the model to write
 the right start line, and a weaker prompt makes that rarer, with or without the program. Every run
 that started finished exactly. The checksum bars are the original 60 questions; three further prompt
 formats with 100 fresh numbers each gave 300 of 300.
@@ -348,7 +385,7 @@ these symbols and nothing on those is then a weighted sum of private directions.
 
 <WeightsFigure name="method" wide>
 
-**Figure 13.** The one primitive. With two tokens it is a picture: remove from A's input the part
+**Figure 14.** The one primitive. With two tokens it is a picture: remove from A's input the part
 along B. The real version removes 285 other directions from each of 286 reserved tokens, in 2,560
 dimensions.
 
@@ -409,7 +446,7 @@ switched the machine on for common English words and cut agreement with the orig
 
 <WeightsFigure name="trail" wide>
 
-**Figure 14.** The same 907-token page after each change to the engine. Deleting the head costs
+**Figure 15.** The same 907-token page after each change to the engine. Deleting the head costs
 0.0030 on this page.
 
 </WeightsFigure>

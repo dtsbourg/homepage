@@ -395,7 +395,376 @@ export function mount(ROOT, DATA, SKELETONS) {
       }
     }
 
-    // ---------- Figure 1: the hero ----------
+    // ---------- the summary: installing programs into the model, package-manager style ----------
+    ;(() => {
+      // Rule 110 and the adder ship in the same head with the same letters; head 7 is where a rebuilt adder would go.
+      const PL = [
+        {
+          key: 'hanoi',
+          name: 'Tower of Hanoi',
+          pkg: 'tower-of-hanoi',
+          head: 5,
+          meta: '100 symbols',
+        },
+        {
+          key: 'rule110',
+          name: 'Rule 110',
+          pkg: 'rule-110',
+          head: 11,
+          meta: '90 symbols',
+        },
+        {
+          key: 'adder',
+          name: 'Binary adder',
+          pkg: 'binary-adder',
+          head: 7,
+          meta: '110 symbols',
+        },
+      ]
+      const B3 = DATA.base3 // what the unmodified model wrote on Rule 110 and addition, recorded
+      const on = new Set(['hanoi']),
+        active = new Map(),
+        log = ['+ tower-of-hanoi → head 5 · 2.63M numbers written']
+      // a replay that advances every `every` ticks, runs once and stops; restart() plays it again
+      const once = (total, every, draw) => {
+        let t = still ? total : 0,
+          k = 0
+        draw(t)
+        return {
+          tick() {
+            if (t < total && ++k % every === 0) draw(++t)
+          },
+          restart() {
+            if (!still) {
+              t = 0
+              k = 0
+              draw(0)
+            }
+          },
+        }
+      }
+      // each runner draws its own picture and reports a readout and, at the end, a verdict through show()
+      const runners = {
+        hanoi(inst, show) {
+          const n = 6,
+            need = 2 ** n - 1,
+            B = makeBoard(n, inst ? 'disk-prog' : 'disk-host'),
+            el = [h('div', { class: 'plug-board' }, B.el)]
+          if (inst) {
+            const R = hanoiRun(n)
+            return {
+              el,
+              ...once(need, 1, (t) => {
+                B.set(R.states[t])
+                show(
+                  `move ${t} of ${need}`,
+                  t === need ? { ok: true, label: 'Solved' } : null,
+                )
+              }),
+            }
+          }
+          const host = HOST[n],
+            hs = [Array(n).fill(0)],
+            mv = host.moves[host.legal]
+          for (let i = 0; i < host.legal; i++) {
+            const s = hs[i].slice()
+            s[host.moves[i][0] - 1] = PEG.indexOf(host.moves[i][2])
+            hs.push(s)
+          }
+          return {
+            el,
+            ...once(host.legal + 1, 1, (t) => {
+              const stuck = t > host.legal
+              B.set(hs[Math.min(t, host.legal)], stuck ? mv[0] : 0)
+              show(
+                `move ${t} of ${need}`,
+                stuck
+                  ? {
+                      ok: false,
+                      label: 'Failed',
+                      detail: `Illegal move: disk ${mv[0]} cannot go from ${mv[1]} to ${mv[2]}.`,
+                    }
+                  : null,
+              )
+            }),
+          }
+        },
+        rule110(inst, show) {
+          const c = B3.rule110,
+            GEN = c.want.length
+          const rows = [c.start].concat(
+              inst ? c.want : c.written.slice(0, c.rows_right + 1),
+            ),
+            total = rows.length - 1
+          const grid = h('div', {
+            class: 'grid110 mini',
+            style: 'grid-template-columns:repeat(10,1rem)',
+          })
+          return {
+            el: [grid],
+            ...once(total, 5, (t) => {
+              const cells = []
+              for (let r = 0; r <= GEN; r++)
+                for (let j = 0; j < 10; j++) {
+                  if (r > t || r >= rows.length) {
+                    cells.push(h('div', { class: 'g todo' }))
+                    continue
+                  }
+                  const v = rows[r][j],
+                    wrong = !inst && r > 0 && v !== c.want[r - 1][j]
+                  cells.push(
+                    h('div', {
+                      class:
+                        'g' +
+                        (v ? ' on' : '') +
+                        (r === 0 ? ' seed' : inst ? '' : ' host') +
+                        (wrong ? ' bad' : ''),
+                    }),
+                  )
+                }
+              fill(grid, cells)
+              show(
+                `generation ${t} of ${GEN}`,
+                t < total
+                  ? null
+                  : inst
+                    ? { ok: true, label: 'Exact' }
+                    : {
+                        ok: false,
+                        label: 'Failed',
+                        detail: `Generation ${total} is wrong.`,
+                      },
+              )
+            }),
+          }
+        },
+        adder(inst, show) {
+          const c = B3.add,
+            n = c.bits,
+            bin = (v) => v.toString(2).padStart(n, '0')
+          const head = h('div', {
+              class: 'readout',
+              text: `${bin(c.a)} + ${bin(c.b)}`,
+            }),
+            sum = `${fmt(c.a)} + ${fmt(c.b)} = ${fmt(c.a + c.b)}`
+          if (inst) {
+            const first = PROGRAMS.adder.first(c.a, c.b, n),
+              steps = simulate('adder', first, 100),
+              out = h('div', { class: 'tape' })
+            const typed = h(
+              'div',
+              { class: 'tape' },
+              first.map((s) =>
+                h('span', {
+                  class: 'cell small typed',
+                  text: letterOf('adder', s),
+                }),
+              ),
+            )
+            return {
+              el: [
+                h(
+                  'div',
+                  { class: 'plug-stack' },
+                  head,
+                  h('div', { class: 'tape-lines' }, typed, out),
+                ),
+              ],
+              ...once(steps.length, 2, (t) => {
+                const done = t >= steps.length
+                fill(
+                  out,
+                  steps.slice(0, t).map((st) =>
+                    h('span', {
+                      class: 'cell small run',
+                      text: st.halt ? A.halt : letterOf('adder', st.sym),
+                    }),
+                  ),
+                )
+                show(
+                  done ? `= ${c.want}` : '= …',
+                  done ? { ok: true, label: 'Correct', detail: sum } : null,
+                )
+              }),
+            }
+          }
+          const wrote = h('div', { class: 'readout wrote' })
+          return {
+            el: [h('div', { class: 'plug-stack' }, head, wrote)],
+            ...once(c.written.length, 2, (t) => {
+              const done = t >= c.written.length,
+                off = c.want.length - c.written.length // compared from the lowest bit
+              fill(
+                wrote,
+                '= ',
+                [...c.written.slice(0, t)].map((ch, i) =>
+                  h('span', {
+                    class: done && ch !== c.want[i + off] ? 'bad-bit' : '',
+                    text: ch,
+                  }),
+                ),
+              )
+              show(
+                done ? `should be ${c.want}` : '',
+                done
+                  ? {
+                      ok: false,
+                      label: 'Failed',
+                      detail: `Wrote ${fmt(parseInt(c.written, 2) || 0)}; ${sum}.`,
+                    }
+                  : null,
+              )
+            }),
+          }
+        },
+      }
+      const card = (p, is) => {
+        const read = h('span', { class: 'readout' }),
+          detail = h('div', { class: 'plug-detail' }),
+          verdict = h('span', { class: 'plug-verdict' }),
+          el = h('div', { class: 'panel plug-card' })
+        const show = (text, v) => {
+          read.textContent = text
+          detail.textContent = (v && v.detail) || ''
+          verdict.textContent = v ? (v.ok ? '✓ ' : '✕ ') + v.label : ''
+          verdict.className = 'plug-verdict' + (v ? (v.ok ? ' ok' : ' no') : '')
+          el.classList.toggle('is-ok', !!v && v.ok)
+          el.classList.toggle('is-bad', !!v && !v.ok)
+        }
+        const r = runners[p.key](is, show)
+        add(el, [
+          h(
+            'h4',
+            {},
+            p.name,
+            h('span', {
+              class: 'chip ' + (is ? 'chip-prog' : 'chip-host'),
+              text: is ? 'plugin installed' : 'bare model',
+            }),
+          ),
+          h(
+            'div',
+            { class: 'plug-body' },
+            r.el,
+            h('div', { class: 'plug-info' }, read, detail),
+            verdict,
+          ),
+        ])
+        return { card: el, tick: r.tick, restart: r.restart }
+      }
+      const rail = () => {
+        const names = PL.filter((p) => on.has(p.key)).map(
+          (p) => `${p.name} in head ${p.head}`,
+        )
+        const g = sv('svg', {
+          class: 'diagram rail',
+          viewBox: '0 0 348 40',
+          role: 'img',
+          'aria-label':
+            'The sixteen attention heads of the first layer. ' +
+            (names.length
+              ? 'Installed: ' + names.join(', ') + '.'
+              : 'No program installed.'),
+        })
+        for (let i = 0; i < 16; i++) {
+          const p = PL.find((q) => q.head === i),
+            filled = p && on.has(p.key),
+            x = i * 22
+          g.append(
+            sv('rect', {
+              x: x + 0.5,
+              y: 0.5,
+              width: 17,
+              height: 17,
+              rx: 4,
+              class: filled ? 'sq-prog' : p ? 'dim' : '',
+              style: filled || p ? '' : 'fill:var(--axis)',
+            }),
+          )
+          if (p)
+            g.append(
+              sv('text', {
+                x: x + 9,
+                y: 34,
+                'text-anchor': 'middle',
+                class: filled ? 't-strong' : '',
+                text: String(i),
+              }),
+            )
+        }
+        return g
+      }
+      const render = () => {
+        const n = on.size
+        $('plug-state').textContent = n
+          ? `${n} plugin${n > 1 ? 's' : ''} installed`
+          : 'bare model'
+        fill($('plug-model'), rail())
+        $('plug-status').textContent = n
+          ? `${(2.63 * n).toFixed(2)} million of 4.2 billion numbers changed. The other 31 layers are untouched.`
+          : '4.2 billion numbers, none changed.'
+        fill(
+          $('plug-patches'),
+          PL.map((p) => {
+            const is = on.has(p.key)
+            const btn = h('button', {
+              class: 'btn',
+              id: 'plug-' + p.key,
+              'aria-label': `${is ? 'Remove' : 'Install'} ${p.name}`,
+              text: is ? 'Remove' : 'Install',
+            })
+            btn.addEventListener('click', () => {
+              if (is) {
+                on.delete(p.key)
+                log.push(`− ${p.pkg} · head ${p.head} restored bit for bit`)
+              } else {
+                on.add(p.key)
+                log.push(`+ ${p.pkg} → head ${p.head} · 2.63M numbers written`)
+              }
+              render()
+            })
+            return h(
+              'div',
+              { class: 'pkg-row' + (is ? ' is-on' : '') },
+              h(
+                'div',
+                { class: 'pkg-what' },
+                h('span', { class: 'pkg-title', text: p.name }),
+                h('span', {
+                  class: 'pkg-meta',
+                  text: `10.6 MB · ${p.meta}${is ? ` · head ${p.head}` : ''}`,
+                }),
+              ),
+              btn,
+            )
+          }),
+        )
+        fill(
+          $('plug-log'),
+          log.slice(-3).map((l) => h('div', { text: l })),
+        )
+        // every task is always on show: on the bare model it fails, with its plugin installed it runs
+        fill(
+          $('plug-out'),
+          PL.map((p) => {
+            const is = on.has(p.key),
+              id = p.key + (is ? '+' : '-')
+            if (!active.has(id)) {
+              active.delete(p.key + (is ? '-' : '+'))
+              active.set(id, card(p, is))
+            }
+            return active.get(id).card
+          }),
+        )
+      }
+      $('plug-replay').addEventListener('click', () =>
+        active.forEach((r) => r.restart()),
+      )
+      render()
+      if (!still) setInterval(() => active.forEach((r) => r.tick()), 120)
+    })()
+
+    // ---------- the towers replay ----------
     ;(() => {
       let n = 6,
         t = 0,
