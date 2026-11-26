@@ -20,4 +20,4 @@
 *.svg
 
 # measured data for one article's figures
-/public/articles/installing-a-program/data.json
+/public/articles/installed-not-trained/data.json

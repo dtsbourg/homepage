@@ -1,15 +1,14 @@
 import { ArticleLayout } from '@/components/ArticleLayout'
-import Callout from '@/components/mdx/Callout'
 import WeightsFigure from '@/components/mdx/weights/WeightsFigure'
 import WeightsRuntime from '@/components/mdx/weights/WeightsRuntime'
 
 export const article = {
   author: 'Dylan Bourgeois',
   date: '2026-11-25',
-  title: 'Installing a program in a language model',
+  title: "Installed, not trained: plugging programs into a model's weights",
   description:
     'We wrote a program into the weights of an open 4-billion-parameter model, with no training, and shipped it as a 10 MB patch. The patched model plays Tower of Hanoi for 1,023 moves without an error.',
-  slug: 'installing-a-program-in-a-language-model',
+  slug: 'installed-not-trained',
   lang: 'en',
 }
 
@@ -59,13 +58,9 @@ We did something else. We treated the model as a machine you can install softwar
 not learned and not attached. It is written into weights the model already has, and from then on the
 model runs it natively, one token at a time.
 
-<Callout type="note" title="The rule">
-
-No training of any kind. Every number we changed is a closed-form function of the model's existing
-weights and a small table that describes the program. No gradients, no fitting to examples, no
-search over what to write.
-
-</Callout>
+> **The rule.** No training of any kind. Every number we changed is a closed-form function of the
+> model's existing weights and a small table that describes the program. No gradients, no fitting to
+> examples, no search over what to write.
 
 There are two builds, and each result below says which it comes from. **The patch** rewrites one
 attention head in the first layer. It is a file you apply to the unmodified model and take off
@@ -422,12 +417,6 @@ switched the machine on for common English words and cut agreement with the orig
 coordinates the network writes to least, expecting it to miss them least. Clearing those three cost
 0.029 in KL, ten times more than three coordinates of median use. No weight statistic we tried
 predicted the cost, so we measured it. Four chosen that way cost 0.0033 together.
-
-## Run it
-
-Everything runs from one folder against the unmodified checkpoint. `wi.py hanoi 8` applies the patch
-and prints the solution. `test_patches.py` builds the three patches and runs every check on them.
-`night.sh` runs the launch, cost, fine-tuning and other comparisons reported here.
 
 _Model: Qwen3.5-4B-Base, 32 layers, run at 32-bit precision. The patch occupies key head 5 of the
 first layer and its two value heads. Every figure uses measured values from the runs described._

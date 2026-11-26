@@ -18,7 +18,7 @@ export default function WeightsRuntime() {
 
     Promise.all([
       import('./runtime'),
-      fetch('/articles/installing-a-program/data.json').then((r) => r.json()),
+      fetch('/articles/installed-not-trained/data.json').then((r) => r.json()),
     ]).then(([runtime, data]) => {
       if (!cancelled) cleanup = runtime.mount(root, data, SKELETONS)
     })
