@@ -63,13 +63,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: article.title,
     description: article.description,
-    keywords: [
-      'Dylan Bourgeois',
-      'AI',
-      'artificial intelligence',
-      'robotics',
-      ...article.title.split(' ').slice(0, 3),
-    ],
+    keywords: article.keywords
+      ? ['Dylan Bourgeois', ...article.keywords]
+      : [
+          'Dylan Bourgeois',
+          'AI',
+          'artificial intelligence',
+          'robotics',
+          ...article.title.split(' ').slice(0, 3),
+        ],
     authors: [{ name: article.author }],
     publisher: 'Dylan Bourgeois',
     openGraph: {
@@ -88,6 +90,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         },
       ],
       publishedTime: article.date,
+      modifiedTime: article.updated ?? article.date,
       authors: [article.author],
     },
     twitter: {
@@ -97,6 +100,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [ogImageUrl],
       creator: '@dtsbourg',
     },
+    // Google Scholar reads these; only articles with a DOI are papers in that sense.
+    other: article.doi
+      ? {
+          citation_title: article.title,
+          citation_author: article.author,
+          citation_publication_date: article.date.replaceAll('-', '/'),
+          citation_doi: article.doi,
+          citation_abstract_html_url: `${siteUrl}${path}`,
+          ...(article.pdf ? { citation_pdf_url: article.pdf } : {}),
+        }
+      : undefined,
     alternates: alternates(
       path,
       article.hasTranslation
@@ -120,7 +134,7 @@ export default async function ArticlePage({ params }: Props) {
     description: article.description,
     image: [await getOgImageUrl(article, locale)],
     datePublished: article.date,
-    dateModified: article.date,
+    dateModified: article.updated ?? article.date,
     author: {
       '@type': 'Person',
       name: article.author,
@@ -137,7 +151,19 @@ export default async function ArticlePage({ params }: Props) {
       '@type': 'WebPage',
       '@id': url,
     },
-    keywords: article.slug.split('-').join(', '),
+    keywords: article.keywords
+      ? article.keywords.join(', ')
+      : article.slug.split('-').join(', '),
+    ...(article.doi
+      ? {
+          identifier: {
+            '@type': 'PropertyValue',
+            propertyID: 'DOI',
+            value: article.doi,
+          },
+          sameAs: [`https://doi.org/${article.doi}`],
+        }
+      : {}),
     inLanguage: locale,
     isAccessibleForFree: true,
     copyrightHolder: {

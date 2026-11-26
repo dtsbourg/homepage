@@ -9,9 +9,23 @@ export const article = {
   date: '2026-11-25',
   title: "Installed, not trained: plugging programs into a model's weights",
   description:
-    'We wrote a program into the weights of an open 4-billion-parameter model, with no training, and shipped it as a 10 MB patch. The patched model plays Tower of Hanoi for 1,023 moves without an error.',
+    "Weight-space programming on a pretrained LLM: exact programs written into Qwen3.5-4B's weights with no training, shipped as a 10 MB patch you can remove.",
   slug: 'installed-not-trained',
   lang: 'en',
+  updated: '2026-11-26',
+  keywords: [
+    'weight-space programming',
+    'editing model weights',
+    'model editing',
+    'language models',
+    'no training',
+    'Qwen3.5',
+    'attention heads',
+    'Tower of Hanoi',
+    'mechanistic interpretability',
+  ],
+  doi: '10.5281/zenodo.24570919',
+  pdf: 'https://zenodo.org/records/24570919/files/installed-not-trained.pdf',
 }
 
 export default (props) => <ArticleLayout article={article} {...props} />
@@ -61,17 +75,8 @@ outside tool.
 
 We did something else. We treated the model as a machine you can install software on. The program is
 not learned and not attached. It is written into weights the model already has, and from then on the
-model runs it natively, one token at a time.
-
-<WeightsFigure name="hero" wide hero>
-
-**Figure 2.** Both rows replay text the model wrote. Top: Qwen3.5-4B-Base, shown four worked
-solutions and asked for the next size, writes legal moves for a while and then one that is not
-allowed. Bottom: the same model with the patch applied. A person types the first line; the model
-writes every later position of the puzzle, in borrowed letters, until it halts. The installed
-program ends on peg B for an odd number of disks and C for an even number.
-
-</WeightsFigure>
+model runs it natively, one token at a time. Writing weights directly, with no training, now has a
+name: weight-space programming. Here it is done inside a pretrained model that has to keep working.
 
 > **The rule.** No training of any kind. Every number we changed is a closed-form function of the
 > model's existing weights and a small table that describes the program. No gradients, no fitting to
@@ -86,25 +91,48 @@ article is about the patch. The last third is about why the model could not laun
 fixed that.
 
 <TableOfContents
-  items={[
-    { title: 'The one loop a language model has', anchor: 'the-one-loop-a-language-model-has' },
-    { title: 'Tower of Hanoi is counting', anchor: 'tower-of-hanoi-is-counting' },
-    { title: 'The tape', anchor: 'the-tape' },
-    { title: 'Inside the head', anchor: 'inside-the-head' },
-    { title: 'Install, stack, uninstall', anchor: 'install-stack-uninstall' },
-    { title: 'Against prompting and fine-tuning', anchor: 'against-prompting-and-fine-tuning' },
-    { title: 'What it costs the host', anchor: 'what-it-costs-the-host' },
+  groups={[
     {
-      title: 'The host cannot launch what it cannot see',
-      anchor: 'the-host-cannot-launch-what-it-cannot-see',
+      title: 'How it works',
+      items: [
+        { title: 'The one loop a language model has', anchor: 'the-one-loop-a-language-model-has' },
+        { title: 'Tower of Hanoi is counting', anchor: 'tower-of-hanoi-is-counting' },
+        { title: 'The tape', anchor: 'the-tape' },
+        { title: 'Inside the head', anchor: 'inside-the-head' },
+      ],
     },
-    { title: 'Write quietly, answer late', anchor: 'write-quietly-answer-late' },
-    { title: 'The host launches the program', anchor: 'the-host-launches-the-program' },
-    { title: 'How a weight is written', anchor: 'how-a-weight-is-written' },
-    { title: 'Related work', anchor: 'related-work' },
-    { title: 'Limits', anchor: 'limits' },
-    { title: 'Appendix: what broke along the way', anchor: 'appendix-what-broke-along-the-way' },
-    { title: 'Cite this work', anchor: 'cite-this-work' },
+    {
+      title: 'The patch, measured',
+      items: [
+        { title: 'Install, stack, uninstall', anchor: 'install-stack-uninstall' },
+        { title: 'Against prompting and fine-tuning', anchor: 'against-prompting-and-fine-tuning' },
+        { title: 'What it costs the host', anchor: 'what-it-costs-the-host' },
+      ],
+    },
+    {
+      title: 'Called by the model',
+      items: [
+        {
+          title: 'The host cannot launch what it cannot see',
+          anchor: 'the-host-cannot-launch-what-it-cannot-see',
+        },
+        { title: 'Write quietly, answer late', anchor: 'write-quietly-answer-late' },
+        { title: 'The host launches the program', anchor: 'the-host-launches-the-program' },
+      ],
+    },
+    {
+      title: 'Details',
+      items: [
+        { title: 'How a weight is written', anchor: 'how-a-weight-is-written' },
+        { title: 'Related work', anchor: 'related-work' },
+        { title: 'Limits', anchor: 'limits' },
+        {
+          title: 'Appendix: what broke along the way',
+          anchor: 'appendix-what-broke-along-the-way',
+        },
+        { title: 'Cite this work', anchor: 'cite-this-work' },
+      ],
+    },
   ]}
 />
 
@@ -124,7 +152,7 @@ loop. The memory of the computation is the text written so far. We call that tex
 
 <WeightsFigure name="loop" wide>
 
-**Figure 3.** Two places a loop can live. A purpose-built network repeats one block over depth and
+**Figure 2.** Two places a loop can live. A purpose-built network repeats one block over depth and
 keeps its state inside. A pretrained model runs each of its layers once per token; its only loop is
 that the token it writes comes back in, so the state has to live in the text.
 
@@ -144,7 +172,7 @@ it and travels on. Where it meets a 0 it sets it, moves that disk one peg round,
 
 <WeightsFigure name="count" wide>
 
-**Figure 4.** Four disks, fifteen moves. Each row is the move number in binary with the lowest bit
+**Figure 3.** Four disks, fifteen moves. Each row is the move number in binary with the lowest bit
 on the left, so column 1 is the smallest disk. Outlined cells are the ones the carry passed through;
 the filled one is where it stopped, and that disk moves.
 
@@ -167,7 +195,7 @@ move, in these letters. Reading it takes a lookup table, and the model never tra
 
 <WeightsFigure name="alpha" wide>
 
-**Figure 5.** The 100 symbols of the Hanoi program. A symbol's script gives its column, which is its
+**Figure 4.** The 100 symbols of the Hanoi program. A symbol's script gives its column, which is its
 disk; its row gives the counter bit, the peg, and whether the carry travels on. Column 11 exists
 only to end a ten-disk line.
 
@@ -200,7 +228,7 @@ outvote it.
 
 <WeightsFigure name="head" wide>
 
-**Figure 6.** The patched head running in your browser from its real weights. Step through three
+**Figure 5.** The patched head running in your browser from its real weights. Step through three
 disks and watch each part act. Below, every row of the head's weights is drawn by what it reads on
 each of the 100 symbols, with the current symbol marked. Orange is "on", blue-grey is "off". Switch
 to the original weights to see the head as it shipped, on the same scale.
@@ -215,7 +243,7 @@ what it overwrote, so uninstalling restores the model bit for bit.
 
 <WeightsFigure name="scale" wide>
 
-**Figure 7.** The patch, to scale. The small square has 0.06% of the large one's area.
+**Figure 6.** The patch, to scale. The small square has 0.06% of the large one's area.
 
 </WeightsFigure>
 
@@ -226,7 +254,7 @@ adder for numbers up to ten bits. Both install into a second head with their own
 
 <WeightsFigure name="progs" wide>
 
-**Figure 8.** Three programs on one engine, all with the patch. The panel above is a simulation of
+**Figure 7.** Three programs on one engine, all with the patch. The panel above is a simulation of
 the tables in your browser, not the model; the table gives what the model itself did, checked
 against ordinary reference code. The smallest margin by which the right token won was 35 logits. The
 ten-disk run is 11,264 tokens and took about fourteen minutes on a laptop.
@@ -241,6 +269,16 @@ disks once in six attempts and nothing larger. Fine-tuned on the complete soluti
 disks, it reproduces those and fails at seven and eight after 47 legal moves each: it has memorised
 sequences, not learned the procedure.[^3] The patch has seen no examples, and works at every size
 its tape can hold.
+
+<WeightsFigure name="hero" wide hero>
+
+**Figure 8.** Both rows replay text the model wrote. Top: Qwen3.5-4B-Base, shown four worked
+solutions and asked for the next size, writes legal moves for a while and then one that is not
+allowed. Bottom: the same model with the patch applied. A person types the first line; the model
+writes every later position of the puzzle, in borrowed letters, until it halts. The installed
+program ends on peg B for an odd number of disks and C for an even number.
+
+</WeightsFigure>
 
 <WeightsFigure name="vs" wide>
 
@@ -403,14 +441,22 @@ ordinary text: a search over where to write, never over what.
 
 ## Related work
 
+Writing a network's weights directly is now called weight-space programming, after a post from MIT,
+_Sparks of Weight-Space Programming_, in which a frontier model reads and edits the weights of small
+networks. The idea of programs as weights is older: [RASP](https://arxiv.org/abs/2106.06981) and
+[Tracr](https://arxiv.org/abs/2301.05062) compile programs into transformers built for the purpose.
+Model editing, as in [ROME](https://arxiv.org/abs/2202.05262), changes single facts in a trained
+model, and uses gradients to find the value it inserts.
+
 The rule comes from
 [Language Models Can Rewrite Their Own Weights](https://arxiv.org/abs/2611.21885), which has a model
 edit itself with no gradients and asks that "every value" in an edit be "written by the model's own
-reasoning". Its edits are coarse and remove obstacles; none installs a new behaviour. Looped
-Weight-Space Programming runs far harder programs than ours, mazes, Sudoku and a million-move Hanoi,
-in networks written from nothing. What is different here is the host: the program goes into a
-pretrained model that keeps working, through its normalisation layers and in its existing tensors,
-and the model can be the one to start it.
+reasoning". Its edits are coarse and remove obstacles; none installs a new behaviour. The three
+programs here are things the unmodified model could not do. Looped Weight-Space Programming runs far
+harder programs than ours, mazes, Sudoku and a million-move Hanoi, in networks written from nothing.
+What is different here is the host: the program goes into a pretrained model that keeps working,
+through its normalisation layers and in its existing tensors, and the model can be the one to start
+it.
 
 ## Limits
 
